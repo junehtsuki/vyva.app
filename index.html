@@ -46,7 +46,7 @@ section.bg-white { background: var(--surface); }
 button, input, select { font: inherit; outline: none; border: none; cursor: pointer; }
 
 /* UI COMPONENTS */
-.btn-primary, .primary { background-color: var(--green); color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 15px rgba(74, 149, 114, 0.3); }
+.btn-primary, .primary { background-color: var(--green); color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 15px rgba(74, 149, 114, 0.3); display:flex; justify-content:center; align-items:center; gap:8px;}
 .btn-primary:active, .primary:active { transform: scale(0.98); }
 .btn-outline, .secondary { background-color: #fff; color: var(--ink); width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; border: 1.5px solid var(--line); margin-bottom: 12px; }
 .btn-black { background-color: #111; color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; }
@@ -86,7 +86,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
 
 /* =========================================
-   ONBOARDING / QUIZ FLOW (หน้าเดียวจบ จาก kla.html)
+   ONBOARDING / QUIZ FLOW (ดึงจาก kla.html 100%)
 ========================================= */
 .onboarding-wrap { padding: 5px 0 30px; width: 100%; }
 .onboarding-header { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 30px; }
@@ -106,29 +106,38 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .input-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
 /* =========================================
-   RESULT & PAYMENT (จาก kla.html)
+   RESULT & PAYMENT (ดึงจาก kla.html 100%)
 ========================================= */
-.result-hero{ position:relative; overflow:hidden; padding:30px; border-radius:32px; background:linear-gradient(135deg,#0f5f50,#173d35); color:white; margin-bottom:15px; }
-.result-top{ display:grid; grid-template-columns:1fr; gap:20px; align-items:center; }
+.result-hero{ position:relative; overflow:hidden; padding:40px 25px; border-radius:32px; background:linear-gradient(135deg,#2d664b,#113626); color:white; margin-bottom:15px; box-shadow:var(--shadow); }
+.result-hero::before{ content:""; position:absolute; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.06); right:-60px; top:-80px; }
+.result-top{ position:relative; z-index:1; display:grid; grid-template-columns:1fr; gap:20px; align-items:center; }
 .result-badge{ display:inline-flex; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.13); font-size:12px; font-weight:700; }
-.package-result-name{ margin:4px 0 10px; font-size:38px; line-height:1.1; }
-.match-score-card{ padding:28px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.13); }
-.score-circle{ width:120px; height:120px; margin:auto; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#a7e0c7 0deg,#a7e0c7 339deg,rgba(255,255,255,.13) 339deg); position:relative; }
+.package-result-name{ margin:15px 0 10px; font-size:38px; line-height:1.1; }
+.match-score-card{ padding:24px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.13); }
+.score-circle{ width:130px; height:130px; margin:auto; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#a7e0c7 0deg,#a7e0c7 339deg,rgba(255,255,255,.13) 339deg); position:relative; }
 .score-circle::before{ content:""; position:absolute; width:100px; height:100px; border-radius:50%; background:#17463c; }
 .score-inner{ position:relative; z-index:1; }
 .score-num{ font-family:"DM Sans"; font-size:36px; font-weight:800; }
 .reason-card, .summary-card{ padding:24px; border-radius:25px; background:white; border:1px solid var(--line); margin-bottom: 15px;}
-.reason{ padding:12px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; display:flex; gap:10px;}
+.reason{ padding:12px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; display:flex; gap:10px; line-height:1.5;}
 .reason::before { content: '✓'; color: var(--green); font-weight: bold; }
+.reason:last-child { border-bottom: none; }
 .plan-price { font-family: "DM Sans"; font-size: 32px; font-weight: 800; margin: 10px 0; }
 
 .checkout-grid { display: flex; flex-direction: column; gap: 15px; }
 .order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 24px; margin-bottom: 15px;}
 .summary-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.summary-row:last-child { border-bottom: none; }
 .payment-tabs { display: flex; gap: 8px; margin: 15px 0; }
-.pay-tab { flex: 1; background: #fff; border: 1px solid var(--line); padding: 12px; border-radius: 12px; font-size: 13px; text-align: center; font-weight: 600; color: var(--muted); }
+.pay-tab { flex: 1; background: #fff; border: 1px solid var(--line); padding: 12px; border-radius: 12px; font-size: 12px; text-align: center; font-weight: 600; color: var(--muted); }
 .pay-tab.active { background: var(--mint); border-color: var(--green); color: var(--green); }
 .stepper{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px}.step-item{width:70px;text-align:center;color:#9aa7a2;font-weight:700;font-size:13px}.step-item span{font-weight:400;font-size:10px}.step-item:before{content:"";display:block;width:30px;height:30px;border-radius:50%;background:#e8eeeb;margin:0 auto 6px}.step-item.active{color:var(--green)}.step-item.active:before{background:var(--green);box-shadow:inset 0 0 0 9px var(--mint)}.step-line{height:2px;flex:1;background:#e8eeeb;margin:14px 5px}
+
+/* QR Code & Mobile Banking Boxes */
+.qr-box{background:#f6faf8;border:1px solid var(--line);padding:22px;border-radius:20px;display:flex;align-items:center;flex-direction:column;text-align:center;gap:15px}.qr-box p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}.qr-total{color:var(--green);font-weight:700;margin-top:8px}.fake-qr{width:132px;height:132px;background:white;padding:9px;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;border:1px solid #dce5e1}.fake-qr span{background:#17362e}.fake-qr span:nth-child(2n),.fake-qr span:nth-child(5n){background:transparent}.fake-qr span:nth-child(7n){background:var(--green)}
+.mobile-bank-intro{background:#f6faf8;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}.mobile-bank-intro b{display:block;margin-bottom:4px}.mobile-bank-intro p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}.bank-grid{display:grid;grid-template-columns:1fr;gap:10px}.bank-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px;color:var(--ink);transition:.18s ease}.bank-option.active{border-color:var(--green);background:var(--mint);box-shadow:0 0 0 2px rgba(74,149,114,.2)}.bank-logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:white;font-size:11px;font-weight:800;letter-spacing:.3px;flex:0 0 auto}.bank-copy{min-width:0}.bank-copy b{display:block;font-size:13px}.bank-copy small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.bank-check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1px solid #cfdad5;display:grid;place-items:center;font-size:11px;color:transparent;background:white}.bank-option.active .bank-check{background:var(--green);border-color:var(--green);color:white}.kbank{background:#13864f}.scb{background:#6b3b8f}.ktb{background:#1e78b7}.bbl{background:#223f92}
+
+.process-line{height:10px;background:#e6eeea;border-radius:10px;margin:30px 0 10px;overflow:hidden}.process-line div{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--secondary));transition:width .3s}.process-status{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}.cancel-note{background:#f5f8f6;color:var(--muted);padding:13px;border-radius:12px;font-size:11px;margin-top:25px}
 
 /* PLAN & BOOKING (GRID 3 COLUMNS) */
 .horizontal-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; scrollbar-width: none; white-space: nowrap; }
@@ -160,7 +169,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 /* CHAT SECTION */
 #chat { padding: 0; display: none; flex-direction: column; height: 100%; background: #fff; }
 #chat.active { display: flex; }
-.chat-header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 15px; background: #fff; position: sticky; top: 0; z-index: 10;}
+.chat-header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 15px; background: #fff; position: sticky; top: 0; z-index: 10; padding-top: max(15px, env(safe-area-inset-top));}
 .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: var(--bg); }
 .chat-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; word-wrap: break-word;}
 .chat-left { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--line); }
@@ -214,14 +223,19 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     
     <div style="position:relative; margin-bottom:12px;">
       <input type="password" id="regPass" class="input-field" placeholder="Password (ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว)" style="margin-bottom:0;">
-      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); font-weight:bold; font-size:13px;" onclick="togglePass('regPass', this)">Show</button>
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); display:flex; align-items:center; justify-content:center; padding:0;" onclick="togglePass('regPass', this)" aria-label="Toggle Password Visibility">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+      </button>
     </div>
 
     <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('signup')">Continue</button>
     
     <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
     <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
-    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
+    <button class="btn-social" onclick="loginSuccess()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
   </section>
 
   <section id="signin" class="bg-white no-padding-bottom">
@@ -232,18 +246,23 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     
     <div style="position:relative; margin-bottom:12px;">
       <input type="password" id="logPass" class="input-field" placeholder="Password" style="margin-bottom:0;">
-      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); font-weight:bold; font-size:13px;" onclick="togglePass('logPass', this)">Show</button>
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); display:flex; align-items:center; justify-content:center; padding:0;" onclick="togglePass('logPass', this)" aria-label="Toggle Password Visibility">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+      </button>
     </div>
 
     <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('login')">Continue</button>
     
     <div style="text-align: center; margin-top: 10px;">
-      <b style="color: var(--muted); font-size:14px;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
+      <b style="color: var(--muted); font-size:14px; cursor:pointer;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
     </div>
 
     <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
     <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
-    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
+    <button class="btn-social" onclick="loginSuccess()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
   </section>
 
   <!-- =========================================
@@ -255,7 +274,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
         <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
-      <!-- กดที่รูป Profile เพื่อไปหน้า Profile -->
       <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
 
@@ -269,7 +287,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <div class="eyebrow">YOUR MATCH</div>
     <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
     <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
-    <!-- เริ่ม Quiz (Onboarding จาก kla.html) -->
+    <!-- เริ่ม Quiz แบบเลื่อนยาวหน้าเดียว -->
     <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
   </section>
 
@@ -297,16 +315,16 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   </section>
 
   <section id="result">
-    <div class="quiz-wrap">
+    <div class="onboarding-wrap" style="padding-top:0;">
       <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
       
       <div class="result-hero">
         <div class="result-top">
           <div>
-            <div class="eyebrow" style="color:var(--secondary);">✦ YOUR WELLNESS MATCH</div>
+            <div class="result-badge">✦ YOUR WELLNESS MATCH</div>
             <h1 class="package-result-name" id="packageName">Signature Package</h1>
-            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px;">เหมาะกับรูปแบบการใช้ชีวิตของคุณ</p>
-            <button class="btn-outline" style="border:none; color:var(--green); margin:0;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
+            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจแบบครบครันสำหรับคนที่ต้องการดูแลสุขภาพอย่างหลากหลาย</p>
+            <button class="btn-outline" style="border:none; color:var(--green); margin:0; padding:12px 24px; width:auto; font-size:14px;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
           </div>
           <div class="match-score-card">
             <div class="score-circle">
@@ -315,26 +333,29 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
                 <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
               </div>
             </div>
+            <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
           </div>
         </div>
       </div>
 
       <div class="reason-card">
-        <h3 style="margin-top:0;">ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
+        <h3 style="margin-top:0; font-size: 18px;">ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
         <div id="reasons"></div>
       </div>
 
       <div class="summary-card">
         <div class="eyebrow">YOUR PACKAGE</div>
-        <h3 id="summaryPackage" style="margin:5px 0;">Signature Package</h3>
-        <div class="plan-price" id="packagePrice" style="margin:5px 0 15px;">฿3,000</div>
-        <button class="btn-outline" style="margin:0;" onclick="showPopup('เปรียบเทียบ', 'ฟีเจอร์นี้สงวนไว้ในเวอร์ชันเต็มครับ')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+        <h3 id="summaryPackage" style="margin:5px 0; font-size: 20px;">Signature Package</h3>
+        <div class="plan-price" id="packagePrice" style="margin:5px 0 10px;">฿3,000</div>
+        <div style="color:var(--muted); font-size:13px; margin-bottom:15px;">ต่อเดือน</div>
+        <p id="summaryText" style="font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px;">เหมาะสำหรับผู้ที่ต้องการกิจกรรมหลากหลายในแพ็กเกจเดียว และต้องการดูแลสุขภาพทั้งด้านร่างกายและการผ่อนคลาย</p>
+        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="showPopup('เปรียบเทียบ', 'ฟีเจอร์นี้อยู่ระหว่างการพัฒนา')">เปรียบเทียบกับแพ็กเกจอื่น</button>
       </div>
     </div>
   </section>
 
   <section id="payment">
-    <div class="quiz-wrap">
+    <div class="onboarding-wrap" style="padding-top:0;">
       <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
       <div class="eyebrow">CHECKOUT</div>
       <h2 class="section-title">ยืนยันแพ็กเกจของคุณ</h2>
@@ -349,35 +370,90 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       </div>
 
       <div class="checkout-grid">
-        <!-- กล่องซ้าย -->
         <div class="card" style="padding:0; overflow:hidden;">
           <div class="order-plan" style="margin:0; border-radius:20px 20px 0 0;">
             <div class="eyebrow">YOUR SELECTED PACKAGE</div>
-            <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature</h3>
+            <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature Package</h3>
             <div class="plan-price" id="checkoutPrice">฿3,000</div>
+            <div style="font-size:12px; margin-top:10px;">ต่อเดือน</div>
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Fitness</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Yoga</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Pilates</span>
+            </div>
           </div>
           <div style="padding:20px;">
-            <div class="summary-row"><span>ค่าบริการ</span><b id="subTotal">฿3,000</b></div>
-            <div class="summary-row"><span>ภาษี 7%</span><b id="vatAmount">฿210</b></div>
-            <div class="summary-row" style="border:none; font-size:18px; padding-bottom:0;"><span>ยอดชำระ</span><b id="grandTotal" style="color:var(--green);">฿3,210</b></div>
+            <div class="summary-row"><span>ค่าบริการเดือนแรก</span><b id="subTotal">฿3,000</b></div>
+            <div class="summary-row"><span>ภาษีมูลค่าเพิ่ม 7%</span><b id="vatAmount">฿210</b></div>
+            <div class="summary-row" style="border:none; font-size:18px; padding-bottom:0;"><span>ยอดชำระวันนี้</span><b id="grandTotal" style="color:var(--green);">฿3,210</b></div>
           </div>
         </div>
 
-        <!-- กล่องขวา -->
         <div class="card">
-          <div class="eyebrow">เลือกวิธีชำระเงิน</div>
+          <h3 style="margin:0 0 15px; font-size: 16px;">เลือกวิธีชำระเงิน</h3>
           <div class="payment-tabs">
-            <div class="pay-tab active">💳 บัตรเครดิต</div>
-            <div class="pay-tab">▦ QR Code</div>
-            <div class="pay-tab">📱 Mobile</div>
+            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต / เดบิต</div>
+            <div class="pay-tab" onclick="setPayment('qr', this)">▦ QR Code</div>
+            <div class="pay-tab" onclick="setPayment('mobile', this)">📱 Mobile Banking</div>
           </div>
-          <input type="text" class="input-field" placeholder="หมายเลขบัตร 16 หลัก">
-          <input type="text" class="input-field" placeholder="ชื่อบนบัตร">
-          <div style="display:flex; gap:10px;">
-            <input type="text" class="input-field" placeholder="MM/YY">
-            <input type="text" class="input-field" placeholder="CVV">
+          
+          <div id="cardForm">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">หมายเลขบัตร</label>
+            <input type="text" class="input-field" placeholder="1234 5678 9012 3456">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">ชื่อบนบัตร</label>
+            <input type="text" class="input-field" placeholder="ชื่อ - นามสกุล">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">วันหมดอายุ</label>
+                <input type="text" class="input-field" placeholder="MM/YY">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">CVV</label>
+                <input type="text" class="input-field" placeholder="123">
+              </div>
+            </div>
           </div>
-          <button class="btn-primary" style="margin-top:10px;" onclick="processPayment()">ชำระเงิน <span id="payButtonAmount"></span> →</button>
+
+          <div id="qrForm" style="display:none;">
+            <div class="qr-box">
+              <div class="fake-qr" id="fakeQr"></div>
+              <div>
+                <b style="font-size: 14px;">สแกน QR เพื่อชำระเงิน</b>
+                <p>เปิดแอปธนาคารแล้วสแกน QR Code นี้</p>
+                <div class="qr-total" id="qrTotalDisplay">ยอดชำระ ฿3,210</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="mobileForm" style="display:none;">
+            <div class="mobile-bank-intro">
+              <b>เลือกธนาคารที่ต้องการชำระ</b>
+              <p>เมื่อยืนยัน ระบบจะจำลองการเชื่อมต่อไปยังแอปธนาคาร</p>
+            </div>
+            <div class="bank-grid">
+              <div class="bank-option active" onclick="selectBank('K PLUS', this)">
+                <div class="bank-logo kbank">K+</div>
+                <div class="bank-copy"><b>K PLUS</b><small>Kasikornbank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('SCB EASY', this)">
+                <div class="bank-logo scb">SCB</div>
+                <div class="bank-copy"><b>SCB EASY</b><small>Siam Commercial Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('Krungthai NEXT', this)">
+                <div class="bank-logo ktb">KTB</div>
+                <div class="bank-copy"><b>Krungthai NEXT</b><small>Krungthai Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" style="margin-top:20px;" onclick="processPayment()">
+            <span id="payActionText" style="flex:1; text-align:left;">ชำระเงิน</span> 
+            <span id="payButtonAmount">฿3,210 →</span>
+          </button>
+          <div style="text-align: center; color: var(--muted); font-size: 11px; margin-top: 10px;">🔒 ข้อมูลการชำระเงินได้รับการปกป้อง</div>
         </div>
       </div>
     </div>
@@ -385,27 +461,37 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
   <section id="processing">
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-      <div style="font-size:60px; margin-bottom:20px;">⌛</div>
-      <h2>กำลังดำเนินการ...</h2>
-      <p class="section-desc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
+      <div style="font-size:60px; margin-bottom:20px; animation: pulse 1s infinite alternate;">⌛</div>
+      <h2 id="processTitle">กำลังดำเนินการชำระเงิน</h2>
+      <p class="section-desc" id="processDesc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
+      
+      <div style="width: 80%; max-width: 300px; background: var(--line); height: 8px; border-radius: 4px; margin: 20px auto; overflow: hidden;">
+        <div id="processFill" style="width: 0%; height: 100%; background: var(--green); transition: width 0.3s;"></div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; width:80%; max-width:300px; font-size:11px; color:var(--muted); margin:0 auto;">
+        <span>ตรวจสอบ</span><span>ยืนยัน</span><span>เสร็จสมบูรณ์</span>
+      </div>
     </div>
   </section>
 
   <section id="success">
-    <div class="quiz-wrap" style="flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center;">
-      <div style="font-size:60px; margin-bottom:20px; color:var(--green); background:var(--mint); width:100px; height:100px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px;">✓</div>
+    <div class="onboarding-wrap" style="padding-top:20px; text-align:center;">
+      <div class="success-icon">✓</div>
       <div class="eyebrow">PAYMENT SUCCESSFUL</div>
       <h2 style="font-size:32px; margin:5px 0 15px;">ชำระเงินสำเร็จ! 🎉</h2>
-      <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว</p>
+      <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว ขั้นตอนถัดไปคือการเลือกกิจกรรมและจองช่วงเวลา</p>
       
-      <div class="card" style="text-align:left; background:var(--bg);">
-        <div class="summary-row"><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
-        <div class="summary-row"><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
-        <div class="summary-row"><span>วิธีชำระเงิน</span><b>บัตรเครดิต</b></div>
-        <div class="summary-row" style="border:none;"><span>สถานะ</span><b style="color:var(--green);">ชำระเงินแล้ว</b></div>
+      <div class="receipt">
+        <div><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
+        <div><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
+        <div><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
+        <div><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
+        <div style="border:none;"><span>สถานะ</span><b class="paid">ชำระเงินแล้ว</b></div>
       </div>
 
-      <button class="btn-primary" style="margin-top:10px;" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
+      <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
+      <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
@@ -466,17 +552,16 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <span style="font-size:20px;">🚗</span>
     </button>
     <div class="transport-grid">
-      <!-- โลโก้ Grab / LINE MAN (ใช้โค้ด CSS Box สีเขียวเพื่อให้การันตีว่าแสดงผลแน่นอน ไม่พึ่งรูปลิงก์) -->
       <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')">
-        <div style="width:24px; height:24px; border-radius:6px; background:#00B14F; color:#fff; display:grid; place-items:center; font-weight:bold; font-size:14px;">G</div> Grab
+        <img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> Grab
       </button>
       <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')">
-        <div style="width:24px; height:24px; border-radius:6px; background:#00C300; color:#fff; display:grid; place-items:center; font-weight:bold; font-size:14px;">L</div> LINE MAN
+        <img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> LINEMAN
       </button>
     </div>
   </section>
 
-  <!-- หน้าใหม่: CLASS BOOKING DETAIL (เข้าไปหน้าใหม่ ไม่เด้งทับ) -->
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
   <section id="class-detail" class="bg-white">
     <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
     <div style="text-align:center; margin-bottom:20px;">
@@ -552,14 +637,13 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- หน้าใหม่: CREATE POST (เข้าไปหน้าใหม่) -->
+  <!-- หน้าใหม่: CREATE POST -->
   <section id="create-post" class="bg-white">
     <button class="back-link" onclick="switchTab('community')">← ย้อนกลับ</button>
     <h2 class="section-title">สร้างโพสต์หา Buddy</h2>
     <p class="section-desc">ชวนเพื่อนไปทำกิจกรรมด้วยกัน</p>
     
     <div class="eyebrow" style="margin-top:10px;">กิจกรรม</div>
-    <!-- เปลี่ยนเป็น Dropdown ให้เลือกกิจกรรม -->
     <select id="postTitle" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
       <option value="" disabled selected>เลือกกิจกรรม...</option>
       <option value="Yoga Flow 🧘">Yoga Flow 🧘</option>
@@ -592,7 +676,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-weight:bold;" id="chatIcon">N</div>
       <b id="chatName" style="font-size:18px;">Name</b>
     </div>
-    <!-- แชทเริ่มต้นแบบว่างเปล่า พิมพ์แล้วเด้งข้อความได้จริง -->
     <div class="chat-body" id="chatBody"></div>
     <div class="chat-input-area">
       <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; border-radius:999px; border:1px solid var(--line); padding:12px 15px; outline:none;">
@@ -720,12 +803,17 @@ function switchTab(tabId) {
 }
 
 /* =========================
-   AUTH VALIDATION & SHOW PASS
+   AUTH VALIDATION & SHOW PASS (SVG Eye)
 ========================= */
 function togglePass(id, btn) {
   const input = document.getElementById(id);
-  if(input.type === 'password') { input.type = 'text'; btn.innerText = 'Hide'; }
-  else { input.type = 'password'; btn.innerText = 'Show'; }
+  if(input.type === 'password') { 
+    input.type = 'text'; 
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+  } else { 
+    input.type = 'password'; 
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+  }
 }
 
 function validateAuth(type) {
@@ -832,7 +920,7 @@ function submitPost() {
 function openChat(name) {
   document.getElementById('chatName').innerText = name;
   document.getElementById('chatIcon').innerText = name.charAt(0);
-  document.getElementById('chatBody').innerHTML = ''; // ลบข้อความเก่าออก
+  document.getElementById('chatBody').innerHTML = ''; 
   show('chat');
 }
 
@@ -843,7 +931,7 @@ function sendMessage() {
     const chatBody = document.getElementById('chatBody');
     chatBody.innerHTML += `<div class="chat-bubble chat-right">${text}</div>`;
     input.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight; // เลื่อนลงล่างสุด
+    chatBody.scrollTop = chatBody.scrollHeight; 
   }
 }
 
@@ -858,7 +946,7 @@ function showPopup(title, desc) {
 function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
 
 /* =========================
-   ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - จาก kla.html)
+   ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - ดึงโครงสร้างจาก kla.html 100%)
 ========================= */
 const questions = [
   { q: "เพศของคุณคืออะไร?", e: "GENDER", help: "ช่วยให้เราปรับแต่งคำแนะนำที่เหมาะสมกับคุณ", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
@@ -900,10 +988,10 @@ function renderOnboarding() {
          let iconHtml = "";
          if (qIndex === 0) {
            const icons = ['👨', '👩', '👤'];
-           iconHtml = `<span class="icon">${icons[oIndex]}</span>`;
+           iconHtml = `<span class="icon" style="font-size:26px;">${icons[oIndex]}</span>`;
          } else if (qIndex === 4) {
            const icons = ['🏋️', '👨‍🏫', '👥', '🥊', '🧘', '💆', '♨️', '☕', '🏓'];
-           iconHtml = `<span class="icon">${icons[oIndex] || '✦'}</span>`;
+           iconHtml = `<span class="icon" style="font-size:26px;">${icons[oIndex] || '✦'}</span>`;
          }
 
          html += `
@@ -966,23 +1054,82 @@ function submitOnboarding(){
   document.getElementById("packageName").textContent = pkgName + " Package";
   document.getElementById("summaryPackage").textContent = pkgName + " Package";
   document.getElementById("packagePrice").textContent = pkgPrice;
-  document.getElementById("checkoutPackage").textContent = pkgName;
+  document.getElementById("checkoutPackage").textContent = pkgName + " Package";
   document.getElementById("checkoutPrice").textContent = checkoutPrice;
   document.getElementById("subTotal").textContent = sub;
   
-  // คำนวณ VAT 7%
   const numPrice = Number(sub.replace(/[^0-9]/g, ''));
   const vat = Math.round(numPrice * 0.07);
   document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
-  
   document.getElementById("grandTotal").textContent = grand;
-  document.getElementById("payButtonAmount").textContent = grand;
+  document.getElementById("payButtonAmount").textContent = grand + " →";
+
+  // ดึงเหตุผลมาโชว์แบบ kla.html
+  const goals = answersOB[2].map(i => questions[2].o[i]).join(" · ");
+  const freq = questions[3].o[answersOB[3]];
+  const interests = answersOB[4].map(i => questions[4].o[i]).join(" · ");
+  document.getElementById("reasons").innerHTML = [
+    `เป้าหมายที่คุณเลือก: ${goals}`,
+    `คุณออกกำลังกาย ${freq}`,
+    `กิจกรรมที่คุณสนใจ: ${interests}`,
+    `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน`
+  ].map(item => `<div class="reason">${item}</div>`).join("");
 
   show('result');
 }
 
-function goPayment() { show('payment'); }
-function processPayment() { show('processing'); setTimeout(() => { show('success'); }, 2000); }
+/* PAYMENT LOGIC (จาก kla.html) */
+let paymentMethod = 'card';
+function setPayment(type, element) {
+  paymentMethod = type;
+  document.querySelectorAll(".pay-tab").forEach(tab => tab.classList.remove("active"));
+  element.classList.add("active");
+  document.getElementById("cardForm").style.display = type === "card" ? "block" : "none";
+  document.getElementById("qrForm").style.display = type === "qr" ? "block" : "none";
+  document.getElementById("mobileForm").style.display = type === "mobile" ? "block" : "none";
+  
+  const actionText = document.getElementById("payActionText");
+  if(type === "mobile") actionText.textContent = selectedBank ? "เปิด " + selectedBank : "เลือกธนาคารเพื่อชำระ";
+  else if(type === "qr") actionText.textContent = "ยืนยันการชำระผ่าน QR";
+  else actionText.textContent = "ชำระเงิน";
+}
+
+let selectedBank = null;
+function selectBank(bank, element) {
+  selectedBank = bank;
+  document.querySelectorAll(".bank-option").forEach(opt => opt.classList.remove("active"));
+  element.classList.add("active");
+  document.getElementById("payActionText").textContent = "เปิด " + bank;
+}
+
+function processPayment() {
+  if (paymentMethod === "mobile" && !selectedBank) return showPopup("แจ้งเตือน", "กรุณาเลือกธนาคารก่อนครับ");
+  
+  document.getElementById("processTitle").textContent = paymentMethod === "mobile" ? "กำลังเชื่อมต่อ " + selectedBank : "กำลังดำเนินการชำระเงิน";
+  document.getElementById("processDesc").textContent = paymentMethod === "qr" ? "กำลังตรวจสอบการชำระผ่าน QR" : "กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ";
+
+  show('processing');
+  
+  const fill = document.getElementById("processFill");
+  fill.style.width = "0%";
+  setTimeout(()=>fill.style.width="35%", 150);
+  setTimeout(()=>fill.style.width="72%", 800);
+  setTimeout(()=>fill.style.width="100%", 1450);
+
+  setTimeout(() => { 
+    document.getElementById("successPackage").textContent = document.getElementById("packageName").textContent;
+    document.getElementById("successAmount").textContent = document.getElementById("grandTotal").textContent;
+    document.getElementById("successMethod").textContent = paymentMethod === 'card' ? "บัตรเครดิต / เดบิต" : (paymentMethod === 'qr' ? "QR Code" : "Mobile Banking · " + selectedBank);
+    show('success'); 
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const qr = document.getElementById("fakeQr");
+  if(qr && !qr.children.length){
+    for(let i=0;i<36;i++){ qr.appendChild(document.createElement("span")); }
+  }
+});
 
 </script>
 
