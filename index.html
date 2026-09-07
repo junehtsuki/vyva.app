@@ -8,175 +8,165 @@
 <link rel="icon" href="sayo.logo.jpg">
 <title>SAYO App</title>
 
+<!-- โหลดฟอนต์ -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
+/* =========================================
+   COLOR PALETTE
+========================================= */
 :root {
-  --bg-color: #f2f2f7; 
-  --app-bg: #ffffff;   
+  --bg: #f5f7f4;
+  --surface: #ffffff;
   --ink: #111111;
   --muted: #71807a;
-  --primary: #4A9572;      
-  --secondary: #9acda8;    
-  --bg-light: #eaf6e5;     
-  --bg-yellow: #fff6d3;    
-  --accent: #dca434;       
-  --border: #e5e5ea;
+  --green: #4A9572;
+  --green-dark: #2d664b;
+  --mint: #eaf6e5;
+  --mint2: #f0f8f4;
+  --line: #dfe8e3;
+  --gold: #dca434;
   --shadow: 0 10px 30px rgba(74, 149, 114, 0.1);
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-body { margin: 0; background-color: var(--bg-color); color: var(--ink); font-family: 'DM Sans', 'Noto Sans Thai', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+body { margin: 0; background-color: #f2f2f7; color: var(--ink); font-family: 'DM Sans', 'Noto Sans Thai', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
 
-/* APP CONTAINER - ล็อกไม่ให้เลื่อนทั้งจอ */
-.app-container { width: 100%; max-width: 430px; height: 100vh; max-height: 932px; background-color: var(--app-bg); position: relative; display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.08); overflow: hidden; }
+/* APP CONTAINER */
+.app-container { width: 100%; max-width: 430px; height: 100vh; max-height: 932px; background-color: var(--surface); position: relative; display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.08); overflow: hidden; }
 @media (max-width: 480px) { .app-container { max-height: 100dvh; box-shadow: none; } }
 
-/* SECTION - ให้เลื่อนเฉพาะส่วนเนื้อหา */
-section { display: none; flex: 1; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 20px; padding-bottom: 95px; animation: fadeIn 0.3s ease; }
+/* SECTION */
+section { display: none; flex: 1; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 20px; padding-bottom: 95px; animation: fadeIn 0.3s ease; background: var(--bg); }
 section.active { display: flex; }
 section.no-padding-bottom { padding-bottom: 20px; }
+section.bg-white { background: var(--surface); }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-button, input { font: inherit; outline: none; border: none; cursor: pointer; }
+button, input, select { font: inherit; outline: none; border: none; cursor: pointer; }
 
 /* UI COMPONENTS */
-.btn-primary { background-color: var(--primary); color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 15px rgba(74, 149, 114, 0.3); }
-.btn-primary:active { transform: scale(0.98); }
-.btn-outline { background-color: #fff; color: var(--ink); width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; border: 1.5px solid var(--ink); margin-bottom: 12px; }
+.btn-primary, .primary { background-color: var(--green); color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 15px rgba(74, 149, 114, 0.3); }
+.btn-primary:active, .primary:active { transform: scale(0.98); }
+.btn-outline, .secondary { background-color: #fff; color: var(--ink); width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; border: 1.5px solid var(--line); margin-bottom: 12px; }
 .btn-black { background-color: #111; color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; }
-.btn-social { background-color: #fff; color: #111; width: 100%; padding: 14px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--border); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+.btn-social { background-color: #fff; color: #111; width: 100%; padding: 14px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-.input-field { width: 100%; padding: 16px 20px; border-radius: 999px; border: 1px solid var(--border); font-size: 15px; margin-bottom: 12px; background: #f9f9f9; }
-.input-field:focus { border-color: var(--primary); background: #fff; }
+.input-field { width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line); font-size: 15px; margin-bottom: 12px; background: #fff; }
+.input-field:focus { border-color: var(--green); }
 
-.eyebrow { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.eyebrow { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
 .section-title { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.5px; }
 .section-desc { font-size: 14px; color: var(--muted); margin: 0 0 20px; line-height: 1.5; }
-.card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+.back-link { background: none; color: var(--green); padding: 0; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block; text-align: left; }
 
-/* BOTTOM NAVIGATION - ล็อกตำแหน่งให้อยู่ล่างสุดเสมอ */
-.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: none; grid-template-columns: repeat(5, 1fr); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+/* BOTTOM NAVIGATION */
+.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--line); display: none; grid-template-columns: repeat(5, 1fr); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
 .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 600; background: transparent; }
 .nav-item .icon { font-size: 22px; }
-.nav-item.active { color: var(--primary); }
+.nav-item.active { color: var(--green); }
 
-/* SPLASH SCREEN */
-#splash { background-color: var(--bg-light); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
+/* SPLASH & AUTH */
+#splash { background-color: var(--mint); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
 .splash-scene { position: relative; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
 .splash-oval { position: absolute; right: 15%; top: 15%; width: 90px; height: 200px; z-index: 1; transform: scale(0); animation: ovalPop 0.6s ease forwards; }
 .splash-people { position: absolute; right: 15%; top: 10%; width: 220px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.3s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 .brand-box { text-align: center; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s 1.5s forwards; }
-.brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: var(--primary); margin: 0; letter-spacing: 4px; line-height: 1; }
-.brand-slogan { font-size: 14px; color: var(--primary); letter-spacing: 3px; margin: 8px 0 0; font-weight: 600; }
-
+.brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: var(--green); margin: 0; letter-spacing: 4px; line-height: 1; }
 @keyframes ovalPop { to { transform: scale(1); } }
 @keyframes flipJump { 0% { transform: translateX(40px) rotate(90deg) scale(0.5); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateX(-110px) rotate(-360deg) scale(1.1); opacity: 1; } }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-/* WELCOME & AUTH */
 .welcome-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow); }
-#welcome { align-items: center; justify-content: center; background: var(--bg-light); text-align: center; }
-.auth-header { margin-bottom: 30px; margin-top: 10px; }
-.auth-title { font-size: 36px; font-weight: 700; margin: 0 0 8px; }
-.divider { display: flex; align-items: center; margin: 20px 0; color: var(--muted); font-size: 12px; }
-.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
-.divider:not(:empty)::before { margin-right: 15px; }
-.divider:not(:empty)::after { margin-left: 15px; }
+#welcome { align-items: center; justify-content: center; text-align: center; }
 
-/* HOME DASHBOARD */
+/* HOME */
 .home-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.user-info h2 { margin: 0; font-size: 20px; }
-.user-info p { margin: 0; color: var(--muted); font-size: 13px; }
-.profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); }
-.trial-banner { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
-.trial-banner h3 { margin: 0 0 4px; font-size: 22px; }
-.trial-banner p { margin: 0 0 16px; font-size: 13px; line-height: 1.5; }
-.badge-yellow { background: var(--bg-yellow); color: var(--accent); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 8px; }
+.profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
+.trial-banner { background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
 
-/* QUIZ / ONBOARDING */
-.quiz-progress { height: 6px; background: var(--border); border-radius: 10px; margin-bottom: 24px; overflow: hidden; }
-.quiz-bar { height: 100%; background: var(--primary); width: 0%; transition: 0.3s; }
-.option-btn { width: 100%; padding: 18px 20px; text-align: left; background: #fff; border: 1.5px solid var(--border); border-radius: 16px; font-size: 15px; margin-bottom: 12px; transition: 0.2s; color: var(--ink); font-family: inherit; }
-.option-btn.selected { border-color: var(--primary); background: var(--bg-light); font-weight: 600; }
-.option-btn.selected::after { content: '✓'; float: right; color: var(--primary); }
+/* QUIZ / RESULT / COMPARE (จาก kla.html) */
+.quiz-wrap{ max-width:830px; margin:0 auto; width: 100%; }
+.progress-head{ display:flex; justify-content:space-between; color:var(--muted); font-size:13px; margin-bottom:8px; }
+.step{ height:7px; border-radius:10px; background:#e3ebe7; margin-bottom:20px; }
+.bar{ height:100%; width:20%; border-radius:10px; background:var(--green); transition:.3s; }
+.quiz-card{ padding:34px 24px; border-radius:28px; background:white; border:1px solid var(--line); box-shadow:var(--shadow); }
+.question{ margin:8px 0 20px; font-size:24px; line-height: 1.3; }
+.options{ display:grid; gap:10px; }
+.option{ position:relative; width:100%; padding:15px 17px; text-align:left; background:white; color:var(--ink); border:1.5px solid var(--line); border-radius:15px; transition:.2s; }
+.option.selected{ border-color:var(--green); background:#f0faf6; }
+.option.selected::after{ content:"✓"; float:right; color:var(--green); font-weight:800; }
+.budget-input{ width:100%; padding:18px; border-radius:16px; border:1.5px solid var(--line); outline:none; font-size:20px; color:var(--ink); }
+.result-hero{ position:relative; overflow:hidden; padding:30px; border-radius:32px; background:linear-gradient(135deg,#0f5f50,#173d35); color:white; margin-bottom:20px; }
+.match-score-card{ padding:20px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); margin-top:15px; }
+.reason-card, .summary-card{ padding:20px; border-radius:20px; background:white; border:1px solid var(--line); margin-bottom: 15px;}
+.reason{ padding:10px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; }
+.plan-card { padding: 20px; background: white; border: 1px solid var(--line); border-radius: 20px; margin-bottom: 15px; }
+.plan-card.selected { border: 2px solid var(--green); background: var(--mint2); }
+.plan-price { font-family: "DM Sans"; font-size: 28px; font-weight: 800; margin: 10px 0; }
+.selected-package-banner{ position:sticky; bottom:0; padding:15px; border-radius:20px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
+.checkout-grid { display: flex; flex-direction: column; gap: 15px; }
+.order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 20px; margin-bottom: 15px;}
+.summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.payment-tabs { display: flex; gap: 8px; margin: 15px 0; }
+.pay-tab { flex: 1; background: #fff; border: 1px solid var(--line); padding: 10px; border-radius: 12px; font-size: 12px; }
+.pay-tab.active { background: var(--mint); border-color: var(--green); color: var(--green); font-weight: bold; }
 
-/* RESULT */
-.result-hero{ padding:30px 20px; border-radius:24px; background:linear-gradient(135deg,#0f5f50,#173d35); color:white; margin-bottom:20px; }
-.package-result-name{ margin:10px 0; font-size:36px; line-height:1.1; }
+/* PLAN & BOOKING (GRID 3 COLUMNS) */
+.horizontal-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; scrollbar-width: none; }
+.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 55px; height: 75px; border-radius: 16px; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+.cal-day.active { background: var(--green); color: #fff; border-color: var(--green); }
 
-/* PLAN & BOOKING */
-.horizontal-scroll { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 15px; scrollbar-width: none; }
-.horizontal-scroll::-webkit-scrollbar { display: none; }
-.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 55px; height: 75px; border-radius: 16px; background: #fff; border: 1px solid var(--border); color: var(--muted); transition: 0.2s; }
-.cal-day.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(74,149,114,0.3); }
-.cal-day b { font-size: 20px; margin-top: 4px; }
-.cal-day span { font-size: 11px; text-transform: uppercase; }
-
-.class-card { display: flex; gap: 15px; align-items: center; padding: 16px; cursor: pointer; transition: 0.2s; }
-.class-card:active { transform: scale(0.98); }
-.class-time { font-size: 16px; font-weight: 700; color: var(--primary); width: 50px; text-align: center; }
-.class-info { flex: 1; }
-.class-info b { display: block; font-size: 16px; margin-bottom: 2px; }
-.class-info span { font-size: 12px; color: var(--muted); }
-.btn-book { background: var(--bg-light); color: var(--primary); padding: 8px 16px; border-radius: 999px; font-weight: 700; font-size: 13px; }
+.class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.class-box { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 15px 5px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+.class-box:active { transform: scale(0.95); }
+.class-box .emoji { font-size: 28px; }
+.class-box b { font-size: 12px; line-height: 1.2; color: var(--ink); }
 
 .transport-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
-.transport-btn { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid var(--border); padding: 16px; border-radius: 16px; font-weight: 600; font-size: 14px; }
-.parking-btn { background: var(--bg-yellow); color: var(--ink); border: none; padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+.transport-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid var(--line); padding: 14px; border-radius: 16px; font-weight: 600; font-size: 13px; }
+.parking-btn { background: var(--bg-yellow); color: var(--ink); border: none; padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; margin-bottom: 12px; width: 100%; }
 
-/* REWARDS */
-.points-card { background: var(--ink); color: #fff; padding: 24px; border-radius: 20px; text-align: center; margin-bottom: 20px; }
-.points-card h2 { font-size: 42px; margin: 10px 0; color: var(--accent); }
-.reward-item { display: flex; gap: 15px; align-items: center; cursor: pointer; }
-.reward-img { width: 60px; height: 60px; background: var(--bg-light); border-radius: 14px; display: grid; place-items: center; font-size: 24px; }
+/* TIME SLOTS */
+.time-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+.time-chip { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); transition: 0.2s; background: #fff;}
+.time-chip.active { background: var(--mint); border-color: var(--green); color: var(--green); }
 
 /* COMMUNITY */
-.map-mockup { width: 100%; height: 180px; background: var(--bg-light); border-radius: 20px; margin-bottom: 20px; position: relative; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.map-marker { position: absolute; width: 40px; height: 40px; background: #fff; border-radius: 50%; border: 2px solid var(--primary); display: grid; place-items: center; font-size: 18px; box-shadow: var(--shadow); }
-.buddy-post { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 16px; }
-.buddy-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.buddy-user { display: flex; align-items: center; gap: 10px; }
-.buddy-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-.tag { background: var(--bg-light); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.buddy-post { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; }
+.buddy-user { display: flex; align-items: center; gap: 10px; margin-bottom: 12px;}
+.tag { background: var(--mint); color: var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
 .buddy-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
-.btn-join { background: var(--primary); color: #fff; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 13px; }
-.btn-joined { background: var(--border); color: var(--muted); padding: 12px; border-radius: 12px; font-weight: 600; font-size: 13px; cursor: default; }
 
-/* CHAT MODAL OVERLAY (ซ่อมบั๊กแชท) */
-.chat-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 200; display: flex; flex-direction: column; transform: translateY(100%); transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-.chat-modal.active { transform: translateY(0); }
-.chat-header { background: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); padding-top: max(20px, env(safe-area-inset-top)); }
-.chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
-.chat-bubble { max-width: 75%; padding: 14px 18px; border-radius: 20px; font-size: 14px; line-height: 1.4; }
-.chat-left { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; }
-.chat-right { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
-.chat-input-area { background: #fff; padding: 15px 20px; display: flex; gap: 10px; border-top: 1px solid var(--border); }
-.chat-input-area input { flex: 1; background: var(--bg-color); border-radius: 999px; padding: 12px 20px; }
+/* CHAT SECTION */
+#chat { padding: 0; display: none; flex-direction: column; height: 100%; background: #fff; }
+#chat.active { display: flex; }
+.chat-header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 15px; background: #fff; position: sticky; top: 0; z-index: 10;}
+.chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: var(--bg); }
+.chat-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; word-wrap: break-word;}
+.chat-left { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--line); }
+.chat-right { background: var(--green); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-input-area { padding: 15px 20px; display: flex; gap: 10px; border-top: 1px solid var(--line); background: #fff; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
 
-/* POPUP MODALS (REUSABLE) */
-.overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px; backdrop-filter: blur(4px); }
+/* POPUP */
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px; }
 .overlay.active { opacity: 1; visibility: visible; }
-.popup { background: #fff; width: 100%; max-width: 320px; padding: 30px; border-radius: 24px; text-align: center; transform: scale(0.9); transition: 0.3s; max-height: 90vh; overflow-y: auto; }
+.popup { background: #fff; width: 100%; max-width: 320px; padding: 30px; border-radius: 24px; text-align: center; transform: scale(0.9); transition: 0.3s; }
 .overlay.active .popup { transform: scale(1); }
-.modal-close { position: absolute; right: 20px; top: 20px; font-size: 20px; background: none; color: var(--muted); }
-
-/* TIME CHIPS FOR BOOKING */
-.time-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
-.time-chip { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); transition: 0.2s; }
-.time-chip.active { background: var(--bg-light); border-color: var(--primary); color: var(--primary); }
-
 </style>
 </head>
 <body>
 
 <div class="app-container">
 
-  <!-- SPLASH SCREEN -->
+  <!-- =========================================
+       0. SPLASH SCREEN 
+  ========================================= -->
   <div id="splash">
     <div class="splash-scene">
-      <img src="oval.png" class="splash-oval" alt="Oval" onerror="this.style.background='var(--primary)'; this.style.borderRadius='50%';">
-      <img src="sayo.people.png" class="splash-people" alt="SAYO" onerror="this.style.background='var(--accent)'; this.style.borderRadius='50%'; this.style.height='140px';">
+      <img src="oval.png" class="splash-oval" alt="Oval Portal" onerror="this.style.background='var(--green)'; this.style.borderRadius='50%';">
+      <img src="sayo.people.png" class="splash-people" alt="SAYO Person" onerror="this.style.background='var(--gold)'; this.style.borderRadius='50%'; this.style.height='140px';">
     </div>
     <div class="brand-box">
       <h1 class="brand-sayo">SAYO</h1>
@@ -184,253 +174,365 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
     </div>
   </div>
 
-  <!-- WELCOME -->
-  <section id="welcome" class="no-padding-bottom">
-    <img src="sayo.logo.jpg" class="welcome-logo" alt="SAYO Logo" onerror="this.style.background='var(--primary)';">
-    <h1 class="brand-sayo" style="font-size: 42px;">SAYO</h1>
-    <p class="brand-slogan" style="margin-bottom: 40px; color: var(--muted);">MOVE LIVE GROW</p>
-    <div style="width: 100%; margin-top: auto;">
-      <button class="btn-black" onclick="show('signup')">Sign up (Free Trial)</button>
-      <button class="btn-outline" onclick="show('signin')">Sign in</button>
+  <!-- =========================================
+       1. WELCOME & AUTH
+  ========================================= -->
+  <section id="welcome" class="bg-white no-padding-bottom">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+      <img src="sayo.logo.jpg" class="welcome-logo" alt="SAYO" onerror="this.style.background='var(--green)';">
+      <h1 class="brand-sayo" style="font-size: 42px;">SAYO</h1>
+      <p class="section-desc" style="letter-spacing: 2px;">MOVE LIVE GROW</p>
     </div>
+    <button class="btn-black" onclick="show('signup')">Sign up (Free Trial)</button>
+    <button class="btn-outline" onclick="show('signin')">Sign in</button>
   </section>
 
-  <!-- SIGN UP -->
-  <section id="signup" class="no-padding-bottom">
-    <button style="text-align:left; font-size:24px; background:none; padding:0; margin-bottom: 10px;" onclick="show('welcome')">←</button>
-    <div class="auth-header">
-      <h1 class="auth-title">Sign up <span class="brand-sayo" style="font-size: 20px;">SAYO</span></h1>
-      <p class="section-desc">สร้างบัญชีเพื่อเริ่ม Wellness Journey</p>
-    </div>
+  <section id="signup" class="bg-white no-padding-bottom">
+    <button class="back-link" onclick="show('welcome')">← กลับ</button>
+    <h1 class="section-title">Sign up</h1>
+    <p class="section-desc">สร้างบัญชีเพื่อเริ่ม Wellness Journey</p>
     <input type="text" id="regName" class="input-field" placeholder="Full name">
     <input type="email" id="regEmail" class="input-field" placeholder="Email">
-    <input type="password" id="regPass" class="input-field" placeholder="Password (Min 6 chars, 1 Uppercase)">
-    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('signup')">Continue</button>
-    <div class="divider">or</div>
-    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
-    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
+    <input type="password" id="regPass" class="input-field" placeholder="Password (ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว)">
+    <button class="btn-black" onclick="validateAuth('signup')">Continue</button>
   </section>
 
-  <!-- SIGN IN -->
-  <section id="signin" class="no-padding-bottom">
-    <button style="text-align:left; font-size:24px; background:none; padding:0; margin-bottom: 10px;" onclick="show('welcome')">←</button>
-    <div class="auth-header">
-      <h1 class="auth-title">Sign in <span class="brand-sayo" style="font-size: 20px;">SAYO</span></h1>
-      <p class="section-desc">Glad to see you again!</p>
-    </div>
+  <section id="signin" class="bg-white no-padding-bottom">
+    <button class="back-link" onclick="show('welcome')">← กลับ</button>
+    <h1 class="section-title">Sign in</h1>
+    <p class="section-desc">Glad to see you again!</p>
     <input type="email" id="logEmail" class="input-field" placeholder="Email">
     <input type="password" id="logPass" class="input-field" placeholder="Password">
-    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('login')">Continue</button>
-    <div style="text-align: center; font-size: 14px; margin-bottom: 15px;">
-      <b style="color: var(--muted); cursor:pointer;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
+    <button class="btn-black" onclick="validateAuth('login')">Continue</button>
+    <div style="text-align: center; margin-top: 10px;">
+      <b style="color: var(--muted); font-size:14px;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
     </div>
-    <div class="divider">or</div>
-    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
-    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
   </section>
 
-  <!-- HOME DASHBOARD -->
+  <!-- =========================================
+       2. HOME DASHBOARD
+  ========================================= -->
   <section id="home">
     <div class="home-header">
-      <div class="user-info">
-        <h2>สวัสดี SAYO! 👋</h2>
-        <p>พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
+      <div>
+        <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
+        <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
-      <div class="profile-avatar">🤸‍♀️</div>
+      <!-- กดที่รูป Profile เพื่อไปหน้า Profile -->
+      <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
-    <div class="trial-banner">
-      <div class="badge-yellow">Free Trial Active</div>
-      <h3>Welcome to SAYO</h3>
-      <p>คุณได้รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง และ <b>300 Credits</b></p>
-      <button class="btn-outline" style="background:#fff; color:var(--ink); padding:10px; margin:0;" onclick="switchTab('plan')">จองคลาสทดลองเลย</button>
+
+    <div class="card" style="background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; border:none;">
+      <span style="background: var(--bg-yellow); color: var(--ink); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; margin-bottom:10px; display:inline-block;">Free Trial Active</span>
+      <h3 style="margin: 0 0 5px; font-size: 20px;">Welcome to SAYO</h3>
+      <p style="margin: 0 0 15px; font-size: 13px; line-height: 1.5; opacity: 0.9;">รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง และ <b>300 Credits</b></p>
+      <button class="btn-outline" style="padding:10px; margin:0; border:none;" onclick="switchTab('plan')">จองคลาสทดลองเลย</button>
     </div>
+
     <div class="eyebrow">YOUR MATCH</div>
     <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
-    <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสที่เหมาะกับคุณที่สุด</p>
+    <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
+    <!-- เริ่ม Quiz -->
     <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
   </section>
 
-  <!-- QUIZ (ONBOARDING) -->
+  <!-- =========================================
+       3. QUIZ FLOW (ดึงจาก kla.html เป๊ะๆ)
+  ========================================= -->
   <section id="quiz">
-    <button style="text-align:left; font-size:24px; background:none; padding:0; margin-bottom: 15px;" onclick="switchTab('home')">←</button>
-    <div class="quiz-progress"><div class="quiz-bar" id="progressBar"></div></div>
-    <div class="eyebrow" id="qeyebrow">GOAL</div>
-    <h2 class="section-title" id="questionText">คำถาม</h2>
-    <p class="section-desc" id="questionHelp">คำอธิบาย</p>
-    <div id="optionsArea" style="margin-bottom: 20px;"></div>
-    <div style="display:flex; gap:10px; margin-top:auto;">
-      <button class="btn-outline" id="backBtn" onclick="prevQ()" style="flex:1;">ย้อนกลับ</button>
-      <button class="btn-primary" id="nextBtn" onclick="nextQ()" style="flex:1; margin-bottom:12px;">ถัดไป</button>
+    <div class="quiz-wrap">
+      <button class="back-link" onclick="switchTab('home')">← ยกเลิก</button>
+      <div class="progress-head"><span id="qnum">คำถาม 1 / 7</span><span id="percent">14%</span></div>
+      <div class="step"><div class="bar" id="bar"></div></div>
+      <div class="quiz-card">
+        <div class="eyebrow" id="qeyebrow">GOAL</div>
+        <div class="question" id="question">คำถาม?</div>
+        <div id="options" class="options"></div>
+        <div id="budgetArea"></div>
+        <div style="display:flex; gap:10px; margin-top:24px;">
+          <button class="btn-outline" id="backBtn" onclick="prevQ()" style="margin:0;">← ย้อนกลับ</button>
+          <button class="btn-primary" id="nextBtn" onclick="nextQ()" style="margin:0;">ถัดไป →</button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- RESULT -->
   <section id="result">
-    <button style="text-align:left; font-size:24px; background:none; padding:0; margin-bottom: 15px;" onclick="switchTab('home')">←</button>
-    <div class="result-hero">
-      <div class="eyebrow" style="color:#9acda8;">YOUR MATCH</div>
-      <h1 class="package-result-name" id="packageName">Signature Package</h1>
-      <p style="color:#c7ddd5; line-height:1.6;" id="resultDescription">แพ็กเกจที่เหมาะกับไลฟ์สไตล์ของคุณ</p>
-    </div>
-    <div class="card" style="text-align:center;">
-      <h3 style="margin:0; font-size:28px; color:var(--primary);" id="packagePrice">฿3,000</h3>
-      <span style="font-size:13px; color:var(--muted);">/ เดือน</span>
-      <button class="btn-black" style="margin-top:20px;" onclick="showPopup('ไปหน้าชำระเงิน', 'ระบบจำลองยืนยันแพ็กเกจเรียบร้อย')">เลือกแพ็กเกจนี้</button>
+    <div class="quiz-wrap">
+      <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
+      <div class="result-hero">
+        <div class="eyebrow" style="color:var(--secondary)">YOUR MATCH</div>
+        <h1 class="package-result-name" id="packageName">Signature Package</h1>
+        <p id="resultDescription" style="color:#c7ddd5;">เหมาะกับรูปแบบการใช้ชีวิตของคุณ</p>
+        <button class="btn-outline" style="margin-top:15px; border:none;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
+      </div>
+      <div class="match-score-card">
+        <div class="score-circle">
+          <div class="score-inner">
+            <div class="score-num" id="score">94%</div>
+            <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
+          </div>
+        </div>
+      </div>
+      <div class="summary-card" style="margin-top:15px;">
+        <h3 id="summaryPackage">Signature Package</h3>
+        <div class="plan-price" id="packagePrice">฿3,000</div>
+        <button class="btn-outline" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+      </div>
     </div>
   </section>
 
-  <!-- PLAN (CALENDAR & CLASSES) -->
+  <section id="compare">
+    <div class="quiz-wrap">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
+      <div id="compareGrid"></div>
+      <div class="selected-package-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
+          <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green);">฿3,000</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="payment">
+    <div class="quiz-wrap">
+      <button class="back-link" onclick="show('compare')">← ย้อนกลับ</button>
+      <h2 class="section-title">ยืนยันแพ็กเกจ</h2>
+      <div class="order-plan">
+        <h3 id="checkoutPackage" style="margin:0 0 10px;">Signature</h3>
+        <div class="plan-price" id="checkoutPrice">฿3,000</div>
+      </div>
+      <div class="card" style="padding:15px;">
+        <div class="summary-row"><span>ค่าบริการ</span><b id="subTotal">฿3,000</b></div>
+        <div class="summary-row" style="border:none; font-size:18px;"><span>ยอดชำระ</span><b id="grandTotal" style="color:var(--green);">฿3,210</b></div>
+      </div>
+      <div class="card">
+        <div class="eyebrow">วิธีชำระเงิน</div>
+        <div class="payment-tabs">
+          <div class="pay-tab active">💳 บัตรเครดิต</div>
+          <div class="pay-tab">▦ QR Code</div>
+        </div>
+        <input type="text" class="input-field" placeholder="หมายเลขบัตร 16 หลัก">
+        <input type="text" class="input-field" placeholder="ชื่อบนบัตร">
+        <button class="btn-primary" onclick="processPayment()">ชำระเงิน <span id="payButtonAmount"></span></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="processing">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <div style="font-size:60px; margin-bottom:20px;">⌛</div>
+      <h2>กำลังชำระเงิน...</h2>
+    </div>
+  </section>
+
+  <section id="success">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <div style="font-size:60px; margin-bottom:20px;">🎉</div>
+      <h2 style="color:var(--green);">ชำระเงินสำเร็จ!</h2>
+      <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว</p>
+      <button class="btn-primary" style="margin-top:20px;" onclick="switchTab('plan')">จองคลาสเลย</button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       4. PLAN (GRID คลาส 3-4 กล่องต่อแถว ตามเรฟ)
+  ========================================= -->
   <section id="plan">
-    <div class="eyebrow">MY WEEKLY PLANNER</div>
-    <h2 class="section-title">ตารางสัปดาห์นี้</h2>
-    <p class="section-desc">เลื่อนดูวันที่ต้องการจองคลาส</p>
-
-    <!-- Scrollable Calendar -->
-    <div class="horizontal-scroll" id="calendarScroll">
-      <button class="cal-day active" onclick="selectDay(this)"><span>Mon</span><b>7</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>8</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>9</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>10</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>11</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>12</b></button>
-      <button class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>13</b></button>
+    <div class="eyebrow">MY PLANNER</div>
+    <h2 class="section-title">ปฏิทินกิจกรรม</h2>
+    
+    <!-- ปฏิทินเลื่อนซ้ายขวา -->
+    <div class="horizontal-scroll">
+      <div class="cal-day active"><span>Mon</span><b>7</b></div>
+      <div class="cal-day"><span>Tue</span><b>8</b></div>
+      <div class="cal-day"><span>Wed</span><b>9</b></div>
+      <div class="cal-day"><span>Thu</span><b>10</b></div>
+      <div class="cal-day"><span>Fri</span><b>11</b></div>
+      <div class="cal-day"><span>Sat</span><b>12</b></div>
+      <div class="cal-day"><span>Sun</span><b>13</b></div>
     </div>
 
-    <!-- Classes List -->
-    <div class="card class-card" onclick="openClassBooking('Yoga Flow', 'Mind & Body Studio')">
-      <div class="class-info"><b>🧘 Yoga Flow</b><span>Mind & Body Studio</span></div>
-      <button class="btn-book">จองเวลา</button>
-    </div>
-    <div class="card class-card" onclick="openClassBooking('Pilates Reformer', 'Core Studio')">
-      <div class="class-info"><b>🤸‍♀️ Pilates Reformer</b><span>Core Studio</span></div>
-      <button class="btn-book">จองเวลา</button>
-    </div>
-    <div class="card class-card" onclick="openClassBooking('Muay Thai', 'Combat Zone')">
-      <div class="class-info"><b>🥊 Muay Thai</b><span>Combat Zone</span></div>
-      <button class="btn-book">จองเวลา</button>
-    </div>
-    <div class="card class-card" onclick="openClassBooking('Gym · Upper Body', 'Fitness Floor')">
-      <div class="class-info"><b>🏋️ Gym · Upper Body</b><span>Fitness Floor</span></div>
-      <button class="btn-book">จองเวลา</button>
-    </div>
-    <div class="card class-card" onclick="openClassBooking('Onsen Recovery', 'Relax Zone')">
-      <div class="class-info"><b>♨️ Onsen Recovery</b><span>Relax Zone</span></div>
-      <button class="btn-book">จองเวลา</button>
+    <div class="eyebrow" style="margin-top: 15px;">CLASSES</div>
+    <!-- คลาสเรียงเป็นบ็อกซ์ 3 กล่องต่อแถว -->
+    <div class="class-grid">
+      <div class="class-box" onclick="openClassDetail('Yoga Flow', '🧘')">
+        <span class="emoji">🧘</span><b>Yoga Flow</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Pilates', '🤸‍♀️')">
+        <span class="emoji">🤸‍♀️</span><b>Pilates</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Muay Thai', '🥊')">
+        <span class="emoji">🥊</span><b>Muay Thai</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Fitness', '🏋️')">
+        <span class="emoji">🏋️</span><b>Fitness</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Onsen', '♨️')">
+        <span class="emoji">♨️</span><b>Onsen</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Dance', '💃')">
+        <span class="emoji">💃</span><b>Dance</b>
+      </div>
     </div>
 
-    <div class="eyebrow" style="margin-top: 10px;">FACILITIES & TRANSPORT</div>
-    <h2 class="section-title">ที่จอดรถ & การเดินทาง</h2>
-    <button class="parking-btn" onclick="showPopup('จองที่จอดรถ', 'คุณได้รับสิทธิ์จอดรถ 4 ชั่วโมง (มีตู้ EV)')">
+    <div class="eyebrow">TRANSPORT & PARKING</div>
+    <button class="parking-btn" onclick="showPopup('จองที่จอดรถ', 'คุณได้รับสิทธิ์จอดรถ EV ฟรี 4 ชม.')">
       <div style="display:flex; align-items:center; gap:10px;">
-        <div style="background:var(--primary); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
-        <div style="text-align:left; line-height:1.2;"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px;">สิทธิพิเศษจอดฟรี 4 ชม.</span></div>
+        <div style="background:var(--green); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
+        <div style="text-align:left; line-height:1.2;"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px;">สิทธิ์จอดฟรี 4 ชม.</span></div>
       </div>
       <span style="font-size:20px;">🚗</span>
     </button>
+    <div class="transport-grid">
+      <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')"><img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; border-radius:6px;"> Grab</button>
+      <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')"><img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; border-radius:6px;"> LINEMAN</button>
+    </div>
   </section>
 
-  <!-- REWARDS -->
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
+  <section id="class-detail" class="bg-white">
+    <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
+    <div style="text-align:center; margin-bottom:20px;">
+      <div id="detailEmoji" style="font-size:60px;">🧘</div>
+      <h2 id="detailClassName" style="margin:10px 0 5px;">Class Name</h2>
+      <p style="color:var(--muted); margin:0;">เลือกเวลาที่ต้องการจองคลาส</p>
+    </div>
+    
+    <div class="eyebrow">TIME SLOTS</div>
+    <div class="time-chips">
+      <div class="time-chip" onclick="selectTime(this)">08:00</div>
+      <div class="time-chip" onclick="selectTime(this)">09:30</div>
+      <div class="time-chip" onclick="selectTime(this)">11:00</div>
+      <div class="time-chip" onclick="selectTime(this)">13:00</div>
+      <div class="time-chip" onclick="selectTime(this)">14:30</div>
+      <div class="time-chip" onclick="selectTime(this)">16:00</div>
+      <div class="time-chip" onclick="selectTime(this)">17:30</div>
+      <div class="time-chip" onclick="selectTime(this)">19:00</div>
+      <div class="time-chip" onclick="selectTime(this)">20:30</div>
+    </div>
+    
+    <button class="btn-primary" style="margin-top:auto;" onclick="confirmBooking()">ยืนยันการจอง →</button>
+  </section>
+
+  <!-- =========================================
+       5. REWARDS
+  ========================================= -->
   <section id="rewards">
     <div class="eyebrow">YOUR CREDITS</div>
     <h2 class="section-title">SAYO Rewards</h2>
-    <div class="points-card">
-      <p style="margin:0; font-size:14px; opacity:0.8;">เครดิตคงเหลือ</p>
-      <h2>300 <span style="font-size:20px;">Pts</span></h2>
-      <p style="margin:0; font-size:12px; opacity:0.7;">คลาสที่ไม่ได้เข้าเปลี่ยนเป็นพอยต์ได้</p>
+    <div class="card" style="background:var(--ink); color:#fff; text-align:center;">
+      <h2 style="font-size:42px; margin:5px 0; color:var(--gold);">300 <span style="font-size:20px;">Pts</span></h2>
+      <p style="margin:0; font-size:12px; opacity:0.8;">คลาสที่ไม่ได้เข้า เปลี่ยนเป็นพอยต์ได้</p>
     </div>
-
-    <div class="eyebrow">REDEEM PRIVILEGES</div>
-    <div class="card reward-item" onclick="showPopup('แลกสำเร็จ', 'ได้รับส่วนลด 50 บาทที่คาเฟ่ (หัก 100 Pts)')">
-      <div class="reward-img">☕</div>
-      <div style="flex:1;"><b>SAYO Cafe Discount</b><br><span style="font-size:12px; color:var(--muted);">ส่วนลด 50 บาท เมนูเครื่องดื่ม</span></div>
-      <button class="btn-book">100 Pts</button>
+    <div class="eyebrow">REDEEM</div>
+    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับส่วนลดคาเฟ่ 50 บาท')">
+      <div style="font-size:30px;">☕</div>
+      <div style="flex:1;"><b>Cafe Discount</b><br><span style="font-size:12px; color:var(--muted);">ส่วนลด 50฿</span></div>
+      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">100 Pts</button>
     </div>
-    <div class="card reward-item" onclick="showPopup('แลกสำเร็จ', 'ได้รับ Healthy Smoothie (หัก 150 Pts)')">
-      <div class="reward-img">🥤</div>
-      <div style="flex:1;"><b>Healthy Smoothie</b><br><span style="font-size:12px; color:var(--muted);">รับฟรี น้ำปั่น 1 แก้ว</span></div>
-      <button class="btn-book">150 Pts</button>
-    </div>
-    <div class="card reward-item" onclick="showPopup('แลกสำเร็จ', 'เพิ่มสิทธิ์เข้าคลาส 1 ครั้ง (หัก 300 Pts)')">
-      <div class="reward-img">🥊</div>
-      <div style="flex:1;"><b>Free Class Pass</b><br><span style="font-size:12px; color:var(--muted);">เข้าคลาสใดก็ได้ 1 ครั้ง</span></div>
-      <button class="btn-book">300 Pts</button>
+    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับคลาสฟรี 1 ครั้ง')">
+      <div style="font-size:30px;">🥊</div>
+      <div style="flex:1;"><b>Free Class</b><br><span style="font-size:12px; color:var(--muted);">เข้าคลาสใดก็ได้</span></div>
+      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">300 Pts</button>
     </div>
   </section>
 
-  <!-- COMMUNITY -->
+  <!-- =========================================
+       6. COMMUNITY
+  ========================================= -->
   <section id="community">
-    <div class="eyebrow">FIND YOUR BUDDY</div>
-    <h2 class="section-title">เพื่อนใกล้คุณ</h2>
-    <div class="map-mockup" onclick="showPopup('แผนที่ Radar', 'กำลังค้นหาเพื่อนในรัศมี 5 กม.')">
-      <div class="map-marker" style="z-index:10;">📍</div>
-      <div class="map-marker" style="top:20px; left:40px; font-size:14px; width:30px; height:30px;">👩🏻</div>
-      <div class="map-marker" style="bottom:30px; right:50px; font-size:14px; width:30px; height:30px;">👨🏽</div>
-    </div>
-
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-      <div class="eyebrow" style="margin:0;">BUDDY FEED</div>
-      <button style="background:var(--bg-light); color:var(--primary); padding:6px 12px; border-radius:8px; font-weight:bold; font-size:12px;" onclick="openBuddyPostModal()">+ สร้างโพสต์</button>
+    <div class="eyebrow">COMMUNITY</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h2 class="section-title" style="margin:0;">Buddy Feed</h2>
+      <button class="btn-primary" style="width:auto; padding:8px 16px; margin:0; font-size:13px;" onclick="show('create-post')">+ สร้างโพสต์</button>
     </div>
     
-    <div class="buddy-post">
-      <div class="buddy-head">
+    <div id="feedContainer">
+      <!-- โพสต์ตัวอย่าง -->
+      <div class="buddy-post">
         <div class="buddy-user">
           <div style="width:40px; height:40px; border-radius:50%; background:var(--secondary); display:grid; place-items:center; font-weight:bold;">N</div>
           <div><b style="display:block; font-size:15px;">Nara</b><span style="font-size:11px; color:var(--muted);">2 กม. · 20 นาทีที่แล้ว</span></div>
         </div>
-      </div>
-      <b style="font-size:18px;">หาเพื่อนตีแบดวันอาทิตย์นี้! 🏸</b>
-      <p style="font-size:14px; color:var(--muted); margin:8px 0;">Beginner มาได้ นัดกันที่สนามใกล้สาขา ขาด 2 คน</p>
-      <div style="display:flex; gap:8px; margin:10px 0;"><span style="background:var(--bg-light); color:var(--primary); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">อา. 13 ก.ย.</span></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;">
-        <button class="btn-primary" style="margin:0; padding:12px; font-size:13px;" onclick="joinBuddy(this)">Join · เข้าร่วม</button>
-        <button class="btn-outline" style="margin:0; padding:12px; font-size:13px;" onclick="openChat('Nara')">💬 แชท</button>
+        <b style="font-size:18px;">หาเพื่อนตีแบดวันอาทิตย์นี้! 🏸</b>
+        <p style="font-size:14px; color:var(--muted); margin:8px 0;">Beginner มาได้ นัดเจอที่หน้าสนาม ขาด 2 คน</p>
+        <div class="buddy-actions">
+          <button class="btn-primary" style="margin:0; padding:12px; font-size:13px;" onclick="joinBuddy(this)">Join · เข้าร่วม</button>
+          <button class="btn-outline" style="margin:0; padding:12px; font-size:13px;" onclick="openChat('Nara')">💬 แชท</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CHAT MODAL (Overlay) -->
-  <div id="chatModal" class="chat-modal">
+  <!-- หน้าใหม่: CREATE POST -->
+  <section id="create-post" class="bg-white">
+    <button class="back-link" onclick="switchTab('community')">← ย้อนกลับ</button>
+    <h2 class="section-title">สร้างโพสต์หา Buddy</h2>
+    <p class="section-desc">ชวนเพื่อนไปทำกิจกรรมด้วยกัน</p>
+    
+    <div class="eyebrow" style="margin-top:10px;">กิจกรรม</div>
+    <input type="text" id="postTitle" class="input-field" placeholder="เช่น วิ่งสวนลุม, ตีแบด">
+    
+    <div class="eyebrow">รายละเอียดเพิ่มเติม</div>
+    <input type="text" id="postDesc" class="input-field" placeholder="เช่น นัดเจอหน้าตึก 5 โมงเย็น">
+    
+    <button class="btn-primary" style="margin-top:auto;" onclick="submitPost()">โพสต์ประกาศ</button>
+  </section>
+
+  <!-- หน้าใหม่: CHAT ROOM -->
+  <section id="chat" class="no-padding-bottom">
     <div class="chat-header">
-      <button style="background:none; font-size:24px; padding:0;" onclick="closeChat()">←</button>
-      <div style="width:36px; height:36px; border-radius:50%; background:var(--primary); display:grid; place-items:center; color:#fff; font-weight:bold;" id="chatIcon">N</div>
+      <button class="back-link" style="margin:0;" onclick="switchTab('community')">←</button>
+      <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-weight:bold;" id="chatIcon">N</div>
       <b id="chatName" style="font-size:18px;">Name</b>
     </div>
-    <div class="chat-body">
-      <div class="chat-bubble chat-left">สวัสดีครับ สนใจกิจกรรมไหม?</div>
-      <div class="chat-bubble chat-right">สนใจค่ะ เจอกันที่ไหนดีคะ?</div>
-      <div class="chat-bubble chat-left">เจอกันที่ SAYO Center เลยครับ</div>
-    </div>
+    <!-- แชทเริ่มต้นแบบว่างเปล่า -->
+    <div class="chat-body" id="chatBody"></div>
     <div class="chat-input-area">
-      <input type="text" placeholder="พิมพ์ข้อความ...">
-      <button style="background:var(--primary); color:#fff; padding:12px 20px; border-radius:999px; font-weight:bold;">ส่ง</button>
+      <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; border-radius:999px; border:1px solid var(--line); padding:12px 15px; outline:none;">
+      <button class="btn-primary" style="width:auto; margin:0; padding:12px 20px;" onclick="sendMessage()">ส่ง</button>
     </div>
-  </div>
+  </section>
 
-  <!-- PROFILE -->
+  <!-- =========================================
+       7. PROFILE & SETTINGS
+  ========================================= -->
   <section id="profile">
     <div style="text-align: center; margin: 20px 0;">
       <div style="width:80px; height:80px; font-size:40px; margin:0 auto 15px; border-radius:50%; background:var(--bg-yellow); display:grid; place-items:center;">🤸‍♀️</div>
       <h2>SAYO Member</h2>
-      <p style="color:var(--muted); margin:0;">Free Trial Active</p>
+      <p style="color:var(--muted); margin:0;">member@sayo.app</p>
     </div>
 
-    <div class="card" style="display:flex; justify-content:space-around; text-align:center; padding: 20px 10px;">
-      <div><b style="font-size:22px;">300</b><br><span style="font-size:11px; color:var(--muted)">Credits</span></div>
-      <div style="width:1px; background:var(--border);"></div>
-      <div><b style="font-size:22px;">1</b><br><span style="font-size:11px; color:var(--muted)">Free Class</span></div>
-      <div style="width:1px; background:var(--border);"></div>
-      <div><b style="font-size:22px;">3</b><br><span style="font-size:11px; color:var(--muted)">สัปดาห์ต่อเนื่อง</span></div>
-    </div>
+    <div class="eyebrow">SETTINGS & MENU</div>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('my-package')">แพ็กเกจของฉัน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('settings')">⚙️ ตั้งค่า (Settings) <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c;" onclick="logout()">ออกจากระบบ <span>></span></button>
+  </section>
 
-    <div class="eyebrow">SETTINGS & HELP</div>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="openProfileEdit()">ข้อมูลส่วนตัว <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="openPackageView()">แพ็กเกจของฉัน <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ประวัติการใช้งาน', 'ไม่มีประวัติการใช้งานย้อนหลัง')">ประวัติการใช้งาน <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ศูนย์ช่วยเหลือ', 'กรุณาติดต่อแอดมินผ่าน LINE @SAYO')">ศูนย์ช่วยเหลือ <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ตั้งค่าระบบ', 'การแจ้งเตือน / ภาษา / ความปลอดภัย')">⚙️ ตั้งค่า (Settings) <span>></span></button>
-    
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c; margin-top:20px;" onclick="logout()">ออกจากระบบ <span>></span></button>
+  <!-- หน้าใหม่: MY PACKAGE -->
+  <section id="my-package" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">แพ็กเกจของฉัน</h2>
+    <div class="card" style="background:var(--mint); border-color:var(--green);">
+      <h3 style="color:var(--green); margin:0 0 10px;">Free Trial Active</h3>
+      <p style="font-size:14px; margin:0;">คุณกำลังใช้สิทธิ์ทดลองเข้าคลาส 1 ครั้ง และรับ 300 Pts</p>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">อัปเกรดแพ็กเกจ</button>
+  </section>
+
+  <!-- หน้าใหม่: SETTINGS -->
+  <section id="settings" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">ตั้งค่า</h2>
+    <div class="eyebrow">ข้อมูลส่วนตัว</div>
+    <input type="text" class="input-field" value="SAYO Member">
+    <input type="email" class="input-field" value="member@sayo.app">
+    <button class="btn-primary" onclick="showPopup('สำเร็จ', 'อัปเดตข้อมูลเรียบร้อย')">บันทึกข้อมูล</button>
   </section>
 
   <!-- BOTTOM NAVIGATION BAR -->
@@ -445,92 +547,10 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
   <!-- POPUP MODAL (GENERAL) -->
   <div id="popupOverlay" class="overlay">
     <div class="popup">
-      <button class="modal-close" onclick="closePopup()">✕</button>
-      <div class="popup-icon" style="font-size:50px; margin-bottom:10px;">✨</div>
+      <div style="font-size:50px; margin-bottom:10px;">✨</div>
       <h2 id="popupTitle" style="margin:0 0 10px;">สำเร็จ</h2>
-      <p id="popupDesc" style="color:var(--muted); font-size:14px; margin:0 0 20px; line-height:1.5;">ดำเนินการเรียบร้อยแล้ว</p>
+      <p id="popupDesc" style="color:var(--muted); font-size:14px; margin:0 0 20px; line-height:1.5;">ดำเนินการเรียบร้อย</p>
       <button class="btn-primary" style="margin:0;" onclick="closePopup()">ตกลง</button>
-    </div>
-  </div>
-
-  <!-- MODAL: BOOKING TIME SLOTS -->
-  <div id="classBookingModal" class="overlay">
-    <div class="popup" style="text-align: left;">
-      <button class="modal-close" onclick="closeModal('classBookingModal')">✕</button>
-      <div class="eyebrow">CLASS BOOKING</div>
-      <h2 id="bookClassTitle" style="margin:0 0 5px; font-size:22px;">Class Name</h2>
-      <p id="bookClassLoc" style="color:var(--muted); font-size:13px; margin:0 0 20px;">Location</p>
-      
-      <b style="display:block; margin-bottom:10px;">เลือกเวลา:</b>
-      <div class="time-chips">
-        <div class="time-chip" onclick="selectTime(this)">08:00</div>
-        <div class="time-chip" onclick="selectTime(this)">09:30</div>
-        <div class="time-chip" onclick="selectTime(this)">11:00</div>
-        <div class="time-chip" onclick="selectTime(this)">14:00</div>
-        <div class="time-chip" onclick="selectTime(this)">16:30</div>
-        <div class="time-chip" onclick="selectTime(this)">18:00</div>
-      </div>
-      <button class="btn-primary" style="margin-top:10px; margin-bottom:0;" onclick="confirmClassBooking()">ยืนยันการจองคลาส</button>
-    </div>
-  </div>
-
-  <!-- MODAL: CREATE BUDDY POST -->
-  <div id="buddyCreateModal" class="overlay">
-    <div class="popup" style="text-align: left;">
-      <button class="modal-close" onclick="closeModal('buddyCreateModal')">✕</button>
-      <div class="eyebrow">CREATE POST</div>
-      <h2 style="margin:0 0 20px; font-size:22px;">หาเพื่อนออกกำลังกาย</h2>
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">กิจกรรม</p>
-      <input type="text" class="input-field" placeholder="เช่น ตีแบด, วิ่งสวนลุม">
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">รายละเอียด</p>
-      <input type="text" class="input-field" placeholder="เช่น Beginner มาได้ นัดเล่นชิลๆ">
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">จำนวนเพื่อนที่ต้องการ</p>
-      <input type="number" class="input-field" placeholder="เช่น 2">
-
-      <button class="btn-primary" style="margin-top:10px; margin-bottom:0;" onclick="closeModal('buddyCreateModal'); showPopup('โพสต์สำเร็จ', 'ประกาศหา Buddy ของคุณถูกโพสต์ลงใน Community เรียบร้อยแล้ว')">โพสต์ประกาศ</button>
-    </div>
-  </div>
-
-  <!-- MODAL: PROFILE EDIT -->
-  <div id="profileEditModal" class="overlay">
-    <div class="popup" style="text-align: left;">
-      <button class="modal-close" onclick="closeModal('profileEditModal')">✕</button>
-      <div class="eyebrow">SETTINGS</div>
-      <h2 style="margin:0 0 20px; font-size:22px;">ข้อมูลส่วนตัว</h2>
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">ชื่อ - นามสกุล</p>
-      <input type="text" class="input-field" value="ปอรตรี พุ่มจันทร์">
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">อีเมล</p>
-      <input type="text" class="input-field" value="poratree.pum@gmail.com">
-      
-      <p style="margin:0 0 8px; font-size:13px; font-weight:bold;">น้ำหนัก / ส่วนสูง</p>
-      <div style="display:flex; gap:10px;">
-        <input type="text" class="input-field" placeholder="กก.">
-        <input type="text" class="input-field" placeholder="ซม.">
-      </div>
-
-      <button class="btn-primary" style="margin-top:10px; margin-bottom:0;" onclick="closeModal('profileEditModal'); showPopup('สำเร็จ', 'บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว')">บันทึกข้อมูล</button>
-    </div>
-  </div>
-
-  <!-- MODAL: MY PACKAGE -->
-  <div id="packageViewModal" class="overlay">
-    <div class="popup" style="text-align: left;">
-      <button class="modal-close" onclick="closeModal('packageViewModal')">✕</button>
-      <div class="eyebrow">MY SUBSCRIPTION</div>
-      <h2 style="margin:0 0 20px; font-size:22px;">แพ็กเกจปัจจุบัน</h2>
-      
-      <div style="background:var(--bg-light); border:1px solid var(--primary); padding:20px; border-radius:16px; margin-bottom:20px;">
-        <h3 style="margin:0 0 5px; color:var(--primary);">Free Trial (ทดลองใช้)</h3>
-        <p style="margin:0; font-size:13px; color:var(--muted);">สิทธิ์เข้าคลาส 1 ครั้ง / เครดิต 300 Pts</p>
-      </div>
-
-      <p style="font-size:14px; text-align:center; color:var(--muted);">คุณสามารถอัปเกรดเป็นแพ็กเกจรายเดือนเพื่อสิทธิพิเศษที่มากกว่า</p>
-      <button class="btn-primary" style="margin-top:10px; margin-bottom:0;" onclick="closeModal('packageViewModal'); startQuiz();">ค้นหาแพ็กเกจที่ใช่</button>
     </div>
   </div>
 
@@ -538,7 +558,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 
 <script>
 /* =========================
-   ROUTING & CORE LOGIC
+   ROUTING
 ========================= */
 window.addEventListener('load', () => {
   setTimeout(() => {
@@ -551,6 +571,10 @@ function show(id) {
   document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
+  
+  // ซ่อน Bottom Nav ในหน้าย่อยหรือ Quiz
+  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings'];
+  document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
 }
 
 function switchTab(tabId) {
@@ -560,32 +584,25 @@ function switchTab(tabId) {
   });
 }
 
+/* =========================
+   AUTH VALIDATION
+========================= */
 function validateAuth(type) {
   let email, pass;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // รหัสผ่านต้อง 6 ตัวขึ้นไป และมีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว
   const passRegex = /^(?=.*[A-Z]).{6,}$/; 
 
   if (type === 'signup') {
-    const name = document.getElementById('regName').value;
     email = document.getElementById('regEmail').value;
     pass = document.getElementById('regPass').value;
-    if (!name) return showPopup('ข้อมูลไม่ครบ', 'กรุณากรอกชื่อ-นามสกุลให้เรียบร้อย');
   } else {
     email = document.getElementById('logEmail').value;
     pass = document.getElementById('logPass').value;
   }
 
-  if (!email || !emailRegex.test(email)) {
-    return showPopup('รูปแบบอีเมลผิด', 'กรุณากรอกอีเมลให้ถูกต้อง');
-  }
-  if (!pass || !passRegex.test(pass)) {
-    return showPopup('รหัสผ่านไม่ผ่านเกณฑ์', 'รหัสผ่านต้องมี 6 ตัวอักษรขึ้นไป และมีตัวอักษรพิมพ์ใหญ่อย่างน้อย 1 ตัว');
-  }
-  loginSuccess();
-}
-
-function loginSuccess() {
+  if (!emailRegex.test(email)) return showPopup('อีเมลไม่ถูกต้อง', 'กรุณากรอกอีเมลให้ถูกต้อง');
+  if (!passRegex.test(pass)) return showPopup('รหัสผ่านอ่อนไป', 'รหัสผ่านต้องมีอย่างน้อย 6 ตัว และมีตัวพิมพ์ใหญ่ 1 ตัว');
+  
   document.getElementById('bottomNav').style.display = 'grid';
   switchTab('home');
 }
@@ -593,11 +610,98 @@ function loginSuccess() {
 function logout() {
   document.getElementById('bottomNav').style.display = 'none';
   show('welcome');
-  showPopup('ออกจากระบบ', 'คุณได้ออกจากระบบเรียบร้อยแล้ว');
 }
 
 /* =========================
-   QUIZ LOGIC
+   PLAN & BOOKING
+========================= */
+function openClassDetail(name, emoji) {
+  document.getElementById('detailClassName').innerText = name;
+  document.getElementById('detailEmoji').innerText = emoji;
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+  show('class-detail');
+}
+
+function selectTime(btn) {
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function confirmBooking() {
+  const selected = document.querySelector('.time-chip.active');
+  if(!selected) return showPopup('แจ้งเตือน', 'กรุณาเลือกเวลาที่ต้องการจอง');
+  showPopup('จองสำเร็จ!', 'คุณได้ทำการจองคลาสเรียบร้อยแล้ว เตรียมตัวให้พร้อม!');
+  setTimeout(() => { switchTab('plan'); }, 1500);
+}
+
+/* =========================
+   COMMUNITY & CHAT
+========================= */
+function joinBuddy(btn) {
+  if(btn.innerText.includes('Join')) {
+    btn.innerText = '✓ Requested';
+    btn.style.background = "var(--line)";
+    btn.style.color = "var(--muted)";
+  } else {
+    btn.innerText = 'Join · เข้าร่วม';
+    btn.style.background = "var(--green)";
+    btn.style.color = "#fff";
+  }
+}
+
+function submitPost() {
+  const title = document.getElementById('postTitle').value;
+  const desc = document.getElementById('postDesc').value;
+  if(!title) return showPopup('แจ้งเตือน', 'กรุณากรอกชื่อกิจกรรม');
+  
+  const feed = document.getElementById('feedContainer');
+  const newPost = `
+    <div class="buddy-post">
+      <div class="buddy-user">
+        <div style="width:40px; height:40px; border-radius:50%; background:var(--gold); display:grid; place-items:center; font-weight:bold; color:#fff;">S</div>
+        <div><b style="display:block; font-size:15px;">SAYO Member</b><span style="font-size:11px; color:var(--muted);">เพิ่งโพสต์</span></div>
+      </div>
+      <b style="font-size:18px;">${title}</b>
+      <p style="font-size:14px; color:var(--muted); margin:8px 0;">${desc}</p>
+    </div>
+  `;
+  feed.insertAdjacentHTML('afterbegin', newPost);
+  document.getElementById('postTitle').value = '';
+  document.getElementById('postDesc').value = '';
+  switchTab('community');
+  showPopup('โพสต์สำเร็จ', 'ประกาศของคุณถูกโพสต์ลงฟีดแล้ว');
+}
+
+function openChat(name) {
+  document.getElementById('chatName').innerText = name;
+  document.getElementById('chatIcon').innerText = name.charAt(0);
+  document.getElementById('chatBody').innerHTML = ''; // ลบข้อความเก่าทิ้ง
+  show('chat');
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(text) {
+    const chatBody = document.getElementById('chatBody');
+    chatBody.innerHTML += `<div class="chat-bubble chat-right">${text}</div>`;
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight; // เลื่อนลงล่างสุดอัตโนมัติ
+  }
+}
+
+/* =========================
+   POPUP MODAL
+========================= */
+function showPopup(title, desc) {
+  document.getElementById('popupTitle').innerText = title;
+  document.getElementById('popupDesc').innerText = desc;
+  document.getElementById('popupOverlay').classList.add('active');
+}
+function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
+
+/* =========================
+   QUIZ LOGIC (จาก kla.html)
 ========================= */
 const questions = [
   { q: "เพศของคุณคืออะไร?", e: "GENDER", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
@@ -605,31 +709,20 @@ const questions = [
   { q: "ออกกำลังกายบ่อยแค่ไหน?", e: "ACTIVITY", type: "single", o: ["ไม่ออกเลย", "1-2 วัน", "3-4 วัน", "5 วันขึ้นไป"] },
   { q: "งบประมาณต่อเดือน?", e: "BUDGET", type: "single", o: ["ไม่เกิน 1,500 บาท", "1,500 - 3,000 บาท", "3,000 บาทขึ้นไป"] }
 ];
-let currentQ = 0;
-let answers = [[], [], [], []];
+let currentQ = 0; let answers = [[], [], [], []];
 
-function startQuiz() {
-  currentQ = 0;
-  answers = [[], [], [], []];
-  document.getElementById('bottomNav').style.display = 'none'; // ซ่อน tab ชั่วคราว
-  show('quiz');
-  renderQ();
-}
-
+function startQuiz() { currentQ = 0; answers = [[], [], [], []]; show('quiz'); renderQ(); }
 function renderQ() {
   const q = questions[currentQ];
   document.getElementById("progressBar").style.width = ((currentQ + 1) / questions.length) * 100 + "%";
   document.getElementById("qeyebrow").textContent = q.e;
-  document.getElementById("questionText").textContent = q.q;
-  document.getElementById("questionHelp").textContent = (q.type === "multi") ? "เลือกได้มากกว่า 1 ข้อ" : "เลือก 1 ข้อ";
-
-  const optionsArea = document.getElementById("optionsArea");
+  document.getElementById("question").textContent = q.q;
+  const optionsArea = document.getElementById("options");
   optionsArea.innerHTML = "";
-
   q.o.forEach((opt, idx) => {
     const btn = document.createElement("button");
     const isSelected = answers[currentQ].includes(idx);
-    btn.className = "option-btn" + (isSelected ? " selected" : "");
+    btn.className = "option" + (isSelected ? " selected" : "");
     btn.textContent = opt;
     btn.onclick = () => {
       if (q.type === "single") answers[currentQ] = [idx];
@@ -641,102 +734,23 @@ function renderQ() {
     };
     optionsArea.appendChild(btn);
   });
-
   document.getElementById("backBtn").style.visibility = currentQ === 0 ? "hidden" : "visible";
-  document.getElementById("nextBtn").textContent = currentQ === questions.length - 1 ? "ดูผลลัพธ์" : "ถัดไป";
+  document.getElementById("nextBtn").textContent = currentQ === questions.length - 1 ? "ดูผลลัพธ์" : "ถัดไป →";
 }
-
 function nextQ() {
-  if (answers[currentQ].length === 0) return showPopup("แจ้งเตือน", "กรุณาเลือกคำตอบก่อนนะครับ");
-  if (currentQ < questions.length - 1) {
-    currentQ++;
-    renderQ();
-  } else {
-    // จบ Quiz
+  if (answers[currentQ].length === 0) return showPopup("แจ้งเตือน", "กรุณาเลือกคำตอบครับ");
+  if (currentQ < questions.length - 1) { currentQ++; renderQ(); } 
+  else {
     const budget = answers[3][0];
-    if (budget === 2) {
-      document.getElementById("packageName").textContent = "Signature Package";
-      document.getElementById("packagePrice").textContent = "฿3,000";
-    } else if (budget === 1) {
-      document.getElementById("packageName").textContent = "Core Package";
-      document.getElementById("packagePrice").textContent = "฿1,800";
-    } else {
-      document.getElementById("packageName").textContent = "U-Rate Package";
-      document.getElementById("packagePrice").textContent = "฿990";
-    }
+    if (budget === 2) { document.getElementById("packageName").textContent = "Signature Package"; document.getElementById("packagePrice").textContent = "฿3,000"; } 
+    else if (budget === 1) { document.getElementById("packageName").textContent = "Core Package"; document.getElementById("packagePrice").textContent = "฿1,800"; } 
+    else { document.getElementById("packageName").textContent = "U-Rate Package"; document.getElementById("packagePrice").textContent = "฿990"; }
     show('result');
-    document.getElementById('bottomNav').style.display = 'grid'; // คืนค่า tab กลับมา
   }
 }
-
-function prevQ() {
-  if (currentQ > 0) { currentQ--; renderQ(); }
-}
-
-/* =========================
-   PLAN & BOOKING
-========================= */
-function selectDay(btn) {
-  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function openClassBooking(title, location) {
-  document.getElementById('bookClassTitle').innerText = title;
-  document.getElementById('bookClassLoc').innerText = location;
-  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active')); // Reset
-  document.getElementById('classBookingModal').classList.add('active');
-}
-
-function selectTime(btn) {
-  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function confirmClassBooking() {
-  const selected = document.querySelector('.time-chip.active');
-  if(!selected) return showPopup('แจ้งเตือน', 'กรุณาเลือกเวลาที่ต้องการจอง');
-  closeModal('classBookingModal');
-  showPopup('จองคลาสสำเร็จ!', 'เตรียมชุดให้พร้อม แล้วเจอกันที่คลาสครับ');
-}
-
-/* =========================
-   COMMUNITY & MODALS
-========================= */
-function joinBuddy(btn) {
-  if(btn.innerText.includes('Join')) {
-    btn.innerText = '✓ Requested';
-    btn.style.background = "var(--border)";
-    btn.style.color = "var(--muted)";
-    showPopup('ส่งคำขอแล้ว!', 'ส่งคำขอเข้าร่วมของคุณไปยังผู้โพสต์เรียบร้อยแล้ว');
-  } else {
-    btn.innerText = 'Join · เข้าร่วม';
-    btn.style.background = "var(--primary)";
-    btn.style.color = "#fff";
-  }
-}
-
-function openChat(name) {
-  document.getElementById('chatName').innerText = name;
-  document.getElementById('chatIcon').innerText = name.charAt(0);
-  document.getElementById('chatModal').classList.add('active');
-}
-function closeChat() { document.getElementById('chatModal').classList.remove('active'); }
-
-function openBuddyPostModal() { document.getElementById('buddyCreateModal').classList.add('active'); }
-function openProfileEdit() { document.getElementById('profileEditModal').classList.add('active'); }
-function openPackageView() { document.getElementById('packageViewModal').classList.add('active'); }
-
-/* =========================
-   GLOBAL POPUP CONTROLS
-========================= */
-function showPopup(title, desc) {
-  document.getElementById('popupTitle').innerText = title;
-  document.getElementById('popupDesc').innerText = desc;
-  document.getElementById('popupOverlay').classList.add('active');
-}
-function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
+function prevQ() { if (currentQ > 0) { currentQ--; renderQ(); } }
+function goPayment() { show('payment'); }
+function processPayment() { show('processing'); setTimeout(() => { show('success'); }, 2000); }
 </script>
 
 </body>
