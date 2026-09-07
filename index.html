@@ -52,8 +52,10 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .btn-black { background-color: #111; color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; }
 .btn-social { background-color: #fff; color: #111; width: 100%; padding: 14px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-.input-field { width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line); font-size: 15px; margin-bottom: 12px; background: #fff; }
+.input-field { width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line); font-size: 15px; margin-bottom: 12px; background: #fff; color: var(--ink); }
 .input-field:focus { border-color: var(--green); }
+.budget-input { width: 100%; padding: 18px; border-radius: 16px; border: 1.5px solid var(--line); font-size: 20px; margin-bottom: 12px; background: #fff; }
+.budget-input:focus { border-color: var(--green); }
 
 .eyebrow { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
 .section-title { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.5px; }
@@ -84,38 +86,28 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 /* HOME */
 .home-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
 .profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
-.trial-banner { background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; padding: 20px; border-radius: 20px; margin-bottom: 20px; box-shadow: var(--shadow); }
 
-/* QUIZ / RESULT / COMPARE (จาก kla.html) */
+/* QUIZ / RESULT / COMPARE */
 .quiz-wrap{ max-width:830px; margin:0 auto; width: 100%; }
 .progress-head{ display:flex; justify-content:space-between; color:var(--muted); font-size:13px; margin-bottom:8px; }
 .step{ height:7px; border-radius:10px; background:#e3ebe7; margin-bottom:20px; }
-.bar{ height:100%; width:20%; border-radius:10px; background:var(--green); transition:.3s; }
+.bar{ height:100%; width:0%; border-radius:10px; background:var(--green); transition:.3s; }
 .quiz-card{ padding:34px 24px; border-radius:28px; background:white; border:1px solid var(--line); box-shadow:var(--shadow); }
 .question{ margin:8px 0 20px; font-size:24px; line-height: 1.3; }
 .options{ display:grid; gap:10px; }
 .option{ position:relative; width:100%; padding:15px 17px; text-align:left; background:white; color:var(--ink); border:1.5px solid var(--line); border-radius:15px; transition:.2s; }
 .option.selected{ border-color:var(--green); background:#f0faf6; }
 .option.selected::after{ content:"✓"; float:right; color:var(--green); font-weight:800; }
-.budget-input{ width:100%; padding:18px; border-radius:16px; border:1.5px solid var(--line); outline:none; font-size:20px; color:var(--ink); }
 .result-hero{ position:relative; overflow:hidden; padding:30px; border-radius:32px; background:linear-gradient(135deg,#0f5f50,#173d35); color:white; margin-bottom:20px; }
 .match-score-card{ padding:20px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); margin-top:15px; }
 .reason-card, .summary-card{ padding:20px; border-radius:20px; background:white; border:1px solid var(--line); margin-bottom: 15px;}
-.reason{ padding:10px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; }
-.plan-card { padding: 20px; background: white; border: 1px solid var(--line); border-radius: 20px; margin-bottom: 15px; }
-.plan-card.selected { border: 2px solid var(--green); background: var(--mint2); }
 .plan-price { font-family: "DM Sans"; font-size: 28px; font-weight: 800; margin: 10px 0; }
 .selected-package-banner{ position:sticky; bottom:0; padding:15px; border-radius:20px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
-.checkout-grid { display: flex; flex-direction: column; gap: 15px; }
-.order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 20px; margin-bottom: 15px;}
-.summary-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-.payment-tabs { display: flex; gap: 8px; margin: 15px 0; }
-.pay-tab { flex: 1; background: #fff; border: 1px solid var(--line); padding: 10px; border-radius: 12px; font-size: 12px; }
-.pay-tab.active { background: var(--mint); border-color: var(--green); color: var(--green); font-weight: bold; }
 
-/* PLAN & BOOKING (GRID 3 COLUMNS) */
-.horizontal-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; scrollbar-width: none; }
-.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 55px; height: 75px; border-radius: 16px; background: #fff; border: 1px solid var(--line); color: var(--muted); }
+/* PLAN & BOOKING */
+.horizontal-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; scrollbar-width: none; white-space: nowrap; }
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 60px; height: 75px; border-radius: 16px; background: #fff; border: 1px solid var(--line); color: var(--muted); flex-shrink: 0; }
 .cal-day.active { background: var(--green); color: #fff; border-color: var(--green); }
 
 .class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
@@ -126,20 +118,18 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
 .transport-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
 .transport-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid var(--line); padding: 14px; border-radius: 16px; font-weight: 600; font-size: 13px; }
+.transport-btn img { width: 24px; height: 24px; border-radius: 6px; object-fit: cover; }
 .parking-btn { background: var(--bg-yellow); color: var(--ink); border: none; padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; margin-bottom: 12px; width: 100%; }
 
-/* TIME SLOTS */
 .time-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
 .time-chip { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); transition: 0.2s; background: #fff;}
 .time-chip.active { background: var(--mint); border-color: var(--green); color: var(--green); }
 
-/* COMMUNITY */
+/* COMMUNITY & CHAT */
 .buddy-post { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; }
 .buddy-user { display: flex; align-items: center; gap: 10px; margin-bottom: 12px;}
-.tag { background: var(--mint); color: var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
 .buddy-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 
-/* CHAT SECTION */
 #chat { padding: 0; display: none; flex-direction: column; height: 100%; background: #fff; }
 #chat.active { display: flex; }
 .chat-header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 15px; background: #fff; position: sticky; top: 0; z-index: 10;}
@@ -165,8 +155,8 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <div id="splash">
     <div class="splash-scene">
-      <img src="oval.png" class="splash-oval" alt="Oval Portal" onerror="this.style.background='var(--green)'; this.style.borderRadius='50%';">
-      <img src="sayo.people.png" class="splash-people" alt="SAYO Person" onerror="this.style.background='var(--gold)'; this.style.borderRadius='50%'; this.style.height='140px';">
+      <img src="oval.png" class="splash-oval" alt="Oval" onerror="this.style.background='var(--green)'; this.style.borderRadius='50%';">
+      <img src="sayo.people.png" class="splash-people" alt="SAYO" onerror="this.style.background='var(--gold)'; this.style.borderRadius='50%'; this.style.height='140px';">
     </div>
     <div class="brand-box">
       <h1 class="brand-sayo">SAYO</h1>
@@ -193,8 +183,18 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <p class="section-desc">สร้างบัญชีเพื่อเริ่ม Wellness Journey</p>
     <input type="text" id="regName" class="input-field" placeholder="Full name">
     <input type="email" id="regEmail" class="input-field" placeholder="Email">
-    <input type="password" id="regPass" class="input-field" placeholder="Password (ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว)">
-    <button class="btn-black" onclick="validateAuth('signup')">Continue</button>
+    
+    <div style="position:relative; margin-bottom:12px;">
+      <input type="password" id="regPass" class="input-field" placeholder="Password (ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว)" style="margin-bottom:0;">
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); font-weight:bold; font-size:13px;" onclick="togglePass('regPass', this)">Show</button>
+    </div>
+
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('signup')">Continue</button>
+    
+    <!-- ปุ่มโซเชียลเพิ่มกลับมา -->
+    <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
+    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
+    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
   </section>
 
   <section id="signin" class="bg-white no-padding-bottom">
@@ -202,11 +202,22 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <h1 class="section-title">Sign in</h1>
     <p class="section-desc">Glad to see you again!</p>
     <input type="email" id="logEmail" class="input-field" placeholder="Email">
-    <input type="password" id="logPass" class="input-field" placeholder="Password">
-    <button class="btn-black" onclick="validateAuth('login')">Continue</button>
+    
+    <div style="position:relative; margin-bottom:12px;">
+      <input type="password" id="logPass" class="input-field" placeholder="Password" style="margin-bottom:0;">
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); font-weight:bold; font-size:13px;" onclick="togglePass('logPass', this)">Show</button>
+    </div>
+
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('login')">Continue</button>
+    
     <div style="text-align: center; margin-top: 10px;">
       <b style="color: var(--muted); font-size:14px;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
     </div>
+
+    <!-- ปุ่มโซเชียลเพิ่มกลับมา -->
+    <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
+    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
+    <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
   </section>
 
   <!-- =========================================
@@ -218,7 +229,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
         <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
-      <!-- กดที่รูป Profile เพื่อไปหน้า Profile -->
       <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
 
@@ -232,12 +242,11 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <div class="eyebrow">YOUR MATCH</div>
     <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
     <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
-    <!-- เริ่ม Quiz -->
     <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
   </section>
 
   <!-- =========================================
-       3. QUIZ FLOW (ดึงจาก kla.html เป๊ะๆ)
+       3. QUIZ FLOW (7 ข้อ ดึงจาก kla.html)
   ========================================= -->
   <section id="quiz">
     <div class="quiz-wrap">
@@ -264,20 +273,16 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div class="eyebrow" style="color:var(--secondary)">YOUR MATCH</div>
         <h1 class="package-result-name" id="packageName">Signature Package</h1>
         <p id="resultDescription" style="color:#c7ddd5;">เหมาะกับรูปแบบการใช้ชีวิตของคุณ</p>
-        <button class="btn-outline" style="margin-top:15px; border:none;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
+        <button class="btn-outline" style="margin-top:15px; border:none; color:var(--green);" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
       </div>
       <div class="match-score-card">
-        <div class="score-circle">
-          <div class="score-inner">
-            <div class="score-num" id="score">94%</div>
-            <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
-          </div>
-        </div>
+        <div class="score-num" id="score" style="font-size:36px; font-weight:bold; color:var(--green);">94%</div>
+        <div style="font-size:11px; color:var(--muted);">MATCH SCORE</div>
       </div>
       <div class="summary-card" style="margin-top:15px;">
         <h3 id="summaryPackage">Signature Package</h3>
         <div class="plan-price" id="packagePrice">฿3,000</div>
-        <button class="btn-outline" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+        <button class="btn-outline" onclick="show('compare')">เปรียบเทียบแพ็กเกจอื่น</button>
       </div>
     </div>
   </section>
@@ -286,7 +291,24 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <div class="quiz-wrap">
       <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
-      <div id="compareGrid"></div>
+      
+      <div class="card" style="border:2px solid var(--green); background:var(--mint2);">
+        <div class="eyebrow">RECOMMENDED</div>
+        <h2 style="margin:0 0 10px;">Signature</h2>
+        <div class="plan-price">฿3,000</div>
+        <ul style="font-size:14px; color:var(--muted); line-height:1.8; padding-left:20px;">
+          <li>Fitness, Yoga, Pilates, Muay Thai, Onsen</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0 0 10px;">Core</h2>
+        <div class="plan-price">฿1,800</div>
+        <ul style="font-size:14px; color:var(--muted); line-height:1.8; padding-left:20px;">
+          <li>Fitness, Yoga</li>
+        </ul>
+      </div>
+
       <div class="selected-package-banner">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
@@ -339,21 +361,28 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   </section>
 
   <!-- =========================================
-       4. PLAN (GRID คลาส 3-4 กล่องต่อแถว ตามเรฟ)
+       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทิน)
   ========================================= -->
   <section id="plan">
     <div class="eyebrow">MY PLANNER</div>
     <h2 class="section-title">ปฏิทินกิจกรรม</h2>
     
-    <!-- ปฏิทินเลื่อนซ้ายขวา -->
-    <div class="horizontal-scroll">
-      <div class="cal-day active"><span>Mon</span><b>7</b></div>
-      <div class="cal-day"><span>Tue</span><b>8</b></div>
-      <div class="cal-day"><span>Wed</span><b>9</b></div>
-      <div class="cal-day"><span>Thu</span><b>10</b></div>
-      <div class="cal-day"><span>Fri</span><b>11</b></div>
-      <div class="cal-day"><span>Sat</span><b>12</b></div>
-      <div class="cal-day"><span>Sun</span><b>13</b></div>
+    <!-- ปฏิทินเลื่อนซ้ายขวาได้ เพิ่มวันยาวๆ -->
+    <div class="horizontal-scroll" id="calScroll">
+      <div class="cal-day active" onclick="selectDay(this)"><span>Mon</span><b>7</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>8</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>9</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>10</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>11</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>12</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>13</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Mon</span><b>14</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>15</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>16</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>17</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>18</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>19</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>20</b></div>
     </div>
 
     <div class="eyebrow" style="margin-top: 15px;">CLASSES</div>
@@ -383,17 +412,22 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <button class="parking-btn" onclick="showPopup('จองที่จอดรถ', 'คุณได้รับสิทธิ์จอดรถ EV ฟรี 4 ชม.')">
       <div style="display:flex; align-items:center; gap:10px;">
         <div style="background:var(--green); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
-        <div style="text-align:left; line-height:1.2;"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px;">สิทธิ์จอดฟรี 4 ชม.</span></div>
+        <div style="text-align:left; line-height:1.2; color:var(--ink);"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px; font-weight:500;">สิทธิ์จอดฟรี 4 ชม.</span></div>
       </div>
       <span style="font-size:20px;">🚗</span>
     </button>
     <div class="transport-grid">
-      <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')"><img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; border-radius:6px;"> Grab</button>
-      <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')"><img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; border-radius:6px;"> LINEMAN</button>
+      <!-- โลโก้ Grab / LINE MAN -->
+      <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')">
+        <img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> Grab
+      </button>
+      <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')">
+        <img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> LINEMAN
+      </button>
     </div>
   </section>
 
-  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL (เข้าไปหน้าใหม่ ไม่เด้งทับ) -->
   <section id="class-detail" class="bg-white">
     <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
     <div style="text-align:center; margin-bottom:20px;">
@@ -468,17 +502,35 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- หน้าใหม่: CREATE POST -->
+  <!-- หน้าใหม่: CREATE POST (เข้าไปหน้าใหม่) -->
   <section id="create-post" class="bg-white">
     <button class="back-link" onclick="switchTab('community')">← ย้อนกลับ</button>
     <h2 class="section-title">สร้างโพสต์หา Buddy</h2>
     <p class="section-desc">ชวนเพื่อนไปทำกิจกรรมด้วยกัน</p>
     
     <div class="eyebrow" style="margin-top:10px;">กิจกรรม</div>
-    <input type="text" id="postTitle" class="input-field" placeholder="เช่น วิ่งสวนลุม, ตีแบด">
+    <!-- เปลี่ยนเป็น Dropdown ให้เลือกกิจกรรม -->
+    <select id="postTitle" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="" disabled selected>เลือกกิจกรรม...</option>
+      <option value="Yoga Flow 🧘">Yoga Flow 🧘</option>
+      <option value="Pilates 🤸‍♀️">Pilates 🤸‍♀️</option>
+      <option value="Muay Thai 🥊">Muay Thai 🥊</option>
+      <option value="Fitness 🏋️">Fitness 🏋️</option>
+      <option value="Onsen ♨️">Onsen ♨️</option>
+      <option value="Dance 💃">Dance 💃</option>
+    </select>
     
     <div class="eyebrow">รายละเอียดเพิ่มเติม</div>
     <input type="text" id="postDesc" class="input-field" placeholder="เช่น นัดเจอหน้าตึก 5 โมงเย็น">
+
+    <div class="eyebrow">จำนวนคนที่ต้องการ</div>
+    <select id="postCount" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="2 คน">2 คน</option>
+      <option value="3 คน">3 คน</option>
+      <option value="4 คน">4 คน</option>
+      <option value="5 คน">5 คน</option>
+      <option value="6 คนขึ้นไป">6 คนขึ้นไป</option>
+    </select>
     
     <button class="btn-primary" style="margin-top:auto;" onclick="submitPost()">โพสต์ประกาศ</button>
   </section>
@@ -490,7 +542,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-weight:bold;" id="chatIcon">N</div>
       <b id="chatName" style="font-size:18px;">Name</b>
     </div>
-    <!-- แชทเริ่มต้นแบบว่างเปล่า -->
+    <!-- แชทเริ่มต้นแบบว่างเปล่า พิมพ์แล้วเด้งข้อความได้จริง -->
     <div class="chat-body" id="chatBody"></div>
     <div class="chat-input-area">
       <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; border-radius:999px; border:1px solid var(--line); padding:12px 15px; outline:none;">
@@ -509,9 +561,29 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
 
     <div class="eyebrow">SETTINGS & MENU</div>
+    <!-- เมนูต่างๆ กดแล้วเข้าหน้าใหม่ หรือเด้ง Popup -->
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('profile-info')">ข้อมูลส่วนตัว <span>></span></button>
     <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('my-package')">แพ็กเกจของฉัน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ประวัติการใช้งาน', 'ยังไม่มีประวัติการทำกิจกรรมย้อนหลังในระบบ')">ประวัติการใช้งาน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ศูนย์ช่วยเหลือ', 'กรุณาติดต่อแอดมินผ่าน LINE @SAYO')">ศูนย์ช่วยเหลือ <span>></span></button>
     <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('settings')">⚙️ ตั้งค่า (Settings) <span>></span></button>
+    
     <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c;" onclick="logout()">ออกจากระบบ <span>></span></button>
+  </section>
+
+  <!-- หน้าใหม่: ข้อมูลส่วนตัว -->
+  <section id="profile-info" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">ข้อมูลส่วนตัว</h2>
+    <div class="eyebrow">ข้อมูลทั่วไป</div>
+    <input type="text" class="input-field" value="SAYO Member" disabled style="background:#f9f9f9; color:var(--muted);">
+    <input type="email" class="input-field" value="member@sayo.app" disabled style="background:#f9f9f9; color:var(--muted);">
+    <div class="eyebrow">ร่างกาย</div>
+    <div style="display:flex; gap:10px;">
+      <input type="number" class="input-field" placeholder="น้ำหนัก (กก.)">
+      <input type="number" class="input-field" placeholder="ส่วนสูง (ซม.)">
+    </div>
+    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว')">บันทึกข้อมูล</button>
   </section>
 
   <!-- หน้าใหม่: MY PACKAGE -->
@@ -520,7 +592,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <h2 class="section-title">แพ็กเกจของฉัน</h2>
     <div class="card" style="background:var(--mint); border-color:var(--green);">
       <h3 style="color:var(--green); margin:0 0 10px;">Free Trial Active</h3>
-      <p style="font-size:14px; margin:0;">คุณกำลังใช้สิทธิ์ทดลองเข้าคลาส 1 ครั้ง และรับ 300 Pts</p>
+      <p style="font-size:14px; margin:0; line-height:1.5;">คุณกำลังใช้สิทธิ์ทดลองเข้าคลาส 1 ครั้ง และรับ 300 Pts</p>
     </div>
     <button class="btn-primary" onclick="startQuiz()">อัปเกรดแพ็กเกจ</button>
   </section>
@@ -529,10 +601,24 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   <section id="settings" class="bg-white">
     <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
     <h2 class="section-title">ตั้งค่า</h2>
-    <div class="eyebrow">ข้อมูลส่วนตัว</div>
-    <input type="text" class="input-field" value="SAYO Member">
-    <input type="email" class="input-field" value="member@sayo.app">
-    <button class="btn-primary" onclick="showPopup('สำเร็จ', 'อัปเดตข้อมูลเรียบร้อย')">บันทึกข้อมูล</button>
+    
+    <div class="eyebrow">ภาษา (Language)</div>
+    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="th">ภาษาไทย</option>
+      <option value="en">English</option>
+    </select>
+
+    <div class="eyebrow">การแจ้งเตือน</div>
+    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="all">เปิดทั้งหมด (แนะนำ)</option>
+      <option value="important">เฉพาะแจ้งเตือนคลาส</option>
+      <option value="none">ปิดการแจ้งเตือน</option>
+    </select>
+
+    <div class="eyebrow">ความปลอดภัย</div>
+    <button class="btn-outline" style="text-align:left; padding: 16px 20px; border-radius:16px;">เปลี่ยนรหัสผ่าน</button>
+
+    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกการตั้งค่าเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
   </section>
 
   <!-- BOTTOM NAVIGATION BAR -->
@@ -572,8 +658,8 @@ function show(id) {
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
   
-  // ซ่อน Bottom Nav ในหน้าย่อยหรือ Quiz
-  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings'];
+  // ซ่อน Bottom Nav ในหน้าย่อย
+  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info'];
   document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
 }
 
@@ -585,11 +671,18 @@ function switchTab(tabId) {
 }
 
 /* =========================
-   AUTH VALIDATION
+   AUTH VALIDATION & SHOW PASS
 ========================= */
+function togglePass(id, btn) {
+  const input = document.getElementById(id);
+  if(input.type === 'password') { input.type = 'text'; btn.innerText = 'Hide'; }
+  else { input.type = 'password'; btn.innerText = 'Show'; }
+}
+
 function validateAuth(type) {
   let email, pass;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว
   const passRegex = /^(?=.*[A-Z]).{6,}$/; 
 
   if (type === 'signup') {
@@ -601,8 +694,12 @@ function validateAuth(type) {
   }
 
   if (!emailRegex.test(email)) return showPopup('อีเมลไม่ถูกต้อง', 'กรุณากรอกอีเมลให้ถูกต้อง');
-  if (!passRegex.test(pass)) return showPopup('รหัสผ่านอ่อนไป', 'รหัสผ่านต้องมีอย่างน้อย 6 ตัว และมีตัวพิมพ์ใหญ่ 1 ตัว');
+  if (!passRegex.test(pass)) return showPopup('รหัสผ่านอ่อนไป', 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร และมีตัวอักษรพิมพ์ใหญ่ 1 ตัว');
   
+  loginSuccess();
+}
+
+function loginSuccess() {
   document.getElementById('bottomNav').style.display = 'grid';
   switchTab('home');
 }
@@ -615,6 +712,11 @@ function logout() {
 /* =========================
    PLAN & BOOKING
 ========================= */
+function selectDay(btn) {
+  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
+  btn.classList.add('active');
+}
+
 function openClassDetail(name, emoji) {
   document.getElementById('detailClassName').innerText = name;
   document.getElementById('detailEmoji').innerText = emoji;
@@ -650,9 +752,13 @@ function joinBuddy(btn) {
 }
 
 function submitPost() {
-  const title = document.getElementById('postTitle').value;
+  const titleSelect = document.getElementById('postTitle');
+  const countSelect = document.getElementById('postCount');
+  const title = titleSelect.options[titleSelect.selectedIndex].value;
+  const count = countSelect.options[countSelect.selectedIndex].value;
   const desc = document.getElementById('postDesc').value;
-  if(!title) return showPopup('แจ้งเตือน', 'กรุณากรอกชื่อกิจกรรม');
+
+  if(!title) return showPopup('แจ้งเตือน', 'กรุณาเลือกกิจกรรม');
   
   const feed = document.getElementById('feedContainer');
   const newPost = `
@@ -662,12 +768,14 @@ function submitPost() {
         <div><b style="display:block; font-size:15px;">SAYO Member</b><span style="font-size:11px; color:var(--muted);">เพิ่งโพสต์</span></div>
       </div>
       <b style="font-size:18px;">${title}</b>
-      <p style="font-size:14px; color:var(--muted); margin:8px 0;">${desc}</p>
+      <p style="font-size:14px; color:var(--muted); margin:8px 0;">${desc ? desc : 'ใครว่างมาจอยกันได้เลยยย'}</p>
+      <div style="margin-bottom:10px;"><span style="background:var(--mint); color:var(--green); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">รับ ${count}</span></div>
     </div>
   `;
   feed.insertAdjacentHTML('afterbegin', newPost);
-  document.getElementById('postTitle').value = '';
   document.getElementById('postDesc').value = '';
+  titleSelect.selectedIndex = 0;
+  countSelect.selectedIndex = 0;
   switchTab('community');
   showPopup('โพสต์สำเร็จ', 'ประกาศของคุณถูกโพสต์ลงฟีดแล้ว');
 }
@@ -675,7 +783,7 @@ function submitPost() {
 function openChat(name) {
   document.getElementById('chatName').innerText = name;
   document.getElementById('chatIcon').innerText = name.charAt(0);
-  document.getElementById('chatBody').innerHTML = ''; // ลบข้อความเก่าทิ้ง
+  document.getElementById('chatBody').innerHTML = ''; // ลบข้อความเก่าออก
   show('chat');
 }
 
@@ -686,7 +794,7 @@ function sendMessage() {
     const chatBody = document.getElementById('chatBody');
     chatBody.innerHTML += `<div class="chat-bubble chat-right">${text}</div>`;
     input.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight; // เลื่อนลงล่างสุดอัตโนมัติ
+    chatBody.scrollTop = chatBody.scrollHeight; // เลื่อนลงล่างสุด
   }
 }
 
@@ -701,50 +809,71 @@ function showPopup(title, desc) {
 function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
 
 /* =========================
-   QUIZ LOGIC (จาก kla.html)
+   QUIZ LOGIC 7 ข้อ (KLA.HTML)
 ========================= */
 const questions = [
   { q: "เพศของคุณคืออะไร?", e: "GENDER", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
-  { q: "เป้าหมายหลักของคุณ?", e: "GOAL", type: "multi", o: ["ลดน้ำหนัก", "เพิ่มกล้ามเนื้อ", "สุขภาพดีขึ้น", "ลดความเครียด"] },
-  { q: "ออกกำลังกายบ่อยแค่ไหน?", e: "ACTIVITY", type: "single", o: ["ไม่ออกเลย", "1-2 วัน", "3-4 วัน", "5 วันขึ้นไป"] },
-  { q: "งบประมาณต่อเดือน?", e: "BUDGET", type: "single", o: ["ไม่เกิน 1,500 บาท", "1,500 - 3,000 บาท", "3,000 บาทขึ้นไป"] }
+  { q: "อาชีพของคุณคืออะไร?", e: "OCCUPATION", type: "single", o: ["นักศึกษา", "พนักงานเอกชน", "ข้าราชการ/รัฐวิสาหกิจ", "บุคลากรทางการแพทย์", "อาจารย์/บุคลากรการศึกษา", "ธุรกิจส่วนตัว/เจ้าของกิจการ"] },
+  { q: "เป้าหมายหลักของคุณคืออะไร?", e: "GOAL", type: "multi", o: ["ลดน้ำหนัก", "เพิ่มกล้ามเนื้อ", "ดูแลสุขภาพ", "ผ่อนคลาย / Wellness"] },
+  { q: "คุณออกกำลังกายบ่อยแค่ไหน?", e: "ACTIVITY", type: "single", o: ["1–2 ครั้ง / สัปดาห์", "3–4 ครั้ง / สัปดาห์", "5 ครั้งขึ้นไป", "เพิ่งเริ่มต้น"] },
+  { q: "คุณสนใจกิจกรรมอะไรเป็นพิเศษ?", e: "INTEREST", type: "multi", o: ["Performance Fitness", "Personal Training", "Group Training Classes", "Muay Thai", "Pilates & Yoga", "Sports Massage & Recovery", "Onsen", "Café & Co-working", "Pickleball"] },
+  { q: "งบประมาณต่อเดือนของคุณคือเท่าไร?", e: "BUDGET", type: "budget" },
+  { q: "คุณอยากใช้บริการแบบไหน?", e: "PREFERENCE", type: "multi", o: ["หลากหลายกิจกรรมในแพ็กเดียว", "เน้นกิจกรรมหลัก", "เลือกใช้แบบยืดหยุ่น", "อยากให้ระบบช่วยเลือก"] }
 ];
-let currentQ = 0; let answers = [[], [], [], []];
+let currentQ = 0; let answers = [[], [], [], [], [], null, []];
 
-function startQuiz() { currentQ = 0; answers = [[], [], [], []]; show('quiz'); renderQ(); }
+function startQuiz() { currentQ = 0; answers = [[], [], [], [], [], null, []]; show('quiz'); renderQ(); }
 function renderQ() {
   const q = questions[currentQ];
-  document.getElementById("progressBar").style.width = ((currentQ + 1) / questions.length) * 100 + "%";
+  document.getElementById("bar").style.width = ((currentQ + 1) / questions.length) * 100 + "%";
+  document.getElementById("qnum").textContent = `คำถาม ${currentQ + 1} / 7`;
+  document.getElementById("percent").textContent = Math.round(((currentQ + 1) / questions.length) * 100) + "%";
   document.getElementById("qeyebrow").textContent = q.e;
   document.getElementById("question").textContent = q.q;
+  
   const optionsArea = document.getElementById("options");
+  const budgetArea = document.getElementById("budgetArea");
   optionsArea.innerHTML = "";
-  q.o.forEach((opt, idx) => {
-    const btn = document.createElement("button");
-    const isSelected = answers[currentQ].includes(idx);
-    btn.className = "option" + (isSelected ? " selected" : "");
-    btn.textContent = opt;
-    btn.onclick = () => {
-      if (q.type === "single") answers[currentQ] = [idx];
-      else {
-        if (answers[currentQ].includes(idx)) answers[currentQ] = answers[currentQ].filter(i => i !== idx);
-        else answers[currentQ].push(idx);
-      }
-      renderQ();
-    };
-    optionsArea.appendChild(btn);
-  });
+  budgetArea.innerHTML = "";
+
+  if(q.type === "budget"){
+    budgetArea.innerHTML = `
+      <input type="number" min="0" class="budget-input" placeholder="เช่น 2500" value="${answers[currentQ] || ""}" oninput="answers[${currentQ}]=Number(this.value)">
+      <div style="font-size:13px; color:var(--muted); margin-bottom:20px;">ตัวอย่าง: 1200 · 1800 · 3000 บาทต่อเดือน</div>
+    `;
+  } else {
+    q.o.forEach((opt, idx) => {
+      const btn = document.createElement("button");
+      const isSelected = (q.type === "single" && answers[currentQ][0] === idx) || (q.type === "multi" && answers[currentQ].includes(idx));
+      btn.className = "option" + (isSelected ? " selected" : "");
+      btn.textContent = opt;
+      btn.onclick = () => {
+        if (q.type === "single") answers[currentQ] = [idx];
+        else {
+          if (answers[currentQ].includes(idx)) answers[currentQ] = answers[currentQ].filter(i => i !== idx);
+          else answers[currentQ].push(idx);
+        }
+        renderQ();
+      };
+      optionsArea.appendChild(btn);
+    });
+  }
+
   document.getElementById("backBtn").style.visibility = currentQ === 0 ? "hidden" : "visible";
   document.getElementById("nextBtn").textContent = currentQ === questions.length - 1 ? "ดูผลลัพธ์" : "ถัดไป →";
 }
+
 function nextQ() {
-  if (answers[currentQ].length === 0) return showPopup("แจ้งเตือน", "กรุณาเลือกคำตอบครับ");
+  const q = questions[currentQ];
+  if ((q.type === "multi" || q.type === "single") && answers[currentQ].length === 0) return showPopup("แจ้งเตือน", "กรุณาเลือกคำตอบก่อนนะครับ");
+  if (q.type === "budget" && (!answers[currentQ] || answers[currentQ] <= 0)) return showPopup("แจ้งเตือน", "กรุณาระบุงบประมาณให้ถูกต้อง");
+
   if (currentQ < questions.length - 1) { currentQ++; renderQ(); } 
   else {
-    const budget = answers[3][0];
-    if (budget === 2) { document.getElementById("packageName").textContent = "Signature Package"; document.getElementById("packagePrice").textContent = "฿3,000"; } 
-    else if (budget === 1) { document.getElementById("packageName").textContent = "Core Package"; document.getElementById("packagePrice").textContent = "฿1,800"; } 
-    else { document.getElementById("packageName").textContent = "U-Rate Package"; document.getElementById("packagePrice").textContent = "฿990"; }
+    const budget = answers[5];
+    if (budget >= 3000) { document.getElementById("packageName").textContent = "Signature Package"; document.getElementById("packagePrice").textContent = "฿3,000"; document.getElementById("checkoutPackage").textContent = "Signature"; document.getElementById("checkoutPrice").textContent = "฿3,000"; document.getElementById("subTotal").textContent = "฿3,000"; document.getElementById("grandTotal").textContent = "฿3,210"; } 
+    else if (budget >= 1500) { document.getElementById("packageName").textContent = "Core Package"; document.getElementById("packagePrice").textContent = "฿1,800"; document.getElementById("checkoutPackage").textContent = "Core"; document.getElementById("checkoutPrice").textContent = "฿1,800"; document.getElementById("subTotal").textContent = "฿1,800"; document.getElementById("grandTotal").textContent = "฿1,926"; } 
+    else { document.getElementById("packageName").textContent = "U-Rate Package"; document.getElementById("packagePrice").textContent = "฿990"; document.getElementById("checkoutPackage").textContent = "U-Rate"; document.getElementById("checkoutPrice").textContent = "฿990"; document.getElementById("subTotal").textContent = "฿990"; document.getElementById("grandTotal").textContent = "฿1,059"; }
     show('result');
   }
 }
