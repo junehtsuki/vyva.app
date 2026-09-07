@@ -102,11 +102,11 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .ob-chip.selected { background: var(--mint); border-color: var(--green); color: var(--green); }
 .ob-chip .icon { font-size: 26px; display: block; margin-bottom: 2px; }
 
-.budget-input { width: 100%; padding: 18px; border-radius: 16px; border: 1.5px solid var(--line); outline: none; font-size: 20px; color: var(--ink); }
+.budget-input { width: 100%; padding: 18px; border-radius: 16px; border: 1.5px solid var(--line); outline: none; font-size: 20px; color: var(--ink); margin-bottom: 10px;}
 .input-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
 /* =========================================
-   RESULT & PAYMENT (ดึงจาก kla.html 100%)
+   RESULT, COMPARE & PAYMENT (ดึงจาก kla.html)
 ========================================= */
 .result-hero{ position:relative; overflow:hidden; padding:40px 25px; border-radius:32px; background:linear-gradient(135deg,#2d664b,#113626); color:white; margin-bottom:15px; box-shadow:var(--shadow); }
 .result-hero::before{ content:""; position:absolute; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.06); right:-60px; top:-80px; }
@@ -123,6 +123,13 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .reason::before { content: '✓'; color: var(--green); font-weight: bold; }
 .reason:last-child { border-bottom: none; }
 .plan-price { font-family: "DM Sans"; font-size: 32px; font-weight: 800; margin: 10px 0; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px;}
+.plan { position:relative; display:flex; flex-direction:column; padding:28px; background:white; border:1px solid var(--line); border-radius:28px; transition:.25s; }
+.plan.selected { border:2px solid var(--green); box-shadow:0 15px 40px rgba(20,107,89,.13); }
+.plan.has-ribbon { background: var(--mint2); }
+.ribbon { position:absolute; top:18px; right:18px; padding:6px 11px; border-radius:999px; background:var(--green); color:white; font-size:11px; font-weight:700; }
+.selected-package-banner{ position:sticky; bottom:0; padding:20px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
 
 .checkout-grid { display: flex; flex-direction: column; gap: 15px; }
 .order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 24px; margin-bottom: 15px;}
@@ -274,6 +281,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
         <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
+      <!-- กดที่รูป Profile เพื่อไปหน้า Profile -->
       <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
 
@@ -287,12 +295,12 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <div class="eyebrow">YOUR MATCH</div>
     <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
     <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
-    <!-- เริ่ม Quiz แบบเลื่อนยาวหน้าเดียว -->
+    <!-- เริ่ม Quiz (Onboarding ดึงจาก kla.html) -->
     <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
   </section>
 
   <!-- =========================================
-       3. QUIZ FLOW (ONBOARDING FROM kla.html)
+       3. QUIZ FLOW (ONBOARDING FROM kla.html ดึงมา 100%)
   ========================================= -->
   <section id="quiz">
     <div class="onboarding-wrap">
@@ -321,7 +329,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div class="result-hero">
         <div class="result-top">
           <div>
-            <div class="result-badge">✦ YOUR WELLNESS MATCH</div>
+            <div class="eyebrow" style="color:var(--secondary);">✦ YOUR WELLNESS MATCH</div>
             <h1 class="package-result-name" id="packageName">Signature Package</h1>
             <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจแบบครบครันสำหรับคนที่ต้องการดูแลสุขภาพอย่างหลากหลาย</p>
             <button class="btn-outline" style="border:none; color:var(--green); margin:0; padding:12px 24px; width:auto; font-size:14px;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
@@ -349,11 +357,28 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div class="plan-price" id="packagePrice" style="margin:5px 0 10px;">฿3,000</div>
         <div style="color:var(--muted); font-size:13px; margin-bottom:15px;">ต่อเดือน</div>
         <p id="summaryText" style="font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px;">เหมาะสำหรับผู้ที่ต้องการกิจกรรมหลากหลายในแพ็กเกจเดียว และต้องการดูแลสุขภาพทั้งด้านร่างกายและการผ่อนคลาย</p>
-        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="showPopup('เปรียบเทียบ', 'ฟีเจอร์นี้อยู่ระหว่างการพัฒนา')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="showPopup('เปรียบเทียบ', 'ฟีเจอร์การเปรียบเทียบในมุมมองมือถือจะมาในเวอร์ชันถัดไปครับ')">เปรียบเทียบกับแพ็กเกจอื่น</button>
       </div>
     </div>
   </section>
 
+  <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
+  <section id="compare">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
+      <div class="compare-grid" id="compareGrid"></div>
+      <div class="selected-package-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
+          <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT SECTION (ดึงจาก kla.html แบบ 100%) -->
   <section id="payment">
     <div class="onboarding-wrap" style="padding-top:0;">
       <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
@@ -376,11 +401,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
             <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature Package</h3>
             <div class="plan-price" id="checkoutPrice">฿3,000</div>
             <div style="font-size:12px; margin-top:10px;">ต่อเดือน</div>
-            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
-               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Fitness</span>
-               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Yoga</span>
-               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Pilates</span>
-            </div>
           </div>
           <div style="padding:20px;">
             <div class="summary-row"><span>ค่าบริการเดือนแรก</span><b id="subTotal">฿3,000</b></div>
@@ -389,10 +409,11 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
           </div>
         </div>
 
+        <!-- กล่องขวา (วิธีชำระเงินครบจาก kla.html) -->
         <div class="card">
           <h3 style="margin:0 0 15px; font-size: 16px;">เลือกวิธีชำระเงิน</h3>
           <div class="payment-tabs">
-            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต / เดบิต</div>
+            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต</div>
             <div class="pay-tab" onclick="setPayment('qr', this)">▦ QR Code</div>
             <div class="pay-tab" onclick="setPayment('mobile', this)">📱 Mobile Banking</div>
           </div>
@@ -431,7 +452,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
               <p>เมื่อยืนยัน ระบบจะจำลองการเชื่อมต่อไปยังแอปธนาคาร</p>
             </div>
             <div class="bank-grid">
-              <div class="bank-option active" onclick="selectBank('K PLUS', this)">
+              <div class="bank-option" onclick="selectBank('K PLUS', this)">
                 <div class="bank-logo kbank">K+</div>
                 <div class="bank-copy"><b>K PLUS</b><small>Kasikornbank</small></div>
                 <div class="bank-check">✓</div>
@@ -459,9 +480,10 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
+  <!-- PROCESSING (จาก kla.html) -->
   <section id="processing">
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-      <div style="font-size:60px; margin-bottom:20px; animation: pulse 1s infinite alternate;">⌛</div>
+      <div style="font-size:60px; margin-bottom:20px; animation: fadeIn 1s infinite alternate;">⌛</div>
       <h2 id="processTitle">กำลังดำเนินการชำระเงิน</h2>
       <p class="section-desc" id="processDesc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
       
@@ -475,28 +497,29 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
+  <!-- SUCCESS (จาก kla.html) -->
   <section id="success">
     <div class="onboarding-wrap" style="padding-top:20px; text-align:center;">
-      <div class="success-icon">✓</div>
+      <div style="font-size:50px; margin-bottom:20px; color:#fff; background:var(--green); width:90px; height:90px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px; box-shadow: 0 10px 20px rgba(74,149,114,0.2);">✓</div>
       <div class="eyebrow">PAYMENT SUCCESSFUL</div>
       <h2 style="font-size:32px; margin:5px 0 15px;">ชำระเงินสำเร็จ! 🎉</h2>
       <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว ขั้นตอนถัดไปคือการเลือกกิจกรรมและจองช่วงเวลา</p>
       
-      <div class="receipt">
-        <div><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
-        <div><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
-        <div><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
-        <div><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
-        <div style="border:none;"><span>สถานะ</span><b class="paid">ชำระเงินแล้ว</b></div>
+      <div class="card" style="text-align:left; background:var(--bg);">
+        <div class="summary-row"><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
+        <div class="summary-row"><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
+        <div class="summary-row"><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
+        <div class="summary-row"><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
+        <div class="summary-row" style="border:none;"><span>สถานะ</span><b style="color:var(--green);">ชำระเงินแล้ว</b></div>
       </div>
 
-      <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
+      <button class="btn-outline" style="margin-top:10px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
       <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
   <!-- =========================================
-       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทิน)
+       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทินแบบยาวๆ)
   ========================================= -->
   <section id="plan">
     <div class="eyebrow">MY PLANNER</div>
@@ -524,22 +547,22 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <!-- คลาสเรียงเป็นบ็อกซ์ 3 กล่องต่อแถว -->
     <div class="class-grid">
       <div class="class-box" onclick="openClassDetail('Yoga Flow', '🧘')">
-        <span class="emoji">🧘</span><b>Yoga Flow</b>
+        <span style="font-size:28px;">🧘</span><b style="font-size:12px; margin-top:5px;">Yoga Flow</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Pilates', '🤸‍♀️')">
-        <span class="emoji">🤸‍♀️</span><b>Pilates</b>
+        <span style="font-size:28px;">🤸‍♀️</span><b style="font-size:12px; margin-top:5px;">Pilates</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Muay Thai', '🥊')">
-        <span class="emoji">🥊</span><b>Muay Thai</b>
+        <span style="font-size:28px;">🥊</span><b style="font-size:12px; margin-top:5px;">Muay Thai</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Fitness', '🏋️')">
-        <span class="emoji">🏋️</span><b>Fitness</b>
+        <span style="font-size:28px;">🏋️</span><b style="font-size:12px; margin-top:5px;">Fitness</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Onsen', '♨️')">
-        <span class="emoji">♨️</span><b>Onsen</b>
+        <span style="font-size:28px;">♨️</span><b style="font-size:12px; margin-top:5px;">Onsen</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Dance', '💃')">
-        <span class="emoji">💃</span><b>Dance</b>
+        <span style="font-size:28px;">💃</span><b style="font-size:12px; margin-top:5px;">Dance</b>
       </div>
     </div>
 
@@ -561,7 +584,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL (เข้าไปหน้าใหม่ ไม่เด้งทับ) -->
   <section id="class-detail" class="bg-white">
     <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
     <div style="text-align:center; margin-bottom:20px;">
@@ -790,7 +813,6 @@ function show(id) {
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
   
-  // ซ่อน Bottom Nav ในหน้าย่อย
   const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info'];
   document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
 }
@@ -819,7 +841,6 @@ function togglePass(id, btn) {
 function validateAuth(type) {
   let email, pass;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว
   const passRegex = /^(?=.*[A-Z]).{6,}$/; 
 
   if (type === 'signup') {
@@ -948,6 +969,12 @@ function closePopup() { document.getElementById('popupOverlay').classList.remove
 /* =========================
    ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - ดึงโครงสร้างจาก kla.html 100%)
 ========================= */
+const packages = {
+  signature: { name: "Signature Package", price: 3000, type: "SIGNATURE", services: ["Fitness", "Yoga", "Pilates", "Muay Thai", "Onsen"] },
+  core: { name: "Core Package", price: 1800, type: "CORE", services: ["Fitness", "Yoga", "เลือกบริการหลัก", "เหมาะกับการใช้งานทั่วไป"] },
+  urate: { name: "U-Rate Package", price: 1200, type: "U-RATE", services: ["Fitness", "เหมาะสำหรับเริ่มต้น", "ราคาประหยัด", "ยืดหยุ่น"] }
+};
+
 const questions = [
   { q: "เพศของคุณคืออะไร?", e: "GENDER", help: "ช่วยให้เราปรับแต่งคำแนะนำที่เหมาะสมกับคุณ", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
   { q: "อาชีพของคุณคืออะไร?", e: "OCCUPATION", help: "ช่วยให้เราเข้าใจไลฟ์สไตล์และเวลาในการใช้บริการของคุณ", type: "single", o: ["นักศึกษา", "พนักงานเอกชน", "ข้าราชการ/รัฐวิสาหกิจ", "บุคลากรทางการแพทย์", "อาจารย์/บุคลากรการศึกษา", "ธุรกิจส่วนตัว/เจ้าของกิจการ"] },
@@ -1030,6 +1057,8 @@ function updateBudgetOb(qIndex, value){
   answersOB[qIndex] = Number(value);
 }
 
+let selectedPackage = "signature";
+
 function submitOnboarding(){
   let valid = true;
   for (let i = 0; i < questions.length; i++) {
@@ -1044,27 +1073,34 @@ function submitOnboarding(){
 
   const budget = answersOB[5];
   let pkgName = "U-Rate", pkgPrice = "฿990", checkoutPrice="฿990", sub="฿990", grand="฿1,059";
+  selectedPackage = "urate";
   
   if (budget >= 3000) { 
     pkgName = "Signature"; pkgPrice = "฿3,000"; checkoutPrice = "฿3,000"; sub = "฿3,000"; grand = "฿3,210";
+    selectedPackage = "signature";
   } else if (budget >= 1800) { 
     pkgName = "Core"; pkgPrice = "฿1,800"; checkoutPrice = "฿1,800"; sub = "฿1,800"; grand = "฿1,926";
+    selectedPackage = "core";
   }
   
   document.getElementById("packageName").textContent = pkgName + " Package";
   document.getElementById("summaryPackage").textContent = pkgName + " Package";
   document.getElementById("packagePrice").textContent = pkgPrice;
+  
+  // Set Compare Data
+  renderCompare();
+
+  // Set Checkout Data
   document.getElementById("checkoutPackage").textContent = pkgName + " Package";
   document.getElementById("checkoutPrice").textContent = checkoutPrice;
   document.getElementById("subTotal").textContent = sub;
-  
   const numPrice = Number(sub.replace(/[^0-9]/g, ''));
   const vat = Math.round(numPrice * 0.07);
   document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
   document.getElementById("grandTotal").textContent = grand;
   document.getElementById("payButtonAmount").textContent = grand + " →";
 
-  // ดึงเหตุผลมาโชว์แบบ kla.html
+  // Reasons
   const goals = answersOB[2].map(i => questions[2].o[i]).join(" · ");
   const freq = questions[3].o[answersOB[3]];
   const interests = answersOB[4].map(i => questions[4].o[i]).join(" · ");
@@ -1077,6 +1113,53 @@ function submitOnboarding(){
 
   show('result');
 }
+
+function renderCompare(){
+  const container=document.getElementById("compareGrid");
+  container.innerHTML="";
+  Object.entries(packages).forEach(([key,pkg])=>{
+    const isSelected = selectedPackage===key;
+    const isRecommended = selectedPackage===key;
+    container.innerHTML+=`
+      <div class="plan ${isSelected?"selected":""} ${isRecommended?"has-ribbon":""}">
+        ${isRecommended?`<div class="ribbon">✦ Recommended</div>`:""}
+        <div class="eyebrow">${pkg.type}</div>
+        <h2 style="margin:20px 0 10px;">${pkg.name}</h2>
+        <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿${pkg.price.toLocaleString()}</div>
+        <small style="color:var(--muted);">ต่อเดือน</small>
+        <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+          ${pkg.services.map(service=>`<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("")}
+        </ul>
+        <button class="${isSelected?"btn-primary":"btn-outline"}" style="margin:0;" onclick="choosePackage('${key}')">${isSelected?"เลือกอยู่":"เลือกแพ็กเกจนี้"}</button>
+      </div>
+    `;
+  });
+  updateCompareCheckoutBanner();
+}
+
+function choosePackage(key){
+  selectedPackage = key;
+  renderCompare();
+  
+  // อัปเดตราคาในหน้า Payment ด้วย
+  const pkg = packages[key];
+  const vat = Math.round(pkg.price * 0.07);
+  const total = pkg.price + vat;
+  document.getElementById("checkoutPackage").textContent = pkg.name;
+  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
+  document.getElementById("grandTotal").textContent = "฿" + total.toLocaleString();
+  document.getElementById("payButtonAmount").textContent = "฿" + total.toLocaleString() + " →";
+}
+
+function updateCompareCheckoutBanner(){
+  const pkg=packages[selectedPackage];
+  document.getElementById("compareSelectedName").textContent=pkg.name;
+  document.getElementById("compareSelectedPrice").textContent="฿"+pkg.price.toLocaleString()+" / เดือน";
+}
+
+function goPayment() { show('payment'); }
 
 /* PAYMENT LOGIC (จาก kla.html) */
 let paymentMethod = 'card';
@@ -1117,7 +1200,7 @@ function processPayment() {
   setTimeout(()=>fill.style.width="100%", 1450);
 
   setTimeout(() => { 
-    document.getElementById("successPackage").textContent = document.getElementById("packageName").textContent;
+    document.getElementById("successPackage").textContent = document.getElementById("checkoutPackage").textContent;
     document.getElementById("successAmount").textContent = document.getElementById("grandTotal").textContent;
     document.getElementById("successMethod").textContent = paymentMethod === 'card' ? "บัตรเครดิต / เดบิต" : (paymentMethod === 'qr' ? "QR Code" : "Mobile Banking · " + selectedBank);
     show('success'); 
