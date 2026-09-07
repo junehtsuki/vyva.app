@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+<!-- ตั้งค่าไอคอนสำหรับเว็บบราวเซอร์ทั่วไป -->
+<link rel="icon" href="sayo.logo.jpg">
+
+<!-- ตั้งค่าไอคอนสำหรับเวลาเซฟเป็นแอปลงหน้าจอมือถือ (iOS/Android) -->
+<link rel="apple-touch-icon" href="sayo.logo.jpg">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>SAYO App</title>
 
-<!-- โหลดฟอนต์: Noto Sans Thai, DM Sans, และ Montserrat สำหรับโลโก้แบรนด์ -->
+<!-- โหลดฟอนต์ -->
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -17,12 +22,11 @@
   --app-bg: #ffffff;   
   --ink: #111111;
   --muted: #71807a;
-  /* โทนสีจากเรฟ PDF */
-  --primary: #4A9572;      /* เขียวหลัก */
-  --secondary: #9acda8;    /* เขียวอ่อน */
-  --bg-light: #eaf6e5;     /* พื้นหลังเขียวอ่อนสุด */
-  --bg-yellow: #fff6d3;    /* เหลืองอ่อน */
-  --accent: #dca434;       /* ทอง/เหลืองเข้ม */
+  --primary: #4A9572;      
+  --secondary: #9acda8;    
+  --bg-light: #eaf6e5;     
+  --bg-yellow: #fff6d3;    
+  --accent: #dca434;       
   --border: #e5e5ea;
   --shadow: 0 10px 30px rgba(74, 149, 114, 0.1);
 }
@@ -31,7 +35,7 @@
 body { margin: 0; background-color: var(--bg-color); color: var(--ink); font-family: 'DM Sans', 'Noto Sans Thai', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
 
 /* =========================================
-   APP CONTAINER (จำลองมือถือ)
+   APP CONTAINER
 ========================================= */
 .app-container { width: 100%; max-width: 430px; height: 100vh; max-height: 932px; background-color: var(--app-bg); position: relative; overflow-x: hidden; overflow-y: auto; display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.08); scroll-behavior: smooth; }
 @media (max-width: 480px) { .app-container { max-height: 100dvh; box-shadow: none; } }
@@ -53,8 +57,9 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 .btn-black { background-color: #111; color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; }
 .btn-social { background-color: #fff; color: #111; width: 100%; padding: 14px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--border); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-.input-field { width: 100%; padding: 16px 20px; border-radius: 999px; border: 1px solid var(--border); font-size: 15px; margin-bottom: 16px; background: #f9f9f9; }
+.input-field { width: 100%; padding: 16px 20px; border-radius: 999px; border: 1px solid var(--border); font-size: 15px; margin-bottom: 8px; background: #f9f9f9; }
 .input-field:focus { border-color: var(--primary); background: #fff; }
+.error-msg { color: #e74c3c; font-size: 12px; margin-bottom: 16px; padding-left: 10px; display: none; }
 
 .eyebrow { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
 .section-title { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.5px; }
@@ -62,24 +67,25 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 .card { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
 
 /* =========================================
-   1. SPLASH SCREEN (ANIMATION)
+   1. SPLASH SCREEN (ANIMATION FIXED)
 ========================================= */
 #splash { background-color: var(--bg-light); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
-.splash-scene { position: relative; width: 250px; height: 250px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
-/* วงรีอยู่ฝั่งขวา */
-.splash-oval { position: absolute; right: 20px; top: 20%; width: 60px; height: 140px; z-index: 1; transform: scale(0); animation: ovalPop 0.5s ease forwards; }
-/* คนตีลังกาพุ่งจากขวามาซ้าย */
-.splash-people { position: absolute; right: 30px; top: 10%; width: 140px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.2s 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.splash-scene { position: relative; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
+/* วงรีอยู่ฝั่งขวา ขยายขนาดขึ้น */
+.splash-oval { position: absolute; right: 15%; top: 15%; width: 90px; height: 200px; z-index: 1; transform: scale(0); animation: ovalPop 0.6s ease forwards; }
+/* คนตีลังกาพุ่งจากขวามาซ้าย ใหญ่ขึ้น และตกพอดี */
+.splash-people { position: absolute; right: 15%; top: 10%; width: 220px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.3s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 
 .brand-box { text-align: center; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s 1.5s forwards; }
-.brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 58px; font-weight: 900; color: var(--primary); margin: 0; letter-spacing: 4px; line-height: 1; }
+.brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: var(--primary); margin: 0; letter-spacing: 4px; line-height: 1; }
 .brand-slogan { font-size: 14px; color: var(--primary); letter-spacing: 3px; margin: 8px 0 0; font-weight: 600; }
 
 @keyframes ovalPop { to { transform: scale(1); } }
 @keyframes flipJump {
-  0% { transform: translateX(20px) rotate(90deg) scale(0.5); opacity: 0; }
+  0% { transform: translateX(40px) rotate(90deg) scale(0.5); opacity: 0; }
   30% { opacity: 1; }
-  100% { transform: translateX(-80px) rotate(-360deg) scale(1.2); opacity: 1; }
+  /* ปรับให้ขยับไปซ้ายแบบพอดีๆ ไม่ทะลุจอ */
+  100% { transform: translateX(-110px) rotate(-360deg) scale(1.1); opacity: 1; }
 }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
@@ -99,7 +105,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
    BOTTOM NAVIGATION
 ========================================= */
 .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 75px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); display: none; grid-template-columns: repeat(5, 1fr); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
-.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 600; }
+.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 600; background: transparent; }
 .nav-item .icon { font-size: 22px; }
 .nav-item.active { color: var(--primary); }
 
@@ -113,14 +119,14 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 
 .trial-banner { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; padding: 20px; border-radius: 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow); }
 .trial-banner h3 { margin: 0 0 4px; font-size: 22px; }
-.trial-banner p { margin: 0 0 16px; font-size: 13px; opacity: 0.9; }
+.trial-banner p { margin: 0 0 16px; font-size: 13px; opacity: 0.9; line-height: 1.5; }
 .badge-yellow { background: var(--bg-yellow); color: var(--accent); padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; display: inline-block; margin-bottom: 8px; }
 
 /* =========================================
    PLAN & BOOKING
 ========================================= */
 .calendar-wrap { display: flex; justify-content: space-between; margin-bottom: 20px; }
-.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 45px; height: 60px; border-radius: 14px; background: #fff; border: 1px solid var(--border); color: var(--muted); }
+.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 45px; height: 60px; border-radius: 14px; background: #fff; border: 1px solid var(--border); color: var(--muted); transition: 0.2s; }
 .cal-day.active { background: var(--primary); color: #fff; border-color: var(--primary); box-shadow: 0 4px 10px rgba(74,149,114,0.3); }
 .cal-day b { font-size: 18px; margin-top: 2px; }
 .cal-day span { font-size: 10px; text-transform: uppercase; }
@@ -146,27 +152,32 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 .reward-img { width: 60px; height: 60px; background: var(--bg-light); border-radius: 14px; display: grid; place-items: center; font-size: 24px; }
 
 /* =========================================
-   COMMUNITY (BUDDY & CHAT)
+   COMMUNITY (BUDDY)
 ========================================= */
 .map-mockup { width: 100%; height: 180px; background: url('https://www.transparenttextures.com/patterns/cubes.png'), var(--bg-light); border-radius: 20px; margin-bottom: 20px; position: relative; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.map-marker { position: absolute; width: 40px; height: 40px; background: #fff; border-radius: 50%; border: 2px solid var(--primary); display: grid; place-items: center; font-size: 18px; box-shadow: var(--shadow); }
+.map-marker { position: absolute; width: 40px; height: 40px; background: #fff; border-radius: 50%; border: 2px solid var(--primary); display: grid; place-items: center; font-size: 18px; box-shadow: var(--shadow); cursor: pointer;}
 .pulse-ring { position: absolute; width: 100px; height: 100px; border: 2px solid var(--primary); border-radius: 50%; animation: ping 2s infinite; opacity: 0.5; }
 @keyframes ping { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
 
-.buddy-post { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 16px; }
+.buddy-post { background: #fff; border: 1px solid var(--border); border-radius: 20px; padding: 20px; margin-bottom: 16px; cursor: pointer; transition: 0.2s; }
+.buddy-post:active { transform: scale(0.98); }
 .buddy-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
 .buddy-user { display: flex; align-items: center; gap: 10px; }
 .buddy-user img { width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); }
-.buddy-tags { display: flex; gap: 8px; margin: 12px 0; }
+.buddy-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
 .tag { background: var(--bg-light); color: var(--primary); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
 .buddy-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
 .btn-join { background: var(--primary); color: #fff; padding: 12px; border-radius: 12px; font-weight: 600; font-size: 13px; }
 .btn-joined { background: var(--border); color: var(--muted); padding: 12px; border-radius: 12px; font-weight: 600; font-size: 13px; cursor: default; }
 .btn-chat { background: var(--bg-yellow); color: var(--accent); padding: 12px; border-radius: 12px; font-weight: 700; font-size: 13px; }
 
-/* Chat Room Modal */
-.chat-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 200; display: flex; flex-direction: column; transform: translateY(100%); transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
-.chat-modal.active { transform: translateY(0); }
+/* =========================================
+   CHAT MODAL (FIXED)
+========================================= */
+.chat-modal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 200; display: none; flex-direction: column; }
+.chat-modal.active { display: flex; animation: slideUp 0.3s forwards; }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
 .chat-header { background: #fff; padding: 20px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid var(--border); padding-top: max(20px, env(safe-area-inset-top)); }
 .chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
 .chat-bubble { max-width: 75%; padding: 14px 18px; border-radius: 20px; font-size: 14px; line-height: 1.4; }
@@ -175,13 +186,14 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 .chat-input-area { background: #fff; padding: 15px 20px; padding-bottom: max(15px, env(safe-area-inset-bottom)); display: flex; gap: 10px; border-top: 1px solid var(--border); }
 .chat-input-area input { flex: 1; background: var(--bg-color); border-radius: 999px; padding: 12px 20px; }
 
-/* Popup / Modal */
+/* =========================================
+   POPUP MODAL (REUSABLE)
+========================================= */
 .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px; }
 .overlay.active { opacity: 1; visibility: visible; }
 .popup { background: #fff; width: 100%; max-width: 320px; padding: 30px; border-radius: 24px; text-align: center; transform: scale(0.9); transition: 0.3s; }
 .overlay.active .popup { transform: scale(1); }
 .popup-icon { font-size: 50px; margin-bottom: 10px; }
-
 </style>
 </head>
 <body>
@@ -189,7 +201,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
 <div class="app-container">
 
   <!-- =========================================
-       0. SPLASH SCREEN (Animation)
+       0. SPLASH SCREEN (ANIMATION)
   ========================================= -->
   <div id="splash">
     <div class="splash-scene">
@@ -217,7 +229,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
   </section>
 
   <!-- =========================================
-       2. SIGN UP (MINIMAL)
+       2. SIGN UP (WITH VALIDATION)
   ========================================= -->
   <section id="signup" class="no-padding-bottom">
     <button style="background:none; text-align:left; font-size:24px; padding:0; margin-bottom: 10px;" onclick="show('welcome')">←</button>
@@ -225,20 +237,23 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
       <h1 class="auth-title">Sign up <span class="brand-sayo" style="font-size: 20px;">SAYO</span></h1>
       <p class="section-desc">To start your wellness journey and keep track of your progress you need to create an account.</p>
     </div>
-    <input type="text" class="input-field" placeholder="Full name">
-    <input type="email" class="input-field" placeholder="Email">
-    <input type="password" class="input-field" placeholder="Password">
-    <button class="btn-black" onclick="loginSuccess()">Continue</button>
+    
+    <input type="text" id="regName" class="input-field" placeholder="Full name">
+    <input type="email" id="regEmail" class="input-field" placeholder="Email">
+    <input type="password" id="regPass" class="input-field" placeholder="Password (Min 8 chars, 1 Uppercase, 1 Special)">
+    
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('signup')">Continue</button>
     <div class="divider">or</div>
     <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
     <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
+    
     <p style="text-align: center; margin-top: auto; font-size: 14px; color: var(--muted);">
       Already have an account? <b style="color:var(--primary); cursor:pointer;" onclick="show('signin')">Sign in</b>
     </p>
   </section>
 
   <!-- =========================================
-       3. SIGN IN (MINIMAL)
+       3. SIGN IN (WITH VALIDATION)
   ========================================= -->
   <section id="signin" class="no-padding-bottom">
     <button style="background:none; text-align:left; font-size:24px; padding:0; margin-bottom: 10px;" onclick="show('welcome')">←</button>
@@ -246,9 +261,16 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
       <h1 class="auth-title">Sign in <span class="brand-sayo" style="font-size: 20px;">SAYO</span></h1>
       <p class="section-desc">Glad to see you again!<br>Are you a new user? <b style="color:var(--primary); cursor:pointer;" onclick="show('signup')">Sign up</b></p>
     </div>
-    <input type="email" class="input-field" placeholder="Email">
-    <input type="password" class="input-field" placeholder="Password">
-    <button class="btn-black" onclick="loginSuccess()">Continue</button>
+
+    <input type="email" id="logEmail" class="input-field" placeholder="Email">
+    <input type="password" id="logPass" class="input-field" placeholder="Password">
+    
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('login')">Continue</button>
+    
+    <div style="text-align: center; font-size: 14px; margin-bottom: 15px;">
+      <a href="#" style="color: var(--muted); text-decoration: none;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์สำหรับรีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลของคุณแล้ว กรุณาตรวจสอบกล่องข้อความ')">Forgot password?</a>
+    </div>
+
     <div class="divider">or</div>
     <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
     <button class="btn-social" onclick="loginSuccess()">G Continue with Google</button>
@@ -260,7 +282,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
   <section id="home">
     <div class="home-header">
       <div class="user-info">
-        <h2>สวัสดี Achiraya! 👋</h2>
+        <h2>สวัสดี SAYO! 👋</h2>
         <p>พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
       <div class="profile-avatar">🤸‍♀️</div>
@@ -277,7 +299,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
     <div class="eyebrow">YOUR MATCH</div>
     <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
     <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
-    <button class="btn-primary" onclick="alert('ระบบ Match จะเปิดหน้าคำถาม 7 ข้อ (โค้ดเดิมมีให้แล้ว)')">เริ่มทำ Wellness Match ✦</button>
+    <button class="btn-primary" onclick="showPopup('เริ่มแบบสอบถาม', 'ฟีเจอร์ Wellness Match แบบสอบถามจะเด้งขึ้นมาตรงนี้ (เชื่อมกับระบบหน้า Quiz ที่มีอยู่แล้ว)')">เริ่มทำ Wellness Match ✦</button>
   </section>
 
   <!-- =========================================
@@ -289,35 +311,35 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
     <p class="section-desc">1 - 7 ก.ย. 2026</p>
 
     <div class="calendar-wrap">
-      <div class="cal-day"><span>Mon</span><b>1</b></div>
-      <div class="cal-day"><span>Tue</span><b>2</b></div>
-      <div class="cal-day active"><span>Wed</span><b>3</b></div>
-      <div class="cal-day"><span>Thu</span><b>4</b></div>
-      <div class="cal-day"><span>Fri</span><b>5</b></div>
+      <button class="cal-day" onclick="selectDay(this)"><span>Mon</span><b>1</b></button>
+      <button class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>2</b></button>
+      <button class="cal-day active" onclick="selectDay(this)"><span>Wed</span><b>3</b></button>
+      <button class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>4</b></button>
+      <button class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>5</b></button>
     </div>
 
-    <div class="card class-card">
+    <div class="card class-card" onclick="showPopup('รายละเอียดคลาส', 'คลาส Gym Upper Body เวลา 10:00 - 11:00 น. นำสอนโดยเทรนเนอร์ผู้เชี่ยวชาญ')">
       <div class="class-time">10:00</div>
       <div class="class-info">
         <b>Gym · Upper Body</b>
         <span>Fitness Studio</span>
       </div>
-      <button class="btn-book" onclick="showPopup('จองคลาสสำเร็จ!', 'เตรียมชุดให้พร้อม แล้วเจอกันที่คลาสครับ')">จองเลย</button>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('จองคลาสสำเร็จ!', 'เตรียมชุดให้พร้อม แล้วเจอกันที่คลาสครับ')">จองเลย</button>
     </div>
 
-    <div class="card class-card">
+    <div class="card class-card" onclick="showPopup('รายละเอียดคลาส', 'คลาส Yoga Flow เพื่อปรับสมดุลและลดออฟฟิศซินโดรม เวลา 17:30 - 18:30 น.')">
       <div class="class-time">17:30</div>
       <div class="class-info">
         <b>Yoga Flow</b>
         <span>Mind & Body Studio</span>
       </div>
-      <button class="btn-book" onclick="showPopup('จองคลาสสำเร็จ!', 'เตรียมชุดให้พร้อม แล้วเจอกันที่คลาสครับ')">จองเลย</button>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('จองคลาสสำเร็จ!', 'เตรียมชุดให้พร้อม แล้วเจอกันที่คลาสครับ')">จองเลย</button>
     </div>
 
     <div class="eyebrow" style="margin-top: 10px;">FACILITIES & TRANSPORT</div>
     <h2 class="section-title">ที่จอดรถ & การเดินทาง</h2>
     
-    <button class="parking-btn" onclick="showPopup('จองที่จอดสำเร็จ', 'ที่จอดรถ EV ช่อง B4 ถูกจองให้คุณ 4 ชั่วโมง')">
+    <button class="parking-btn" onclick="showPopup('จองที่จอดรถ EV สำเร็จ', 'ที่จอดรถ EV ช่อง B4 ถูกจองให้คุณ 4 ชั่วโมง ระบบจะหัก 200 Pts ถ้าเกินเวลา')">
       <div style="display:flex; align-items:center; gap:10px;">
         <div style="background: var(--primary); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
         <div style="text-align:left; line-height:1.2;"><b>จองที่จอดรถ (มีตู้ EV)</b><br><span style="font-size:11px; font-weight:500;">สิทธิพิเศษจอดฟรี 4 ชม.</span></div>
@@ -326,13 +348,13 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
     </button>
 
     <div class="transport-grid">
-      <button class="transport-btn" onclick="alert('เปิดแอป Grab')"><img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="Grab" style="background:#00B14F;"> เรียก Grab</button>
-      <button class="transport-btn" onclick="alert('เปิดแอป LINE MAN')"><img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="Lineman" style="background:#00C300;"> LINE MAN</button>
+      <button class="transport-btn" onclick="showPopup('เรียกรถ', 'ระบบกำลังสลับไปเปิดแอป Grab เพื่อเรียกมารับที่ SAYO Wellness Center')"><img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="Grab" style="background:#00B14F;"> เรียก Grab</button>
+      <button class="transport-btn" onclick="showPopup('เรียกรถ', 'ระบบกำลังสลับไปเปิดแอป LINE MAN เพื่อเรียกมารับที่ SAYO Wellness Center')"><img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="Lineman" style="background:#00C300;"> LINE MAN</button>
     </div>
   </section>
 
   <!-- =========================================
-       6. REWARDS (WELLNESS WRAP / POINTS)
+       6. REWARDS
   ========================================= -->
   <section id="rewards">
     <div class="eyebrow">YOUR CREDITS</div>
@@ -344,51 +366,80 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
       <p style="margin:0; font-size:12px; opacity:0.7;">เปลี่ยนคลาสที่ไม่ได้เข้า เป็นพอยต์สุดคุ้ม</p>
     </div>
 
-    <div class="eyebrow">REDEEM</div>
+    <div class="eyebrow">REDEEM PRIVILEGES</div>
     
-    <div class="card reward-item">
+    <div class="card reward-item" onclick="showPopup('ยืนยันแลกสิทธิ์', 'คุณต้องการใช้ 100 Pts แลกส่วนลดเครื่องดื่ม 50 บาท ใช่หรือไม่?')">
       <div class="reward-img">☕</div>
       <div style="flex:1;">
         <b style="display:block; font-size:16px;">SAYO Cafe Discount</b>
         <span style="font-size:12px; color:var(--muted);">ส่วนลด 50 บาท เมนูเครื่องดื่ม</span>
       </div>
-      <button class="btn-book" onclick="showPopup('แลกสำเร็จ', 'คุณได้รับส่วนลด 50 บาทที่คาเฟ่')">100 Pts</button>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('แลกสำเร็จ', 'คุณได้รับส่วนลด 50 บาทที่คาเฟ่ นำคิวอาร์โค้ดไปสแกนที่เคาน์เตอร์ได้เลย')">100 Pts</button>
     </div>
 
-    <div class="card reward-item">
+    <div class="card reward-item" onclick="showPopup('ยืนยันแลกสิทธิ์', 'คุณต้องการใช้ 150 Pts แลก Healthy Smoothie ฟรี ใช่หรือไม่?')">
+      <div class="reward-img">🥤</div>
+      <div style="flex:1;">
+        <b style="display:block; font-size:16px;">Healthy Smoothie</b>
+        <span style="font-size:12px; color:var(--muted);">รับฟรี น้ำปั่นเพื่อสุขภาพ 1 แก้ว</span>
+      </div>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('แลกสำเร็จ', 'กรุณาแสดงหน้าจอที่คาเฟ่เพื่อรับเครื่องดื่ม')">150 Pts</button>
+    </div>
+
+    <div class="card reward-item" onclick="showPopup('ยืนยันแลกสิทธิ์', 'คุณต้องการใช้ 200 Pts แลกที่จอดรถ EV 4 ชั่วโมง ใช่หรือไม่?')">
+      <div class="reward-img">⚡</div>
+      <div style="flex:1;">
+        <b style="display:block; font-size:16px;">EV Parking 4 Hrs</b>
+        <span style="font-size:12px; color:var(--muted);">สิทธิ์จอดรถพร้อมชาร์จ EV</span>
+      </div>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('แลกสำเร็จ', 'คุณได้รับสิทธิ์จอดรถ EV 4 ชั่วโมง ระบบจะจองช่องให้อัตโนมัติ')">200 Pts</button>
+    </div>
+
+    <div class="card reward-item" onclick="showPopup('ยืนยันแลกสิทธิ์', 'คุณต้องการใช้ 300 Pts แลกสิทธิ์เข้าคลาสฟรี 1 ครั้ง ใช่หรือไม่?')">
       <div class="reward-img">🥊</div>
       <div style="flex:1;">
         <b style="display:block; font-size:16px;">Free Class Pass</b>
         <span style="font-size:12px; color:var(--muted);">เข้าคลาสใดก็ได้ 1 ครั้ง</span>
       </div>
-      <button class="btn-book" onclick="showPopup('แลกสำเร็จ', 'คุณได้รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง')">300 Pts</button>
+      <button class="btn-book" onclick="event.stopPropagation(); showPopup('แลกสำเร็จ', 'คุณได้รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง (เพิ่มลงในบัญชีเรียบร้อย)')">300 Pts</button>
+    </div>
+
+    <div class="card reward-item" onclick="showPopup('ยืนยันแลกสิทธิ์', 'คุณต้องการใช้ 1,500 Pts แลกชุดของขวัญ Wellness Gift Set ใช่หรือไม่?')">
+      <div class="reward-img">🎁</div>
+      <div style="flex:1;">
+        <b style="display:block; font-size:16px;">Wellness Gift Set</b>
+        <span style="font-size:12px; color:var(--muted);">ชุดสกินแคร์และชาออร์แกนิก</span>
+      </div>
+      <button class="btn-book" style="background:#f2f2f7; color:var(--muted);" onclick="event.stopPropagation(); showPopup('พอยต์ไม่พอ', 'คุณต้องมี 1,500 Pts เพื่อแลกรางวัลนี้ (ปัจจุบันคุณมี 300 Pts)')">1500 Pts</button>
     </div>
   </section>
 
   <!-- =========================================
-       7. COMMUNITY (BUDDY & CHAT)
+       7. COMMUNITY
   ========================================= -->
   <section id="community">
     <div class="eyebrow">FIND YOUR BUDDY</div>
     <h2 class="section-title">เพื่อนสายสปอร์ตใกล้คุณ</h2>
     
     <!-- แผนที่จำลองรัศมี -->
-    <div class="map-mockup">
+    <div class="map-mockup" onclick="showPopup('แผนที่ Radar', 'ระบบกำลังค้นหาเพื่อนในรัศมี 5 กม. เพื่อจับคู่ทำกิจกรรมร่วมกัน')">
       <div class="pulse-ring"></div>
       <div class="map-marker" style="z-index:10;">📍</div>
-      <!-- เพื่อนรอบๆ -->
       <div class="map-marker" style="top:20px; left:40px; font-size:14px; width:30px; height:30px;">👩🏻</div>
       <div class="map-marker" style="bottom:30px; right:50px; font-size:14px; width:30px; height:30px;">👨🏽</div>
     </div>
 
-    <div class="eyebrow">BUDDY FEED</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+      <div class="eyebrow" style="margin:0;">BUDDY FEED</div>
+      <button style="background:var(--bg-light); color:var(--primary); padding:6px 12px; border-radius:8px; font-weight:bold; font-size:12px;" onclick="showPopup('สร้างโพสต์', 'เด้งหน้าต่างให้คุณสร้างประกาศหา Buddy (ฟีเจอร์นี้เปิดใช้งานในเวอร์ชันเต็ม)')">+ สร้างโพสต์</button>
+    </div>
     
-    <div class="buddy-post">
+    <div class="buddy-post" onclick="showPopup('โพสต์ของ Nara', 'รายละเอียดโพสต์: หาเพื่อน Beginner ตีแบด นัดเจอที่หน้าสนามเวลา 15:50 น. รับอีก 2 คน')">
       <div class="buddy-head">
         <div class="buddy-user">
-          <img src="" alt="" onerror="this.style.background='var(--primary)'">
+          <div style="width:40px; height:40px; border-radius:50%; background:var(--secondary); display:grid; place-items:center; font-weight:bold;">N</div>
           <div>
-            <b style="display:block; font-size:15px;">Mint</b>
+            <b style="display:block; font-size:15px;">Nara (นารา)</b>
             <span style="font-size:11px; color:var(--muted);">ห่างออกไป 2 กม.</span>
           </div>
         </div>
@@ -400,23 +451,45 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
         <span class="tag">อา. 7 ก.ย.</span> <span class="tag">16:00</span> <span class="tag">รับ 2 คน</span>
       </div>
       <div class="buddy-actions">
-        <button class="btn-join" id="btnJoin1" onclick="joinBuddy(this)">Join · ขอเข้าร่วม</button>
-        <button class="btn-chat" onclick="openChat('Mint')">💬 แชท</button>
+        <button class="btn-join" id="btnJoin1" onclick="event.stopPropagation(); joinBuddy(this)">Join · ขอเข้าร่วม</button>
+        <button class="btn-chat" onclick="event.stopPropagation(); openChat('Nara (นารา)')">💬 แชท</button>
+      </div>
+    </div>
+
+    <div class="buddy-post" onclick="showPopup('โพสต์ของ Peak', 'รายละเอียดโพสต์: หาคนหารค่าคอร์ส Pilates แบบกลุ่ม 4 คน ตกคนละไม่กี่ร้อย')">
+      <div class="buddy-head">
+        <div class="buddy-user">
+          <div style="width:40px; height:40px; border-radius:50%; background:#dca434; color:#fff; display:grid; place-items:center; font-weight:bold;">P</div>
+          <div>
+            <b style="display:block; font-size:15px;">Peak</b>
+            <span style="font-size:11px; color:var(--muted);">ห่างออกไป 5 กม.</span>
+          </div>
+        </div>
+        <span style="font-size:11px; color:var(--muted);">1 ชั่วโมงที่แล้ว</span>
+      </div>
+      <b style="font-size:18px;">หาตี้หารคอร์ส Pilates 🧘‍♀️</b>
+      <p style="font-size:14px; color:var(--muted); margin:8px 0;">กลุ่ม 4 คน ราคาคุ้มกว่าเยอะเลยค่ะ ใครสนใจทักมาได้เลย</p>
+      <div class="buddy-tags">
+        <span class="tag">พ. 10 ก.ย.</span> <span class="tag">Pilates</span>
+      </div>
+      <div class="buddy-actions">
+        <button class="btn-join" onclick="event.stopPropagation(); joinBuddy(this)">Join · ขอเข้าร่วม</button>
+        <button class="btn-chat" onclick="event.stopPropagation(); openChat('Peak')">💬 แชท</button>
       </div>
     </div>
   </section>
 
-  <!-- CHAT MODAL (MOCKUP) -->
+  <!-- CHAT MODAL (แก้ไขบั๊กทะลุหน้าจอ) -->
   <div id="chatModal" class="chat-modal">
     <div class="chat-header">
-      <button style="background:none; font-size:24px; padding:0;" onclick="closeChat()">←</button>
-      <img src="" alt="" style="width:36px; height:36px; border-radius:50%; background:var(--primary);">
-      <b id="chatName" style="font-size:18px;">Mint</b>
+      <button style="background:none; font-size:24px; padding:0; color:var(--ink);" onclick="closeChat()">←</button>
+      <div style="width:36px; height:36px; border-radius:50%; background:var(--primary); display:grid; place-items:center; color:#fff; font-weight:bold;" id="chatIcon">N</div>
+      <b id="chatName" style="font-size:18px;">Nara (นารา)</b>
     </div>
     <div class="chat-body">
-      <div class="chat-bubble chat-left">สวัสดีครับ สนใจไปตีแบดด้วยกันไหม? 🏸</div>
+      <div class="chat-bubble chat-left">สวัสดีครับ สนใจไปทำกิจกรรมด้วยกันไหม?</div>
       <div class="chat-bubble chat-right">สนใจค่ะ เจอกันที่ไหนดีคะ?</div>
-      <div class="chat-bubble chat-left">เจอกันที่คอร์ตใกล้ SAYO Center เลยครับ เวลา 16:00 น.</div>
+      <div class="chat-bubble chat-left">เจอกันที่ SAYO Center เลยครับ เวลา 16:00 น.</div>
     </div>
     <div class="chat-input-area">
       <input type="text" placeholder="พิมพ์ข้อความ...">
@@ -429,23 +502,29 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
   ========================================= -->
   <section id="profile">
     <div class="home-header" style="justify-content: center; flex-direction: column; text-align: center; margin-top: 20px;">
-      <div class="profile-avatar" style="width:80px; height:80px; font-size:40px; margin-bottom:15px;">🤸‍♀️</div>
-      <h2>Achiraya!</h2>
-      <p>Free Trial Member</p>
+      <div class="profile-avatar" style="width:80px; height:80px; font-size:40px; margin-bottom:15px; background:var(--bg-yellow); color:var(--accent);">🤸‍♀️</div>
+      <h2>SAYO Member</h2>
+      <p>Free Trial Active</p>
     </div>
 
+    <!-- สถิติปรับปรุงใหม่ -->
     <div class="card" style="display:flex; justify-content:space-around; text-align:center; padding: 20px 10px;">
-      <div><b style="font-size:22px;">300</b><br><span style="font-size:12px; color:var(--muted)">Credits</span></div>
+      <div><b style="font-size:22px;">300</b><br><span style="font-size:11px; color:var(--muted)">Credits</span></div>
       <div style="width:1px; background:var(--border);"></div>
-      <div><b style="font-size:22px;">1</b><br><span style="font-size:12px; color:var(--muted)">Free Class</span></div>
+      <div><b style="font-size:22px;">1</b><br><span style="font-size:11px; color:var(--muted)">Free Class</span></div>
       <div style="width:1px; background:var(--border);"></div>
-      <div><b style="font-size:22px;">0</b><br><span style="font-size:12px; color:var(--muted)">Buddies</span></div>
+      <div><b style="font-size:22px;">3</b><br><span style="font-size:11px; color:var(--muted)">สัปดาห์ต่อเนื่อง</span></div>
     </div>
 
-    <div class="eyebrow">SETTINGS</div>
-    <button class="card" style="width:100%; text-align:left; font-size:16px; font-weight:600; display:flex; justify-content:space-between;">ข้อมูลส่วนตัว <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:16px; font-weight:600; display:flex; justify-content:space-between;">แพ็กเกจของฉัน <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:16px; font-weight:600; display:flex; justify-content:space-between; color:red;">ออกจากระบบ <span>></span></button>
+    <div class="eyebrow">SETTINGS & HELP</div>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ข้อมูลส่วนตัว', 'หน้าจัดการข้อมูลส่วนตัว ชื่อ อีเมล น้ำหนัก ส่วนสูง')">ข้อมูลส่วนตัว <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('แพ็กเกจของฉัน', 'รายละเอียดแพ็กเกจปัจจุบัน (Free Trial) สิทธิพิเศษที่เหลืออยู่')">แพ็กเกจของฉัน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ประวัติการใช้งาน', 'ประวัติการเข้าคลาส แลกคะแนน และการสั่งซื้อที่ผ่านมา')">ประวัติการใช้งาน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ศูนย์ช่วยเหลือ', 'คำถามที่พบบ่อย (FAQ) และติดต่อแอดมิน')">ศูนย์ช่วยเหลือ <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; margin-bottom:10px;" onclick="showPopup('ตั้งค่าระบบ', 'ตั้งค่าการแจ้งเตือน เสียง ภาษา และความปลอดภัย')">⚙️ ตั้งค่า (Settings) <span>></span></button>
+    
+    <!-- ปุ่ม Logout กดได้จริง -->
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c; margin-top:20px;" onclick="logout()">ออกจากระบบ <span>></span></button>
   </section>
 
   <!-- =========================================
@@ -474,7 +553,7 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
   ========================================= -->
   <div id="popupOverlay" class="overlay">
     <div class="popup">
-      <div class="popup-icon">✅</div>
+      <div class="popup-icon">✨</div>
       <h2 id="popupTitle" style="margin:0 0 10px;">สำเร็จ</h2>
       <p id="popupDesc" style="color:var(--muted); font-size:14px; margin:0 0 20px; line-height:1.5;">ดำเนินการเรียบร้อยแล้ว</p>
       <button class="btn-primary" style="margin:0;" onclick="closePopup()">ตกลง</button>
@@ -488,7 +567,6 @@ button, input { font: inherit; outline: none; border: none; cursor: pointer; }
    ROUTING & LOGIC
 ========================= */
 window.addEventListener('load', () => {
-  // Splash Screen หายไปหลังจากแอนิเมชันจบ (2.5 วินาที)
   setTimeout(() => {
     document.getElementById('splash').style.display = 'none';
     document.getElementById('welcome').classList.add('active');
@@ -501,38 +579,87 @@ function show(id) {
   document.querySelector('.app-container').scrollTop = 0;
 }
 
+// Validation สำหรับ Sign Up และ Sign In
+function validateAuth(type) {
+  let email, pass;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // พาสเวิร์ดต้องมีอย่างน้อย 8 ตัว, พิมพ์ใหญ่ 1, อักษรพิเศษ 1
+  const passRegex = /^(?=.*[A-Z])(?=.*[!@#$&*]).{8,}$/; 
+
+  if (type === 'signup') {
+    const name = document.getElementById('regName').value;
+    email = document.getElementById('regEmail').value;
+    pass = document.getElementById('regPass').value;
+    
+    if (!name) return showPopup('ข้อมูลไม่ครบ', 'กรุณากรอกชื่อ-นามสกุลให้เรียบร้อย');
+  } else {
+    email = document.getElementById('logEmail').value;
+    pass = document.getElementById('logPass').value;
+  }
+
+  if (!email || !emailRegex.test(email)) {
+    return showPopup('รูปแบบอีเมลผิด', 'กรุณากรอกอีเมลให้ถูกต้อง (เช่น name@email.com)');
+  }
+  
+  if (!pass || !passRegex.test(pass)) {
+    return showPopup('รหัสผ่านไม่ปลอดภัย', 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร มีตัวพิมพ์ใหญ่อย่างน้อย 1 ตัว และอักษรพิเศษ 1 ตัว');
+  }
+
+  loginSuccess();
+}
+
 function loginSuccess() {
-  // เมื่อ Login/Signup ผ่าน ให้โชว์ Bottom Nav และเข้าหน้า Home
   document.getElementById('bottomNav').style.display = 'grid';
   switchTab('home');
 }
 
+function logout() {
+  // เคลียร์ค่าในช่องกรอก (ถ้าต้องการ)
+  document.getElementById('regName').value = '';
+  document.getElementById('regEmail').value = '';
+  document.getElementById('regPass').value = '';
+  document.getElementById('logEmail').value = '';
+  document.getElementById('logPass').value = '';
+
+  document.getElementById('bottomNav').style.display = 'none';
+  show('welcome');
+  showPopup('ออกจากระบบ', 'คุณได้ออกจากระบบเรียบร้อยแล้ว');
+}
+
 function switchTab(tabId) {
   show(tabId);
-  // อัปเดตสถานะปุ่มใน Bottom Nav
   document.querySelectorAll('.nav-item').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tabId);
   });
+}
+
+function selectDay(btn) {
+  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 function joinBuddy(btn) {
   if(btn.innerText.includes('Join')) {
     btn.innerText = '✓ Requested';
     btn.className = 'btn-joined';
-    showPopup('ส่งคำขอแล้ว!', 'รอให้ผู้โพสต์ยืนยันรับเข้ากลุ่มนะครับ');
+    showPopup('ส่งคำขอแล้ว!', 'ระบบส่งคำขอเข้าร่วมของคุณไปยังผู้โพสต์เรียบร้อยแล้ว กรุณารอการตอบรับ');
   } else {
     btn.innerText = 'Join · ขอเข้าร่วม';
     btn.className = 'btn-join';
   }
 }
 
+// เปิด Chat และป้องกันการเลื่อนของพื้นหลัง
 function openChat(name) {
   document.getElementById('chatName').innerText = name;
+  document.getElementById('chatIcon').innerText = name.charAt(0);
   document.getElementById('chatModal').classList.add('active');
+  document.querySelector('.app-container').style.overflowY = 'hidden'; 
 }
 
 function closeChat() {
   document.getElementById('chatModal').classList.remove('active');
+  document.querySelector('.app-container').style.overflowY = 'auto'; 
 }
 
 function showPopup(title, desc) {
