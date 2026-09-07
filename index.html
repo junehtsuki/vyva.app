@@ -614,7 +614,7 @@ section.active{min-height:0;}
         <b>Rewards</b>
         <p>สะสมแต้มแลกสิทธิพิเศษ</p>
       </button>
-      <button class="dash-shortcut" onclick="alert('ไปหน้าจองคิว')">
+      <button class="dash-shortcut" onclick="openActivityBooking()">
         <span class="icon">📅</span>
         <b>Booking</b>
         <p>ดูกิจกรรมและช่วงเวลา</p>
@@ -649,6 +649,111 @@ section.active{min-height:0;}
         <div class="buddy-actions">
           <button class="primary" id="joinBtn1" onclick="toggleBuddyJoin(this)">Join · ขอเข้าร่วม</button>
           <button class="secondary" onclick="alert('กำลังเปิดหน้าแชทกับ Mint')">💬 แชทกับ Mint</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================
+     PHASE 2 · ACTIVITY BOOKING (MAPPED FROM PRIM)
+========================= -->
+<section id="activityBooking">
+  <div class="phase2-wrap">
+    <button class="back-link" onclick="goBack()">← ย้อนกลับ</button>
+
+    <div class="phase2-top">
+      <div class="phase2-title">
+        <div class="eyebrow">PHASE 2 · BOOKING</div>
+        <h2>My Planner</h2>
+        <p>เลือกกิจกรรม วัน และช่วงเวลาที่คุณต้องการจอง</p>
+      </div>
+      <div class="phase2-pill">📅 September 2026</div>
+    </div>
+
+    <div class="booking-panel" style="padding:28px;">
+      <div class="booking-header">
+        <div>
+          <div class="eyebrow">AVAILABLE ACTIVITIES</div>
+          <h3>เลือกกิจกรรม</h3>
+          <p>เลือกกิจกรรมที่อยู่ในแพ็กเกจของคุณ</p>
+        </div>
+        <div class="soon-badge">✨ Ready to book</div>
+      </div>
+
+      <div class="booking-content">
+        <div class="booking-label">กิจกรรม</div>
+        <div class="activity-cards" id="activityBookingCards">
+          <button type="button" class="activity-card featured booking-activity"
+                  data-activity="Yoga Flow" onclick="selectBookingActivity(this)">
+            <span class="emoji">🧘</span>
+            <b>Yoga Flow</b>
+            <small>Mind & Body Studio</small>
+          </button>
+
+          <button type="button" class="activity-card booking-activity"
+                  data-activity="Muay Thai" onclick="selectBookingActivity(this)">
+            <span class="emoji">🥊</span>
+            <b>Muay Thai</b>
+            <small>Combat Zone</small>
+          </button>
+
+          <button type="button" class="activity-card booking-activity"
+                  data-activity="Onsen Recovery" onclick="selectBookingActivity(this)">
+            <span class="emoji">♨️</span>
+            <b>Onsen Recovery</b>
+            <small>Recovery Zone</small>
+          </button>
+
+          <button type="button" class="activity-card booking-activity"
+                  data-activity="Gym · Upper Body" onclick="selectBookingActivity(this)">
+            <span class="emoji">🏋️</span>
+            <b>Gym · Upper Body</b>
+            <small>Fitness Studio</small>
+          </button>
+        </div>
+
+        <div class="booking-label">เลือกวันและช่วงเวลา</div>
+        <div class="booking-row">
+          <div class="calendar-preview">
+            <div class="calendar-head">
+              <span>กันยายน 2026</span>
+              <span>‹ ›</span>
+            </div>
+            <div class="days" id="bookingDays">
+              <span>จ</span><span>อ</span><span>พ</span><span>พฤ</span><span>ศ</span><span>ส</span><span>อา</span>
+              <span></span><span class="date">1</span><span class="date">2</span><span class="date">3</span><span class="date">4</span><span class="date">5</span><span class="date">6</span>
+              <span class="date picked">7</span><span class="date">8</span><span class="date">9</span><span class="date">10</span><span class="date">11</span><span class="date">12</span><span class="date">13</span>
+            </div>
+          </div>
+
+          <div class="times-preview">
+            <div class="calendar-head">
+              <span>Available time</span>
+              <span>4 slots</span>
+            </div>
+            <div class="time-chips" id="bookingTimes">
+              <button type="button" class="time-chip pick" onclick="selectBookingTime(this)">09:00</button>
+              <button type="button" class="time-chip" onclick="selectBookingTime(this)">11:00</button>
+              <button type="button" class="time-chip" onclick="selectBookingTime(this)">14:30</button>
+              <button type="button" class="time-chip" onclick="selectBookingTime(this)">17:00</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="coming-overlay" style="margin-top:22px;">
+          <div>
+            <div class="eyebrow" style="color:#d0e4dc;">YOUR BOOKING</div>
+            <h3 id="bookingSummaryTitle">Yoga Flow · 7 ก.ย. · 09:00</h3>
+            <p id="bookingSummaryText">พร้อมจองกิจกรรมนี้ในแพ็กเกจของคุณ</p>
+          </div>
+          <div class="coming-icon">📅</div>
+        </div>
+
+        <div class="phase2-actions">
+          <button type="button" class="secondary" onclick="show('dashboard')">← กลับ Wellness Journey</button>
+          <button type="button" class="primary" id="confirmActivityBooking" onclick="confirmActivityBooking()">ยืนยันการจอง →</button>
         </div>
       </div>
     </div>
@@ -1775,9 +1880,110 @@ function openPhase2(){
     phase2Timer=null;
   }
   const pkg=packages[selectedPackage];
-  document.getElementById("phase2Package").textContent=pkg.name;
+  const phase2Package=document.getElementById("phase2Package");
+  if(phase2Package) phase2Package.textContent=pkg.name;
   show("dashboard");
 }
+
+
+/* =========================
+   PHASE 2 · ACTIVITY BOOKING
+   Mapped from Prim's working booking flow
+========================= */
+let selectedBookingActivity = "Yoga Flow";
+let selectedBookingDay = "7";
+let selectedBookingTime = "09:00";
+let bookedActivities = {};
+
+function openActivityBooking(){
+  show("activityBooking");
+  renderActivityBookingState();
+}
+
+function renderActivityBookingState(){
+  const cards = document.querySelectorAll(".booking-activity");
+  cards.forEach(card=>{
+    card.classList.toggle("featured", card.dataset.activity === selectedBookingActivity);
+  });
+
+  document.querySelectorAll("#bookingDays .date").forEach(day=>{
+    day.classList.toggle("picked", day.textContent.trim() === selectedBookingDay);
+  });
+
+  document.querySelectorAll("#bookingTimes .time-chip").forEach(time=>{
+    time.classList.toggle("pick", time.textContent.trim() === selectedBookingTime);
+  });
+
+  const title = document.getElementById("bookingSummaryTitle");
+  const text = document.getElementById("bookingSummaryText");
+  const confirm = document.getElementById("confirmActivityBooking");
+
+  if(title) title.textContent = `${selectedBookingActivity} · ${selectedBookingDay} ก.ย. · ${selectedBookingTime}`;
+
+  const key = `${selectedBookingActivity}|${selectedBookingDay}|${selectedBookingTime}`;
+  if(bookedActivities[key]){
+    if(text) text.textContent = "กิจกรรมนี้จองแล้ว ✓";
+    if(confirm){
+      confirm.disabled = true;
+      confirm.textContent = "จองแล้ว ✓";
+      confirm.style.opacity = ".65";
+      confirm.style.cursor = "not-allowed";
+    }
+  }else{
+    if(text) text.textContent = "พร้อมจองกิจกรรมนี้ในแพ็กเกจของคุณ";
+    if(confirm){
+      confirm.disabled = false;
+      confirm.textContent = "ยืนยันการจอง →";
+      confirm.style.opacity = "1";
+      confirm.style.cursor = "pointer";
+    }
+  }
+}
+
+function selectBookingActivity(element){
+  selectedBookingActivity = element.dataset.activity;
+  renderActivityBookingState();
+}
+
+function selectBookingTime(element){
+  selectedBookingTime = element.textContent.trim();
+  renderActivityBookingState();
+}
+
+function confirmActivityBooking(){
+  const key = `${selectedBookingActivity}|${selectedBookingDay}|${selectedBookingTime}`;
+  if(bookedActivities[key]) return;
+
+  bookedActivities[key] = true;
+
+  // Same reward behavior as Prim's working booking flow.
+  if(typeof points === "number"){
+    points += 80;
+    if(typeof updatePoints === "function") updatePoints();
+  }
+
+  renderActivityBookingState();
+
+  const text = document.getElementById("bookingSummaryText");
+  if(text) text.textContent = `จอง ${selectedBookingActivity} สำเร็จแล้ว · +80 points 🎉`;
+
+  setTimeout(()=>{
+    const btn = document.getElementById("confirmActivityBooking");
+    if(btn){
+      btn.disabled = true;
+      btn.textContent = "จองแล้ว ✓";
+    }
+  }, 0);
+}
+
+// Calendar selection: mapped from Prim's clickable date behavior.
+document.addEventListener("click", function(e){
+  const day = e.target.closest("#bookingDays .date");
+  if(day){
+    selectedBookingDay = day.textContent.trim();
+    renderActivityBookingState();
+  }
+});
 
 /* =========================
    DASHBOARD & MODAL LOGIC
@@ -1840,6 +2046,15 @@ document.addEventListener("DOMContentLoaded",()=>{
     btn.setAttribute('onclick', "show('dashboard')");
     btn.dataset.target = 'dashboard';
   });
+
+  document.querySelectorAll('#bookingDays .date').forEach(el => {
+    el.onclick = function() {
+      selectedBookingDay = this.textContent.trim();
+      renderActivityBookingState();
+    };
+  });
+
+  renderActivityBookingState();
 
   document.querySelectorAll('.modal-days span.date').forEach(el => {
     el.onclick = function() {
