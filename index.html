@@ -2,669 +2,447 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VYVA - Wellness Value Matcher</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VYVA App</title>
+
+<!-- โหลดฟอนต์: Noto Sans Thai (ภาษาไทย), DM Sans (อังกฤษทั่วไป), และ Syne (สำหรับออกแบบโลโก้ VYVA) -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
-
-:root{
-  --bg:#f5f7f4;
-  --surface:#ffffff;
-  --ink:#18332d;
-  --muted:#71807a;
-  --green:#146b59;
-  --green-dark:#0d4f43;
-  --mint:#e2f4ec;
-  --mint2:#f0f8f4;
-  --line:#dfe8e3;
-  --gold:#f3c969;
-  --shadow:0 18px 45px rgba(25,60,50,.10);
-  --green2:#1e8a72;
+:root {
+  --bg-color: #f2f2f7; /* สีพื้นหลังเมื่อเปิดในคอม */
+  --app-bg: #ffffff;   /* สีพื้นหลังของแอป (ขาวคลีนตามเรฟ) */
+  --ink: #111111;
+  --muted: #888888;
+  --green: #146b59;
+  --green-light: #e2f4ec;
+  --border: #e5e5ea;
 }
 
-*{box-sizing:border-box}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--ink);
-  font-family:"Noto Sans Thai","DM Sans",sans-serif;
-  overflow-x: hidden;
-}
-
-button,input{ font:inherit; }
-button{ border:0; cursor:pointer; }
-a{ cursor:pointer; }
-
-.app{ min-height:100vh; display: flex; flex-direction: column; }
-
-/* NAV - ซ่อนไว้ก่อน จะแสดงตอน Login เข้ามาแล้ว */
-nav{
-  height:72px;
-  padding:0 7vw;
-  display:none; /* ซ่อนตอนโหลด */
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(15px);
-  border-bottom:1px solid var(--line);
-  position:sticky;
-  top:0;
-  z-index:50;
-}
-.brand{ display:flex; align-items:center; gap:10px; font-family:"DM Sans","Noto Sans Thai"; font-size:19px; font-weight:800; }
-.logo{ width:39px; height:39px; border-radius:13px; display:grid; place-items:center; background:linear-gradient(145deg,#1b806b,#0b443a); color:white; box-shadow:0 8px 20px rgba(20,107,89,.2); }
-.navlinks{ display:flex; align-items:center; gap:22px; font-size:14px; color:var(--muted); }
-.navlinks button{ background:transparent; color:inherit; }
-.navlinks button:hover{ color:var(--green); }
-.navcta{ background:var(--green)!important; color:white!important; padding:10px 18px; border-radius:999px; }
-
-/* GENERAL SECTIONS */
-section{ display:none; flex: 1; }
-section.active{ display:block; }
-
-.primary{ background:var(--green); color:white; padding:14px 22px; border-radius:14px; font-weight:700; transition:.2s; box-shadow:0 10px 20px rgba(20,107,89,.15); }
-.primary:hover{ transform:translateY(-2px); background:var(--green-dark); }
-.secondary{ background:white; color:var(--ink); padding:13px 20px; border-radius:14px; border:1px solid var(--line); font-weight:600; transition:.2s; }
-.secondary:hover{ border-color:var(--green); background:var(--mint2); }
-.small-detail{ display:inline-block; margin-top:15px; color:var(--green); font-size:14px; text-decoration:underline; text-underline-offset:3px; background:none; padding:0; }
-.back-link { background: none; color: var(--green); padding: 0; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block; }
-
-/* =========================================
-   1. SPLASH SCREEN (VYVA ANIMATION)
-========================================= */
-#splash {
-  background-color: var(--surface);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-.vyva-animation-box {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.vyva-oval {
-  width: 50px;
-  height: 120px;
-  background: var(--green);
-  border-radius: 50%;
-  position: absolute;
-  z-index: 1;
-  transform: scale(0);
-  animation: popOval 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-}
-.vyva-character {
-  font-size: 60px;
-  position: absolute;
-  z-index: 2;
-  opacity: 0;
-  /* เริ่มต้นหลบอยู่ในวงรี แล้วค่อยๆ ตีลังกาพุ่งออกมา */
-  transform: translateX(0) rotate(180deg) scale(0.5);
-  animation: flipOut 1.2s 0.7s forwards cubic-bezier(0.25, 1, 0.5, 1);
-}
-.vyva-text-box { text-align: center; margin-top: 20px; }
-.vyva-title {
-  font-family: "DM Sans", sans-serif;
-  font-size: 72px;
-  font-weight: 900;
-  color: var(--green);
+body {
   margin: 0;
-  letter-spacing: -3px;
-  line-height: 1;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s 1.5s forwards;
-}
-.vyva-slogan {
-  font-size: 18px;
-  color: var(--muted);
-  margin: 10px 0 0 0;
-  letter-spacing: 1.5px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.8s 1.8s forwards;
-}
-
-@keyframes popOval {
-  to { transform: scale(1); }
-}
-@keyframes flipOut {
-  0% { transform: translateX(0) rotate(180deg) scale(0.5); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateX(-60px) rotate(0deg) scale(1); opacity: 1; }
-}
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* =========================================
-   2. LOGIN / SIGNUP SCREEN
-========================================= */
-#login {
-  background-color: var(--surface);
+  background-color: var(--bg-color);
+  color: var(--ink);
+  font-family: 'DM Sans', 'Noto Sans Thai', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   min-height: 100vh;
 }
-.login-box {
-  width: 100%;
-  max-width: 400px;
-}
-.auth-header { margin-bottom: 30px; }
-.auth-title {
-  font-size: 42px;
-  font-weight: 700;
-  margin: 0 0 8px 0;
-  color: #111;
-  letter-spacing: -1px;
-}
-.auth-brand { font-size: 20px; vertical-align: super; color: var(--green); font-weight: 800; }
-.auth-sub { font-size: 14px; color: var(--muted); line-height: 1.6; margin: 0; }
-.auth-sub-link { color: #111; text-decoration: none; font-weight: 600; }
 
-.auth-form { display: flex; flex-direction: column; gap: 15px; }
-.auth-input {
+/* =========================================
+   APP CONTAINER (จำลองจอมือถือ)
+========================================= */
+.app-container {
   width: 100%;
-  padding: 16px 20px;
-  border: 1px solid #ccc;
-  border-radius: 999px;
-  font-size: 15px;
-  outline: none;
-  transition: 0.2s;
+  max-width: 430px; /* ขนาดจำลอง iPhone Pro Max */
+  height: 100vh;
+  max-height: 932px;
+  background-color: var(--app-bg);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 40px rgba(0,0,0,0.08);
 }
-.auth-input:focus { border-color: var(--green); }
-.auth-btn-main {
-  background: #1c1c1e;
-  color: white;
+
+@media (max-width: 480px) {
+  .app-container { max-height: none; box-shadow: none; }
+}
+
+section { display: none; flex: 1; flex-direction: column; padding: 24px; animation: fadeIn 0.3s ease; }
+section.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+button, input { font: inherit; outline: none; }
+button { cursor: pointer; border: none; }
+
+/* =========================================
+   UI COMPONENTS (ตามภาพเรฟเฟอเรนซ์)
+========================================= */
+.btn-black {
+  background-color: #111;
+  color: #fff;
+  width: 100%;
+  padding: 16px;
+  border-radius: 999px;
   font-weight: 600;
   font-size: 16px;
-  padding: 18px;
+  text-align: center;
+  margin-bottom: 12px;
+  transition: transform 0.1s;
+}
+.btn-black:active { transform: scale(0.98); }
+
+.btn-white {
+  background-color: #fff;
+  color: #111;
+  width: 100%;
+  padding: 16px;
   border-radius: 999px;
-  margin-top: 5px;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  border: 1.5px solid #111;
+  margin-bottom: 12px;
+  transition: transform 0.1s;
+}
+.btn-white:active { transform: scale(0.98); }
+
+.btn-social {
+  background-color: #fff;
+  color: #111;
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: center;
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
-.auth-divider {
+.input-field {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.input-field:focus { border-color: #111; }
+
+.divider {
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 25px 0;
-  color: #a0a0a0;
-  font-size: 13px;
+  margin: 16px 0 24px;
+  color: var(--muted);
+  font-size: 12px;
 }
-.auth-divider::before, .auth-divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid #eaeaea;
-}
-.auth-divider:not(:empty)::before { margin-right: .5em; }
-.auth-divider:not(:empty)::after { margin-left: .5em; }
+.divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border); }
+.divider:not(:empty)::before { margin-right: 15px; }
+.divider:not(:empty)::after { margin-left: 15px; }
 
-.auth-btn-social {
-  background: white;
-  border: 1px solid #ccc;
+.auth-header { margin-bottom: 32px; margin-top: 20px; }
+.auth-title { font-size: 38px; font-weight: 700; margin: 0 0 8px; letter-spacing: -1px; }
+.auth-brand { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; vertical-align: super; color: var(--green); }
+.auth-desc { font-size: 14px; color: var(--muted); line-height: 1.5; margin: 0; }
+.auth-link { color: #007aff; text-decoration: none; font-weight: 500; }
+
+.bottom-text { text-align: center; font-size: 14px; color: var(--muted); margin-top: auto; padding-top: 20px; }
+
+/* =========================================
+   LOGO ANIMATION & TYPOGRAPHY
+========================================= */
+.landing-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 60px; }
+.logo-container { position: relative; width: 160px; height: 160px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; }
+
+/* วงรีสีเขียว */
+.logo-oval {
+  position: absolute;
+  width: 55px;
+  height: 110px;
+  background-color: var(--green);
+  border-radius: 50%;
+  z-index: 1;
+  animation: pulseOval 2s infinite ease-in-out;
+}
+/* คาแรคเตอร์ให้ใหญ่กว่าวงรีชัดเจน */
+.logo-character {
+  position: absolute;
+  font-size: 95px; /* ปรับขนาดให้ใหญ่กว่าวงรี */
+  z-index: 2;
+  transform: translateX(-15px) rotate(0deg); 
+  animation: flipIn 1.5s ease-out forwards;
+}
+
+/* ออกแบบฟอนต์ VYVA ให้มีเอกลักษณ์ */
+.vyva-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 56px;
+  font-weight: 800;
   color: #111;
-  font-weight: 600;
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -3px;
+  transform: skewX(-5deg); /* เอียงนิดๆ ให้ดูสปอร์ตและล้ำสมัย */
+}
+.vyva-slogan {
   font-size: 15px;
-  padding: 16px;
-  border-radius: 999px;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
+  color: var(--muted);
+  margin-top: 4px;
+  letter-spacing: 0.5px;
 }
-.auth-footer { text-align: center; margin-top: 35px; font-size: 14px; color: var(--muted); }
-.auth-footer a { color: #2374e1; text-decoration: none; font-weight: 500; }
 
-/* (ส่วนโค้ด CSS ของหน้า Home, Quiz, Result ดึงมาจาก final_jra.html) */
-.hero{ max-width:1180px; margin:auto; padding:65px 7vw 35px; display:grid; grid-template-columns:1.05fr .95fr; gap:50px; align-items:center; }
-.badge{ display:inline-flex; padding:7px 13px; border-radius:999px; background:var(--mint); color:var(--green); font-size:13px; font-weight:700; }
-h1{ font-family:"DM Sans","Noto Sans Thai"; font-size:clamp(44px,6vw,74px); line-height:1.08; letter-spacing:-2px; margin:17px 0; }
-.accent{ color:var(--green); }
-.lead{ max-width:590px; font-size:17px; line-height:1.8; color:var(--muted); }
-.actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:24px; }
-.stats{ display:flex; gap:30px; margin-top:32px; }
-.stats b{ display:block; font-size:20px; }
-.stats span{ color:var(--muted); font-size:12px; }
-.visual{ min-height:470px; position:relative; overflow:hidden; border-radius:34px; background: radial-gradient(circle at 25% 20%,#d8f2e7,transparent 32%), linear-gradient(135deg,#eff7f3,#d9eee5); }
-.orb{ position:absolute; border-radius:50%; }
-.o1{ width:220px; height:220px; background:#abdcc7; right:-45px; top:-50px; }
-.o2{ width:150px; height:150px; background:#f5dba1; left:-40px; bottom:-30px; }
-.phone{ position:absolute; width:280px; height:500px; right:15%; top:25px; padding:9px; border-radius:36px; background:#18332d; transform:rotate(4deg); box-shadow:0 25px 45px rgba(20,50,42,.28); }
-.screen{ height:100%; padding:22px 17px; border-radius:28px; background:white; }
-.notch{ width:84px; height:19px; border-radius:20px; background:#18332d; margin:-14px auto 17px; }
-.welcome-card{ padding:17px; border-radius:20px; background:linear-gradient(145deg,#1c7562,#0c4b40); color:white; }
-.welcome-card h3{ margin:8px 0; }
-.service-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-top:14px; }
-.service{ padding:11px; border-radius:14px; background:#f4f7f5; text-align:center; font-size:12px; }
-.section-title{ text-align:center; padding:35px 20px 5px; }
-.section-title h2{ font-size:34px; margin:0; }
-.section-title p{ color:var(--muted); }
-.features{ max-width:1100px; margin:20px auto 60px; padding:0 7vw; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.feature{ background:white; border:1px solid var(--line); border-radius:22px; padding:23px; }
-.feature .icon{ width:50px; height:50px; border-radius:15px; display:grid; place-items:center; background:var(--mint); font-size:24px; }
-.feature h3{ margin:14px 0 5px; }
-.feature p{ margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
-
-/* QUIZ */
-.quiz-wrap{ max-width:830px; margin:35px auto; padding:0 20px; }
-.progress-head{ display:flex; justify-content:space-between; color:var(--muted); font-size:13px; margin-bottom:8px; }
-.step{ height:7px; border-radius:10px; background:#e3ebe7; margin-bottom:20px; }
-.bar{ height:100%; width:20%; border-radius:10px; background:var(--green); transition:.3s; }
-.quiz-card{ padding:34px; border-radius:28px; background:white; border:1px solid var(--line); box-shadow:var(--shadow); }
-.eyebrow{ color:var(--green); font-size:13px; font-weight:800; letter-spacing:.8px; }
-.question{ margin:8px 0 20px; font-size:28px; }
-.question-help{ margin:-10px 0 20px; font-size:14px; color:var(--muted); }
-.options{ display:grid; gap:10px; }
-.option{ position:relative; width:100%; padding:15px 17px; text-align:left; background:white; color:var(--ink); border:1.5px solid var(--line); border-radius:15px; transition:.2s; }
-.option:hover{ border-color:#9acabb; }
-.option.selected{ border-color:var(--green); background:#f0faf6; }
-.option.selected::after{ content:"✓"; float:right; color:var(--green); font-weight:800; }
-.budget-input{ width:100%; padding:18px; border-radius:16px; border:1.5px solid var(--line); outline:none; font-size:20px; color:var(--ink); }
-.budget-input:focus{ border-color:var(--green); }
-.input-note{ font-size:13px; color:var(--muted); margin-top:8px; }
-.quiz-footer{ display:flex; justify-content:space-between; gap:10px; margin-top:24px; }
-
-/* RESULT */
-.result-wrap{ max-width:1050px; margin:35px auto 60px; padding:0 20px; }
-.result-hero{ position:relative; overflow:hidden; padding:40px; border-radius:32px; background:linear-gradient(135deg,#0f5f50,#173d35); color:white; box-shadow:0 25px 60px rgba(16,78,66,.22); }
-.result-hero::before{ content:""; position:absolute; width:330px; height:330px; border-radius:50%; background:rgba(255,255,255,.06); right:-80px; top:-120px; }
-.result-top{ position:relative; z-index:1; display:grid; grid-template-columns:1.1fr .9fr; gap:35px; align-items:center; }
-.result-badge{ display:inline-flex; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.13); font-size:12px; font-weight:700; }
-.package-result-name{ margin:22px 0 10px; font-size:46px; line-height:1.1; }
-.result-desc{ color:#c7ddd5; line-height:1.7; max-width:550px; }
-.match-score-card{ padding:28px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.13); }
-.score-circle{ width:155px; height:155px; margin:auto; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#a7e0c7 0deg,#a7e0c7 330deg,rgba(255,255,255,.13) 330deg); position:relative; }
-.score-circle::before{ content:""; position:absolute; width:125px; height:125px; border-radius:50%; background:#17463c; }
-.score-inner{ position:relative; z-index:1; }
-.score-num{ font-family:"DM Sans"; font-size:42px; font-weight:800; }
-.score-label{ font-size:11px; color:#c8ddd6; }
-.result-info{ margin-top:20px; display:grid; grid-template-columns:1.1fr .9fr; gap:18px; }
-.reason-card, .summary-card{ padding:27px; border-radius:25px; background:white; border:1px solid var(--line); }
-.reason-card h3, .summary-card h3{ margin-top:0; }
-.reason{ padding:12px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; }
-.result-price{ font-family:"DM Sans"; font-size:38px; font-weight:800; margin:7px 0; }
-.result-summary{ color:var(--muted); font-size:14px; line-height:1.7; }
-
-/* Compare & Utility classes (ย่อลงเพื่อประหยัดพื้นที่โค้ด แต่ทำงานครบถ้วน) */
-.compare-wrap{ max-width:1180px; margin:25px auto 60px; padding:0 20px; }
-.compare-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-.plan{ position:relative; display:flex; flex-direction:column; min-height:520px; padding:28px; background:white; border:1px solid var(--line); border-radius:28px; transition:.25s; }
-.plan.selected{ border:2px solid var(--green); box-shadow:0 15px 40px rgba(20,107,89,.13); }
-.ribbon{ position:absolute; top:18px; right:18px; padding:6px 11px; border-radius:999px; background:var(--green); color:white; font-size:11px; font-weight:700; }
-.plan h2{ margin:27px 0 14px; font-size:29px; }
-.plan-price{ font-family:"DM Sans"; font-size:38px; font-weight:800; }
-.plan ul{ padding:0; list-style:none; color:#64736d; font-size:15px; line-height:2.6; flex:1; }
-.plan li::before{ content:"✓ "; color:var(--green); font-weight:bold; }
-.plan-actions{ margin-top:auto; }
-.plan .choose-btn{ width:100%; }
-
-.selected-package-banner{ margin-top:22px; padding:22px 24px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; display:flex; align-items:center; justify-content:space-between; gap:22px; }
-.selected-package-kicker{ color:var(--green); font-size:12px; font-weight:800; }
-.selected-package-main h3{ margin:0; font-size:24px; }
-.selected-package-price{ font-family:"DM Sans"; font-size:25px; font-weight:800; color:var(--green); }
-
-.checkout-wrap{max-width:1120px;margin:42px auto 80px;padding:0 20px}
-.checkout-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
-.checkout-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:20px}
-.order-card,.method-card,.process-card,.success-card{background:#fff;border:1px solid var(--line);border-radius:30px;padding:28px;box-shadow:var(--shadow)}
-.order-plan{background:linear-gradient(145deg,#edf9f4,#d9eee4);border-radius:22px;padding:24px}
-.summary-row{display:flex;justify-content:space-between;padding:17px 4px;border-bottom:1px solid var(--line);font-size:14px}
-.method-card label{display:block;font-size:12px;font-weight:700;margin:13px 0 7px;color:#52615c}
-.method-card input{width:100%;border:1px solid var(--line);border-radius:11px;padding:13px 14px;outline:none}
-.pay-btn{width:100%;margin-top:22px;display:flex;justify-content:space-between;align-items:center}
-.process-wrap,.success-wrap{max-width:760px}
-.process-card,.success-card{text-align:center;padding:52px 42px}
-.hourglass{font-size:62px;animation:pulse 1.1s infinite}
-@keyframes pulse{50%{transform:scale(1.08);opacity:.8}}
-
-@media(max-width:800px){
-  .hero{ grid-template-columns:1fr; }
-  .features, .compare-grid, .checkout-grid { grid-template-columns:1fr; }
-  .result-top, .result-info { grid-template-columns:1fr; }
+@keyframes pulseOval { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes flipIn {
+  0% { transform: translateX(30px) rotate(180deg) scale(0.5); opacity: 0; }
+  100% { transform: translateX(-15px) rotate(0deg) scale(1); opacity: 1; }
 }
+
+/* =========================================
+   MAIN APP (QUIZ & HOME)
+========================================= */
+.top-nav { display: flex; justify-content: space-between; align-items: center; padding-bottom: 20px; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.nav-logo { font-family: 'Syne', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); }
+.profile-pic { width: 36px; height: 36px; background: var(--green-light); border-radius: 50%; display: grid; place-items: center; font-size: 16px; }
+
+.quiz-card { background: #fff; border: 1px solid var(--border); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); }
+.quiz-eyebrow { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 12px; }
+.quiz-question { font-size: 24px; font-weight: 700; margin: 0 0 8px; line-height: 1.3; }
+.quiz-help { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
+.quiz-progress { height: 6px; background: var(--border); border-radius: 10px; margin-bottom: 24px; overflow: hidden; }
+.quiz-bar { height: 100%; background: var(--green); width: 0%; transition: 0.3s; }
+
+.option-btn { width: 100%; padding: 18px 20px; text-align: left; background: #fff; border: 1.5px solid var(--border); border-radius: 16px; font-size: 15px; margin-bottom: 12px; transition: 0.2s; color: var(--ink); }
+.option-btn.selected { border-color: var(--green); background: var(--green-light); font-weight: 600; }
+.option-btn.selected::after { content: '✓'; float: right; color: var(--green); }
+
+.nav-buttons { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.btn-outline { flex: 1; padding: 16px; border-radius: 999px; border: 1px solid var(--border); background: #fff; font-weight: 600; text-align: center; }
+.btn-primary { flex: 1; padding: 16px; border-radius: 999px; background: var(--green); color: #fff; font-weight: 600; text-align: center; }
+
 </style>
 </head>
-
 <body>
-<div class="app">
 
-<!-- NAV : ซ่อนในหน้า Splash & Login -->
-<nav id="mainNav">
-  <div class="brand">
-    <div class="logo">♥</div>
-    VYVA
-  </div>
-  <div class="navlinks">
-    <button onclick="show('home')">หน้าหลัก</button>
-    <button onclick="show('compare')">เปรียบเทียบแพ็กเกจ</button>
-    <button class="navcta" onclick="startQuiz()">ค้นหาแพ็กเกจที่ใช่ ✦</button>
-  </div>
-</nav>
+<div class="app-container">
 
-<!-- 1. SPLASH SCREEN -->
-<section id="splash" class="active">
-  <div class="vyva-animation-box">
-    <div class="vyva-oval"></div>
-    <div class="vyva-character">🤸‍♀️</div>
-  </div>
-  <div class="vyva-text-box">
-    <h1 class="vyva-title">VYVA</h1>
-    <p class="vyva-slogan">Your life. Your VYVA.</p>
-  </div>
-</section>
+  <!-- =========================================
+       1. LANDING SCREEN
+  ========================================= -->
+  <section id="landing" class="active">
+    <div class="landing-content">
+      <div class="logo-container">
+        <div class="logo-oval"></div>
+        <div class="logo-character">🤸‍♀️</div>
+      </div>
+      <h1 class="vyva-text">VYVA</h1>
+      <p class="vyva-slogan">Your life. Your VYVA.</p>
+    </div>
+    <div style="margin-top: auto;">
+      <button class="btn-black" onclick="show('signup')">Sign up</button>
+      <button class="btn-white" onclick="show('signin')">Sign in</button>
+    </div>
+  </section>
 
-<!-- 2. LOGIN / SIGNUP SCREEN -->
-<section id="login">
-  <div class="login-box">
+  <!-- =========================================
+       2. SIGN UP SCREEN
+  ========================================= -->
+  <section id="signup">
     <div class="auth-header">
-      <h1 class="auth-title" id="authTitle">Sign up <span class="auth-brand">VYVA</span></h1>
-      <p class="auth-sub" id="authSub">To start your wellness journey and keep track of your progress you need to create an account.</p>
+      <h1 class="auth-title">Sign up <span class="auth-brand">vyva</span></h1>
+      <p class="auth-desc">To start your wellness journey and keep track of your progress you need to create an account.</p>
     </div>
 
-    <div class="auth-form">
-      <input type="text" id="authName" class="auth-input" placeholder="Full name">
-      <input type="email" class="auth-input" placeholder="Email">
-      <input type="password" class="auth-input" placeholder="Password">
-      <button class="auth-btn-main" onclick="doLogin()">Continue</button>
-    </div>
-
-    <div class="auth-divider">or</div>
-
-    <button class="auth-btn-social" onclick="doLogin()"> Continue with Apple</button>
-    <button class="auth-btn-social" onclick="doLogin()">
+    <input type="text" class="input-field" placeholder="Full name">
+    <input type="email" class="input-field" placeholder="Email">
+    <input type="password" class="input-field" placeholder="Password">
+    
+    <button class="btn-black" onclick="doAuth()">Continue</button>
+    
+    <div class="divider">or</div>
+    
+    <button class="btn-social" onclick="doAuth()"> Continue with Apple</button>
+    <button class="btn-social" onclick="doAuth()">
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> 
       Continue with Google
     </button>
 
-    <div class="auth-footer">
-      <span id="authToggleText">Already have an account?</span> 
-      <a href="#" onclick="toggleAuthMode()" id="authToggleLink">Sign in</a>
+    <div class="bottom-text">
+      Already have an account? <a href="#" class="auth-link" onclick="show('signin')">Sign in</a>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 3. HOME SCREEN -->
-<section id="home">
-  <div class="hero">
-    <div>
-      <div class="badge">✦ Personalized Wellness Recommendation</div>
-      <h1>
-        <span style="white-space: nowrap;">เลือกแพ็กเกจที่ใช่</span><br>
-        <span class="accent" style="white-space: nowrap;">ในแบบที่เป็นคุณ</span>
-      </h1>
-      <p class="lead">ตอบคำถามเกี่ยวกับเป้าหมาย ไลฟ์สไตล์ และงบประมาณ แล้วให้เราช่วยค้นหาแพ็กเกจที่เหมาะกับคุณที่สุด</p>
-      <div class="actions">
-        <button class="primary" onclick="startQuiz()">เริ่มค้นหาแพ็กเกจที่ใช่ →</button>
-        <button class="secondary" onclick="show('compare')">เปรียบเทียบแพ็กเกจ</button>
-      </div>
+  <!-- =========================================
+       3. SIGN IN SCREEN
+  ========================================= -->
+  <section id="signin">
+    <div class="auth-header">
+      <h1 class="auth-title">Sign in <span class="auth-brand">vyva</span></h1>
+      <p class="auth-desc">Glad to see you again!<br>Are you a new user? <a href="#" class="auth-link" onclick="show('signup')">Sign up</a></p>
     </div>
-    <div class="visual">
-      <div class="orb o1"></div><div class="orb o2"></div>
-      <div class="phone">
-        <div class="screen">
-          <div class="notch"></div>
-          <div style="font-size:11px;color:#6f7e78">สวัสดี 👋</div>
-          <h3 style="margin:7px 0 16px">วันนี้อยากดูแล<br>ตัวเองแบบไหน?</h3>
-          <div class="welcome-card">
-            <div style="font-size:11px;opacity:.8">PERSONALIZED FOR YOU</div>
-            <h3>ค้นหาแพ็กเกจที่ใช่</h3>
-            <button style="margin-top:14px;background:white;color:#146b59;padding:9px 14px;border-radius:10px;font-size:12px;font-weight:700" onclick="startQuiz()">เริ่มเลย</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- QUIZ, RESULT, COMPARE, PAYMENT (โครงสร้างเดิมที่ทำงานได้ 100%) -->
-<section id="quiz">
-  <div class="quiz-wrap">
-    <button class="back-link" onclick="show('home')">← ยกเลิกการประเมิน</button>
-    <div class="progress-head"><span id="qnum"></span><span id="percent"></span></div>
-    <div class="step"><div class="bar" id="bar"></div></div>
+    <input type="email" class="input-field" placeholder="Email">
+    <input type="password" class="input-field" placeholder="Password">
+    
+    <button class="btn-black" onclick="doAuth()">Continue</button>
+    
+    <div class="divider">or</div>
+    
+    <button class="btn-social" onclick="doAuth()"> Continue with Apple</button>
+    <button class="btn-social" onclick="doAuth()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> 
+      Continue with Google
+    </button>
+
+    <div class="bottom-text">
+      <a href="#" class="auth-link" style="color: var(--muted); font-weight: 400;">Forgot password?</a>
+    </div>
+  </section>
+
+  <!-- =========================================
+       4. MAIN APP (QUIZ)
+  ========================================= -->
+  <section id="mainApp" style="background-color: #fcfcfc;">
+    <div class="top-nav">
+      <div class="nav-logo">VYVA</div>
+      <div class="profile-pic">🤸‍♀️</div>
+    </div>
+
     <div class="quiz-card">
-      <div class="eyebrow" id="qeyebrow"></div>
-      <h2 class="question" id="question"></h2>
-      <div class="question-help" id="questionHelp"></div>
-      <div class="options" id="options"></div>
-      <div id="budgetArea"></div>
-      <div class="quiz-footer">
-        <button class="secondary" onclick="prevQ()" id="backBtn">← ย้อนกลับ</button>
-        <button class="primary" onclick="nextQ()" id="nextBtn">ถัดไป →</button>
+      <div class="quiz-progress"><div class="quiz-bar" id="progressBar"></div></div>
+      <div class="quiz-eyebrow" id="qeyebrow">GOAL</div>
+      <h2 class="quiz-question" id="questionText">เป้าหมายของคุณ?</h2>
+      <div class="quiz-help" id="questionHelp">เลือกให้ตรงใจที่สุด</div>
+      
+      <div id="optionsArea"></div>
+      
+      <div class="nav-buttons">
+        <button class="btn-outline" id="backBtn" onclick="prevQ()">ย้อนกลับ</button>
+        <button class="btn-primary" id="nextBtn" onclick="nextQ()">ถัดไป</button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="result">
-  <div class="result-wrap">
-    <button class="back-link" onclick="show('home')">← กลับหน้าหลัก</button>
-    <div class="result-hero">
-      <div class="result-top">
-        <div>
-          <div class="result-badge">✦ YOUR WELLNESS MATCH</div>
-          <h1 class="package-result-name" id="packageName"></h1>
-          <p class="result-desc" id="resultDescription"></p>
-          <button class="primary" style="background:white;color:#146b59" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
-        </div>
-        <div class="match-score-card">
-          <div class="score-circle"><div class="score-inner"><div class="score-num" id="score"></div></div></div>
-        </div>
-      </div>
+  <!-- =========================================
+       5. RESULT SCREEN
+  ========================================= -->
+  <section id="result" style="background-color: #fcfcfc;">
+    <div class="top-nav">
+      <div class="nav-logo">VYVA</div>
+      <div class="profile-pic">✨</div>
     </div>
-    <div class="result-info">
-      <div class="reason-card">
-        <h3>ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
-        <div id="reasons"></div>
+    
+    <div class="quiz-card" style="text-align: center; padding-top: 40px; padding-bottom: 40px;">
+      <div class="quiz-eyebrow">YOUR MATCH</div>
+      <h2 class="quiz-question" id="packageName" style="font-size: 32px; color: var(--green);">Signature Package</h2>
+      <p class="quiz-help" style="margin-bottom: 20px;">แพ็กเกจที่เหมาะกับไลฟ์สไตล์ของคุณที่สุด</p>
+      
+      <div style="background: var(--green-light); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+        <h3 style="margin:0; font-size: 28px; color: var(--green);" id="packagePrice">฿3,000</h3>
+        <span style="font-size: 13px; color: var(--green);">/ เดือน</span>
       </div>
-      <div class="summary-card">
-        <div class="eyebrow">YOUR PACKAGE</div>
-        <h3 id="summaryPackage"></h3>
-        <div class="result-price" id="packagePrice"></div>
-        <button class="secondary" style="width:100%" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
-      </div>
+
+      <button class="btn-black" onclick="alert('ไปสู่หน้าชำระเงินจำลองต่อไป ✓')">เลือกแพ็กเกจนี้</button>
+      <button class="btn-white" onclick="alert('ฟีเจอร์เปรียบเทียบ')">เปรียบเทียบกับแพ็กเกจอื่น</button>
     </div>
-  </div>
-</section>
-
-<section id="compare">
-  <div class="compare-wrap">
-    <button class="back-link" onclick="show('home')">← ย้อนกลับ</button>
-    <div class="section-title" style="padding-top:0"><h2>เปรียบเทียบแพ็กเกจ</h2></div>
-    <div class="compare-grid" id="compareGrid"></div>
-    <div class="selected-package-banner" id="selectedPackageBanner">
-      <div>
-        <div class="selected-package-kicker">แพ็กเกจที่คุณเลือก</div>
-        <div class="selected-package-main">
-          <h3 id="compareSelectedName"></h3>
-          <div class="selected-package-price" id="compareSelectedPrice"></div>
-        </div>
-      </div>
-      <button class="primary" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
-    </div>
-  </div>
-</section>
-
-<section id="payment">
-  <div class="checkout-wrap">
-    <button class="back-link" onclick="show('compare')">← ย้อนกลับ</button>
-    <div class="checkout-head"><div><h2>ยืนยันแพ็กเกจของคุณ</h2></div></div>
-    <div class="checkout-grid">
-      <div class="order-card">
-        <div class="order-plan">
-          <h3 id="checkoutPackage"></h3>
-          <div class="order-price" id="checkoutPrice"></div>
-        </div>
-        <div class="summary-row"><span>ค่าบริการ</span><b id="subTotal"></b></div>
-        <div class="summary-row total"><span>ยอดชำระวันนี้</span><b id="grandTotal" style="color:var(--green)"></b></div>
-      </div>
-      <div class="method-card">
-        <h3>💳 บัตรเครดิต / เดบิต</h3>
-        <input class="auth-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" style="margin-bottom:10px">
-        <input class="auth-input" id="cardName" placeholder="ชื่อ - นามสกุล" style="margin-bottom:10px">
-        <button class="primary pay-btn" onclick="processPayment()">ชำระเงิน <span id="payButtonAmount"></span> →</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="processing">
-  <div class="process-wrap"><div class="process-card"><div class="hourglass">⌛</div><h2>กำลังดำเนินการชำระเงิน</h2></div></div>
-</section>
-
-<section id="success">
-  <div class="process-wrap"><div class="process-card"><div class="hourglass" style="animation:none">🎉</div><h2>ชำระเงินสำเร็จ!</h2><button class="primary" style="margin-top:20px" onclick="show('home')">กลับสู่หน้าหลัก</button></div></div>
-</section>
+  </section>
 
 </div>
 
 <script>
 /* =========================
-   ROUTING & INIT
+   ROUTING
 ========================= */
 function show(id) {
   document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  if(id === "compare") renderCompare();
+  // สั่งให้หน้าจอเด้งกลับไปบนสุดเสมอเมื่อเปลี่ยนหน้า
+  document.querySelector('.app-container').scrollTop = 0; 
 }
 
-window.onload = () => {
-  // เริ่มมาอยู่หน้า Splash -> รอ 3.5 วิ แล้วเด้งไปหน้า Login อัตโนมัติ
-  setTimeout(() => {
-    show('login');
-  }, 3500);
-};
-
-/* =========================
-   LOGIN SYSTEM
-========================= */
-let isSignUpMode = true;
-
-function toggleAuthMode() {
-  isSignUpMode = !isSignUpMode;
-  document.getElementById("authTitle").innerHTML = (isSignUpMode ? "Sign up" : "Sign in") + ' <span class="auth-brand">VYVA</span>';
-  document.getElementById("authSub").textContent = isSignUpMode 
-    ? "To start your wellness journey and keep track of your progress you need to create an account."
-    : "Glad to see you again! Are you a new user?";
-  document.getElementById("authName").style.display = isSignUpMode ? "block" : "none";
-  document.getElementById("authToggleText").textContent = isSignUpMode ? "Already have an account? " : "New to VYVA? ";
-  document.getElementById("authToggleLink").textContent = isSignUpMode ? "Sign in" : "Sign up";
-}
-
-function doLogin() {
-  // เมื่อกด Login ผ่าน ให้แสดงแถบเมนูด้านบน แล้วพาไปหน้า Home
-  document.getElementById('mainNav').style.display = 'flex';
-  show('home');
+function doAuth() {
+  // พอกด Continue หรือ Login เสร็จ ให้เด้งเข้าหน้าทำแบบสอบถามเลย
+  startQuiz();
 }
 
 /* =========================
-   APP DATA & LOGIC (จากของเดิม)
+   QUIZ LOGIC
 ========================= */
-const packages = {
-  signature: { name: "Signature Package", price: 3000, type: "SIGNATURE", description: "ครบครันทุกบริการ", services: ["Fitness", "Yoga", "Onsen"] },
-  core: { name: "Core Package", price: 1800, type: "CORE", description: "เน้นการออกกำลังกาย", services: ["Fitness", "Yoga"] },
-  urate: { name: "U-Rate Package", price: 1200, type: "U-RATE", description: "แพ็กเกจสุดคุ้ม", services: ["Fitness"] }
-};
-
 const questions = [
-  { q: "เพศของคุณ?", e: "GENDER", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
-  { q: "เป้าหมายหลัก?", e: "GOAL", type: "multi", o: ["ลดน้ำหนัก", "เพิ่มกล้ามเนื้อ", "สุขภาพ"] },
-  { q: "งบประมาณต่อเดือน?", e: "BUDGET", type: "budget" }
+  { q: "เพศของคุณคืออะไร?", e: "GENDER", help: "ช่วยให้เราปรับแต่งคำแนะนำ", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
+  { q: "ปัจจุบันประกอบอาชีพอะไร?", e: "LIFESTYLE", help: "เพื่อประเมินเวลาว่างของคุณ", type: "single", o: ["นักศึกษา", "พนักงานออฟฟิศ", "ธุรกิจส่วนตัว", "อื่นๆ"] },
+  { q: "เป้าหมายหลักของคุณ?", e: "GOAL", help: "เลือกได้มากกว่า 1 ข้อ", type: "multi", o: ["ลดน้ำหนัก", "เพิ่มกล้ามเนื้อ", "สุขภาพดีขึ้น", "ลดความเครียด"] },
+  { q: "ออกกำลังกายบ่อยแค่ไหน?", e: "ACTIVITY", help: "ต่อสัปดาห์", type: "single", o: ["ไม่ออกเลย", "1-2 วัน", "3-4 วัน", "5 วันขึ้นไป"] },
+  { q: "งบประมาณต่อเดือน?", e: "BUDGET", help: "เลือกช่วงที่สะดวก", type: "single", o: ["ไม่เกิน 1,500 บาท", "1,500 - 3,000 บาท", "3,000 บาทขึ้นไป"] }
 ];
 
-let current = 0; let answers = [null, [], null]; let selectedPackage = "signature";
+let currentQ = 0;
+let answers = [[], [], [], [], []];
 
-function startQuiz() { current = 0; answers = [null, [], null]; show("quiz"); renderQ(); }
+function startQuiz() {
+  currentQ = 0;
+  answers = [[], [], [], [], []];
+  show('mainApp');
+  renderQ();
+}
 
 function renderQ() {
-  const x = questions[current];
-  document.getElementById("qnum").textContent = `คำถาม ${current + 1} / ${questions.length}`;
-  document.getElementById("percent").textContent = Math.round(((current + 1) / questions.length) * 100) + "%";
-  document.getElementById("bar").style.width = ((current + 1) / questions.length) * 100 + "%";
-  document.getElementById("qeyebrow").textContent = x.e;
-  document.getElementById("question").textContent = x.q;
-  
-  const box = document.getElementById("options");
-  const budgetArea = document.getElementById("budgetArea");
-  box.innerHTML = ""; budgetArea.innerHTML = "";
+  const q = questions[currentQ];
+  document.getElementById("progressBar").style.width = ((currentQ + 1) / questions.length) * 100 + "%";
+  document.getElementById("qeyebrow").textContent = q.e;
+  document.getElementById("questionText").textContent = q.q;
+  document.getElementById("questionHelp").textContent = q.help;
 
-  if(x.type === "budget"){
-    budgetArea.innerHTML = `<input type="number" class="budget-input" oninput="answers[${current}]=Number(this.value)">`;
-  } else {
-    x.o.forEach((op, i) => {
-      const b = document.createElement("button");
-      b.className = "option" + (x.type === "single" ? (answers[current] === i ? " selected" : "") : (answers[current].includes(i) ? " selected" : ""));
-      b.textContent = op;
-      b.onclick = () => {
-        if(x.type === "single") answers[current] = i;
-        else {
-          if(answers[current].includes(i)) answers[current] = answers[current].filter(item => item !== i);
-          else answers[current].push(i);
+  const optionsArea = document.getElementById("optionsArea");
+  optionsArea.innerHTML = "";
+
+  q.o.forEach((opt, idx) => {
+    const btn = document.createElement("button");
+    const isSelected = answers[currentQ].includes(idx);
+    btn.className = "option-btn" + (isSelected ? " selected" : "");
+    btn.textContent = opt;
+    btn.onclick = () => {
+      if (q.type === "single") {
+        answers[currentQ] = [idx];
+      } else {
+        if (answers[currentQ].includes(idx)) {
+          answers[currentQ] = answers[currentQ].filter(i => i !== idx);
+        } else {
+          answers[currentQ].push(idx);
         }
-        renderQ();
-      };
-      box.appendChild(b);
-    });
-  }
+      }
+      renderQ();
+    };
+    optionsArea.appendChild(btn);
+  });
+
+  document.getElementById("backBtn").style.display = currentQ === 0 ? "none" : "block";
+  document.getElementById("nextBtn").textContent = currentQ === questions.length - 1 ? "ดูผลลัพธ์" : "ถัดไป";
 }
 
 function nextQ() {
-  if (current < questions.length - 1) { current++; renderQ(); }
-  else {
-    selectedPackage = answers[2] >= 3000 ? "signature" : (answers[2] >= 1800 ? "core" : "urate");
-    const p = packages[selectedPackage];
-    document.getElementById("packageName").textContent = p.name;
-    document.getElementById("resultDescription").textContent = p.description;
-    document.getElementById("summaryPackage").textContent = p.name;
-    document.getElementById("packagePrice").textContent = "฿" + p.price.toLocaleString();
-    document.getElementById("score").textContent = "94%";
-    show("result");
+  if (answers[currentQ].length === 0) {
+    alert("กรุณาเลือกคำตอบก่อนน้า 😊");
+    return;
+  }
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    renderQ();
+  } else {
+    // สมมติการคำนวณผลลัพธ์
+    const budget = answers[4][0];
+    if (budget === 2) {
+      document.getElementById("packageName").textContent = "Signature Package";
+      document.getElementById("packagePrice").textContent = "฿3,000";
+    } else if (budget === 1) {
+      document.getElementById("packageName").textContent = "Core Package";
+      document.getElementById("packagePrice").textContent = "฿1,800";
+    } else {
+      document.getElementById("packageName").textContent = "U-Rate Package";
+      document.getElementById("packagePrice").textContent = "฿990";
+    }
+    show('result');
   }
 }
-function prevQ() { if (current > 0) { current--; renderQ(); } }
 
-function renderCompare() {
-  const container = document.getElementById("compareGrid");
-  container.innerHTML = "";
-  Object.entries(packages).forEach(([key, pkg]) => {
-    container.innerHTML += `
-      <div class="plan ${selectedPackage === key ? "selected" : ""}">
-        <div class="eyebrow">${pkg.type}</div><h2>${pkg.name}</h2>
-        <div class="plan-price">฿${pkg.price.toLocaleString()}</div>
-        <ul>${pkg.services.map(s => `<li>${s}</li>`).join("")}</ul>
-        <button class="${selectedPackage === key ? "primary" : "secondary"} choose-btn" onclick="selectedPackage='${key}'; renderCompare();">เลือกแพ็กเกจนี้</button>
-      </div>`;
-  });
-  const p = packages[selectedPackage];
-  document.getElementById("compareSelectedName").textContent = p.name;
-  document.getElementById("compareSelectedPrice").textContent = "฿" + p.price.toLocaleString() + " / เดือน";
-}
-
-function goPayment() {
-  const p = packages[selectedPackage];
-  document.getElementById("checkoutPackage").textContent = p.name;
-  document.getElementById("checkoutPrice").textContent = "฿" + p.price.toLocaleString();
-  document.getElementById("subTotal").textContent = "฿" + p.price.toLocaleString();
-  document.getElementById("grandTotal").textContent = "฿" + p.price.toLocaleString();
-  document.getElementById("payButtonAmount").textContent = "฿" + p.price.toLocaleString();
-  show("payment");
-}
-
-function processPayment() {
-  show("processing");
-  setTimeout(() => show("success"), 2000);
+function prevQ() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQ();
+  }
 }
 </script>
+
 </body>
 </html>
