@@ -86,7 +86,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
 
 /* =========================================
-   ONBOARDING / QUIZ FLOW (ดึงจาก kla.html 100%)
+   ONBOARDING / QUIZ FLOW 
 ========================================= */
 .onboarding-wrap { padding: 5px 0 30px; width: 100%; }
 .onboarding-header { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 30px; }
@@ -106,7 +106,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .input-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
 
 /* =========================================
-   RESULT, COMPARE & PAYMENT (ดึงจาก kla.html)
+   RESULT, COMPARE, DETAIL & PAYMENT
 ========================================= */
 .result-hero{ position:relative; overflow:hidden; padding:40px 25px; border-radius:32px; background:linear-gradient(135deg,#2d664b,#113626); color:white; margin-bottom:15px; box-shadow:var(--shadow); }
 .result-hero::before{ content:""; position:absolute; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.06); right:-60px; top:-80px; }
@@ -130,6 +130,13 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .plan.has-ribbon { background: var(--mint2); }
 .ribbon { position:absolute; top:18px; right:18px; padding:6px 11px; border-radius:999px; background:var(--green); color:white; font-size:11px; font-weight:700; }
 .selected-package-banner{ position:sticky; bottom:0; padding:20px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
+
+/* PACKAGE DETAIL (ดึงจาก kla.html) */
+.detail-card{ padding:30px; background:white; border:1px solid var(--line); border-radius:28px; }
+.detail-header{ padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:20px;}
+.detail-price{ font-family:"DM Sans"; font-size:32px; font-weight:800; color:var(--green); margin-top:10px;}
+.detail-box{ padding:20px; border-radius:16px; background:var(--mint2); margin-bottom: 20px;}
+.detail-list{ list-style:none; padding:0; line-height:2.3; font-size:14px; color:var(--muted); }
 
 .checkout-grid { display: flex; flex-direction: column; gap: 15px; }
 .order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 24px; margin-bottom: 15px;}
@@ -281,7 +288,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
         <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
       </div>
-      <!-- กดที่รูป Profile เพื่อไปหน้า Profile -->
       <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
 
@@ -357,7 +363,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div class="plan-price" id="packagePrice" style="margin:5px 0 10px;">฿3,000</div>
         <div style="color:var(--muted); font-size:13px; margin-bottom:15px;">ต่อเดือน</div>
         <p id="summaryText" style="font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px;">เหมาะสำหรับผู้ที่ต้องการกิจกรรมหลากหลายในแพ็กเกจเดียว และต้องการดูแลสุขภาพทั้งด้านร่างกายและการผ่อนคลาย</p>
-        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="showPopup('เปรียบเทียบ', 'ฟีเจอร์การเปรียบเทียบในมุมมองมือถือจะมาในเวอร์ชันถัดไปครับ')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
       </div>
     </div>
   </section>
@@ -374,6 +380,27 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
           <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
         </div>
         <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGE DETAIL (ดูจาก Compare) -->
+  <section id="detail">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('compare')">← ย้อนกลับ</button>
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="eyebrow" id="detailType">SIGNATURE</div>
+          <h1 style="font-size:32px; margin:8px 0" id="detailName">Signature Package</h1>
+          <p style="color:var(--muted); margin:0" id="detailDescription">แพ็กเกจสำหรับการดูแลสุขภาพอย่างครบครัน</p>
+          <div class="detail-price" id="detailPrice">฿3,000</div>
+          <div style="color:var(--muted); font-size:13px;">ต่อเดือน</div>
+        </div>
+        <div class="detail-box">
+          <h3 style="margin-top:0; font-size:16px;">สิ่งที่รวมอยู่ในแพ็กเกจ</h3>
+          <ul class="detail-list" id="detailServices"></ul>
+        </div>
+        <button class="btn-primary" style="margin-bottom:0;" onclick="selectDetailPackage()">เลือกแพ็กเกจนี้ →</button>
       </div>
     </div>
   </section>
@@ -401,6 +428,11 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
             <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature Package</h3>
             <div class="plan-price" id="checkoutPrice">฿3,000</div>
             <div style="font-size:12px; margin-top:10px;">ต่อเดือน</div>
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Fitness</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Yoga</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Pilates</span>
+            </div>
           </div>
           <div style="padding:20px;">
             <div class="summary-row"><span>ค่าบริการเดือนแรก</span><b id="subTotal">฿3,000</b></div>
@@ -413,7 +445,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div class="card">
           <h3 style="margin:0 0 15px; font-size: 16px;">เลือกวิธีชำระเงิน</h3>
           <div class="payment-tabs">
-            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต</div>
+            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต / เดบิต</div>
             <div class="pay-tab" onclick="setPayment('qr', this)">▦ QR Code</div>
             <div class="pay-tab" onclick="setPayment('mobile', this)">📱 Mobile Banking</div>
           </div>
@@ -452,7 +484,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
               <p>เมื่อยืนยัน ระบบจะจำลองการเชื่อมต่อไปยังแอปธนาคาร</p>
             </div>
             <div class="bank-grid">
-              <div class="bank-option" onclick="selectBank('K PLUS', this)">
+              <div class="bank-option active" onclick="selectBank('K PLUS', this)">
                 <div class="bank-logo kbank">K+</div>
                 <div class="bank-copy"><b>K PLUS</b><small>Kasikornbank</small></div>
                 <div class="bank-check">✓</div>
@@ -480,10 +512,9 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- PROCESSING (จาก kla.html) -->
   <section id="processing">
     <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-      <div style="font-size:60px; margin-bottom:20px; animation: fadeIn 1s infinite alternate;">⌛</div>
+      <div style="font-size:60px; margin-bottom:20px; animation: pulse 1s infinite alternate;">⌛</div>
       <h2 id="processTitle">กำลังดำเนินการชำระเงิน</h2>
       <p class="section-desc" id="processDesc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
       
@@ -497,10 +528,9 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- SUCCESS (จาก kla.html) -->
   <section id="success">
     <div class="onboarding-wrap" style="padding-top:20px; text-align:center;">
-      <div style="font-size:50px; margin-bottom:20px; color:#fff; background:var(--green); width:90px; height:90px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px; box-shadow: 0 10px 20px rgba(74,149,114,0.2);">✓</div>
+      <div class="success-icon" style="font-size:50px; margin-bottom:20px; color:#fff; background:var(--green); width:90px; height:90px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px;">✓</div>
       <div class="eyebrow">PAYMENT SUCCESSFUL</div>
       <h2 style="font-size:32px; margin:5px 0 15px;">ชำระเงินสำเร็จ! 🎉</h2>
       <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว ขั้นตอนถัดไปคือการเลือกกิจกรรมและจองช่วงเวลา</p>
@@ -510,16 +540,16 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div class="summary-row"><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
         <div class="summary-row"><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
         <div class="summary-row"><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
-        <div class="summary-row" style="border:none;"><span>สถานะ</span><b style="color:var(--green);">ชำระเงินแล้ว</b></div>
+        <div class="summary-row" style="border:none;"><span>สถานะ</span><b class="paid" style="color:var(--green);">ชำระเงินแล้ว</b></div>
       </div>
 
-      <button class="btn-outline" style="margin-top:10px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
+      <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
       <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
   <!-- =========================================
-       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทินแบบยาวๆ)
+       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทิน)
   ========================================= -->
   <section id="plan">
     <div class="eyebrow">MY PLANNER</div>
@@ -547,22 +577,22 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <!-- คลาสเรียงเป็นบ็อกซ์ 3 กล่องต่อแถว -->
     <div class="class-grid">
       <div class="class-box" onclick="openClassDetail('Yoga Flow', '🧘')">
-        <span style="font-size:28px;">🧘</span><b style="font-size:12px; margin-top:5px;">Yoga Flow</b>
+        <span class="emoji">🧘</span><b>Yoga Flow</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Pilates', '🤸‍♀️')">
-        <span style="font-size:28px;">🤸‍♀️</span><b style="font-size:12px; margin-top:5px;">Pilates</b>
+        <span class="emoji">🤸‍♀️</span><b>Pilates</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Muay Thai', '🥊')">
-        <span style="font-size:28px;">🥊</span><b style="font-size:12px; margin-top:5px;">Muay Thai</b>
+        <span class="emoji">🥊</span><b>Muay Thai</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Fitness', '🏋️')">
-        <span style="font-size:28px;">🏋️</span><b style="font-size:12px; margin-top:5px;">Fitness</b>
+        <span class="emoji">🏋️</span><b>Fitness</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Onsen', '♨️')">
-        <span style="font-size:28px;">♨️</span><b style="font-size:12px; margin-top:5px;">Onsen</b>
+        <span class="emoji">♨️</span><b>Onsen</b>
       </div>
       <div class="class-box" onclick="openClassDetail('Dance', '💃')">
-        <span style="font-size:28px;">💃</span><b style="font-size:12px; margin-top:5px;">Dance</b>
+        <span class="emoji">💃</span><b>Dance</b>
       </div>
     </div>
 
@@ -584,7 +614,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- หน้าใหม่: CLASS BOOKING DETAIL (เข้าไปหน้าใหม่ ไม่เด้งทับ) -->
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
   <section id="class-detail" class="bg-white">
     <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
     <div style="text-align:center; margin-bottom:20px;">
@@ -813,7 +843,7 @@ function show(id) {
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
   
-  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info'];
+  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info', 'detail'];
   document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
 }
 
@@ -1131,6 +1161,9 @@ function renderCompare(){
           ${pkg.services.map(service=>`<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("")}
         </ul>
         <button class="${isSelected?"btn-primary":"btn-outline"}" style="margin:0;" onclick="choosePackage('${key}')">${isSelected?"เลือกอยู่":"เลือกแพ็กเกจนี้"}</button>
+        <div style="text-align:center; margin-top:15px;">
+          <button style="background:none; color:var(--green); font-size:13px; font-weight:600; text-decoration:underline;" onclick="openPackageDetail('${key}')">ดูรายละเอียดเพิ่มเติม</button>
+        </div>
       </div>
     `;
   });
@@ -1145,7 +1178,7 @@ function choosePackage(key){
   const pkg = packages[key];
   const vat = Math.round(pkg.price * 0.07);
   const total = pkg.price + vat;
-  document.getElementById("checkoutPackage").textContent = pkg.name;
+  document.getElementById("checkoutPackage").textContent = pkg.name + " Package";
   document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
   document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
   document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
@@ -1157,6 +1190,23 @@ function updateCompareCheckoutBanner(){
   const pkg=packages[selectedPackage];
   document.getElementById("compareSelectedName").textContent=pkg.name;
   document.getElementById("compareSelectedPrice").textContent="฿"+pkg.price.toLocaleString()+" / เดือน";
+}
+
+function openPackageDetail(key) {
+  const pkg = packages[key];
+  document.getElementById("detailType").textContent = pkg.type;
+  document.getElementById("detailName").textContent = pkg.name;
+  document.getElementById("detailPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("detailDescription").textContent = pkg.description;
+  document.getElementById("detailSuitable").textContent = pkg.suitable;
+  document.getElementById("detailServices").innerHTML = pkg.services.map(service => `<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("");
+  show('detail');
+}
+
+function selectDetailPackage() {
+  // สั่งให้กลับไปหน้าเปรียบเทียบก่อน แล้วเลือกแพ็กเกจนี้
+  choosePackage(selectedPackage);
+  goPayment();
 }
 
 function goPayment() { show('payment'); }
