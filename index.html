@@ -269,39 +269,33 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
        1. WELCOME & AUTH (Updated Design)
   ========================================= -->
   <section id="welcome" style="background: url('salaya.jpg') center/cover no-repeat; padding: 15px;">
-    <!-- กล่องกระจกเบลอๆ (Glassmorphism) -->
+    <!-- กล่องกระจกเบลอๆ -->
     <div style="background: rgba(228, 242, 223, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 30px; padding: 30px 20px; width: 100%; height: 100%; display: flex; flex-direction: column; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
       
-      <!-- Logo -->
       <div style="display:flex; align-items:center; gap:10px; margin-bottom: 20px;">
         <img src="sayo.people.png" alt="Logo" style="width: 45px; height: 45px; object-fit: contain;">
         <h2 style="margin:0; font-size: 18px; font-weight: 800; color: var(--ink);">SAYO-Wellness</h2>
       </div>
       
-      <!-- Text -->
       <div style="width: 100%; margin-bottom: auto;">
         <div class="eyebrow" style="color: var(--green);">PERSONALIZED WELLNESS @SALAYA</div>
         <h1 style="font-size: 36px; line-height: 1.1; margin: 10px 0; color: var(--green-dark); font-weight: 800;">สุขภาพที่ใช่<br>ในแบบที่เป็นคุณ</h1>
         <p style="color: var(--muted); margin-bottom: 20px;">ค้นหาดูแล และใช้ชีวิตที่ดีขึ้นได้ในทุกพื้นที่</p>
       </div>
       
-      <!-- รูปคนนั่งสมาธิ -->
       <div style="position: relative; width: 220px; height: 220px; margin: 0 auto auto;">
-        <!-- วงกลมพื้นหลัง -->
         <div style="position: absolute; right: 0; bottom: 0; width: 180px; height: 180px; background: #cce3d5; border-radius: 50%; z-index: 0;"></div>
-        <!-- รูป sit.png -->
         <img src="sit.png" alt="SAYO" style="position: relative; z-index: 1; width: 100%; height: 100%; object-fit: contain;">
-        <!-- ข้อความลอย (ขยับขึ้นซ้าย และเอียง) -->
         <div style="position: absolute; left: -50px; bottom: 90px; transform: rotate(-10deg); z-index: 2; color: var(--green-dark); font-weight: 800; font-size: 18px; text-align: left; line-height: 1.2;">A Healthier<br>Happier You</div>   
       </div>
       
-      <!-- ปุ่มด้านล่าง -->
       <div style="margin-top: auto;">
           <button class="btn-primary" style="margin-bottom: 15px;" onclick="show('signup')">เริ่มใช้งาน →</button>
           <p style="margin:0; font-size: 14px; font-weight: 600; color: var(--ink); cursor: pointer; text-align: center;" onclick="show('signin')"><span style="text-decoration: underline;">มีบัญชีแล้ว? เข้าสู่ระบบ</span></p>
       </div>
     </div>
   </section>
+
   <!-- =========================================
        SIGN UP
   ========================================= -->
@@ -336,7 +330,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
       <button class="btn-primary" style="margin-bottom:20px; background: #559b77; box-shadow: none;" onclick="validateAuth('signup')">สมัครสมาชิก</button>
 
-      <!-- Social Buttons -->
       <div style="text-align: center; color: var(--muted); margin: 0 0 20px; font-size: 12px; position: relative;">
         <span style="background: #fff; padding: 0 10px; position: relative; z-index: 1;">OR</span>
         <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); z-index: 0;"></div>
@@ -352,18 +345,15 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <span style="font-weight:600;">Continue with Facebook</span>
       </button>
     </div>
-    
-    <!-- แบนเนอร์ด้านล่าง (ตามรูปที่คุณอัปโหลด) -->
     <div style="text-align:center; margin-top:20px;">
       <img src="sayo.banner.png" alt="SAYO Banner" style="max-width: 160px; opacity: 0.9;">
     </div>
   </section>
-   
+
   <!-- =========================================
        SIGN IN
   ========================================= -->
   <section id="signin" style="background: #e4f2df; padding-top: 40px;">
-    <!-- ปุ่มย้อนกลับ -->
     <div style="text-align: left; width: 100%;">
       <button class="back-link" style="margin-bottom: 10px;" onclick="show('welcome')">← ย้อนกลับ</button>
     </div>
@@ -382,7 +372,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div style="position:relative; margin-bottom:15px;">
         <input type="password" id="logPass" class="input-field" placeholder="ใส่รหัสผ่าน" style="margin-bottom:0; background: #f9f9f9; border: 1px solid #e0e0e0;">
         <button style="position:absolute; right:15px; top:15px; background:none; color:var(--green-dark); font-weight:bold; font-size:13px; padding:0;" onclick="togglePass('logPass', this)" aria-label="Toggle Password">
-          <!-- ไอคอนตาปิด (ค่าเริ่มต้น) -->
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
         </button>
       </div>
@@ -405,7 +394,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); z-index: 0;"></div>
       </div>
 
-      <!-- Social Buttons ในหน้า Sign in -->
+      <!-- Social Buttons -->
       <button class="btn-social" onclick="loginSuccess()"><b></b> Continue with Apple</button>
       <button class="btn-social" onclick="loginSuccess()">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -418,9 +407,92 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
     </div>
     
-    <!-- แบนเนอร์ด้านล่าง (ตามรูปที่คุณอัปโหลด) -->
     <div style="text-align:center; margin-top:20px;">
       <img src="sayo.banner.png" alt="SAYO Banner" style="max-width: 160px; opacity: 0.9;">
+    </div>
+  </section>
+
+  <!-- =========================================
+       2. HOME DASHBOARD
+  ========================================= -->
+  <section id="home" style="background: #e4f2df;">
+    <div class="home-header">
+      <div class="profile-avatar" onclick="show('profile')" style="background: transparent; box-shadow: none;">
+        <img src="sayo.people.png" alt="Profile" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
+      <div class="user-info">
+        <h2 style="color: var(--ink);">SAYO-Wellness</h2>
+        <p>Hello, คุณสมาชิก</p>
+      </div>
+    </div>
+
+    <!-- Match Card หลัก -->
+    <div class="hero-match-card">
+      <div class="match-badge">✦ Personalized Wellness Recommendation</div>
+      <h1>เลือกแพ็กเกจที่ใช่<br>ในแบบที่เป็นคุณ</h1>
+      <p>ตอบคำถามเกี่ยวกับเป้าหมาย ไลฟ์สไตล์ กิจกรรมที่สนใจ และงบประมาณ แล้วให้ Wellness Value Tracker ช่วยค้นหาแพ็กเกจที่เหมาะกับคุณที่สุด</p>
+      
+      <!-- กดเริ่มค้นหา จะวิ่งไปที่หน้า quiz (คำถาม 7 ข้อ) ของโค้ดเดิมคุณ -->
+      <button class="primary" style="margin-top:20px; margin-bottom:10px; width: 100%;" onclick="startQuiz()">เริ่มค้นหาแพ็กเกจที่ใช่ →</button>
+      
+      <!-- กดเปรียบเทียบ จะทำการดึงข้อมูล 3 แพ็กเกจมาแสดง แล้ววิ่งไปหน้า compare -->
+      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="renderCompare(); show('compare');">ดูและเปรียบเทียบแพ็กเกจ</button>
+    </div>
+
+ <!-- Free Trial Banner (Sayo Pass) -->
+    <div class="sayo-pass">
+      <div class="pass-logo">
+        <img src="reward.png" alt="SAYO Experience Pass" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+      </div>
+      <div class="pass-content">
+        <h2>7-Day Sayo<br>Experience Pass</h2>
+        <div class="benefits">
+          <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>ลองใช้ Community ฟรี 7 วัน</span></p>
+          <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>Fitness + Class + Recovery +<br>Co-working</span></p>
+        </div>
+        <button onclick="switchTab('plan')">
+          คลิก เพื่อทดลองใช้ฟรี →
+        </button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box"><b>7 คำถาม</b><span>ตอบตามไลฟ์สไตล์ของคุณ</span></div>
+      <div class="stat-box"><b>3 แพ็กเกจ</b><span>Signature · Core · U-Rate</span></div>
+      <div class="stat-box"><b>For You</b><span>พร้อมเหตุผลประกอบ</span></div>
+    </div>
+
+    <div style="text-align:center; margin: 10px 0 20px;">
+      <h2 style="font-size:22px; font-weight:800; margin:0 0 6px; color: var(--ink);">ง่ายขึ้น ตั้งแต่เริ่มเลือก</h2>
+      <p style="font-size:12px; color:var(--ink); opacity:0.7; margin:0;">ออกแบบให้เข้าใจง่าย และเลือกตามไลฟ์สไตล์ของคุณ</p>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">📝</div>
+        <div>
+          <h3>ตอบตามตัวคุณ</h3>
+          <p>เลือกเป้าหมายและกิจกรรมได้มากกว่าหนึ่งข้อ พร้อมกำหนดงบประมาณของคุณเอง</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✦</div>
+        <div>
+          <h3>ได้รับคำแนะนำ</h3>
+          <p>ระบบช่วยวิเคราะห์ความต้องการและจับคู่กับแพ็กเกจที่เหมาะสมสำหรับคุณ</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚖️</div>
+        <div>
+          <h3>ตัดสินใจได้ง่าย</h3>
+          <p>ดูรายละเอียด เปรียบเทียบแพ็กเกจ และเลือกแพ็กเกจที่ต้องการได้ทันที</p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align:center; margin-top:40px; margin-bottom:20px;">
+      <img src="sayo.banner.png" alt="SAYO A HEALTHIER YOU EVERYDAY" style="max-width: 180px; height: auto; opacity: 0.85;">
     </div>
   </section>
 
@@ -511,7 +583,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   </section>
 
   <!-- =========================================
-       3. QUIZ FLOW (ONBOARDING FROM kla.html ดึงมา 100%)
+       3. QUIZ FLOW
   ========================================= -->
   <section id="quiz">
     <div class="onboarding-wrap">
@@ -523,9 +595,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         </div>
       </div>
       
-      <div id="onboarding-form">
-        <!-- JS จะ render คำถาม 7 ข้อลงตรงนี้ให้เลื่อนตอบในหน้าเดียว -->
-      </div>
+      <div id="onboarding-form"></div>
 
       <div style="margin-top: 20px;">
         <button class="btn-primary" style="width:100%" onclick="submitOnboarding()">ถัดไป →</button>
@@ -533,9 +603,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- =========================================
-       RESULT SECTION (ปรับ Layout ตามดีไซน์)
-  ========================================= -->
   <section id="result" style="padding-bottom: 120px;">
     <div class="onboarding-wrap" style="padding-top:0; padding-bottom:0;">
       <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
@@ -559,7 +626,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
             <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
           </div>
 
-          <!-- ย้ายปุ่มเปรียบเทียบแพ็กเกจมาไว้ด้านล่างกล่องคะแนนภายในกล่องเขียว -->
           <button class="btn-outline" style="border:none; color:var(--green); margin:10px 0 0; width:100%; font-size:15px; font-weight:700; background: #fff;" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
         </div>
       </div>
@@ -569,7 +635,12 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div id="reasons"></div>
       </div>
 
-      <!-- แบนเนอร์ลอยด้านล่างแบบ Sticky สไตล์เดียวกับหน้า Compare -->
+      <div class="summary-card" style="display:none;">
+        <h3 id="summaryPackage"></h3>
+        <div id="packagePrice"></div>
+        <p id="summaryText"></p>
+      </div>
+
       <div class="selected-package-banner">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <div>
@@ -580,6 +651,177 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         </div>
         <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
       </div>
+    </div>
+  </section>
+
+  <section id="compare">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
+      <div class="compare-grid" id="compareGrid"></div>
+      <div class="selected-package-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
+          <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="detail">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('compare')">← ย้อนกลับ</button>
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="eyebrow" id="detailType">SIGNATURE</div>
+          <h1 style="font-size:32px; margin:8px 0" id="detailName">Signature Package</h1>
+          <p style="color:var(--muted); margin:0" id="detailDescription">แพ็กเกจสำหรับการดูแลสุขภาพอย่างครบครัน</p>
+          <div class="detail-price" id="detailPrice">฿3,000</div>
+          <div style="color:var(--muted); font-size:13px;">ต่อเดือน</div>
+        </div>
+        <div class="detail-box">
+          <h3 style="margin-top:0; font-size:16px;">สิ่งที่รวมอยู่ในแพ็กเกจ</h3>
+          <ul class="detail-list" id="detailServices"></ul>
+        </div>
+        <button class="btn-primary" style="margin-bottom:0;" onclick="selectDetailPackage()">เลือกแพ็กเกจนี้ →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="payment">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <div class="eyebrow">CHECKOUT</div>
+      <h2 class="section-title">ยืนยันแพ็กเกจของคุณ</h2>
+      <p class="section-desc">ตรวจสอบรายการและเลือกวิธีชำระเงิน</p>
+
+      <div class="stepper">
+        <div class="step-item active">1<br><span>เลือกแพ็กเกจ</span></div>
+        <div class="step-line"></div>
+        <div class="step-item active">2<br><span>ชำระเงิน</span></div>
+        <div class="step-line"></div>
+        <div class="step-item">3<br><span>เสร็จสิ้น</span></div>
+      </div>
+
+      <div class="checkout-grid">
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="order-plan" style="margin:0; border-radius:20px 20px 0 0;">
+            <div class="eyebrow">YOUR SELECTED PACKAGE</div>
+            <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature Package</h3>
+            <div class="plan-price" id="checkoutPrice">฿3,000</div>
+            <div style="font-size:12px; margin-top:10px;">ต่อเดือน</div>
+          </div>
+          <div style="padding:20px;">
+            <div class="summary-row"><span>ค่าบริการเดือนแรก</span><b id="subTotal">฿3,000</b></div>
+            <div class="summary-row"><span>ภาษีมูลค่าเพิ่ม 7%</span><b id="vatAmount">฿210</b></div>
+            <div class="summary-row" style="border:none; font-size:18px; padding-bottom:0;"><span>ยอดชำระวันนี้</span><b id="grandTotal" style="color:var(--green);">฿3,210</b></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 15px; font-size: 16px;">เลือกวิธีชำระเงิน</h3>
+          <div class="payment-tabs">
+            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต / เดบิต</div>
+            <div class="pay-tab" onclick="setPayment('qr', this)">▦ QR Code</div>
+            <div class="pay-tab" onclick="setPayment('mobile', this)">📱 Mobile Banking</div>
+          </div>
+          
+          <div id="cardForm">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">หมายเลขบัตร</label>
+            <input type="text" class="input-field" placeholder="1234 5678 9012 3456">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">ชื่อบนบัตร</label>
+            <input type="text" class="input-field" placeholder="ชื่อ - นามสกุล">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">วันหมดอายุ</label>
+                <input type="text" class="input-field" placeholder="MM/YY">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">CVV</label>
+                <input type="text" class="input-field" placeholder="123">
+              </div>
+            </div>
+          </div>
+
+          <div id="qrForm" style="display:none;">
+            <div class="qr-box">
+              <div class="fake-qr" id="fakeQr"></div>
+              <div>
+                <b style="font-size: 14px;">สแกน QR เพื่อชำระเงิน</b>
+                <p>เปิดแอปธนาคารแล้วสแกน QR Code นี้</p>
+                <div class="qr-total" id="qrTotalDisplay">ยอดชำระ ฿3,210</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="mobileForm" style="display:none;">
+            <div class="mobile-bank-intro">
+              <b>เลือกธนาคารที่ต้องการชำระ</b>
+              <p>เมื่อยืนยัน ระบบจะจำลองการเชื่อมต่อไปยังแอปธนาคาร</p>
+            </div>
+            <div class="bank-grid">
+              <div class="bank-option active" onclick="selectBank('K PLUS', this)">
+                <div class="bank-logo kbank">K+</div>
+                <div class="bank-copy"><b>K PLUS</b><small>Kasikornbank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('SCB EASY', this)">
+                <div class="bank-logo scb">SCB</div>
+                <div class="bank-copy"><b>SCB EASY</b><small>Siam Commercial Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('Krungthai NEXT', this)">
+                <div class="bank-logo ktb">KTB</div>
+                <div class="bank-copy"><b>Krungthai NEXT</b><small>Krungthai Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" style="margin-top:20px;" onclick="processPayment()">
+            <span id="payActionText" style="flex:1; text-align:left;">ชำระเงิน</span> 
+            <span id="payButtonAmount">฿3,210 →</span>
+          </button>
+          <div style="text-align: center; color: var(--muted); font-size: 11px; margin-top: 10px;">🔒 ข้อมูลการชำระเงินได้รับการปกป้อง</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="processing">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <div style="font-size:60px; margin-bottom:20px; animation: pulse 1s infinite alternate;">⌛</div>
+      <h2 id="processTitle">กำลังดำเนินการชำระเงิน</h2>
+      <p class="section-desc" id="processDesc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
+      
+      <div style="width: 80%; max-width: 300px; background: var(--line); height: 8px; border-radius: 4px; margin: 20px auto; overflow: hidden;">
+        <div id="processFill" style="width: 0%; height: 100%; background: var(--green); transition: width 0.3s;"></div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; width:80%; max-width:300px; font-size:11px; color:var(--muted); margin:0 auto;">
+        <span>ตรวจสอบ</span><span>ยืนยัน</span><span>เสร็จสมบูรณ์</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="success">
+    <div class="onboarding-wrap" style="padding-top:20px; text-align:center;">
+      <div class="success-icon" style="font-size:50px; margin-bottom:20px; color:#fff; background:var(--green); width:90px; height:90px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px;">✓</div>
+      <div class="eyebrow">PAYMENT SUCCESSFUL</div>
+      <h2 style="font-size:32px; margin:5px 0 15px;">ชำระเงินสำเร็จ! 🎉</h2>
+      <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว ขั้นตอนถัดไปคือการเลือกกิจกรรมและจองช่วงเวลา</p>
+      
+      <div class="card" style="text-align:left; background:var(--bg);">
+        <div class="summary-row"><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
+        <div class="summary-row"><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
+        <div class="summary-row"><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
+        <div class="summary-row"><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
+        <div class="summary-row" style="border:none;"><span>สถานะ</span><b class="paid" style="color:var(--green);">ชำระเงินแล้ว</b></div>
+      </div>
+
+      <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
+      <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
@@ -1104,7 +1346,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('splash').style.display = 'none';
-    show('welcome'); // ใช้คำสั่ง show() เพราะมันจะไปสั่งลบหน้าอื่นๆ ออกให้หมดก่อนเปิดหน้า welcome
+    show('welcome'); 
   }, 2600);
 });
    
@@ -1125,7 +1367,7 @@ function switchTab(tabId) {
 }
 
 /* =========================
-   AUTH VALIDATION & SHOW PASS (SVG Eye)
+   AUTH VALIDATION
 ========================= */
 function togglePass(id, btn) {
   const input = document.getElementById(id);
@@ -1141,7 +1383,6 @@ function togglePass(id, btn) {
 function validateAuth(type) {
   let email, pass;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // อัปเดตเงื่อนไข: ยาว 6 ขึ้นไป + มีพิมพ์ใหญ่อย่างน้อย 1 หรือ อักขระพิเศษอย่างน้อย 1
   const passRegex = /^(?=.*[A-Z!@#$%^&*(),.?":{}|<>]).{6,}$/; 
 
   if (type === 'signup') {
@@ -1268,11 +1509,7 @@ function showPopup(title, desc) {
 function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
 
 /* =========================
-   ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - ดึงโครงสร้างจาก kla.html 100%)
-========================= */
-
-/* =========================
-   PACKAGES DATA (อัปเดตตามแบบสำรวจจริง)
+   PACKAGES DATA & QUIZ FLOW
 ========================= */
 const packages = {
   signature: { 
@@ -1328,15 +1565,16 @@ const questions = [
   { q: "งบประมาณต่อเดือนของคุณคือเท่าไร?", e: "BUDGET", help: "กรอกจำนวนเงินที่คุณสะดวก", type: "budget" },
   { q: "คุณอยากใช้บริการแบบไหน?", e: "PREFERENCE", help: "เลือกได้มากกว่าหนึ่งข้อ", type: "multi", o: ["หลากหลายกิจกรรมในแพ็กเดียว", "เน้นกิจกรรมหลัก", "เลือกใช้แบบยืดหยุ่น", "อยากให้ระบบช่วยเลือก"] }
 ];
-let answersOB = [[], [], [], [], [], null, []];
+
+// แก้บัคค่าเริ่มต้น เพื่อให้ป้องกันการกดถัดไปโดยยังไม่ตอบคำถามได้สมบูรณ์
+let answersOB = [null, null, [], null, [], null, []];
 
 function startQuiz() { 
-  answersOB = [[], [], [], [], [], null, []]; 
+  answersOB = [null, null, [], null, [], null, []]; 
   show('quiz'); 
   renderOnboarding(); 
 }
 
-/* ปรับฟังก์ชัน renderOnboarding ช่อง Budget ให้ hint ตัวเลขราคาใหม่ */
 function renderOnboarding() {
   const form = document.getElementById("onboarding-form");
   form.innerHTML = "";
@@ -1354,7 +1592,7 @@ function renderOnboarding() {
        
        html += `<div class="ob-options ${gridClass}">`;
        q.o.forEach((opt, oIndex) => {
-         const isSelected = (q.type === "multi" && answersOB[qIndex].includes(oIndex)) || (q.type === "single" && answersOB[qIndex] === oIndex);
+         const isSelected = (q.type === "multi" && answersOB[qIndex] && answersOB[qIndex].includes(oIndex)) || (q.type === "single" && answersOB[qIndex] === oIndex);
          const selClass = isSelected ? "selected" : "";
          
          let iconHtml = "";
@@ -1404,7 +1642,6 @@ function updateBudgetOb(qIndex, value){
 
 let selectedPackage = "signature";
 
-/* ปรับฟังก์ชัน submitOnboarding ตามช่วงราคาใหม่ และ sync ป้าย Banner ลอย */
 function submitOnboarding(){
   let valid = true;
   for (let i = 0; i < questions.length; i++) {
@@ -1415,11 +1652,13 @@ function submitOnboarding(){
     if (q.type === "budget" && (!ans || ans <= 0)) valid = false;
   }
 
-  if (!valid) return showPopup("แจ้งเตือน", "กรุณาเลือกหรือกรอกข้อมูลให้ครบทุกข้อก่อนนะครับ 😊");
+  if (!valid) {
+    showPopup("แจ้งเตือน", "กรุณาตอบคำถามให้ครบทุกข้อเพื่อผลลัพธ์ที่แม่นยำครับ 😊");
+    return;
+  }
 
   const budget = answersOB[5];
   
-  // Logic การ match แพ็กเกจ
   let chosen = "core";
   if (budget >= 4500) {
     chosen = "signature";
@@ -1434,7 +1673,7 @@ function submitOnboarding(){
   const vat = Math.round(pkg.price * 0.07);
   const grandTotal = pkg.price + vat;
 
-  // อัปเดตหน้า Result (ใส่เงื่อนไข if เพื่อป้องกัน Error ถ้าหา ID ไม่เจอ)
+  // อัปเดตหน้า Result
   const pkgNameElem = document.getElementById("packageName");
   if(pkgNameElem) pkgNameElem.textContent = pkg.name;
   
@@ -1446,21 +1685,30 @@ function submitOnboarding(){
   if (resName) resName.textContent = pkg.name.replace(" Package", "");
   if (resPrice) resPrice.textContent = "฿" + pkg.price.toLocaleString() + " / เดือน";
 
+  const sumPkg = document.getElementById("summaryPackage");
+  if(sumPkg) sumPkg.textContent = pkg.name;
+
+  const pkgPrice = document.getElementById("packagePrice");
+  if(pkgPrice) pkgPrice.textContent = "฿" + pkg.price.toLocaleString();
+
+  const sumText = document.getElementById("summaryText");
+  if(sumText) sumText.textContent = pkg.suitable;
+
   // อัปเดตเหตุผล
-  const goalsStr = answersOB[2].map(i => questions[2].o[i]).join(" · ");
-  const freqStr = questions[3].o[answersOB[3]];
-  const interestsStr = answersOB[4].map(i => questions[4].o[i]).join(" · ");
+  const goalsStr = answersOB[2] ? answersOB[2].map(i => questions[2].o[i]).join(" · ") : "";
+  const freqStr = answersOB[3] !== null ? questions[3].o[answersOB[3]] : "";
+  const interestsStr = answersOB[4] ? answersOB[4].map(i => questions[4].o[i]).join(" · ") : "";
+  
   const reasonsElem = document.getElementById("reasons");
   if(reasonsElem) {
     reasonsElem.innerHTML = [
-      `เป้าหมายที่คุณเลือก: ${goalsStr}`,
-      `ความถี่การออกกำลังกาย: ${freqStr}`,
-      `กิจกรรมที่คุณสนใจ: ${interestsStr}`,
-      `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน`
+      `เป้าหมายหลัก: ${goalsStr}`,
+      `ออกกำลังกาย: ${freqStr}`,
+      `ความสนใจ: ${interestsStr}`,
+      `ตรงกับงบประมาณ ฿${budget.toLocaleString()} / เดือน`
     ].map(item => `<div class="reason">${item}</div>`).join("");
   }
 
-  // Set Compare & Checkout Data
   renderCompare();
   
   const checkPkg = document.getElementById("checkoutPackage");
@@ -1480,8 +1728,63 @@ function submitOnboarding(){
   
   const btnAmt = document.getElementById("payButtonAmount");
   if(btnAmt) btnAmt.textContent = "฿" + grandTotal.toLocaleString() + " →";
+  
+  const qrTotal = document.getElementById("qrTotalDisplay");
+  if(qrTotal) qrTotal.textContent = "ยอดชำระ ฿" + grandTotal.toLocaleString();
 
   show('result');
+}
+
+function renderCompare(){
+  const container=document.getElementById("compareGrid");
+  if(!container) return;
+  container.innerHTML="";
+  Object.entries(packages).forEach(([key,pkg])=>{
+    const isSelected = (selectedPackage === key);
+    const isRecommended = (selectedPackage === key); 
+    container.innerHTML+=`
+      <div class="plan ${isSelected?"selected":""} ${isRecommended?"has-ribbon":""}">
+        ${isRecommended?`<div class="ribbon">✦ Recommended</div>`:""}
+        <div class="eyebrow">${pkg.type}</div>
+        <h2 style="margin:20px 0 10px;">${pkg.name}</h2>
+        <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿${pkg.price.toLocaleString()}</div>
+        <small style="color:var(--muted);">ต่อเดือน</small>
+        <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+          ${pkg.services.map(service=>`<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("")}
+        </ul>
+        <button class="${isSelected?"btn-primary":"btn-outline"}" style="margin:0;" onclick="choosePackage('${key}')">${isSelected?"เลือกอยู่":"เลือกแพ็กเกจนี้"}</button>
+        <div style="text-align:center; margin-top:15px;">
+          <button style="background:none; color:var(--green); font-size:13px; font-weight:600; text-decoration:underline;" onclick="openPackageDetail('${key}')">ดูรายละเอียดเพิ่มเติม</button>
+        </div>
+      </div>
+    `;
+  });
+  updateCompareCheckoutBanner();
+}
+
+function choosePackage(key){
+  selectedPackage = key;
+  renderCompare();
+  
+  const pkg = packages[key];
+  const vat = Math.round(pkg.price * 0.07);
+  const total = pkg.price + vat;
+  document.getElementById("checkoutPackage").textContent = pkg.name + " Package";
+  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
+  document.getElementById("grandTotal").textContent = "฿" + total.toLocaleString();
+  document.getElementById("payButtonAmount").textContent = "฿" + total.toLocaleString() + " →";
+  const qrTotal = document.getElementById("qrTotalDisplay");
+  if(qrTotal) qrTotal.textContent = "ยอดชำระ ฿" + total.toLocaleString();
+}
+
+function updateCompareCheckoutBanner(){
+  const pkg=packages[selectedPackage];
+  const compareName = document.getElementById("compareSelectedName");
+  const comparePrice = document.getElementById("compareSelectedPrice");
+  if(compareName) compareName.textContent=pkg.name;
+  if(comparePrice) comparePrice.textContent="฿"+pkg.price.toLocaleString()+" / เดือน";
 }
 
 function openPackageDetail(key) {
@@ -1506,14 +1809,13 @@ function openPackageDetail(key) {
 }
 
 function selectDetailPackage() {
-  // สั่งให้กลับไปหน้าเปรียบเทียบก่อน แล้วเลือกแพ็กเกจนี้
   choosePackage(selectedPackage);
   goPayment();
 }
 
 function goPayment() { show('payment'); }
 
-/* PAYMENT LOGIC (จาก kla.html) */
+/* PAYMENT LOGIC */
 let paymentMethod = 'card';
 function setPayment(type, element) {
   paymentMethod = type;
