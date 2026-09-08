@@ -6,7 +6,1276 @@
 <title>SAYO Wellness</title>
 <link rel="apple-touch-icon" href="sayo.logo.jpg">
 <link rel="icon" href="sayo.logo.jpg">
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="sayo.logo.jpg">
+<link rel="icon" href="sayo.logo.jpg">
+<title>SAYO App</title>
 
+<!-- โหลดฟอนต์ -->
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================
+   COLOR PALETTE
+========================================= */
+:root {
+  --bg: #f5f7f4;
+  --surface: #ffffff;
+  --ink: #111111;
+  --muted: #71807a;
+  --green: #4A9572;
+  --green-dark: #2d664b;
+  --mint: #eaf6e5;
+  --mint2: #f0f8f4;
+  --line: #dfe8e3;
+  --gold: #dca434;
+  --shadow: 0 10px 30px rgba(74, 149, 114, 0.1);
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; background-color: #f2f2f7; color: var(--ink); font-family: 'DM Sans', 'Noto Sans Thai', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+
+/* APP CONTAINER */
+.app-container { width: 100%; max-width: 430px; height: 100vh; max-height: 932px; background-color: var(--surface); position: relative; display: flex; flex-direction: column; box-shadow: 0 0 40px rgba(0,0,0,0.08); overflow: hidden; }
+@media (max-width: 480px) { .app-container { max-height: 100dvh; box-shadow: none; } }
+
+/* SECTION */
+section { display: none; flex: 1; flex-direction: column; overflow-y: auto; overflow-x: hidden; padding: 20px; padding-bottom: 95px; animation: fadeIn 0.3s ease; background: var(--bg); }
+section.active { display: flex; }
+section.no-padding-bottom { padding-bottom: 20px; }
+section.bg-white { background: var(--surface); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+button, input, select { font: inherit; outline: none; border: none; cursor: pointer; }
+
+/* UI COMPONENTS */
+.btn-primary, .primary { background-color: var(--green); color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; transition: 0.2s; box-shadow: 0 4px 15px rgba(74, 149, 114, 0.3); display:flex; justify-content:center; align-items:center; gap:8px;}
+.btn-primary:active, .primary:active { transform: scale(0.98); }
+.btn-outline, .secondary { background-color: #fff; color: var(--ink); width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; border: 1.5px solid var(--line); margin-bottom: 12px; }
+.btn-black { background-color: #111; color: #fff; width: 100%; padding: 16px; border-radius: 999px; font-weight: 600; font-size: 16px; text-align: center; margin-bottom: 12px; }
+.btn-social { background-color: #fff; color: #111; width: 100%; padding: 14px; border-radius: 999px; font-weight: 600; font-size: 15px; border: 1px solid var(--line); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+.input-field { width: 100%; padding: 16px 20px; border-radius: 16px; border: 1px solid var(--line); font-size: 15px; margin-bottom: 12px; background: #fff; color: var(--ink); }
+.input-field:focus { border-color: var(--green); }
+
+.eyebrow { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+.section-title { font-size: 26px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.5px; }
+.section-desc { font-size: 14px; color: var(--muted); margin: 0 0 20px; line-height: 1.5; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+.back-link { background: none; color: var(--green); padding: 0; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block; text-align: left; }
+
+/* BOTTOM NAVIGATION */
+.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--line); display: none; grid-template-columns: repeat(5, 1fr); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 600; background: transparent; }
+.nav-item .icon { font-size: 22px; }
+.nav-item.active { color: var(--green); }
+
+/* SPLASH & AUTH */
+#splash { background-color: var(--mint); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
+.splash-scene { position: relative; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
+.splash-oval { position: absolute; right: 15%; top: 15%; width: 90px; height: 200px; z-index: 1; transform: scale(0); animation: ovalPop 0.6s ease forwards; }
+.splash-people { position: absolute; right: 15%; top: 10%; width: 220px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.3s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+.brand-box { text-align: center; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s 1.5s forwards; }
+.brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: var(--green); margin: 0; letter-spacing: 4px; line-height: 1; }
+@keyframes ovalPop { to { transform: scale(1); } }
+@keyframes flipJump { 0% { transform: translateX(40px) rotate(90deg) scale(0.5); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateX(-110px) rotate(-360deg) scale(1.1); opacity: 1; } }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+.welcome-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow); }
+#welcome { align-items: center; justify-content: center; text-align: center; }
+
+/* HOME */
+.home-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
+
+/* =========================================
+   ONBOARDING / QUIZ FLOW 
+========================================= */
+.onboarding-wrap { padding: 5px 0 30px; width: 100%; }
+.onboarding-header { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 30px; }
+.ob-q-block { margin-bottom: 32px; }
+.ob-label { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 6px; display: block; }
+.ob-help { font-size: 12px; color: var(--muted); margin-bottom: 12px; display: block; }
+
+.ob-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.ob-options.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+.ob-options.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+
+.ob-chip { background: white; border: 1.5px solid var(--line); border-radius: 16px; padding: 14px 10px; font-size: 13px; color: var(--muted); text-align: center; font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.ob-chip.selected { background: var(--mint); border-color: var(--green); color: var(--green); }
+.ob-chip .icon { font-size: 26px; display: block; margin-bottom: 2px; }
+
+.budget-input { width: 100%; padding: 18px; border-radius: 16px; border: 1.5px solid var(--line); outline: none; font-size: 20px; color: var(--ink); margin-bottom: 10px;}
+.input-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+/* =========================================
+   RESULT, COMPARE, DETAIL & PAYMENT
+========================================= */
+.result-hero{ position:relative; overflow:hidden; padding:40px 25px; border-radius:32px; background:linear-gradient(135deg,#2d664b,#113626); color:white; margin-bottom:15px; box-shadow:var(--shadow); }
+.result-hero::before{ content:""; position:absolute; width:280px; height:280px; border-radius:50%; background:rgba(255,255,255,.06); right:-60px; top:-80px; }
+.result-top{ position:relative; z-index:1; display:grid; grid-template-columns:1fr; gap:20px; align-items:center; }
+.result-badge{ display:inline-flex; padding:7px 12px; border-radius:999px; background:rgba(255,255,255,.13); font-size:12px; font-weight:700; }
+.package-result-name{ margin:15px 0 10px; font-size:38px; line-height:1.1; }
+.match-score-card{ padding:24px; border-radius:25px; text-align:center; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.13); }
+.score-circle{ width:130px; height:130px; margin:auto; border-radius:50%; display:grid; place-items:center; background:conic-gradient(#a7e0c7 0deg,#a7e0c7 339deg,rgba(255,255,255,.13) 339deg); position:relative; }
+.score-circle::before{ content:""; position:absolute; width:100px; height:100px; border-radius:50%; background:#17463c; }
+.score-inner{ position:relative; z-index:1; }
+.score-num{ font-family:"DM Sans"; font-size:36px; font-weight:800; }
+.reason-card, .summary-card{ padding:24px; border-radius:25px; background:white; border:1px solid var(--line); margin-bottom: 15px;}
+.reason{ padding:12px 0; border-bottom:1px solid var(--line); color:#52635d; font-size:14px; display:flex; gap:10px; line-height:1.5;}
+.reason::before { content: '✓'; color: var(--green); font-weight: bold; }
+.reason:last-child { border-bottom: none; }
+.plan-price { font-family: "DM Sans"; font-size: 32px; font-weight: 800; margin: 10px 0; }
+
+.compare-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px;}
+.plan { position:relative; display:flex; flex-direction:column; padding:28px; background:white; border:1px solid var(--line); border-radius:28px; transition:.25s; }
+.plan.selected { border:2px solid var(--green); box-shadow:0 15px 40px rgba(20,107,89,.13); }
+.plan.has-ribbon { background: var(--mint2); }
+.ribbon { position:absolute; top:18px; right:18px; padding:6px 11px; border-radius:999px; background:var(--green); color:white; font-size:11px; font-weight:700; }
+.selected-package-banner{ position:sticky; bottom:0; padding:20px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
+
+/* PACKAGE DETAIL (ดึงจาก kla.html) */
+.detail-card{ padding:30px; background:white; border:1px solid var(--line); border-radius:28px; }
+.detail-header{ padding-bottom:20px; border-bottom:1px solid var(--line); margin-bottom:20px;}
+.detail-price{ font-family:"DM Sans"; font-size:32px; font-weight:800; color:var(--green); margin-top:10px;}
+.detail-box{ padding:20px; border-radius:16px; background:var(--mint2); margin-bottom: 20px;}
+.detail-list{ list-style:none; padding:0; line-height:2.3; font-size:14px; color:var(--muted); }
+
+.checkout-grid { display: flex; flex-direction: column; gap: 15px; }
+.order-plan { background: linear-gradient(145deg,#edf9f4,#d9eee4); border-radius: 22px; padding: 24px; margin-bottom: 15px;}
+.summary-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.summary-row:last-child { border-bottom: none; }
+.payment-tabs { display: flex; gap: 8px; margin: 15px 0; }
+.pay-tab { flex: 1; background: #fff; border: 1px solid var(--line); padding: 12px; border-radius: 12px; font-size: 12px; text-align: center; font-weight: 600; color: var(--muted); }
+.pay-tab.active { background: var(--mint); border-color: var(--green); color: var(--green); }
+.stepper{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px}.step-item{width:70px;text-align:center;color:#9aa7a2;font-weight:700;font-size:13px}.step-item span{font-weight:400;font-size:10px}.step-item:before{content:"";display:block;width:30px;height:30px;border-radius:50%;background:#e8eeeb;margin:0 auto 6px}.step-item.active{color:var(--green)}.step-item.active:before{background:var(--green);box-shadow:inset 0 0 0 9px var(--mint)}.step-line{height:2px;flex:1;background:#e8eeeb;margin:14px 5px}
+
+/* QR Code & Mobile Banking Boxes */
+.qr-box{background:#f6faf8;border:1px solid var(--line);padding:22px;border-radius:20px;display:flex;align-items:center;flex-direction:column;text-align:center;gap:15px}.qr-box p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}.qr-total{color:var(--green);font-weight:700;margin-top:8px}.fake-qr{width:132px;height:132px;background:white;padding:9px;display:grid;grid-template-columns:repeat(6,1fr);gap:3px;border:1px solid #dce5e1}.fake-qr span{background:#17362e}.fake-qr span:nth-child(2n),.fake-qr span:nth-child(5n){background:transparent}.fake-qr span:nth-child(7n){background:var(--green)}
+.mobile-bank-intro{background:#f6faf8;border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px}.mobile-bank-intro b{display:block;margin-bottom:4px}.mobile-bank-intro p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}.bank-grid{display:grid;grid-template-columns:1fr;gap:10px}.bank-option{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px;color:var(--ink);transition:.18s ease}.bank-option.active{border-color:var(--green);background:var(--mint);box-shadow:0 0 0 2px rgba(74,149,114,.2)}.bank-logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;color:white;font-size:11px;font-weight:800;letter-spacing:.3px;flex:0 0 auto}.bank-copy{min-width:0}.bank-copy b{display:block;font-size:13px}.bank-copy small{display:block;color:var(--muted);font-size:10px;margin-top:2px}.bank-check{margin-left:auto;width:22px;height:22px;border-radius:50%;border:1px solid #cfdad5;display:grid;place-items:center;font-size:11px;color:transparent;background:white}.bank-option.active .bank-check{background:var(--green);border-color:var(--green);color:white}.kbank{background:#13864f}.scb{background:#6b3b8f}.ktb{background:#1e78b7}.bbl{background:#223f92}
+
+.process-line{height:10px;background:#e6eeea;border-radius:10px;margin:30px 0 10px;overflow:hidden}.process-line div{height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--secondary));transition:width .3s}.process-status{display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}.cancel-note{background:#f5f8f6;color:var(--muted);padding:13px;border-radius:12px;font-size:11px;margin-top:25px}
+
+/* PLAN & BOOKING (GRID 3 COLUMNS) */
+.horizontal-scroll { display: flex; overflow-x: auto; gap: 10px; padding-bottom: 15px; scrollbar-width: none; white-space: nowrap; }
+.horizontal-scroll::-webkit-scrollbar { display: none; }
+.cal-day { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 60px; height: 75px; border-radius: 16px; background: #fff; border: 1px solid var(--line); color: var(--muted); flex-shrink: 0; }
+.cal-day.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+.class-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+.class-box { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 15px 5px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+.class-box:active { transform: scale(0.95); }
+.class-box .emoji { font-size: 28px; }
+.class-box b { font-size: 12px; line-height: 1.2; color: var(--ink); }
+
+.transport-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+.transport-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: #fff; border: 1px solid var(--line); padding: 14px; border-radius: 16px; font-weight: 600; font-size: 13px; }
+.parking-btn { background: var(--bg-yellow); color: var(--ink); border: none; padding: 16px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 14px; margin-bottom: 12px; width: 100%; }
+
+/* TIME SLOTS */
+.time-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 20px; }
+.time-chip { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 0; text-align: center; font-size: 14px; font-weight: 600; color: var(--muted); transition: 0.2s; background: #fff;}
+.time-chip.active { background: var(--mint); border-color: var(--green); color: var(--green); }
+
+/* COMMUNITY */
+.buddy-post { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; }
+.buddy-user { display: flex; align-items: center; gap: 10px; margin-bottom: 12px;}
+.tag { background: var(--mint); color: var(--green); padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; }
+.buddy-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+
+/* CHAT SECTION */
+#chat { padding: 0; display: none; flex-direction: column; height: 100%; background: #fff; }
+#chat.active { display: flex; }
+.chat-header { padding: 15px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 15px; background: #fff; position: sticky; top: 0; z-index: 10; padding-top: max(15px, env(safe-area-inset-top));}
+.chat-body { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: var(--bg); }
+.chat-bubble { max-width: 75%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; word-wrap: break-word;}
+.chat-left { background: #fff; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--line); }
+.chat-right { background: var(--green); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.chat-input-area { padding: 15px 20px; display: flex; gap: 10px; border-top: 1px solid var(--line); background: #fff; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
+
+/* POPUP */
+.overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: 0.3s; padding: 20px; }
+.overlay.active { opacity: 1; visibility: visible; }
+.popup { background: #fff; width: 100%; max-width: 320px; padding: 30px; border-radius: 24px; text-align: center; transform: scale(0.9); transition: 0.3s; }
+.overlay.active .popup { transform: scale(1); }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- =========================================
+       0. SPLASH SCREEN 
+  ========================================= -->
+  <div id="splash">
+    <div class="splash-scene">
+      <img src="oval.png" class="splash-oval" alt="Oval" onerror="this.style.background='var(--green)'; this.style.borderRadius='50%';">
+      <img src="sayo.people.png" class="splash-people" alt="SAYO Person" onerror="this.style.background='var(--gold)'; this.style.borderRadius='50%'; this.style.height='140px';">
+    </div>
+    <div class="brand-box">
+      <h1 class="brand-sayo">SAYO</h1>
+      <p class="brand-slogan">MOVE LIVE GROW</p>
+    </div>
+  </div>
+
+  <!-- =========================================
+       1. WELCOME & AUTH
+  ========================================= -->
+  <section id="welcome" class="bg-white no-padding-bottom">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+      <img src="sayo.logo.jpg" class="welcome-logo" alt="SAYO" onerror="this.style.background='var(--green)';">
+      <h1 class="brand-sayo" style="font-size: 42px;">SAYO</h1>
+      <p class="section-desc" style="letter-spacing: 2px;">MOVE LIVE GROW</p>
+    </div>
+    <button class="btn-black" onclick="show('signup')">Sign up (Free Trial)</button>
+    <button class="btn-outline" onclick="show('signin')">Sign in</button>
+  </section>
+
+  <section id="signup" class="bg-white no-padding-bottom">
+    <button class="back-link" onclick="show('welcome')">← กลับ</button>
+    <h1 class="section-title">Sign up</h1>
+    <p class="section-desc">สร้างบัญชีเพื่อเริ่ม Wellness Journey</p>
+    <input type="text" id="regName" class="input-field" placeholder="Full name">
+    <input type="email" id="regEmail" class="input-field" placeholder="Email">
+    
+    <div style="position:relative; margin-bottom:12px;">
+      <input type="password" id="regPass" class="input-field" placeholder="Password (ขั้นต่ำ 6 ตัว, พิมพ์ใหญ่ 1 ตัว)" style="margin-bottom:0;">
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); display:flex; align-items:center; justify-content:center; padding:0;" onclick="togglePass('regPass', this)" aria-label="Toggle Password Visibility">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+      </button>
+    </div>
+
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('signup')">Continue</button>
+    
+    <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
+    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
+    <button class="btn-social" onclick="loginSuccess()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+  </section>
+
+  <section id="signin" class="bg-white no-padding-bottom">
+    <button class="back-link" onclick="show('welcome')">← กลับ</button>
+    <h1 class="section-title">Sign in</h1>
+    <p class="section-desc">Glad to see you again!</p>
+    <input type="email" id="logEmail" class="input-field" placeholder="Email">
+    
+    <div style="position:relative; margin-bottom:12px;">
+      <input type="password" id="logPass" class="input-field" placeholder="Password" style="margin-bottom:0;">
+      <button style="position:absolute; right:15px; top:15px; background:none; color:var(--muted); display:flex; align-items:center; justify-content:center; padding:0;" onclick="togglePass('logPass', this)" aria-label="Toggle Password Visibility">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+      </button>
+    </div>
+
+    <button class="btn-black" style="margin-top:10px;" onclick="validateAuth('login')">Continue</button>
+    
+    <div style="text-align: center; margin-top: 10px;">
+      <b style="color: var(--muted); font-size:14px; cursor:pointer;" onclick="showPopup('ลืมรหัสผ่าน', 'ลิงก์รีเซ็ตรหัสผ่านถูกส่งไปยังอีเมลแล้ว')">Forgot password?</b>
+    </div>
+
+    <div style="text-align: center; color: var(--muted); margin: 15px 0; font-size: 12px;">or</div>
+    <button class="btn-social" onclick="loginSuccess()"> Continue with Apple</button>
+    <button class="btn-social" onclick="loginSuccess()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+      Continue with Google
+    </button>
+  </section>
+
+  <!-- =========================================
+       2. HOME DASHBOARD
+  ========================================= -->
+  <section id="home">
+    <div class="home-header">
+      <div>
+        <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
+        <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
+      </div>
+      <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
+    </div>
+
+    <div class="card" style="background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; border:none;">
+      <span style="background: var(--bg-yellow); color: var(--ink); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; margin-bottom:10px; display:inline-block;">Free Trial Active</span>
+      <h3 style="margin: 0 0 5px; font-size: 20px;">Welcome to SAYO</h3>
+      <p style="margin: 0 0 15px; font-size: 13px; line-height: 1.5; opacity: 0.9;">รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง และ <b>300 Credits</b></p>
+      <button class="btn-outline" style="padding:10px; margin:0; border:none;" onclick="switchTab('plan')">จองคลาสทดลองเลย</button>
+    </div>
+
+    <div class="eyebrow">YOUR MATCH</div>
+    <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
+    <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
+    <!-- เริ่ม Quiz (Onboarding ดึงจาก kla.html) -->
+    <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
+  </section>
+
+  <!-- =========================================
+       3. QUIZ FLOW (ONBOARDING FROM kla.html ดึงมา 100%)
+  ========================================= -->
+  <section id="quiz">
+    <div class="onboarding-wrap">
+      <button class="back-link" onclick="switchTab('home')">← ย้อนกลับ</button>
+      <div class="onboarding-header">
+        <div>
+          <h2 class="section-title" style="margin:0;">บอกเราเพิ่มเติม</h2>
+          <p class="section-desc" style="margin:0;">เพื่อแพ็กเกจที่ใช่สำหรับคุณ</p>
+        </div>
+      </div>
+      
+      <div id="onboarding-form">
+        <!-- JS จะ render คำถาม 7 ข้อลงตรงนี้ให้เลื่อนตอบในหน้าเดียว -->
+      </div>
+
+      <div style="margin-top: 20px;">
+        <button class="btn-primary" style="width:100%" onclick="submitOnboarding()">ถัดไป →</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
+      
+      <div class="result-hero">
+        <div class="result-top">
+          <div>
+            <div class="eyebrow" style="color:var(--secondary);">✦ YOUR WELLNESS MATCH</div>
+            <h1 class="package-result-name" id="packageName">Signature Package</h1>
+            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจแบบครบครันสำหรับคนที่ต้องการดูแลสุขภาพอย่างหลากหลาย</p>
+            <button class="btn-outline" style="border:none; color:var(--green); margin:0; padding:12px 24px; width:auto; font-size:14px;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
+          </div>
+          <div class="match-score-card">
+            <div class="score-circle">
+              <div class="score-inner">
+                <div class="score-num" id="score">94%</div>
+                <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
+              </div>
+            </div>
+            <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <h3 style="margin-top:0; font-size: 18px;">ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
+        <div id="reasons"></div>
+      </div>
+
+      <div class="summary-card">
+        <div class="eyebrow">YOUR PACKAGE</div>
+        <h3 id="summaryPackage" style="margin:5px 0; font-size: 20px;">Signature Package</h3>
+        <div class="plan-price" id="packagePrice" style="margin:5px 0 10px;">฿3,000</div>
+        <div style="color:var(--muted); font-size:13px; margin-bottom:15px;">ต่อเดือน</div>
+        <p id="summaryText" style="font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px;">เหมาะสำหรับผู้ที่ต้องการกิจกรรมหลากหลายในแพ็กเกจเดียว และต้องการดูแลสุขภาพทั้งด้านร่างกายและการผ่อนคลาย</p>
+        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
+  <section id="compare">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
+      <div class="compare-grid" id="compareGrid"></div>
+      <div class="selected-package-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
+          <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGE DETAIL (ดูจาก Compare) -->
+  <section id="detail">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('compare')">← ย้อนกลับ</button>
+      <div class="detail-card">
+        <div class="detail-header">
+          <div class="eyebrow" id="detailType">SIGNATURE</div>
+          <h1 style="font-size:32px; margin:8px 0" id="detailName">Signature Package</h1>
+          <p style="color:var(--muted); margin:0" id="detailDescription">แพ็กเกจสำหรับการดูแลสุขภาพอย่างครบครัน</p>
+          <div class="detail-price" id="detailPrice">฿3,000</div>
+          <div style="color:var(--muted); font-size:13px;">ต่อเดือน</div>
+        </div>
+        <div class="detail-box">
+          <h3 style="margin-top:0; font-size:16px;">สิ่งที่รวมอยู่ในแพ็กเกจ</h3>
+          <ul class="detail-list" id="detailServices"></ul>
+        </div>
+        <button class="btn-primary" style="margin-bottom:0;" onclick="selectDetailPackage()">เลือกแพ็กเกจนี้ →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT SECTION (ดึงจาก kla.html แบบ 100%) -->
+  <section id="payment">
+    <div class="onboarding-wrap" style="padding-top:0;">
+      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <div class="eyebrow">CHECKOUT</div>
+      <h2 class="section-title">ยืนยันแพ็กเกจของคุณ</h2>
+      <p class="section-desc">ตรวจสอบรายการและเลือกวิธีชำระเงิน</p>
+
+      <div class="stepper">
+        <div class="step-item active">1<br><span>เลือกแพ็กเกจ</span></div>
+        <div class="step-line"></div>
+        <div class="step-item active">2<br><span>ชำระเงิน</span></div>
+        <div class="step-line"></div>
+        <div class="step-item">3<br><span>เสร็จสิ้น</span></div>
+      </div>
+
+      <div class="checkout-grid">
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="order-plan" style="margin:0; border-radius:20px 20px 0 0;">
+            <div class="eyebrow">YOUR SELECTED PACKAGE</div>
+            <h3 id="checkoutPackage" style="margin:5px 0 10px; font-size:24px;">Signature Package</h3>
+            <div class="plan-price" id="checkoutPrice">฿3,000</div>
+            <div style="font-size:12px; margin-top:10px;">ต่อเดือน</div>
+            <div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Fitness</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Yoga</span>
+               <span style="background:white; color:var(--green); padding:4px 10px; border-radius:999px; font-size:11px; font-weight:bold;">Pilates</span>
+            </div>
+          </div>
+          <div style="padding:20px;">
+            <div class="summary-row"><span>ค่าบริการเดือนแรก</span><b id="subTotal">฿3,000</b></div>
+            <div class="summary-row"><span>ภาษีมูลค่าเพิ่ม 7%</span><b id="vatAmount">฿210</b></div>
+            <div class="summary-row" style="border:none; font-size:18px; padding-bottom:0;"><span>ยอดชำระวันนี้</span><b id="grandTotal" style="color:var(--green);">฿3,210</b></div>
+          </div>
+        </div>
+
+        <!-- กล่องขวา (วิธีชำระเงินครบจาก kla.html) -->
+        <div class="card">
+          <h3 style="margin:0 0 15px; font-size: 16px;">เลือกวิธีชำระเงิน</h3>
+          <div class="payment-tabs">
+            <div class="pay-tab active" onclick="setPayment('card', this)">💳 บัตรเครดิต / เดบิต</div>
+            <div class="pay-tab" onclick="setPayment('qr', this)">▦ QR Code</div>
+            <div class="pay-tab" onclick="setPayment('mobile', this)">📱 Mobile Banking</div>
+          </div>
+          
+          <div id="cardForm">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">หมายเลขบัตร</label>
+            <input type="text" class="input-field" placeholder="1234 5678 9012 3456">
+            <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">ชื่อบนบัตร</label>
+            <input type="text" class="input-field" placeholder="ชื่อ - นามสกุล">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">วันหมดอายุ</label>
+                <input type="text" class="input-field" placeholder="MM/YY">
+              </div>
+              <div>
+                <label style="font-size:12px; font-weight:bold; margin-bottom:6px; display:block;">CVV</label>
+                <input type="text" class="input-field" placeholder="123">
+              </div>
+            </div>
+          </div>
+
+          <div id="qrForm" style="display:none;">
+            <div class="qr-box">
+              <div class="fake-qr" id="fakeQr"></div>
+              <div>
+                <b style="font-size: 14px;">สแกน QR เพื่อชำระเงิน</b>
+                <p>เปิดแอปธนาคารแล้วสแกน QR Code นี้</p>
+                <div class="qr-total" id="qrTotalDisplay">ยอดชำระ ฿3,210</div>
+              </div>
+            </div>
+          </div>
+
+          <div id="mobileForm" style="display:none;">
+            <div class="mobile-bank-intro">
+              <b>เลือกธนาคารที่ต้องการชำระ</b>
+              <p>เมื่อยืนยัน ระบบจะจำลองการเชื่อมต่อไปยังแอปธนาคาร</p>
+            </div>
+            <div class="bank-grid">
+              <div class="bank-option active" onclick="selectBank('K PLUS', this)">
+                <div class="bank-logo kbank">K+</div>
+                <div class="bank-copy"><b>K PLUS</b><small>Kasikornbank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('SCB EASY', this)">
+                <div class="bank-logo scb">SCB</div>
+                <div class="bank-copy"><b>SCB EASY</b><small>Siam Commercial Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+              <div class="bank-option" onclick="selectBank('Krungthai NEXT', this)">
+                <div class="bank-logo ktb">KTB</div>
+                <div class="bank-copy"><b>Krungthai NEXT</b><small>Krungthai Bank</small></div>
+                <div class="bank-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <button class="btn-primary" style="margin-top:20px;" onclick="processPayment()">
+            <span id="payActionText" style="flex:1; text-align:left;">ชำระเงิน</span> 
+            <span id="payButtonAmount">฿3,210 →</span>
+          </button>
+          <div style="text-align: center; color: var(--muted); font-size: 11px; margin-top: 10px;">🔒 ข้อมูลการชำระเงินได้รับการปกป้อง</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="processing">
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
+      <div style="font-size:60px; margin-bottom:20px; animation: pulse 1s infinite alternate;">⌛</div>
+      <h2 id="processTitle">กำลังดำเนินการชำระเงิน</h2>
+      <p class="section-desc" id="processDesc">กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ</p>
+      
+      <div style="width: 80%; max-width: 300px; background: var(--line); height: 8px; border-radius: 4px; margin: 20px auto; overflow: hidden;">
+        <div id="processFill" style="width: 0%; height: 100%; background: var(--green); transition: width 0.3s;"></div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; width:80%; max-width:300px; font-size:11px; color:var(--muted); margin:0 auto;">
+        <span>ตรวจสอบ</span><span>ยืนยัน</span><span>เสร็จสมบูรณ์</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="success">
+    <div class="onboarding-wrap" style="padding-top:20px; text-align:center;">
+      <div class="success-icon" style="font-size:50px; margin-bottom:20px; color:#fff; background:var(--green); width:90px; height:90px; border-radius:50%; display:grid; place-items:center; margin:0 auto 20px;">✓</div>
+      <div class="eyebrow">PAYMENT SUCCESSFUL</div>
+      <h2 style="font-size:32px; margin:5px 0 15px;">ชำระเงินสำเร็จ! 🎉</h2>
+      <p class="section-desc">แพ็กเกจของคุณเปิดใช้งานแล้ว ขั้นตอนถัดไปคือการเลือกกิจกรรมและจองช่วงเวลา</p>
+      
+      <div class="card" style="text-align:left; background:var(--bg);">
+        <div class="summary-row"><span>แพ็กเกจ</span><b id="successPackage">Signature Package</b></div>
+        <div class="summary-row"><span>ยอดชำระ</span><b id="successAmount">฿3,210</b></div>
+        <div class="summary-row"><span>วิธีชำระเงิน</span><b id="successMethod">บัตรเครดิต / เดบิต</b></div>
+        <div class="summary-row"><span>หมายเลขคำสั่งซื้อ</span><b id="successOrder">#WVM-02482335</b></div>
+        <div class="summary-row" style="border:none;"><span>สถานะ</span><b class="paid" style="color:var(--green);">ชำระเงินแล้ว</b></div>
+      </div>
+
+      <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
+      <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทิน)
+  ========================================= -->
+  <section id="plan">
+    <div class="eyebrow">MY PLANNER</div>
+    <h2 class="section-title">ปฏิทินกิจกรรม</h2>
+    
+    <!-- ปฏิทินเลื่อนซ้ายขวาได้ เพิ่มวันยาวๆ -->
+    <div class="horizontal-scroll" id="calScroll">
+      <div class="cal-day active" onclick="selectDay(this)"><span>Mon</span><b>7</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>8</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>9</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>10</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>11</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>12</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>13</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Mon</span><b>14</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>15</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>16</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>17</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>18</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>19</b></div>
+      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>20</b></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top: 15px;">CLASSES</div>
+    <!-- คลาสเรียงเป็นบ็อกซ์ 3 กล่องต่อแถว -->
+    <div class="class-grid">
+      <div class="class-box" onclick="openClassDetail('Yoga Flow', '🧘')">
+        <span class="emoji">🧘</span><b>Yoga Flow</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Pilates', '🤸‍♀️')">
+        <span class="emoji">🤸‍♀️</span><b>Pilates</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Muay Thai', '🥊')">
+        <span class="emoji">🥊</span><b>Muay Thai</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Fitness', '🏋️')">
+        <span class="emoji">🏋️</span><b>Fitness</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Onsen', '♨️')">
+        <span class="emoji">♨️</span><b>Onsen</b>
+      </div>
+      <div class="class-box" onclick="openClassDetail('Dance', '💃')">
+        <span class="emoji">💃</span><b>Dance</b>
+      </div>
+    </div>
+
+    <div class="eyebrow">TRANSPORT & PARKING</div>
+    <button class="parking-btn" onclick="showPopup('จองที่จอดรถ', 'คุณได้รับสิทธิ์จอดรถ EV ฟรี 4 ชม.')">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div style="background:var(--green); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
+        <div style="text-align:left; line-height:1.2; color:var(--ink);"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px; font-weight:500;">สิทธิ์จอดฟรี 4 ชม.</span></div>
+      </div>
+      <span style="font-size:20px;">🚗</span>
+    </button>
+    <div class="transport-grid">
+      <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')">
+        <img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> Grab
+      </button>
+      <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')">
+        <img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> LINEMAN
+      </button>
+    </div>
+  </section>
+
+  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
+  <section id="class-detail" class="bg-white">
+    <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
+    <div style="text-align:center; margin-bottom:20px;">
+      <div id="detailEmoji" style="font-size:60px;">🧘</div>
+      <h2 id="detailClassName" style="margin:10px 0 5px;">Class Name</h2>
+      <p style="color:var(--muted); margin:0;">เลือกเวลาที่ต้องการจองคลาส</p>
+    </div>
+    
+    <div class="eyebrow">TIME SLOTS</div>
+    <div class="time-chips">
+      <div class="time-chip" onclick="selectTime(this)">08:00</div>
+      <div class="time-chip" onclick="selectTime(this)">09:30</div>
+      <div class="time-chip" onclick="selectTime(this)">11:00</div>
+      <div class="time-chip" onclick="selectTime(this)">13:00</div>
+      <div class="time-chip" onclick="selectTime(this)">14:30</div>
+      <div class="time-chip" onclick="selectTime(this)">16:00</div>
+      <div class="time-chip" onclick="selectTime(this)">17:30</div>
+      <div class="time-chip" onclick="selectTime(this)">19:00</div>
+      <div class="time-chip" onclick="selectTime(this)">20:30</div>
+    </div>
+    
+    <button class="btn-primary" style="margin-top:auto;" onclick="confirmBooking()">ยืนยันการจอง →</button>
+  </section>
+
+  <!-- =========================================
+       5. REWARDS
+  ========================================= -->
+  <section id="rewards">
+    <div class="eyebrow">YOUR CREDITS</div>
+    <h2 class="section-title">SAYO Rewards</h2>
+    <div class="card" style="background:var(--ink); color:#fff; text-align:center;">
+      <h2 style="font-size:42px; margin:5px 0; color:var(--gold);">300 <span style="font-size:20px;">Pts</span></h2>
+      <p style="margin:0; font-size:12px; opacity:0.8;">คลาสที่ไม่ได้เข้า เปลี่ยนเป็นพอยต์ได้</p>
+    </div>
+    <div class="eyebrow">REDEEM</div>
+    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับส่วนลดคาเฟ่ 50 บาท')">
+      <div style="font-size:30px;">☕</div>
+      <div style="flex:1;"><b>Cafe Discount</b><br><span style="font-size:12px; color:var(--muted);">ส่วนลด 50฿</span></div>
+      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">100 Pts</button>
+    </div>
+    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับคลาสฟรี 1 ครั้ง')">
+      <div style="font-size:30px;">🥊</div>
+      <div style="flex:1;"><b>Free Class</b><br><span style="font-size:12px; color:var(--muted);">เข้าคลาสใดก็ได้</span></div>
+      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">300 Pts</button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       6. COMMUNITY
+  ========================================= -->
+  <section id="community">
+    <div class="eyebrow">COMMUNITY</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+      <h2 class="section-title" style="margin:0;">Buddy Feed</h2>
+      <button class="btn-primary" style="width:auto; padding:8px 16px; margin:0; font-size:13px;" onclick="show('create-post')">+ สร้างโพสต์</button>
+    </div>
+    
+    <div id="feedContainer">
+      <!-- โพสต์ตัวอย่าง -->
+      <div class="buddy-post">
+        <div class="buddy-user">
+          <div style="width:40px; height:40px; border-radius:50%; background:var(--secondary); display:grid; place-items:center; font-weight:bold;">N</div>
+          <div><b style="display:block; font-size:15px;">Nara</b><span style="font-size:11px; color:var(--muted);">2 กม. · 20 นาทีที่แล้ว</span></div>
+        </div>
+        <b style="font-size:18px;">Yoga Flow 🧘</b>
+        <p style="font-size:14px; color:var(--muted); margin:8px 0;">Beginner มาได้ นัดเจอที่หน้าคลาส ขาด 2 คน</p>
+        <div style="margin-bottom:10px;"><span style="background:var(--mint); color:var(--green); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">รับ 2 คน</span></div>
+        <div class="buddy-actions">
+          <button class="btn-primary" style="margin:0; padding:12px; font-size:13px;" onclick="joinBuddy(this)">Join · เข้าร่วม</button>
+          <button class="btn-outline" style="margin:0; padding:12px; font-size:13px;" onclick="openChat('Nara')">💬 แชท</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- หน้าใหม่: CREATE POST -->
+  <section id="create-post" class="bg-white">
+    <button class="back-link" onclick="switchTab('community')">← ย้อนกลับ</button>
+    <h2 class="section-title">สร้างโพสต์หา Buddy</h2>
+    <p class="section-desc">ชวนเพื่อนไปทำกิจกรรมด้วยกัน</p>
+    
+    <div class="eyebrow" style="margin-top:10px;">กิจกรรม</div>
+    <select id="postTitle" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="" disabled selected>เลือกกิจกรรม...</option>
+      <option value="Yoga Flow 🧘">Yoga Flow 🧘</option>
+      <option value="Pilates 🤸‍♀️">Pilates 🤸‍♀️</option>
+      <option value="Muay Thai 🥊">Muay Thai 🥊</option>
+      <option value="Fitness 🏋️">Fitness 🏋️</option>
+      <option value="Onsen ♨️">Onsen ♨️</option>
+      <option value="Dance 💃">Dance 💃</option>
+    </select>
+    
+    <div class="eyebrow">รายละเอียดเพิ่มเติม</div>
+    <input type="text" id="postDesc" class="input-field" placeholder="เช่น นัดเจอหน้าตึก 5 โมงเย็น">
+
+    <div class="eyebrow">จำนวนคนที่ต้องการ</div>
+    <select id="postCount" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="2 คน">2 คน</option>
+      <option value="3 คน">3 คน</option>
+      <option value="4 คน">4 คน</option>
+      <option value="5 คน">5 คน</option>
+      <option value="6 คนขึ้นไป">6 คนขึ้นไป</option>
+    </select>
+    
+    <button class="btn-primary" style="margin-top:auto;" onclick="submitPost()">โพสต์ประกาศ</button>
+  </section>
+
+  <!-- หน้าใหม่: CHAT ROOM -->
+  <section id="chat" class="no-padding-bottom">
+    <div class="chat-header">
+      <button class="back-link" style="margin:0;" onclick="switchTab('community')">←</button>
+      <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-weight:bold;" id="chatIcon">N</div>
+      <b id="chatName" style="font-size:18px;">Name</b>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; border-radius:999px; border:1px solid var(--line); padding:12px 15px; outline:none;">
+      <button class="btn-primary" style="width:auto; margin:0; padding:12px 20px;" onclick="sendMessage()">ส่ง</button>
+    </div>
+  </section>
+
+  <!-- =========================================
+       7. PROFILE & SETTINGS
+  ========================================= -->
+  <section id="profile">
+    <div style="text-align: center; margin: 20px 0;">
+      <div style="width:80px; height:80px; font-size:40px; margin:0 auto 15px; border-radius:50%; background:var(--bg-yellow); display:grid; place-items:center;">🤸‍♀️</div>
+      <h2>SAYO Member</h2>
+      <p style="color:var(--muted); margin:0;">member@sayo.app</p>
+    </div>
+
+    <div class="eyebrow">SETTINGS & MENU</div>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('profile-info')">ข้อมูลส่วนตัว <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('my-package')">แพ็กเกจของฉัน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ประวัติการใช้งาน', 'ยังไม่มีประวัติการทำกิจกรรมย้อนหลังในระบบ')">ประวัติการใช้งาน <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ศูนย์ช่วยเหลือ', 'กรุณาติดต่อแอดมินผ่าน LINE @SAYO')">ศูนย์ช่วยเหลือ <span>></span></button>
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('settings')">⚙️ ตั้งค่า (Settings) <span>></span></button>
+    
+    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c;" onclick="logout()">ออกจากระบบ <span>></span></button>
+  </section>
+
+  <!-- หน้าใหม่: ข้อมูลส่วนตัว -->
+  <section id="profile-info" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">ข้อมูลส่วนตัว</h2>
+    <div class="eyebrow">ข้อมูลทั่วไป</div>
+    <input type="text" class="input-field" value="SAYO Member" disabled style="background:#f9f9f9; color:var(--muted);">
+    <input type="email" class="input-field" value="member@sayo.app" disabled style="background:#f9f9f9; color:var(--muted);">
+    <div class="eyebrow">ร่างกาย</div>
+    <div style="display:flex; gap:10px;">
+      <input type="number" class="input-field" placeholder="น้ำหนัก (กก.)">
+      <input type="number" class="input-field" placeholder="ส่วนสูง (ซม.)">
+    </div>
+    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว')">บันทึกข้อมูล</button>
+  </section>
+
+  <!-- หน้าใหม่: MY PACKAGE -->
+  <section id="my-package" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">แพ็กเกจของฉัน</h2>
+    <div class="card" style="background:var(--mint); border-color:var(--green);">
+      <h3 style="color:var(--green); margin:0 0 10px;">Free Trial Active</h3>
+      <p style="font-size:14px; margin:0; line-height:1.5;">คุณกำลังใช้สิทธิ์ทดลองเข้าคลาส 1 ครั้ง และรับ 300 Pts</p>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">อัปเกรดแพ็กเกจ</button>
+  </section>
+
+  <!-- หน้าใหม่: SETTINGS -->
+  <section id="settings" class="bg-white">
+    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
+    <h2 class="section-title">ตั้งค่า</h2>
+    
+    <div class="eyebrow">ภาษา (Language)</div>
+    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="th">ภาษาไทย</option>
+      <option value="en">English</option>
+    </select>
+
+    <div class="eyebrow">การแจ้งเตือน</div>
+    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+      <option value="all">เปิดทั้งหมด (แนะนำ)</option>
+      <option value="important">เฉพาะแจ้งเตือนคลาส</option>
+      <option value="none">ปิดการแจ้งเตือน</option>
+    </select>
+
+    <div class="eyebrow">ความปลอดภัย</div>
+    <button class="btn-outline" style="text-align:left; padding: 16px 20px; border-radius:16px;" onclick="showPopup('เปลี่ยนรหัสผ่าน', 'ฟีเจอร์นี้เปิดใช้งานในแอปจริง')">เปลี่ยนรหัสผ่าน</button>
+
+    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกการตั้งค่าเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
+  </section>
+
+  <!-- BOTTOM NAVIGATION BAR -->
+  <div id="bottomNav" class="bottom-nav">
+    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="icon">⌂</span><span>Home</span></button>
+    <button class="nav-item" data-tab="plan" onclick="switchTab('plan')"><span class="icon">📅</span><span>Plan</span></button>
+    <button class="nav-item" data-tab="rewards" onclick="switchTab('rewards')"><span class="icon">🎁</span><span>Rewards</span></button>
+    <button class="nav-item" data-tab="community" onclick="switchTab('community')"><span class="icon">👥</span><span>Community</span></button>
+    <button class="nav-item" data-tab="profile" onclick="switchTab('profile')"><span class="icon">👤</span><span>Profile</span></button>
+  </div>
+
+  <!-- POPUP MODAL (GENERAL) -->
+  <div id="popupOverlay" class="overlay">
+    <div class="popup">
+      <div style="font-size:50px; margin-bottom:10px;">✨</div>
+      <h2 id="popupTitle" style="margin:0 0 10px;">สำเร็จ</h2>
+      <p id="popupDesc" style="color:var(--muted); font-size:14px; margin:0 0 20px; line-height:1.5;">ดำเนินการเรียบร้อย</p>
+      <button class="btn-primary" style="margin:0;" onclick="closePopup()">ตกลง</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* =========================
+   ROUTING
+========================= */
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('welcome').classList.add('active');
+  }, 2600);
+});
+
+function show(id) {
+  document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelector('.app-container').scrollTop = 0;
+  
+  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info', 'detail'];
+  document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
+}
+
+function switchTab(tabId) {
+  show(tabId);
+  document.querySelectorAll('.nav-item').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabId);
+  });
+}
+
+/* =========================
+   AUTH VALIDATION & SHOW PASS (SVG Eye)
+========================= */
+function togglePass(id, btn) {
+  const input = document.getElementById(id);
+  if(input.type === 'password') { 
+    input.type = 'text'; 
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>';
+  } else { 
+    input.type = 'password'; 
+    btn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+  }
+}
+
+function validateAuth(type) {
+  let email, pass;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passRegex = /^(?=.*[A-Z]).{6,}$/; 
+
+  if (type === 'signup') {
+    email = document.getElementById('regEmail').value;
+    pass = document.getElementById('regPass').value;
+  } else {
+    email = document.getElementById('logEmail').value;
+    pass = document.getElementById('logPass').value;
+  }
+
+  if (!emailRegex.test(email)) return showPopup('อีเมลไม่ถูกต้อง', 'กรุณากรอกอีเมลให้ถูกต้อง');
+  if (!passRegex.test(pass)) return showPopup('รหัสผ่านอ่อนไป', 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร และมีตัวอักษรพิมพ์ใหญ่ 1 ตัว');
+  
+  loginSuccess();
+}
+
+function loginSuccess() {
+  document.getElementById('bottomNav').style.display = 'grid';
+  switchTab('home');
+}
+
+function logout() {
+  document.getElementById('bottomNav').style.display = 'none';
+  show('welcome');
+}
+
+/* =========================
+   PLAN & BOOKING
+========================= */
+function selectDay(btn) {
+  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function openClassDetail(name, emoji) {
+  document.getElementById('detailClassName').innerText = name;
+  document.getElementById('detailEmoji').innerText = emoji;
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+  show('class-detail');
+}
+
+function selectTime(btn) {
+  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function confirmBooking() {
+  const selected = document.querySelector('.time-chip.active');
+  if(!selected) return showPopup('แจ้งเตือน', 'กรุณาเลือกเวลาที่ต้องการจอง');
+  showPopup('จองสำเร็จ!', 'คุณได้ทำการจองคลาสเรียบร้อยแล้ว เตรียมตัวให้พร้อม!');
+  setTimeout(() => { switchTab('plan'); }, 1500);
+}
+
+/* =========================
+   COMMUNITY & CHAT
+========================= */
+function joinBuddy(btn) {
+  if(btn.innerText.includes('Join')) {
+    btn.innerText = '✓ Requested';
+    btn.style.background = "var(--line)";
+    btn.style.color = "var(--muted)";
+  } else {
+    btn.innerText = 'Join · เข้าร่วม';
+    btn.style.background = "var(--green)";
+    btn.style.color = "#fff";
+  }
+}
+
+function submitPost() {
+  const titleSelect = document.getElementById('postTitle');
+  const countSelect = document.getElementById('postCount');
+  const title = titleSelect.options[titleSelect.selectedIndex].value;
+  const count = countSelect.options[countSelect.selectedIndex].value;
+  const desc = document.getElementById('postDesc').value;
+
+  if(!title) return showPopup('แจ้งเตือน', 'กรุณาเลือกกิจกรรม');
+  
+  const feed = document.getElementById('feedContainer');
+  const newPost = `
+    <div class="buddy-post">
+      <div class="buddy-user">
+        <div style="width:40px; height:40px; border-radius:50%; background:var(--gold); display:grid; place-items:center; font-weight:bold; color:#fff;">S</div>
+        <div><b style="display:block; font-size:15px;">SAYO Member</b><span style="font-size:11px; color:var(--muted);">เพิ่งโพสต์</span></div>
+      </div>
+      <b style="font-size:18px;">${title}</b>
+      <p style="font-size:14px; color:var(--muted); margin:8px 0;">${desc ? desc : 'ใครว่างมาจอยกันได้เลยยย'}</p>
+      <div style="margin-bottom:10px;"><span style="background:var(--mint); color:var(--green); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">รับ ${count}</span></div>
+    </div>
+  `;
+  feed.insertAdjacentHTML('afterbegin', newPost);
+  document.getElementById('postDesc').value = '';
+  titleSelect.selectedIndex = 0;
+  countSelect.selectedIndex = 0;
+  switchTab('community');
+  showPopup('โพสต์สำเร็จ', 'ประกาศของคุณถูกโพสต์ลงฟีดแล้ว');
+}
+
+function openChat(name) {
+  document.getElementById('chatName').innerText = name;
+  document.getElementById('chatIcon').innerText = name.charAt(0);
+  document.getElementById('chatBody').innerHTML = ''; 
+  show('chat');
+}
+
+function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(text) {
+    const chatBody = document.getElementById('chatBody');
+    chatBody.innerHTML += `<div class="chat-bubble chat-right">${text}</div>`;
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight; 
+  }
+}
+
+/* =========================
+   POPUP MODAL
+========================= */
+function showPopup(title, desc) {
+  document.getElementById('popupTitle').innerText = title;
+  document.getElementById('popupDesc').innerText = desc;
+  document.getElementById('popupOverlay').classList.add('active');
+}
+function closePopup() { document.getElementById('popupOverlay').classList.remove('active'); }
+
+/* =========================
+   ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - ดึงโครงสร้างจาก kla.html 100%)
+========================= */
+const packages = {
+  signature: { name: "Signature Package", price: 3000, type: "SIGNATURE", services: ["Fitness", "Yoga", "Pilates", "Muay Thai", "Onsen"] },
+  core: { name: "Core Package", price: 1800, type: "CORE", services: ["Fitness", "Yoga", "เลือกบริการหลัก", "เหมาะกับการใช้งานทั่วไป"] },
+  urate: { name: "U-Rate Package", price: 1200, type: "U-RATE", services: ["Fitness", "เหมาะสำหรับเริ่มต้น", "ราคาประหยัด", "ยืดหยุ่น"] }
+};
+
+const questions = [
+  { q: "เพศของคุณคืออะไร?", e: "GENDER", help: "ช่วยให้เราปรับแต่งคำแนะนำที่เหมาะสมกับคุณ", type: "single", o: ["ชาย", "หญิง", "ไม่ระบุ"] },
+  { q: "อาชีพของคุณคืออะไร?", e: "OCCUPATION", help: "ช่วยให้เราเข้าใจไลฟ์สไตล์และเวลาในการใช้บริการของคุณ", type: "single", o: ["นักศึกษา", "พนักงานเอกชน", "ข้าราชการ/รัฐวิสาหกิจ", "บุคลากรทางการแพทย์", "อาจารย์/บุคลากรการศึกษา", "ธุรกิจส่วนตัว/เจ้าของกิจการ"] },
+  { q: "เป้าหมายหลักของคุณคืออะไร?", e: "GOAL", help: "เลือกได้มากกว่าหนึ่งข้อ", type: "multi", o: ["ลดน้ำหนัก", "เพิ่มกล้ามเนื้อ", "ดูแลสุขภาพ", "ผ่อนคลาย / Wellness"] },
+  { q: "คุณออกกำลังกายบ่อยแค่ไหน?", e: "ACTIVITY", help: "เลือกคำตอบที่ใกล้เคียงกับคุณที่สุด", type: "single", o: ["1–2 ครั้ง / สัปดาห์", "3–4 ครั้ง / สัปดาห์", "5 ครั้งขึ้นไป", "เพิ่งเริ่มต้น"] },
+  { q: "คุณสนใจกิจกรรมอะไรเป็นพิเศษ?", e: "INTEREST", help: "เลือกได้มากกว่าหนึ่งข้อ", type: "multi", o: ["Performance Fitness", "Personal Training", "Group Training Classes", "Muay Thai", "Pilates & Yoga", "Sports Massage & Recovery", "Onsen", "Café & Co-working", "Pickleball"] },
+  { q: "งบประมาณต่อเดือนของคุณคือเท่าไร?", e: "BUDGET", help: "กรอกจำนวนเงินที่คุณสะดวก", type: "budget" },
+  { q: "คุณอยากใช้บริการแบบไหน?", e: "PREFERENCE", help: "เลือกได้มากกว่าหนึ่งข้อ", type: "multi", o: ["หลากหลายกิจกรรมในแพ็กเดียว", "เน้นกิจกรรมหลัก", "เลือกใช้แบบยืดหยุ่น", "อยากให้ระบบช่วยเลือก"] }
+];
+let answersOB = [[], [], [], [], [], null, []];
+
+function startQuiz() { 
+  answersOB = [[], [], [], [], [], null, []]; 
+  show('quiz'); 
+  renderOnboarding(); 
+}
+
+function renderOnboarding() {
+  const form = document.getElementById("onboarding-form");
+  form.innerHTML = "";
+  
+  questions.forEach((q, qIndex) => {
+    const block = document.createElement("div");
+    block.className = "ob-q-block";
+    
+    let html = `<label class="ob-label">${q.q}</label>`;
+    if (q.help) html += `<span class="ob-help">${q.help}</span>`;
+    
+    if (q.type === "multi" || q.type === "single") {
+       let gridClass = "grid-2"; 
+       if (qIndex === 0 || qIndex === 4) gridClass = "grid-3"; 
+       
+       html += `<div class="ob-options ${gridClass}">`;
+       q.o.forEach((opt, oIndex) => {
+         const isSelected = (q.type === "multi" && answersOB[qIndex].includes(oIndex)) || (q.type === "single" && answersOB[qIndex] === oIndex);
+         const selClass = isSelected ? "selected" : "";
+         
+         let iconHtml = "";
+         if (qIndex === 0) {
+           const icons = ['👨', '👩', '👤'];
+           iconHtml = `<span class="icon" style="font-size:26px;">${icons[oIndex]}</span>`;
+         } else if (qIndex === 4) {
+           const icons = ['🏋️', '👨‍🏫', '👥', '🥊', '🧘', '💆', '♨️', '☕', '🏓'];
+           iconHtml = `<span class="icon" style="font-size:26px;">${icons[oIndex] || '✦'}</span>`;
+         }
+
+         html += `
+           <div class="ob-chip ${selClass}" onclick="toggleObAnswer(${qIndex}, ${oIndex}, '${q.type}')">
+             ${iconHtml}
+             <span>${opt}</span>
+           </div>
+         `;
+       });
+       html += `</div>`;
+    } else if (q.type === "budget") {
+       html += `
+         <input type="number" class="budget-input" placeholder="เช่น 2500" value="${answersOB[qIndex] || ''}" oninput="updateBudgetOb(${qIndex}, this.value)">
+         <div class="input-note">ตัวอย่าง: 1200 · 1800 · 3000 บาทต่อเดือน</div>
+       `;
+    }
+    block.innerHTML = html;
+    form.appendChild(block);
+  });
+}
+
+function toggleObAnswer(qIndex, oIndex, type) {
+  if (type === "single") {
+    answersOB[qIndex] = oIndex;
+  } else if (type === "multi") {
+    if (answersOB[qIndex].includes(oIndex)) {
+      answersOB[qIndex] = answersOB[qIndex].filter(i => i !== oIndex);
+    } else {
+      answersOB[qIndex].push(oIndex);
+    }
+  }
+  renderOnboarding(); 
+}
+
+function updateBudgetOb(qIndex, value){
+  answersOB[qIndex] = Number(value);
+}
+
+let selectedPackage = "signature";
+
+function submitOnboarding(){
+  let valid = true;
+  for (let i = 0; i < questions.length; i++) {
+    const q = questions[i];
+    const ans = answersOB[i];
+    if (q.type === "multi" && (!ans || ans.length === 0)) valid = false;
+    if (q.type === "single" && ans === null) valid = false;
+    if (q.type === "budget" && (!ans || ans <= 0)) valid = false;
+  }
+
+  if (!valid) return showPopup("แจ้งเตือน", "กรุณาเลือกหรือกรอกข้อมูลให้ครบทุกข้อก่อนนะครับ 😊");
+
+  const budget = answersOB[5];
+  let pkgName = "U-Rate", pkgPrice = "฿990", checkoutPrice="฿990", sub="฿990", grand="฿1,059";
+  selectedPackage = "urate";
+  
+  if (budget >= 3000) { 
+    pkgName = "Signature"; pkgPrice = "฿3,000"; checkoutPrice = "฿3,000"; sub = "฿3,000"; grand = "฿3,210";
+    selectedPackage = "signature";
+  } else if (budget >= 1800) { 
+    pkgName = "Core"; pkgPrice = "฿1,800"; checkoutPrice = "฿1,800"; sub = "฿1,800"; grand = "฿1,926";
+    selectedPackage = "core";
+  }
+  
+  document.getElementById("packageName").textContent = pkgName + " Package";
+  document.getElementById("summaryPackage").textContent = pkgName + " Package";
+  document.getElementById("packagePrice").textContent = pkgPrice;
+  
+  // Set Compare Data
+  renderCompare();
+
+  // Set Checkout Data
+  document.getElementById("checkoutPackage").textContent = pkgName + " Package";
+  document.getElementById("checkoutPrice").textContent = checkoutPrice;
+  document.getElementById("subTotal").textContent = sub;
+  const numPrice = Number(sub.replace(/[^0-9]/g, ''));
+  const vat = Math.round(numPrice * 0.07);
+  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
+  document.getElementById("grandTotal").textContent = grand;
+  document.getElementById("payButtonAmount").textContent = grand + " →";
+
+  // Reasons
+  const goals = answersOB[2].map(i => questions[2].o[i]).join(" · ");
+  const freq = questions[3].o[answersOB[3]];
+  const interests = answersOB[4].map(i => questions[4].o[i]).join(" · ");
+  document.getElementById("reasons").innerHTML = [
+    `เป้าหมายที่คุณเลือก: ${goals}`,
+    `คุณออกกำลังกาย ${freq}`,
+    `กิจกรรมที่คุณสนใจ: ${interests}`,
+    `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน`
+  ].map(item => `<div class="reason">${item}</div>`).join("");
+
+  show('result');
+}
+
+function renderCompare(){
+  const container=document.getElementById("compareGrid");
+  container.innerHTML="";
+  Object.entries(packages).forEach(([key,pkg])=>{
+    const isSelected = selectedPackage===key;
+    const isRecommended = selectedPackage===key;
+    container.innerHTML+=`
+      <div class="plan ${isSelected?"selected":""} ${isRecommended?"has-ribbon":""}">
+        ${isRecommended?`<div class="ribbon">✦ Recommended</div>`:""}
+        <div class="eyebrow">${pkg.type}</div>
+        <h2 style="margin:20px 0 10px;">${pkg.name}</h2>
+        <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿${pkg.price.toLocaleString()}</div>
+        <small style="color:var(--muted);">ต่อเดือน</small>
+        <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+          ${pkg.services.map(service=>`<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("")}
+        </ul>
+        <button class="${isSelected?"btn-primary":"btn-outline"}" style="margin:0;" onclick="choosePackage('${key}')">${isSelected?"เลือกอยู่":"เลือกแพ็กเกจนี้"}</button>
+        <div style="text-align:center; margin-top:15px;">
+          <button style="background:none; color:var(--green); font-size:13px; font-weight:600; text-decoration:underline;" onclick="openPackageDetail('${key}')">ดูรายละเอียดเพิ่มเติม</button>
+        </div>
+      </div>
+    `;
+  });
+  updateCompareCheckoutBanner();
+}
+
+function choosePackage(key){
+  selectedPackage = key;
+  renderCompare();
+  
+  // อัปเดตราคาในหน้า Payment ด้วย
+  const pkg = packages[key];
+  const vat = Math.round(pkg.price * 0.07);
+  const total = pkg.price + vat;
+  document.getElementById("checkoutPackage").textContent = pkg.name + " Package";
+  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
+  document.getElementById("grandTotal").textContent = "฿" + total.toLocaleString();
+  document.getElementById("payButtonAmount").textContent = "฿" + total.toLocaleString() + " →";
+}
+
+function updateCompareCheckoutBanner(){
+  const pkg=packages[selectedPackage];
+  document.getElementById("compareSelectedName").textContent=pkg.name;
+  document.getElementById("compareSelectedPrice").textContent="฿"+pkg.price.toLocaleString()+" / เดือน";
+}
+
+function openPackageDetail(key) {
+  const pkg = packages[key];
+  document.getElementById("detailType").textContent = pkg.type;
+  document.getElementById("detailName").textContent = pkg.name;
+  document.getElementById("detailPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("detailDescription").textContent = pkg.description;
+  document.getElementById("detailSuitable").textContent = pkg.suitable;
+  document.getElementById("detailServices").innerHTML = pkg.services.map(service => `<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("");
+  show('detail');
+}
+
+function selectDetailPackage() {
+  // สั่งให้กลับไปหน้าเปรียบเทียบก่อน แล้วเลือกแพ็กเกจนี้
+  choosePackage(selectedPackage);
+  goPayment();
+}
+
+function goPayment() { show('payment'); }
+
+/* PAYMENT LOGIC (จาก kla.html) */
+let paymentMethod = 'card';
+function setPayment(type, element) {
+  paymentMethod = type;
+  document.querySelectorAll(".pay-tab").forEach(tab => tab.classList.remove("active"));
+  element.classList.add("active");
+  document.getElementById("cardForm").style.display = type === "card" ? "block" : "none";
+  document.getElementById("qrForm").style.display = type === "qr" ? "block" : "none";
+  document.getElementById("mobileForm").style.display = type === "mobile" ? "block" : "none";
+  
+  const actionText = document.getElementById("payActionText");
+  if(type === "mobile") actionText.textContent = selectedBank ? "เปิด " + selectedBank : "เลือกธนาคารเพื่อชำระ";
+  else if(type === "qr") actionText.textContent = "ยืนยันการชำระผ่าน QR";
+  else actionText.textContent = "ชำระเงิน";
+}
+
+let selectedBank = null;
+function selectBank(bank, element) {
+  selectedBank = bank;
+  document.querySelectorAll(".bank-option").forEach(opt => opt.classList.remove("active"));
+  element.classList.add("active");
+  document.getElementById("payActionText").textContent = "เปิด " + bank;
+}
+
+function processPayment() {
+  if (paymentMethod === "mobile" && !selectedBank) return showPopup("แจ้งเตือน", "กรุณาเลือกธนาคารก่อนครับ");
+  
+  document.getElementById("processTitle").textContent = paymentMethod === "mobile" ? "กำลังเชื่อมต่อ " + selectedBank : "กำลังดำเนินการชำระเงิน";
+  document.getElementById("processDesc").textContent = paymentMethod === "qr" ? "กำลังตรวจสอบการชำระผ่าน QR" : "กรุณารอสักครู่ ระบบกำลังตรวจสอบรายการของคุณ";
+
+  show('processing');
+  
+  const fill = document.getElementById("processFill");
+  fill.style.width = "0%";
+  setTimeout(()=>fill.style.width="35%", 150);
+  setTimeout(()=>fill.style.width="72%", 800);
+  setTimeout(()=>fill.style.width="100%", 1450);
+
+  setTimeout(() => { 
+    document.getElementById("successPackage").textContent = document.getElementById("checkoutPackage").textContent;
+    document.getElementById("successAmount").textContent = document.getElementById("grandTotal").textContent;
+    document.getElementById("successMethod").textContent = paymentMethod === 'card' ? "บัตรเครดิต / เดบิต" : (paymentMethod === 'qr' ? "QR Code" : "Mobile Banking · " + selectedBank);
+    show('success'); 
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const qr = document.getElementById("fakeQr");
+  if(qr && !qr.children.length){
+    for(let i=0;i<36;i++){ qr.appendChild(document.createElement("span")); }
+  }
+});
+
+</script>
+
+</body>
+</html>
 <!-- โหลดฟอนต์ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
