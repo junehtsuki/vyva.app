@@ -308,7 +308,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   <!-- =========================================
        2. HOME DASHBOARD
   ========================================= -->
-  <section id="home" class="active" style="background: #e4f2df;">
+  <section id="home" style="background: #e4f2df;">
     <div class="home-header">
       <div class="profile-avatar" onclick="show('profile')">🤍</div>
       <div class="user-info">
@@ -923,7 +923,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('splash').style.display = 'none';
-    document.getElementById('welcome').classList.add('active');
+    show('welcome'); // ใช้คำสั่ง show() เพราะมันจะไปสั่งลบหน้าอื่นๆ ออกให้หมดก่อนเปิดหน้า welcome
   }, 2600);
 });
 
