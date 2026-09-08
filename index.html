@@ -433,7 +433,9 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="home" style="background: #e4f2df;">
     <div class="home-header">
-      <div class="profile-avatar" onclick="show('profile')">🤍</div>
+      <div class="profile-avatar" onclick="show('profile')" style="background: transparent; box-shadow: none;">
+        <img src="sayo.people.png" alt="Profile" style="width: 100%; height: 100%; object-fit: contain;">
+      </div>
       <div class="user-info">
         <h2 style="color: var(--ink);">SAYO-Wellness</h2>
         <p>Hello, คุณสมาชิก</p>
@@ -1420,14 +1422,12 @@ function submitOnboarding(){
   if (!valid) return showPopup("แจ้งเตือน", "กรุณาเลือกหรือกรอกข้อมูลให้ครบทุกข้อก่อนนะครับ 😊");
 
   const budget = answersOB[5];
-  const occupation = answersOB[1]; // 0 = นักศึกษา
-  const interests = answersOB[4];  // 1 = PT, 5 = Massage, 6 = Onsen
   
-  // Logic การ match แพ็กเกจที่คำนึงถึงทั้งงบประมาณและ Persona
+  // Logic การ match แพ็กเกจ
   let chosen = "core";
-  if (budget >= 4500 || (interests.includes(1) && interests.includes(6))) {
+  if (budget >= 4500) {
     chosen = "signature";
-  } else if (budget < 2500 || occupation === 0) {
+  } else if (budget < 2500) {
     chosen = "urate";
   } else {
     chosen = "core";
@@ -1438,97 +1438,74 @@ function submitOnboarding(){
   const vat = Math.round(pkg.price * 0.07);
   const grandTotal = pkg.price + vat;
 
-  // Render ข้อมูลหน้า Result
-  document.getElementById("packageName").textContent = pkg.name;
-  document.getElementById("resultDescription").textContent = pkg.description;
+  // อัปเดตหน้า Result (ใส่เงื่อนไข if เพื่อป้องกัน Error ถ้าหา ID ไม่เจอ)
+  const pkgNameElem = document.getElementById("packageName");
+  if(pkgNameElem) pkgNameElem.textContent = pkg.name;
+  
+  const resDescElem = document.getElementById("resultDescription");
+  if(resDescElem) resDescElem.textContent = pkg.description;
 
-  // Render แบนเนอร์ลอยด้านล่างหน้า Result
   const resName = document.getElementById("resultSelectedName");
   const resPrice = document.getElementById("resultSelectedPrice");
   if (resName) resName.textContent = pkg.name.replace(" Package", "");
   if (resPrice) resPrice.textContent = "฿" + pkg.price.toLocaleString() + " / เดือน";
 
-  // Reasons
+  // อัปเดตเหตุผล
   const goalsStr = answersOB[2].map(i => questions[2].o[i]).join(" · ");
   const freqStr = questions[3].o[answersOB[3]];
   const interestsStr = answersOB[4].map(i => questions[4].o[i]).join(" · ");
-  document.getElementById("reasons").innerHTML = [
-    `เป้าหมายที่คุณเลือก: ${goalsStr}`,
-    `ความถี่การออกกำลังกาย: ${freqStr}`,
-    `กิจกรรมที่คุณสนใจ: ${interestsStr}`,
-    `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน (${pkg.name} อยู่ในเกณฑ์ที่คุ้มค่าที่สุด)`
-  ].map(item => `<div class="reason">${item}</div>`).join("");
+  const reasonsElem = document.getElementById("reasons");
+  if(reasonsElem) {
+    reasonsElem.innerHTML = [
+      `เป้าหมายที่คุณเลือก: ${goalsStr}`,
+      `ความถี่การออกกำลังกาย: ${freqStr}`,
+      `กิจกรรมที่คุณสนใจ: ${interestsStr}`,
+      `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน`
+    ].map(item => `<div class="reason">${item}</div>`).join("");
+  }
 
   // Set Compare & Checkout Data
   renderCompare();
-  document.getElementById("checkoutPackage").textContent = pkg.name;
-  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
-  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
-  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
-  document.getElementById("grandTotal").textContent = "฿" + grandTotal.toLocaleString();
-  document.getElementById("payButtonAmount").textContent = "฿" + grandTotal.toLocaleString() + " →";
-  const qrDisplay = document.getElementById("qrTotalDisplay");
-  if (qrDisplay) qrDisplay.textContent = "ยอดชำระ ฿" + grandTotal.toLocaleString();
+  
+  const checkPkg = document.getElementById("checkoutPackage");
+  if(checkPkg) checkPkg.textContent = pkg.name;
+  
+  const checkPrice = document.getElementById("checkoutPrice");
+  if(checkPrice) checkPrice.textContent = "฿" + pkg.price.toLocaleString();
+  
+  const subT = document.getElementById("subTotal");
+  if(subT) subT.textContent = "฿" + pkg.price.toLocaleString();
+  
+  const vatT = document.getElementById("vatAmount");
+  if(vatT) vatT.textContent = "฿" + vat.toLocaleString();
+  
+  const grandT = document.getElementById("grandTotal");
+  if(grandT) grandT.textContent = "฿" + grandTotal.toLocaleString();
+  
+  const btnAmt = document.getElementById("payButtonAmount");
+  if(btnAmt) btnAmt.textContent = "฿" + grandTotal.toLocaleString() + " →";
 
   show('result');
 }
 
-function renderCompare(){
-  const container=document.getElementById("compareGrid");
-  container.innerHTML="";
-  Object.entries(packages).forEach(([key,pkg])=>{
-    const isSelected = selectedPackage===key;
-    const isRecommended = selectedPackage===key;
-    container.innerHTML+=`
-      <div class="plan ${isSelected?"selected":""} ${isRecommended?"has-ribbon":""}">
-        ${isRecommended?`<div class="ribbon">✦ Recommended</div>`:""}
-        <div class="eyebrow">${pkg.type}</div>
-        <h2 style="margin:20px 0 10px;">${pkg.name}</h2>
-        <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿${pkg.price.toLocaleString()}</div>
-        <small style="color:var(--muted);">ต่อเดือน</small>
-        <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
-          ${pkg.services.map(service=>`<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("")}
-        </ul>
-        <button class="${isSelected?"btn-primary":"btn-outline"}" style="margin:0;" onclick="choosePackage('${key}')">${isSelected?"เลือกอยู่":"เลือกแพ็กเกจนี้"}</button>
-        <div style="text-align:center; margin-top:15px;">
-          <button style="background:none; color:var(--green); font-size:13px; font-weight:600; text-decoration:underline;" onclick="openPackageDetail('${key}')">ดูรายละเอียดเพิ่มเติม</button>
-        </div>
-      </div>
-    `;
-  });
-  updateCompareCheckoutBanner();
-}
-
-function choosePackage(key){
-  selectedPackage = key;
-  renderCompare();
-  
-  // อัปเดตราคาในหน้า Payment ด้วย
-  const pkg = packages[key];
-  const vat = Math.round(pkg.price * 0.07);
-  const total = pkg.price + vat;
-  document.getElementById("checkoutPackage").textContent = pkg.name + " Package";
-  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
-  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
-  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
-  document.getElementById("grandTotal").textContent = "฿" + total.toLocaleString();
-  document.getElementById("payButtonAmount").textContent = "฿" + total.toLocaleString() + " →";
-}
-
-function updateCompareCheckoutBanner(){
-  const pkg=packages[selectedPackage];
-  document.getElementById("compareSelectedName").textContent=pkg.name;
-  document.getElementById("compareSelectedPrice").textContent="฿"+pkg.price.toLocaleString()+" / เดือน";
-}
-
 function openPackageDetail(key) {
   const pkg = packages[key];
-  document.getElementById("detailType").textContent = pkg.type;
-  document.getElementById("detailName").textContent = pkg.name;
-  document.getElementById("detailPrice").textContent = "฿" + pkg.price.toLocaleString();
-  document.getElementById("detailDescription").textContent = pkg.description;
-  document.getElementById("detailSuitable").textContent = pkg.suitable;
-  document.getElementById("detailServices").innerHTML = pkg.services.map(service => `<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("");
+  const typeElem = document.getElementById("detailType");
+  if(typeElem) typeElem.textContent = pkg.type;
+  
+  const nameElem = document.getElementById("detailName");
+  if(nameElem) nameElem.textContent = pkg.name;
+  
+  const priceElem = document.getElementById("detailPrice");
+  if(priceElem) priceElem.textContent = "฿" + pkg.price.toLocaleString();
+  
+  const descElem = document.getElementById("detailDescription");
+  if(descElem) descElem.textContent = pkg.description;
+  
+  const srvElem = document.getElementById("detailServices");
+  if(srvElem) {
+    srvElem.innerHTML = pkg.services.map(service => `<li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>${service}</li>`).join("");
+  }
   show('detail');
 }
 
