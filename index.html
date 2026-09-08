@@ -349,8 +349,8 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <!-- กดเริ่มค้นหา จะวิ่งไปที่หน้า quiz (คำถาม 7 ข้อ) ของโค้ดเดิมคุณ -->
       <button class="primary" style="margin-top:20px; margin-bottom:10px; width: 100%;" onclick="startQuiz()">เริ่มค้นหาแพ็กเกจที่ใช่ →</button>
       
-      <!-- กดเปรียบเทียบ จะวิ่งไปหน้า compare ของโค้ดเดิมคุณ -->
-      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
+      <!-- กดเปรียบเทียบ จะทำการดึงข้อมูล 3 แพ็กเกจมาแสดง แล้ววิ่งไปหน้า compare -->
+      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="renderCompare(); show('compare');">ดูและเปรียบเทียบแพ็กเกจ</button>
     </div>
 
  <!-- Free Trial Banner (Sayo Pass) -->
