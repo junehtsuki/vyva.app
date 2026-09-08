@@ -67,19 +67,19 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .nav-item .icon { font-size: 22px; }
 .nav-item.active { color: var(--green); }
 
-/*  & AUTH */
-# { background-color: var(--mint); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
-.-scene { position: relative; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
-.-oval { position: absolute; right: 15%; top: 15%; width: 90px; height: 200px; z-index: 1; transform: scale(0); animation: ovalPop 0.6s ease forwards; }
-.-people { position: absolute; right: 15%; top: 10%; width: 220px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.3s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+/* SPLASH & AUTH */
+#splash { background-color: var(--mint); justify-content: center; align-items: center; height: 100%; position: absolute; width: 100%; z-index: 999; }
+.splash-scene { position: relative; width: 100%; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 30px; }
+.splash-oval { position: absolute; right: 15%; top: 15%; width: 90px; height: 200px; z-index: 1; transform: scale(0); animation: ovalPop 0.6s ease forwards; }
+.splash-people { position: absolute; right: 15%; top: 10%; width: 220px; z-index: 2; opacity: 0; transform-origin: center; transform: translateX(0) rotate(180deg) scale(0.5); animation: flipJump 1.3s 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
 .brand-box { text-align: center; opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s 1.5s forwards; }
 .brand-sayo { font-family: 'Montserrat', sans-serif; font-size: 64px; font-weight: 900; color: var(--green); margin: 0; letter-spacing: 4px; line-height: 1; }
 @keyframes ovalPop { to { transform: scale(1); } }
 @keyframes flipJump { 0% { transform: translateX(40px) rotate(90deg) scale(0.5); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateX(-110px) rotate(-360deg) scale(1.1); opacity: 1; } }
 @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
-.e-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow); }
-#e { align-items: center; justify-content: center; text-align: center; }
+.welcome-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow); }
+#welcome { align-items: center; justify-content: center; text-align: center; }
 
 /* =========================================
    หน้า HOME สไตล์ PASTEL
@@ -250,7 +250,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
 <div class="app-container">
 
-<!-- =========================================
+  <!-- =========================================
        0. SPLASH SCREEN 
   ========================================= -->
   <div id="splash">
@@ -264,8 +264,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </div>
 
-
-<!-- =========================================
+ <!-- =========================================
        1. WELCOME & AUTH (Updated Design)
   ========================================= -->
   <section id="welcome" style="background: url('salaya.jpg') center/cover no-repeat; padding: 15px;">
@@ -302,7 +301,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       </div>
     </div>
   </section>
-
   <!-- =========================================
        SIGN UP
   ========================================= -->
@@ -362,7 +360,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <img src="sayo.banner.png" alt="SAYO Banner" style="max-width: 160px; opacity: 0.9;">
     </div>
   </section>
-
   <!-- =========================================
        SIGN IN
   ========================================= -->
@@ -449,8 +446,8 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <!-- กดเริ่มค้นหา จะวิ่งไปที่หน้า quiz (คำถาม 7 ข้อ) ของโค้ดเดิมคุณ -->
       <button class="primary" style="margin-top:20px; margin-bottom:10px; width: 100%;" onclick="startQuiz()">เริ่มค้นหาแพ็กเกจที่ใช่ →</button>
       
-      <!-- กดเปรียบเทียบ จะทำการดึงข้อมูล 3 แพ็กเกจมาแสดง แล้ววิ่งไปหน้า compare -->
-      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="renderCompare(); show('compare');">ดูและเปรียบเทียบแพ็กเกจ</button>
+      <!-- กดเปรียบเทียบ จะวิ่งไปหน้า compare ของโค้ดเดิมคุณ -->
+      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
     </div>
 
  <!-- Free Trial Banner (Sayo Pass) -->
@@ -535,18 +532,22 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <section id="result">
-    <div class="onboarding-wrap" style="padding-top:0;">
+  <!-- =========================================
+       RESULT SECTION (ปรับ Layout ตามดีไซน์)
+  ========================================= -->
+  <section id="result" style="padding-bottom: 120px;">
+    <div class="onboarding-wrap" style="padding-top:0; padding-bottom:0;">
       <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
       
       <div class="result-hero">
         <div class="result-top">
           <div>
-            <div class="eyebrow" style="color:var(--secondary);">✦ YOUR WELLNESS MATCH</div>
-            <h1 class="package-result-name" id="packageName">Signature Package</h1>
-            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจแบบครบครันสำหรับคนที่ต้องการดูแลสุขภาพอย่างหลากหลาย</p>
-            <button class="btn-outline" style="border:none; color:var(--green); margin:0; padding:12px 24px; width:auto; font-size:14px;" onclick="goPayment()">เลือกแพ็กเกจนี้ →</button>
+            <div class="eyebrow" style="color:#a7e0c7;">✦ YOUR WELLNESS MATCH</div>
+            <div style="font-size:13px; color:#d2ede0; margin-top:4px;">แพ็กเกจที่เหมาะกับคุณที่สุด</div>
+            <h1 class="package-result-name" id="packageName">Core Package</h1>
+            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจยอดนิยม ครบทั้งออกกำลังกาย ผ่อนคลาย และคอมมูนิตี้</p>
           </div>
+          
           <div class="match-score-card">
             <div class="score-circle">
               <div class="score-inner">
@@ -556,6 +557,9 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
             </div>
             <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
           </div>
+
+          <!-- ย้ายปุ่มเปรียบเทียบแพ็กเกจมาไว้ด้านล่างกล่องคะแนนภายในกล่องเขียว -->
+          <button class="btn-outline" style="border:none; color:var(--green); margin:10px 0 0; width:100%; font-size:15px; font-weight:700; background: #fff;" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
         </div>
       </div>
 
@@ -564,13 +568,16 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         <div id="reasons"></div>
       </div>
 
-      <div class="summary-card">
-        <div class="eyebrow">YOUR PACKAGE</div>
-        <h3 id="summaryPackage" style="margin:5px 0; font-size: 20px;">Signature Package</h3>
-        <div class="plan-price" id="packagePrice" style="margin:5px 0 10px;">฿3,000</div>
-        <div style="color:var(--muted); font-size:13px; margin-bottom:15px;">ต่อเดือน</div>
-        <p id="summaryText" style="font-size:14px; color:var(--muted); line-height:1.6; margin-bottom:20px;">เหมาะสำหรับผู้ที่ต้องการกิจกรรมหลากหลายในแพ็กเกจเดียว และต้องการดูแลสุขภาพทั้งด้านร่างกายและการผ่อนคลาย</p>
-        <button class="btn-outline" style="margin:0; font-size: 14px;" onclick="show('compare')">เปรียบเทียบกับแพ็กเกจอื่น</button>
+      <!-- แบนเนอร์ลอยด้านล่างแบบ Sticky สไตล์เดียวกับหน้า Compare -->
+      <div class="selected-package-banner">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div>
+            <div class="eyebrow">แพ็กเกจที่แนะนำ</div>
+            <h3 id="resultSelectedName" style="margin:0; font-size: 18px;">Core</h3>
+          </div>
+          <div id="resultSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿2,990 / เดือน</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
       </div>
     </div>
   </section>
@@ -1217,10 +1224,53 @@ function closePopup() { document.getElementById('popupOverlay').classList.remove
 /* =========================
    ONBOARDING QUIZ (เลื่อนยาวหน้าเดียว - ดึงโครงสร้างจาก kla.html 100%)
 ========================= */
+
+/* =========================
+   PACKAGES DATA (อัปเดตตามแบบสำรวจจริง)
+========================= */
 const packages = {
-  signature: { name: "Signature Package", price: 3000, type: "SIGNATURE", services: ["Fitness", "Yoga", "Pilates", "Muay Thai", "Onsen"] },
-  core: { name: "Core Package", price: 1800, type: "CORE", services: ["Fitness", "Yoga", "เลือกบริการหลัก", "เหมาะกับการใช้งานทั่วไป"] },
-  urate: { name: "U-Rate Package", price: 1200, type: "U-RATE", services: ["Fitness", "เหมาะสำหรับเริ่มต้น", "ราคาประหยัด", "ยืดหยุ่น"] }
+  signature: { 
+    name: "Signature Package", 
+    price: 4990, 
+    type: "SIGNATURE", 
+    description: "Complete Personalized Wellness ดูแลครบวงจรทั้งฟิตเนส เทรนเนอร์ และการฟื้นฟูระดับพรีเมียม",
+    suitable: "ผู้ที่ต้องการการดูแลสุขภาพแบบองค์รวม บริการระดับพรีเมียม และความเป็นส่วนตัว",
+    services: [
+      "Performance Fitness & Café — Unlimited",
+      "Group Training, Pilates & Yoga — Unlimited",
+      "Muay Thai & Pickleball",
+      "Personal Training 1 ครั้ง/เดือน",
+      "Premium Credits 2 ครั้ง/เดือน (Onsen / Sports Massage)",
+      "Priority Booking สิทธิ์จองคลาสและสนามล่วงหน้า"
+    ] 
+  },
+  core: { 
+    name: "Core Package", 
+    price: 2990, 
+    type: "CORE", 
+    description: "Everyday Wellness Membership สมดุลที่ลงตัวสำหรับ Fitness + Recovery + Co-working",
+    suitable: "คนทำงานและผู้ที่ออกกำลังกายเป็นประจำ ต้องการความหลากหลายในราคาคุ้มค่า",
+    services: [
+      "Performance Fitness — Unlimited",
+      "Café & Co-working — Unlimited",
+      "8 Activity Credits/เดือน (Pilates, Group Class, Muay Thai, Pickleball)",
+      "Recovery Credit 1 ครั้ง/เดือน (Onsen หรือ Massage)",
+      "ส่วนลด 15% สำหรับบริการ Personal Training"
+    ] 
+  },
+  urate: { 
+    name: "U-Rate Package", 
+    price: 1490, 
+    type: "U-RATE", 
+    description: "Affordable Active Lifestyle เข้าถึงคอมมูนิตี้และสุขภาพที่ดีในราคาที่เข้าถึงง่าย",
+    suitable: "นักศึกษาและคนรุ่นใหม่ที่เน้นใช้งานฟิตเนส พื้นที่นั่งทำงาน และคลาสออกกำลังกาย",
+    services: [
+      "Performance Fitness — 8 ครั้ง/เดือน",
+      "Café & Co-working — Unlimited",
+      "4 Activity Credits/เดือน (Group Class, Pilates, Pickleball)",
+      "สิทธิ์ซื้อบริการ Onsen, Muay Thai และ Massage ในราคาสมาชิก"
+    ] 
+  }
 };
 
 const questions = [
@@ -1240,6 +1290,7 @@ function startQuiz() {
   renderOnboarding(); 
 }
 
+/* ปรับฟังก์ชัน renderOnboarding ช่อง Budget ให้ hint ตัวเลขราคาใหม่ */
 function renderOnboarding() {
   const form = document.getElementById("onboarding-form");
   form.innerHTML = "";
@@ -1279,8 +1330,8 @@ function renderOnboarding() {
        html += `</div>`;
     } else if (q.type === "budget") {
        html += `
-         <input type="number" class="budget-input" placeholder="เช่น 2500" value="${answersOB[qIndex] || ''}" oninput="updateBudgetOb(${qIndex}, this.value)">
-         <div class="input-note">ตัวอย่าง: 1200 · 1800 · 3000 บาทต่อเดือน</div>
+         <input type="number" class="budget-input" placeholder="เช่น 3000" value="${answersOB[qIndex] || ''}" oninput="updateBudgetOb(${qIndex}, this.value)">
+         <div class="input-note">ตัวอย่างงบประมาณ: 1,490 · 2,990 · 4,990 บาทต่อเดือน</div>
        `;
     }
     block.innerHTML = html;
@@ -1307,6 +1358,7 @@ function updateBudgetOb(qIndex, value){
 
 let selectedPackage = "signature";
 
+/* ปรับฟังก์ชัน submitOnboarding ตามช่วงราคาใหม่ และ sync ป้าย Banner ลอย */
 function submitOnboarding(){
   let valid = true;
   for (let i = 0; i < questions.length; i++) {
@@ -1320,44 +1372,55 @@ function submitOnboarding(){
   if (!valid) return showPopup("แจ้งเตือน", "กรุณาเลือกหรือกรอกข้อมูลให้ครบทุกข้อก่อนนะครับ 😊");
 
   const budget = answersOB[5];
-  let pkgName = "U-Rate", pkgPrice = "฿990", checkoutPrice="฿990", sub="฿990", grand="฿1,059";
-  selectedPackage = "urate";
+  const occupation = answersOB[1]; // 0 = นักศึกษา
+  const interests = answersOB[4];  // 1 = PT, 5 = Massage, 6 = Onsen
   
-  if (budget >= 3000) { 
-    pkgName = "Signature"; pkgPrice = "฿3,000"; checkoutPrice = "฿3,000"; sub = "฿3,000"; grand = "฿3,210";
-    selectedPackage = "signature";
-  } else if (budget >= 1800) { 
-    pkgName = "Core"; pkgPrice = "฿1,800"; checkoutPrice = "฿1,800"; sub = "฿1,800"; grand = "฿1,926";
-    selectedPackage = "core";
+  // Logic การ match แพ็กเกจที่คำนึงถึงทั้งงบประมาณและ Persona
+  let chosen = "core";
+  if (budget >= 4500 || (interests.includes(1) && interests.includes(6))) {
+    chosen = "signature";
+  } else if (budget < 2500 || occupation === 0) {
+    chosen = "urate";
+  } else {
+    chosen = "core";
   }
   
-  document.getElementById("packageName").textContent = pkgName + " Package";
-  document.getElementById("summaryPackage").textContent = pkgName + " Package";
-  document.getElementById("packagePrice").textContent = pkgPrice;
-  
-  // Set Compare Data
-  renderCompare();
+  selectedPackage = chosen;
+  const pkg = packages[chosen];
+  const vat = Math.round(pkg.price * 0.07);
+  const grandTotal = pkg.price + vat;
 
-  // Set Checkout Data
-  document.getElementById("checkoutPackage").textContent = pkgName + " Package";
-  document.getElementById("checkoutPrice").textContent = checkoutPrice;
-  document.getElementById("subTotal").textContent = sub;
-  const numPrice = Number(sub.replace(/[^0-9]/g, ''));
-  const vat = Math.round(numPrice * 0.07);
-  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
-  document.getElementById("grandTotal").textContent = grand;
-  document.getElementById("payButtonAmount").textContent = grand + " →";
+  // Render ข้อมูลหน้า Result
+  document.getElementById("packageName").textContent = pkg.name;
+  document.getElementById("resultDescription").textContent = pkg.description;
+
+  // Render แบนเนอร์ลอยด้านล่างหน้า Result
+  const resName = document.getElementById("resultSelectedName");
+  const resPrice = document.getElementById("resultSelectedPrice");
+  if (resName) resName.textContent = pkg.name.replace(" Package", "");
+  if (resPrice) resPrice.textContent = "฿" + pkg.price.toLocaleString() + " / เดือน";
 
   // Reasons
-  const goals = answersOB[2].map(i => questions[2].o[i]).join(" · ");
-  const freq = questions[3].o[answersOB[3]];
-  const interests = answersOB[4].map(i => questions[4].o[i]).join(" · ");
+  const goalsStr = answersOB[2].map(i => questions[2].o[i]).join(" · ");
+  const freqStr = questions[3].o[answersOB[3]];
+  const interestsStr = answersOB[4].map(i => questions[4].o[i]).join(" · ");
   document.getElementById("reasons").innerHTML = [
-    `เป้าหมายที่คุณเลือก: ${goals}`,
-    `คุณออกกำลังกาย ${freq}`,
-    `กิจกรรมที่คุณสนใจ: ${interests}`,
-    `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน`
+    `เป้าหมายที่คุณเลือก: ${goalsStr}`,
+    `ความถี่การออกกำลังกาย: ${freqStr}`,
+    `กิจกรรมที่คุณสนใจ: ${interestsStr}`,
+    `งบประมาณของคุณประมาณ ฿${budget.toLocaleString()} ต่อเดือน (${pkg.name} อยู่ในเกณฑ์ที่คุ้มค่าที่สุด)`
   ].map(item => `<div class="reason">${item}</div>`).join("");
+
+  // Set Compare & Checkout Data
+  renderCompare();
+  document.getElementById("checkoutPackage").textContent = pkg.name;
+  document.getElementById("checkoutPrice").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("subTotal").textContent = "฿" + pkg.price.toLocaleString();
+  document.getElementById("vatAmount").textContent = "฿" + vat.toLocaleString();
+  document.getElementById("grandTotal").textContent = "฿" + grandTotal.toLocaleString();
+  document.getElementById("payButtonAmount").textContent = "฿" + grandTotal.toLocaleString() + " →";
+  const qrDisplay = document.getElementById("qrTotalDisplay");
+  if (qrDisplay) qrDisplay.textContent = "ยอดชำระ ฿" + grandTotal.toLocaleString();
 
   show('result');
 }
