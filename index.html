@@ -61,9 +61,26 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 20px; margin-bottom: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
 .back-link { background: none; color: var(--green); padding: 0; font-size: 14px; font-weight: 600; margin-bottom: 20px; display: inline-block; text-align: left; }
 
-/* BOTTOM NAVIGATION */
-.bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--line); display: none; grid-template-columns: repeat(5, 1fr); z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
-.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 600; background: transparent; }
+/* =========================================
+   แก้ BOTTOM NAVIGATION ไม่ให้ลอยเวลาเลื่อน
+========================================= */
+.bottom-nav { 
+  position: fixed; 
+  bottom: 0; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  width: 100%; 
+  max-width: 430px; 
+  height: 80px; 
+  background: rgba(255,255,255,0.95); 
+  backdrop-filter: blur(10px); 
+  border-top: 1px solid var(--line); 
+  display: grid; 
+  grid-template-columns: repeat(5, 1fr); 
+  z-index: 1000; 
+  padding-bottom: env(safe-area-inset-bottom); 
+}
+.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); gap: 4px; font-size: 10px; font-weight: 700; background: transparent; border: none; cursor: pointer;}
 .nav-item .icon { font-size: 22px; }
 .nav-item.active { color: var(--green); }
 
@@ -81,9 +98,36 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .welcome-logo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 24px; box-shadow: var(--shadow); }
 #welcome { align-items: center; justify-content: center; text-align: center; }
 
-/* HOME */
-.home-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.profile-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--secondary); display: grid; place-items: center; font-size: 20px; border: 2px solid #fff; box-shadow: var(--shadow); cursor: pointer; }
+/* =========================================
+   หน้า HOME สไตล์ PASTEL
+========================================= */
+.home-header { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
+.profile-avatar { width: 48px; height: 48px; border-radius: 16px; background: var(--green); display: grid; place-items: center; font-size: 24px; color: #fff; box-shadow: var(--shadow); cursor: pointer; }
+.user-info h2 { margin: 0; font-size: 18px; font-weight: 800; }
+.user-info p { margin: 2px 0 0; color: var(--green); font-size: 13px; font-weight: 700;}
+
+.hero-match-card { background: var(--surface); border-radius: 24px; padding: 24px; margin-bottom: 20px; box-shadow: var(--shadow); text-align: left;}
+.match-badge { display: inline-block; background: var(--mint); color: var(--green-dark); padding: 6px 12px; border-radius: 999px; font-size: 11px; font-weight: 800; margin-bottom: 15px; }
+.hero-match-card h1 { font-size: 30px; font-weight: 800; line-height: 1.15; margin: 0 0 12px; color: var(--green-dark); }
+.hero-match-card p { font-size: 13px; color: var(--ink); line-height: 1.6; margin: 0; opacity: 0.8; }
+
+.trial-banner { display: flex; align-items: center; gap: 20px; background: var(--gold); border-radius: 24px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); background-color: #fff5cf; }
+.trial-img-box { width: 80px; height: 80px; flex-shrink: 0; background: #ebd492; border-radius: 16px; display: grid; place-items: center; font-size: 40px; }
+.trial-content h3 { margin: 0 0 8px; font-size: 16px; font-weight: 800; color: var(--ink); }
+.trial-content ul { padding-left: 15px; margin: 0 0 15px; font-size: 11px; color: var(--ink); opacity: 0.8; line-height: 1.5; }
+.btn-gold { background: var(--gold); color: #fff; border: none; border-radius: 999px; padding: 8px 16px; font-weight: 700; font-size: 12px; width: 100%; display: block; text-align: center; cursor: pointer;}
+
+.stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 30px; }
+.stat-box { background: var(--surface); border-radius: 16px; padding: 15px 10px; text-align: center; box-shadow: var(--shadow); }
+.stat-box b { display: block; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+.stat-box span { font-size: 9px; color: var(--muted); line-height: 1.3; }
+
+.feature-list { display: flex; flex-direction: column; gap: 15px; }
+.feature-item { background: var(--surface); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow); }
+.feature-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--mint); display: grid; place-items: center; font-size: 20px; color: var(--green); }
+.feature-item h3 { margin: 0; font-size: 16px; font-weight: 800; }
+.feature-item p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
 
 /* =========================================
    ONBOARDING / QUIZ FLOW 
@@ -282,27 +326,80 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   <!-- =========================================
        2. HOME DASHBOARD
   ========================================= -->
-  <section id="home">
+  <section id="home" class="active" style="background: #e4f2df;">
     <div class="home-header">
-      <div>
-        <h2 style="margin:0; font-size:22px;">สวัสดี SAYO! 👋</h2>
-        <p style="margin:0; color:var(--muted); font-size:13px;">พร้อมสำหรับ Wellness วันนี้หรือยัง?</p>
+      <div class="profile-avatar" onclick="show('profile')">🤍</div>
+      <div class="user-info">
+        <h2 style="color: var(--ink);">SAYO-Wellness</h2>
+        <p>Hello, คุณสมาชิก</p>
       </div>
-      <div class="profile-avatar" onclick="switchTab('profile')">🤸‍♀️</div>
     </div>
 
-    <div class="card" style="background: linear-gradient(135deg, var(--green), var(--green-dark)); color: #fff; border:none;">
-      <span style="background: var(--bg-yellow); color: var(--ink); padding: 4px 10px; border-radius: 8px; font-size: 11px; font-weight: bold; margin-bottom:10px; display:inline-block;">Free Trial Active</span>
-      <h3 style="margin: 0 0 5px; font-size: 20px;">Welcome to SAYO</h3>
-      <p style="margin: 0 0 15px; font-size: 13px; line-height: 1.5; opacity: 0.9;">รับสิทธิ์เข้าคลาสฟรี 1 ครั้ง และ <b>300 Credits</b></p>
-      <button class="btn-outline" style="padding:10px; margin:0; border:none;" onclick="switchTab('plan')">จองคลาสทดลองเลย</button>
+    <!-- Match Card หลัก -->
+    <div class="hero-match-card">
+      <div class="match-badge">✦ Personalized Wellness Recommendation</div>
+      <h1>เลือกแพ็กเกจที่ใช่<br>ในแบบที่เป็นคุณ</h1>
+      <p>ตอบคำถามเกี่ยวกับเป้าหมาย ไลฟ์สไตล์ กิจกรรมที่สนใจ และงบประมาณ แล้วให้ Wellness Value Tracker ช่วยค้นหาแพ็กเกจที่เหมาะกับคุณที่สุด</p>
+      
+      <!-- กดเริ่มค้นหา จะวิ่งไปที่หน้า quiz (คำถาม 7 ข้อ) ของโค้ดเดิมคุณ -->
+      <button class="primary" style="margin-top:20px; margin-bottom:10px; width: 100%;" onclick="startQuiz()">เริ่มค้นหาแพ็กเกจที่ใช่ →</button>
+      
+      <!-- กดเปรียบเทียบ จะวิ่งไปหน้า compare ของโค้ดเดิมคุณ -->
+      <button class="secondary" style="margin:0; width: 100%; background: var(--mint); border: none; color: var(--green-dark);" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
     </div>
 
-    <div class="eyebrow">YOUR MATCH</div>
-    <h2 class="section-title">ค้นหาแพ็กเกจที่ใช่</h2>
-    <p class="section-desc">ทำแบบประเมินสั้นๆ เพื่อหาคลาสและแพ็กเกจที่เหมาะกับร่างกายคุณที่สุด</p>
-    <!-- เริ่ม Quiz (Onboarding ดึงจาก kla.html) -->
-    <button class="btn-primary" onclick="startQuiz()">เริ่มทำ Wellness Match ✦</button>
+    <!-- Free Trial Banner (กล่องของขวัญ) -->
+    <div class="trial-banner">
+      <div class="trial-img-box">🎁</div>
+      <div class="trial-content">
+        <h3>7-Day Sayo<br>Experience Pass</h3>
+        <ul>
+          <li>ลองใช้ Community ฟรี 7 วัน</li>
+          <li>Fitness + Class + Recovery + Co-working</li>
+        </ul>
+        <button class="btn-gold" onclick="alert('ไปหน้ากิจกรรม')">คลิก เพื่อทดลองฟรี →</button>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box"><b>7 คำถาม</b><span>ตอบตามไลฟ์สไตล์ของคุณ</span></div>
+      <div class="stat-box"><b>3 แพ็กเกจ</b><span>Signature · Core · U-Rate</span></div>
+      <div class="stat-box"><b>For You</b><span>พร้อมเหตุผลประกอบ</span></div>
+    </div>
+
+    <div style="text-align:center; margin: 10px 0 20px;">
+      <h2 style="font-size:22px; font-weight:800; margin:0 0 6px; color: var(--ink);">ง่ายขึ้น ตั้งแต่เริ่มเลือก</h2>
+      <p style="font-size:12px; color:var(--ink); opacity:0.7; margin:0;">ออกแบบให้เข้าใจง่าย และเลือกตามไลฟ์สไตล์ของคุณ</p>
+    </div>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="feature-icon">📝</div>
+        <div>
+          <h3>ตอบตามตัวคุณ</h3>
+          <p>เลือกเป้าหมายและกิจกรรมได้มากกว่าหนึ่งข้อ พร้อมกำหนดงบประมาณของคุณเอง</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">✦</div>
+        <div>
+          <h3>ได้รับคำแนะนำ</h3>
+          <p>ระบบช่วยวิเคราะห์ความต้องการและจับคู่กับแพ็กเกจที่เหมาะสมสำหรับคุณ</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">⚖️</div>
+        <div>
+          <h3>ตัดสินใจได้ง่าย</h3>
+          <p>ดูรายละเอียด เปรียบเทียบแพ็กเกจ และเลือกแพ็กเกจที่ต้องการได้ทันที</p>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align:center; margin-top:30px; opacity:0.8;">
+      <h1 style="font-family: 'Montserrat', sans-serif; font-size: 40px; color: var(--ink); margin: 0; letter-spacing: 4px;">SAYO</h1>
+      <p style="font-size: 10px; color: var(--ink); letter-spacing: 2px; font-weight: 700; margin:0;">A HEALTHIER YOU EVERYDAY</p>
+    </div>
   </section>
 
   <!-- =========================================
@@ -806,13 +903,23 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกการตั้งค่าเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
   </section>
 
-  <!-- BOTTOM NAVIGATION BAR -->
+ <!-- BOTTOM NAVIGATION BAR -->
   <div id="bottomNav" class="bottom-nav">
-    <button class="nav-item active" data-tab="home" onclick="switchTab('home')"><span class="icon">⌂</span><span>Home</span></button>
-    <button class="nav-item" data-tab="plan" onclick="switchTab('plan')"><span class="icon">📅</span><span>Plan</span></button>
-    <button class="nav-item" data-tab="rewards" onclick="switchTab('rewards')"><span class="icon">🎁</span><span>Rewards</span></button>
-    <button class="nav-item" data-tab="community" onclick="switchTab('community')"><span class="icon">👥</span><span>Community</span></button>
-    <button class="nav-item" data-tab="profile" onclick="switchTab('profile')"><span class="icon">👤</span><span>Profile</span></button>
+    <button class="nav-item active" onclick="show('home')">
+      <span class="icon">⌂</span><span>Home</span>
+    </button>
+    <button class="nav-item" onclick="show('plan')">
+      <span class="icon">📅</span><span>Activity</span>
+    </button>
+    <button class="nav-item" onclick="show('profile')">
+      <span class="icon">👤</span><span>Profile</span>
+    </button>
+    <button class="nav-item" onclick="show('rewards')">
+      <span class="icon">🎁</span><span>Reward</span>
+    </button>
+    <button class="nav-item" onclick="show('community')">
+      <span class="icon">👥</span><span>Buddy</span>
+    </button>
   </div>
 
   <!-- POPUP MODAL (GENERAL) -->
