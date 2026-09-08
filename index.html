@@ -332,7 +332,9 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
     <!-- Free Trial Banner (กล่องของขวัญ) -->
     <div class="trial-banner">
-      <div class="trial-img-box">🎁</div>
+      <div class="trial-img-box">
+        <img src="reward.png" alt="Reward" style="width: 100%; height: 100%; object-fit: cover; border-radius: 16px;">
+      </div>
       <div class="trial-content">
         <h3>7-Day Sayo<br>Experience Pass</h3>
         <ul>
@@ -932,7 +934,7 @@ function show(id) {
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
   
-  const hideNavPages = ['splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info', 'detail'];
+  const hideNavPages = ['home','splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info', 'detail'];
   document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
 }
 
@@ -977,7 +979,7 @@ function validateAuth(type) {
 }
 
 function loginSuccess() {
-  document.getElementById('bottomNav').style.display = 'grid';
+  document.getElementById('bottomNav').style.display = 'none';
   switchTab('home');
 }
 
