@@ -259,7 +259,8 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <img src="sayo.people.png" class="splash-people" alt="SAYO Person" onerror="this.style.background='var(--gold)'; this.style.borderRadius='50%'; this.style.height='140px';">
     </div>
     <div class="brand-box">
-      <h1 class="brand-sayo">SAYO</h1>
+      <!-- ดึงโลโก้แบนเนอร์มาใช้ตรงนี้ -->
+      <img src="sayo.banner.png" alt="SAYO Banner" style="max-width: 180px; height: auto; display: block; margin: 0 auto 10px;">
       <p class="brand-slogan">MOVE LIVE GROW</p>
     </div>
   </div>
@@ -304,46 +305,48 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   <!-- =========================================
        SIGN UP
   ========================================= -->
-  <section id="signup" style="background: #e4f2df; padding-top: 40px;">
-    <!-- ปุ่มย้อนกลับ -->
+  <section id="signup" class="bg-white no-padding-bottom" style="background: #e4f2df; padding-top: 40px;">
     <div style="text-align: left; width: 100%;">
       <button class="back-link" style="margin-bottom: 10px;" onclick="show('welcome')">← ย้อนกลับ</button>
     </div>
 
     <div style="text-align: center; margin-bottom: 20px;">
       <div style="width: 48px; height: 48px; background: var(--green); border-radius: 16px; display: inline-grid; place-items: center; color: white; font-size: 24px; margin-bottom: 10px;">🤍</div>
-      <h1 style="margin: 0 0 5px; font-size: 24px; color: var(--green-dark); font-weight: 800;">ยินดีต้อนรับ 👋</h1>
-      <p style="margin: 0; color: var(--muted); font-size: 14px;">เข้าสู่บัญชีของคุณเพื่อเริ่ม Wellness Match</p>
+      <h1 style="margin: 0 0 5px; font-size: 24px; color: var(--green-dark); font-weight: 800;">สมัครสมาชิก ✍️</h1>
+      <p style="margin: 0; color: var(--muted); font-size: 14px;">สร้างบัญชีเพื่อเริ่ม Wellness Journey</p>
     </div>
     
     <div class="card" style="padding: 24px;">
+      <label style="font-size:14px; font-weight:800; margin-bottom:8px; display:block;">ชื่อ-นามสกุล</label>
+      <input type="text" id="regName" class="input-field" placeholder="ชื่อ-นามสกุลของคุณ" style="background: #f9f9f9; border: 1px solid #e0e0e0;">
+
+      <label style="font-size:14px; font-weight:800; margin-bottom:8px; display:block;">เบอร์โทรศัพท์</label>
+      <input type="tel" id="regPhone" class="input-field" placeholder="0812345678" style="background: #f9f9f9; border: 1px solid #e0e0e0;">
+
       <label style="font-size:14px; font-weight:800; margin-bottom:8px; display:block;">อีเมล</label>
       <input type="email" id="regEmail" class="input-field" placeholder="ใส่อีเมลของคุณ" style="background: #f9f9f9; border: 1px solid #e0e0e0;">
 
       <label style="font-size:14px; font-weight:800; margin-bottom:8px; display:block;">รหัสผ่าน</label>
       <div style="position:relative; margin-bottom:15px;">
-        <input type="password" id="regPass" class="input-field" placeholder="ใส่รหัสผ่าน" style="margin-bottom:0; background: #f9f9f9; border: 1px solid #e0e0e0;">
+        <input type="password" id="regPass" class="input-field" placeholder="อย่างน้อย 6 ตัว (มีพิมพ์ใหญ่ หรือ อักษรพิเศษ)" style="margin-bottom:0; background: #f9f9f9; border: 1px solid #e0e0e0;">
         <button style="position:absolute; right:15px; top:15px; background:none; color:var(--green-dark); font-weight:bold; font-size:13px; padding:0;" onclick="togglePass('regPass', this)" aria-label="Toggle Password">
-          <!-- ไอคอนตาปิด (ค่าเริ่มต้น) -->
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
         </button>
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; font-size: 13px; font-weight: 600;">
-        <label style="display:flex; align-items:center; gap:8px; color: var(--ink); cursor:pointer;">
-          <input type="checkbox" checked style="accent-color: var(--green); width:16px; height:16px;"> จดจำฉันไว้
-        </label>
-        <span style="color: var(--green-dark); cursor:pointer;" onclick="show('signin')">มีบัญชีแล้ว?</span>
-      </div>
-
       <button class="btn-primary" style="margin-bottom:20px; background: #559b77; box-shadow: none;" onclick="validateAuth('signup')">สมัครสมาชิก</button>
-
+       
       <div style="text-align: center; color: var(--muted); margin: 0 0 20px; font-size: 12px; position: relative;">
         <span style="background: #fff; padding: 0 10px; position: relative; z-index: 1;">OR</span>
         <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); z-index: 0;"></div>
       </div>
 
       <!-- Social Buttons -->
+      <div style="text-align: center; color: var(--muted); margin: 0 0 20px; font-size: 12px; position: relative;">
+        <span style="background: #fff; padding: 0 10px; position: relative; z-index: 1;">OR</span>
+        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--line); z-index: 0;"></div>
+      </div>
+
       <button class="btn-social" onclick="loginSuccess()"><b></b> Continue with Apple</button>
       <button class="btn-social" onclick="loginSuccess()">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
@@ -582,18 +585,63 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
     </div>
   </section>
 
-  <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
+  <!-- =========================================
+       COMPARE PACKAGES (ดึงมาใส่แบบถาวร)
+  ========================================= -->
   <section id="compare">
     <div class="onboarding-wrap" style="padding-top:0;">
-      <button class="back-link" onclick="show('result')">← ย้อนกลับ</button>
+      <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
-      <div class="compare-grid" id="compareGrid"></div>
-      <div class="selected-package-banner">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-          <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
-          <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
+      
+      <div class="compare-grid" id="compareGrid">
+        
+        <!-- 1. Signature -->
+        <div class="plan">
+          <div class="eyebrow">SIGNATURE</div>
+          <h2 style="margin:20px 0 10px;">Signature Package</h2>
+          <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿3,000</div>
+          <small style="color:var(--muted);">ต่อเดือน</small>
+          <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Fitness</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Yoga</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Pilates</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Muay Thai</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Onsen</li>
+          </ul>
+          <button class="btn-outline" style="margin:0;" onclick="show('payment')">เลือกแพ็กเกจนี้</button>
         </div>
-        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+
+        <!-- 2. Core (แนะนำ) -->
+        <div class="plan has-ribbon selected">
+          <div class="ribbon">✦ Recommended</div>
+          <div class="eyebrow">CORE</div>
+          <h2 style="margin:20px 0 10px;">Core Package</h2>
+          <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿1,800</div>
+          <small style="color:var(--muted);">ต่อเดือน</small>
+          <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Fitness</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Yoga</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>เลือกบริการหลัก</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>เหมาะกับการใช้งานทั่วไป</li>
+          </ul>
+          <button class="btn-primary" style="margin:0;" onclick="show('payment')">ดำเนินการชำระเงิน →</button>
+        </div>
+
+        <!-- 3. U-Rate -->
+        <div class="plan">
+          <div class="eyebrow">U-RATE</div>
+          <h2 style="margin:20px 0 10px;">U-Rate Package</h2>
+          <div class="plan-price" style="font-size:28px; font-weight:bold; margin-bottom:10px;">฿1,200</div>
+          <small style="color:var(--muted);">ต่อเดือน</small>
+          <ul style="list-style:none; padding:0; margin:20px 0; line-height:2; font-size:14px; color:var(--muted); flex:1;">
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>Fitness</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>เหมาะสำหรับเริ่มต้น</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>ราคาประหยัด</li>
+            <li><span style="color:var(--green); font-weight:bold; margin-right:8px;">✓</span>ยืดหยุ่น</li>
+          </ul>
+          <button class="btn-outline" style="margin:0;" onclick="show('payment')">เลือกแพ็กเกจนี้</button>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1095,8 +1143,8 @@ function togglePass(id, btn) {
 function validateAuth(type) {
   let email, pass;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // เงื่อนไขใหม่: ยาวอย่างน้อย 6 ตัวอักษร และมีอักษรพิเศษอย่างน้อย 1 ตัว
-  const passRegex = /^(?=.*[!@#$%^&*(),.?":{}|<>]).{6,}$/; 
+  // อัปเดตเงื่อนไข: ยาว 6 ขึ้นไป + มีพิมพ์ใหญ่อย่างน้อย 1 หรือ อักขระพิเศษอย่างน้อย 1
+  const passRegex = /^(?=.*[A-Z!@#$%^&*(),.?":{}|<>]).{6,}$/; 
 
   if (type === 'signup') {
     email = document.getElementById('regEmail').value;
@@ -1107,7 +1155,7 @@ function validateAuth(type) {
   }
 
   if (!emailRegex.test(email)) return showPopup('อีเมลไม่ถูกต้อง', 'กรุณากรอกอีเมลให้ถูกต้อง');
-  if (!passRegex.test(pass)) return showPopup('รหัสผ่านไม่ตรงเงื่อนไข', 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัว และมีตัวอักษรพิเศษ 1 ตัว (เช่น ! @ # $ % เป็นต้น)');
+  if (!passRegex.test(pass)) return showPopup('รหัสผ่านไม่ตรงเงื่อนไข', 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัว และมีตัวอักษรพิมพ์ใหญ่ หรือ ตัวอักษรพิเศษอย่างน้อย 1 ตัว');
   
   loginSuccess();
 }
