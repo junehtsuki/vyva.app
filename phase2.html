@@ -3296,107 +3296,171 @@
 
     
 
-    <!-- GROUP -->
+    <!-- =========================================
+         GROUP (COMMUNITY) - อัปเดตใหม่
+    ========================================= -->
     <section class="screen" id="groupScreen">
       <header class="top">
         <div>
           <div class="eyebrow">SAYO COMMUNITY</div>
-          <h1>Find your wellness crew.</h1>
+          <h1>Find your<br>wellness crew.</h1>
           <p class="subtitle">หาเพื่อนไปทำกิจกรรมใน campus — จะสร้างกลุ่มเอง หรือ join คนอื่นก็ได้</p>
         </div>
-        <div class="avatar-pill" style="font-size:21px" onclick="showToast('Search prototype')">⌕</div>
       </header>
 
-      <section class="create-card">
-        <div class="small">👋 DO IT TOGETHER</div>
-        <h2>อยากหาเพื่อนไปทำอะไรวันนี้?</h2>
-        <p>สร้างโพสต์ ระบุกิจกรรม เวลา และจำนวนคนที่ต้องการ แล้วเปิดห้องคุยได้ทันที</p>
-        <button class="create-btn" onclick="openSheet('createOverlay')">＋ Create a group</button>
+      <section class="section">
+        <div class="create-card">
+          <div class="small">👋 DO IT TOGETHER</div>
+          <h2>อยากหาเพื่อนไปทำอะไรวันนี้?</h2>
+          <p>สร้างโพสต์ ระบุกิจกรรม เวลา และจำนวนคนที่ต้องการ แล้วเปิดห้องคุยได้ทันที</p>
+          <button class="create-btn" onclick="openCreateSheet()">+ Create a group</button>
+        </div>
+
+        <!-- หมวดหมู่แบบกดกรองได้จริง -->
+        <div class="chips" style="margin-top:20px; margin-bottom: 10px;">
+          <button class="chip active" onclick="filterFeed('All', this)">For you</button>
+          <button class="chip" onclick="filterFeed('Fitness', this)">Fitness</button>
+          <button class="chip" onclick="filterFeed('Recovery', this)">Recovery</button>
+          <button class="chip" onclick="filterFeed('Yoga', this)">Yoga</button>
+          <button class="chip" onclick="filterFeed('Cardio', this)">Cardio</button>
+        </div>
+
+        <div class="section-title">
+          <h2 style="font-size: 18px; color: var(--deep);">Groups you can join</h2>
+          <span class="mini">Near campus</span>
+        </div>
       </section>
 
-      <div class="chips" style="padding:14px 18px 8px">
-        <button class="chip active">For you</button>
-        <button class="chip">Fitness</button>
-        <button class="chip">Recovery</button>
-        <button class="chip">Running</button>
-        <button class="chip">Onsen</button>
-        <button class="chip">Massage</button>
-        <button class="chip">This week</button>
-      </div>
-
-      <div class="section-title" style="padding:8px 20px 10px;margin:0">
-        <h2>Groups you can join</h2>
-        <span class="mini">Near campus</span>
-      </div>
-
-      <main class="post-feed" id="feed">
-        <article class="post">
+      <div class="post-feed" id="mainFeed">
+        
+        <!-- โพสต์ที่ 1 -->
+        <article class="post" data-category="Recovery">
           <div class="post-head">
-            <div class="avatar-circle">🏃🏻‍♀️</div>
+            <div class="avatar-circle">M</div>
             <div class="userline">
               <strong>Mint</strong>
               <p>Performance lover · created 8 min ago</p>
             </div>
-            <div class="group-badge">MATCH 94%</div>
+            <!-- Match Score -->
+            <div class="group-badge" style="background:#E2F2DE; color:#347150;">MATCH 94%</div>
           </div>
           <h2>Evening Run + Recovery 🏃‍♀️♨️</h2>
           <p class="desc">วิ่งเบา ๆ รอบ campus แล้วไป Onsen ต่อ ใครอยากหาเพื่อนออกกำลังกายแบบไม่กดดัน มาได้เลย 💚</p>
+          
           <div class="info-grid">
             <div class="info"><span>ACTIVITY</span><strong>Run + Onsen</strong></div>
             <div class="info"><span>TIME</span><strong>Today · 18:30</strong></div>
             <div class="info"><span>MEET AT</span><strong>Fitness Lobby</strong></div>
             <div class="info"><span>NEED</span><strong>2 more people</strong></div>
           </div>
+          
           <div class="members">
-            <div style="display:flex;align-items:center">
-              <div class="avatars"><div class="miniav">👩🏻</div><div class="miniav">🧑🏻</div><div class="miniav">👩🏽</div></div>
-              <div class="count">3 / 5 joined</div>
+            <div class="avatars">
+              <div class="miniav">👱🏻‍♀️</div><div class="miniav">👦🏻</div><div class="miniav">👩🏽</div>
+              <span class="count">3 / 5 joined</span>
             </div>
-            <span style="font-size:10px;color:#698079">Beginner friendly</span>
+            <span style="font-size:10.5px; color:#5D786F; font-weight: 700;">Beginner friendly</span>
           </div>
           <div class="group-progress"><span style="width:60%"></span></div>
+          
           <div class="post-actions">
-            <button class="secondary" onclick="openChat('Evening Run + Recovery','3 / 5 joined')">💬 Group Chat</button>
-            <button class="primary" onclick="toggleJoin(this,1)">Join group</button>
+            <!-- ล็อคแชทไว้ก่อน ถ้ายังไม่ Join -->
+            <button class="secondary chat-btn" disabled style="opacity: 0.5; cursor: not-allowed;" onclick="openChatSheet('Evening Run')">💬 Group Chat</button>
+            <button class="primary join-btn" onclick="toggleJoin(this, 'Evening Run')">Join group</button>
           </div>
-          <div class="notice" id="notice1">✓ Joined! Group chat is now unlocked.</div>
         </article>
 
-        <article class="post">
+        <!-- โพสต์ที่ 2 -->
+        <article class="post" data-category="Yoga">
           <div class="post-head">
-            <div class="avatar-circle">🧘🏻</div>
+            <div class="avatar-circle" style="background: #FFF0D4; color: #A56D21;">P</div>
             <div class="userline">
               <strong>Ploy</strong>
               <p>Recovery focused · created 24 min ago</p>
             </div>
-            <div class="group-badge" style="background:#E8F3FF;color:#43678A">NEW</div>
+            <div class="group-badge">NEW</div>
           </div>
-          <h2>Sunset Yoga Buddy 🌤️</h2>
+          <h2>Sunset Yoga Buddy ⛅</h2>
           <p class="desc">กำลังจะไปคลาส Sunset Yoga คนเดียว ใครไปคลาสเดียวกันมาเจอกันก่อนเข้าคลาสได้น้า</p>
+          
           <div class="info-grid">
             <div class="info"><span>ACTIVITY</span><strong>Sunset Yoga</strong></div>
             <div class="info"><span>TIME</span><strong>Fri · 18:00</strong></div>
             <div class="info"><span>MEET AT</span><strong>Yoga Studio</strong></div>
             <div class="info"><span>NEED</span><strong>1 more person</strong></div>
           </div>
+          
           <div class="members">
-            <div style="display:flex;align-items:center">
-              <div class="avatars"><div class="miniav">👩🏻</div><div class="miniav">👨🏻</div></div>
-              <div class="count">2 / 3 joined</div>
+            <div class="avatars">
+              <div class="miniav">👩🏻</div><div class="miniav">🧔🏻‍♂️</div>
+              <span class="count">2 / 3 joined</span>
             </div>
-            <span style="font-size:10px;color:#698079">Easy pace</span>
+            <span style="font-size:10.5px; color:#5D786F; font-weight: 700;">Easy pace</span>
           </div>
           <div class="group-progress"><span style="width:66%"></span></div>
+          
           <div class="post-actions">
-            <button class="secondary" onclick="openChat('Sunset Yoga Buddy','2 / 3 joined')">💬 Group Chat</button>
-            <button class="primary" onclick="toggleJoin(this,2)">Join group</button>
+            <button class="secondary chat-btn" disabled style="opacity: 0.5; cursor: not-allowed;" onclick="openChatSheet('Sunset Yoga')">💬 Group Chat</button>
+            <button class="primary join-btn" onclick="toggleJoin(this, 'Sunset Yoga')">Join group</button>
           </div>
-          <div class="notice" id="notice2">✓ Joined! Say hi to the group 👋</div>
         </article>
-      </main>
+
+      </div>
     </section>
 
+    <!-- หน้าต่างสร้างกลุ่มใหม่ (Overlay) -->
+    <div class="overlay" id="createSheet">
+      <div class="sheet">
+        <div class="handle"></div>
+        <div class="sheet-head">
+          <h2>Create your group</h2>
+          <button class="close" onclick="closeCreateSheet()">✕</button>
+        </div>
+        
+        <div class="form-group">
+          <label>Activity name</label>
+          <input type="text" id="newTitle" class="field" placeholder="e.g. Onsen after workout">
+        </div>
+        
+        <div class="form-group">
+          <label>Category</label>
+          <select id="newCategory" class="field" style="appearance: none; background: #FAFCF9 url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
+            <option value="Fitness">Fitness</option>
+            <option value="Recovery">Recovery</option>
+            <option value="Yoga">Yoga</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
+        <div class="row2">
+          <div class="form-group">
+            <label>Date & time</label>
+            <input type="datetime-local" id="newTime" class="field">
+          </div>
+          <div class="form-group">
+            <label>People needed</label>
+            <div style="display: flex; align-items: center; justify-content: space-between; background: #FAFCF9; border: 1px solid #DDE7DC; border-radius: 14px; padding: 5px;">
+                <button type="button" style="width: 32px; height: 32px; border: none; border-radius: 10px; background: #E7EEE5; font-weight: bold; font-size: 18px; color: var(--deep);" onclick="changePeopleCount(-1)">-</button>
+                <span id="peopleCountDisplay" style="font-weight: bold; font-size: 16px;">2</span>
+                <button type="button" style="width: 32px; height: 32px; border: none; border-radius: 10px; background: var(--deep); font-weight: bold; font-size: 18px; color: white;" onclick="changePeopleCount(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Meeting point</label>
+          <input type="text" id="newLocation" class="field" placeholder="Fitness Lobby">
+        </div>
+
+        <div class="form-group">
+          <label>Tell people about the plan</label>
+          <textarea id="newDesc" class="field" placeholder="กิจกรรมประมาณไหน เหมาะกับใคร อยากได้เพื่อนแบบไหน..."></textarea>
+        </div>
+
+        <button class="save" onclick="publishGroup()">Create group & open chat</button>
+      </div>
+    </div>
 
 
     <!-- REWARD -->
@@ -4131,7 +4195,6 @@
 
 <script>
 
-
   function applyWellnessRingColors(){
     document.querySelectorAll('.ring[data-score]').forEach(ring => {
       const score = Math.max(0, Math.min(100, Number(ring.dataset.score) || 0));
@@ -4765,6 +4828,126 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
   }
+
+/* =========================================
+   สคริปต์ส่วน COMMUNITY (อัปเดตใหม่)
+========================================= */
+
+// จำนวนคนเริ่มต้น
+let currentPeopleCount = 2;
+
+function changePeopleCount(amount) {
+    currentPeopleCount += amount;
+    if (currentPeopleCount < 1) currentPeopleCount = 1; 
+    if (currentPeopleCount > 10) currentPeopleCount = 10; 
+    document.getElementById('peopleCountDisplay').innerText = currentPeopleCount;
+}
+
+// กรองโพสต์
+function filterFeed(category, btnElement) {
+    const chips = document.querySelectorAll('#groupScreen .chip');
+    chips.forEach(chip => chip.classList.remove('active'));
+    btnElement.classList.add('active');
+
+    const posts = document.querySelectorAll('#mainFeed .post');
+    posts.forEach(post => {
+        if (category === 'All') {
+            post.style.display = 'block';
+        } else {
+            if (post.getAttribute('data-category') === category) {
+                post.style.display = 'block';
+            } else {
+                post.style.display = 'none';
+            }
+        }
+    });
+}
+
+// ปุ่มเข้าร่วมกลุ่ม
+function toggleJoin(btn, groupName) {
+    const postArticle = btn.closest('.post');
+    const chatBtn = postArticle.querySelector('.chat-btn');
+
+    if (btn.innerText === "Join group") {
+        btn.innerText = "✓ Joined";
+        btn.style.background = "#DDF0D9";
+        btn.style.color = "#2F7C4A";
+        
+        chatBtn.disabled = false;
+        chatBtn.style.opacity = "1";
+        chatBtn.style.cursor = "pointer";
+    } else {
+        btn.innerText = "Join group";
+        btn.style.background = "var(--deep)";
+        btn.style.color = "#fff";
+        
+        chatBtn.disabled = true;
+        chatBtn.style.opacity = "0.5";
+        chatBtn.style.cursor = "not-allowed";
+    }
+}
+
+// สร้างกลุ่มใหม่
+function publishGroup() {
+    const title = document.getElementById("newTitle").value || "New Activity";
+    const category = document.getElementById("newCategory").value;
+    const desc = document.getElementById("newDesc").value || "Let's go together!";
+    const loc = document.getElementById("newLocation").value || "TBA";
+    
+    const rawTime = document.getElementById("newTime").value;
+    let timeStr = "TBA";
+    if(rawTime) {
+        const dateObj = new Date(rawTime);
+        const day = dateObj.toLocaleDateString('en-GB', { weekday: 'short' });
+        const time = dateObj.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+        timeStr = `${day} · ${time}`;
+    }
+
+    const feed = document.getElementById("mainFeed");
+    const newPost = `
+      <article class="post" data-category="${category}">
+          <div class="post-head">
+            <div class="avatar-circle" style="background: var(--gold); color: #fff;">Me</div>
+            <div class="userline">
+              <strong>คุณสมาชิก</strong>
+              <p>Just now</p>
+            </div>
+            <div class="group-badge">YOURS</div>
+          </div>
+          <h2>${title}</h2>
+          <p class="desc">${desc}</p>
+          <div class="info-grid">
+            <div class="info"><span>CATEGORY</span><strong>${category}</strong></div>
+            <div class="info"><span>TIME</span><strong>${timeStr}</strong></div>
+            <div class="info"><span>MEET AT</span><strong>${loc}</strong></div>
+            <div class="info"><span>NEED</span><strong>${currentPeopleCount} more</strong></div>
+          </div>
+          <div class="members">
+            <div class="avatars">
+              <div class="miniav">Me</div>
+              <span class="count">1 / ${currentPeopleCount + 1} joined</span>
+            </div>
+          </div>
+          <div class="post-actions">
+            <button class="secondary chat-btn" onclick="openChatSheet('${title}')">💬 Group Chat</button>
+            <button class="primary join-btn" style="background:#DDF0D9; color:#2F7C4A;">✓ Hosted</button>
+          </div>
+        </article>
+    `;
+    
+    feed.insertAdjacentHTML('afterbegin', newPost);
+    closeCreateSheet();
+    
+    document.getElementById("newTitle").value = "";
+    document.getElementById("newDesc").value = "";
+    document.getElementById("newLocation").value = "";
+    document.getElementById("newTime").value = "";
+    currentPeopleCount = 2;
+    document.getElementById('peopleCountDisplay').innerText = currentPeopleCount;
+
+    const allChipBtn = document.querySelector('.chips button:first-child');
+    if(allChipBtn) filterFeed('All', allChipBtn);
+}
 </script>
 
 <script id="fuel-cafe-js">
@@ -4980,6 +5163,7 @@ function scanParkingTicket(){
   if (availability) availability.classList.add('hidden');
   showToast('Parking ticket scanned');
 }
+
 </script>
 
 
