@@ -3308,29 +3308,43 @@
     
 
     <!-- =========================================
-         GROUP (COMMUNITY) - อัปเดตใหม่
+         SAYO COMMUNITY (FULL VERSION - 100% WORKING)
     ========================================= -->
+    <style>
+      /* CSS พิเศษสำหรับปฏิทินและช่องค้นหา */
+      .cal-day { width:32px; height:32px; border-radius:50%; border:none; background:transparent; color:var(--ink); font-weight:700; font-size:13px; display:grid; place-items:center; margin:auto; cursor:pointer; transition:0.2s;}
+      .cal-day:hover { background: #E7EEE5; }
+      .cal-day.active { background:var(--deep); color:white; }
+      .time-slot { border:1px solid #DDE7DC; border-radius:12px; background:white; color:var(--ink); padding:10px 5px; font-size:13px; font-weight:700; cursor:pointer; text-align:center; transition:0.2s;}
+      .time-slot:hover { border-color:#A8CBAA; }
+      .time-slot.active { background:#E4F2DF; border-color:var(--green); color:var(--deep); }
+      .time-grid-scroll { max-height:160px; overflow-y:auto; padding-right:8px; }
+      .time-grid-scroll::-webkit-scrollbar { width: 4px; }
+      .time-grid-scroll::-webkit-scrollbar-thumb { background: #B8CBB7; border-radius: 4px; }
+      @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+    </style>
+
     <section class="screen" id="groupScreen">
-      <!-- Header แก้ไขไม่ให้ตัดบรรทัด + ปุ่ม Search -->
+      <!-- 1. Header บรรทัดเดียว + แว่นขยายเสิร์ช -->
       <header class="top" style="display: flex; justify-content: space-between; align-items: flex-start;">
         <div style="flex: 1; min-width: 0;">
           <div class="eyebrow">SAYO COMMUNITY</div>
           <h1 style="white-space: nowrap; font-size: 26px; overflow: hidden; text-overflow: ellipsis;">Find your wellness crew.</h1>
           <p class="subtitle" style="margin-top: 4px;">หาเพื่อนไปทำกิจกรรมใน campus — จะสร้างกลุ่มเอง หรือ join คนอื่นก็ได้</p>
         </div>
-        <button onclick="toggleGroupSearch()" style="width: 44px; height: 44px; border-radius: 15px; background: #fff; border: none; font-size: 24px; color: var(--deep); display: grid; place-items: center; flex: 0 0 auto; margin-top: 15px; box-shadow: var(--shadow);">⌕</button>
+        <button onclick="toggleGroupSearch()" style="width: 44px; height: 44px; border-radius: 15px; background: #fff; border: none; font-size: 24px; color: var(--deep); display: grid; place-items: center; flex: 0 0 auto; margin-top: 15px; box-shadow: var(--shadow); cursor: pointer;">⌕</button>
       </header>
       
+      <!-- ช่องค้นหา (จะสไลด์ลงมาเมื่อกดแว่นขยาย) -->
       <div id="groupSearchContainer" style="display: none; padding: 0 18px 10px; animation: slideDown 0.3s ease;">
         <div class="searchbar" style="margin:0; padding: 12px 16px;">
           <span style="font-size:18px;">⌕</span>
-          <input type="text" id="groupSearchInput" placeholder="Search activities, locations..." onkeyup="searchFeed()">
+          <input type="text" id="groupSearchInput" placeholder="ค้นหากิจกรรม, สถานที่..." onkeyup="searchFeed()" style="font-weight: 500;">
         </div>
       </div>
 
       <section class="section">
-        
-        <!-- 📥 เอากล่อง Create group ที่หายไป กลับมาวางตรงนี้ครับ 📥 -->
+        <!-- 2. กล่อง Create Group กลับมาแล้ว! -->
         <div class="create-card">
           <div class="small">👋 DO IT TOGETHER</div>
           <h2>อยากหาเพื่อนไปทำอะไรวันนี้?</h2>
@@ -3338,7 +3352,7 @@
           <button class="create-btn" onclick="openCreateSheet()">+ Create a group</button>
         </div>
 
-        <!-- หมวดหมู่แบบกดกรองได้จริง -->
+        <!-- 3. หมวดหมู่สำหรับกดกรอง -->
         <div class="chips" style="margin-top:20px; margin-bottom: 10px;">
           <button class="chip active" onclick="filterFeed('All', this)">For you</button>
           <button class="chip" onclick="filterFeed('Fitness', this)">Fitness</button>
@@ -3353,9 +3367,8 @@
         </div>
       </section>
 
+      <!-- 4. หน้า Feed รายการกิจกรรม -->
       <div class="post-feed" id="mainFeed">
-        
-        <!-- โพสต์ที่ 1 -->
         <article class="post" data-category="Recovery">
           <div class="post-head">
             <div class="avatar-circle">M</div>
@@ -3363,36 +3376,27 @@
               <strong>Mint</strong>
               <p>Performance lover · created 8 min ago</p>
             </div>
-            <!-- Match Score -->
             <div class="group-badge" style="background:#E2F2DE; color:#347150;">MATCH 94%</div>
           </div>
           <h2>Evening Run + Recovery 🏃‍♀️♨️</h2>
           <p class="desc">วิ่งเบา ๆ รอบ campus แล้วไป Onsen ต่อ ใครอยากหาเพื่อนออกกำลังกายแบบไม่กดดัน มาได้เลย 💚</p>
-          
           <div class="info-grid">
             <div class="info"><span>ACTIVITY</span><strong>Run + Onsen</strong></div>
             <div class="info"><span>TIME</span><strong>Today · 18:30</strong></div>
             <div class="info"><span>MEET AT</span><strong>Fitness Lobby</strong></div>
             <div class="info"><span>NEED</span><strong>2 more people</strong></div>
           </div>
-          
           <div class="members">
-            <div class="avatars">
-              <div class="miniav">👱🏻‍♀️</div><div class="miniav">👦🏻</div><div class="miniav">👩🏽</div>
-              <span class="count">3 / 5 joined</span>
-            </div>
+            <div class="avatars"><div class="miniav">👱🏻‍♀️</div><div class="miniav">👦🏻</div><div class="miniav">👩🏽</div><span class="count">3 / 5 joined</span></div>
             <span style="font-size:10.5px; color:#5D786F; font-weight: 700;">Beginner friendly</span>
           </div>
           <div class="group-progress"><span style="width:60%"></span></div>
-          
           <div class="post-actions">
-            <!-- ล็อคแชทไว้ก่อน ถ้ายังไม่ Join -->
             <button class="secondary chat-btn" disabled style="opacity: 0.5; cursor: not-allowed;" onclick="openChatSheet('Evening Run')">💬 Group Chat</button>
             <button class="primary join-btn" onclick="toggleJoin(this, 'Evening Run')">Join group</button>
           </div>
         </article>
 
-        <!-- โพสต์ที่ 2 -->
         <article class="post" data-category="Yoga">
           <div class="post-head">
             <div class="avatar-circle" style="background: #FFF0D4; color: #A56D21;">P</div>
@@ -3404,33 +3408,29 @@
           </div>
           <h2>Sunset Yoga Buddy ⛅</h2>
           <p class="desc">กำลังจะไปคลาส Sunset Yoga คนเดียว ใครไปคลาสเดียวกันมาเจอกันก่อนเข้าคลาสได้น้า</p>
-          
           <div class="info-grid">
             <div class="info"><span>ACTIVITY</span><strong>Sunset Yoga</strong></div>
             <div class="info"><span>TIME</span><strong>Fri · 18:00</strong></div>
             <div class="info"><span>MEET AT</span><strong>Yoga Studio</strong></div>
             <div class="info"><span>NEED</span><strong>1 more person</strong></div>
           </div>
-          
           <div class="members">
-            <div class="avatars">
-              <div class="miniav">👩🏻</div><div class="miniav">🧔🏻‍♂️</div>
-              <span class="count">2 / 3 joined</span>
-            </div>
+            <div class="avatars"><div class="miniav">👩🏻</div><div class="miniav">🧔🏻‍♂️</div><span class="count">2 / 3 joined</span></div>
             <span style="font-size:10.5px; color:#5D786F; font-weight: 700;">Easy pace</span>
           </div>
           <div class="group-progress"><span style="width:66%"></span></div>
-          
           <div class="post-actions">
             <button class="secondary chat-btn" disabled style="opacity: 0.5; cursor: not-allowed;" onclick="openChatSheet('Sunset Yoga')">💬 Group Chat</button>
             <button class="primary join-btn" onclick="toggleJoin(this, 'Sunset Yoga')">Join group</button>
           </div>
         </article>
-
       </div>
     </section>
 
-    <!-- หน้าต่างสร้างกลุ่มใหม่ (Overlay) -->
+    <!-- =========================================
+         5. OVERLAYS (หน้าต่างต่างๆ)
+    ========================================= -->
+    <!-- หน้าต่างสร้างกลุ่มใหม่ -->
     <div class="overlay" id="createSheet">
       <div class="sheet">
         <div class="handle"></div>
@@ -3438,30 +3438,17 @@
           <h2>Create your group</h2>
           <button class="close" onclick="closeCreateSheet()">✕</button>
         </div>
-        
-        <div class="form-group">
-          <label>Activity name</label>
-          <input type="text" id="newTitle" class="field" placeholder="e.g. Onsen after workout">
-        </div>
-        
+        <div class="form-group"><label>Activity name</label><input type="text" id="newTitle" class="field" placeholder="e.g. Onsen after workout"></div>
         <div class="form-group">
           <label>Category</label>
           <select id="newCategory" class="field" style="appearance: none; background: #FAFCF9 url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
-            <option value="Fitness">Fitness</option>
-            <option value="Recovery">Recovery</option>
-            <option value="Yoga">Yoga</option>
-            <option value="Cardio">Cardio</option>
-            <option value="Other">Other</option>
+            <option value="Fitness">Fitness</option><option value="Recovery">Recovery</option><option value="Yoga">Yoga</option><option value="Cardio">Cardio</option>
           </select>
         </div>
-
         <div class="row2">
           <div class="form-group">
             <label>Date & time</label>
-            <!-- ปุ่มกดเรียกปฏิทิน -->
-            <button id="displayDateTime" type="button" class="field" style="text-align:left; background: #FAFCF9 url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z%22/></svg>') no-repeat right 15px center; cursor:pointer; color: var(--muted); font-size: 13px;" onclick="openDateTimeSheet()">
-                Select Date & Times
-            </button>
+            <button id="displayDateTime" type="button" class="field" style="text-align:left; background: #FAFCF9 url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z%22/></svg>') no-repeat right 15px center; cursor:pointer; color: var(--muted); font-size: 13px;" onclick="openDateTimeSheet()">Select Date & Times</button>
           </div>
           <div class="form-group">
             <label>People needed</label>
@@ -3472,41 +3459,13 @@
             </div>
           </div>
         </div>
-
-        <div class="form-group">
-          <label>Meeting point</label>
-          <input type="text" id="newLocation" class="field" placeholder="Fitness Lobby">
-        </div>
-
-        <div class="form-group">
-          <label>Tell people about the plan</label>
-          <textarea id="newDesc" class="field" placeholder="กิจกรรมประมาณไหน เหมาะกับใคร อยากได้เพื่อนแบบไหน..."></textarea>
-        </div>
-
+        <div class="form-group"><label>Meeting point</label><input type="text" id="newLocation" class="field" placeholder="Fitness Lobby"></div>
+        <div class="form-group"><label>Tell people about the plan</label><textarea id="newDesc" class="field" placeholder="กิจกรรมประมาณไหน เหมาะกับใคร..."></textarea></div>
         <button class="save" onclick="publishGroup()">Create group & open chat</button>
       </div>
     </div>
-    <!-- หน้าต่างแชทกลุ่ม (Chat Overlay) -->
-    <div class="overlay" id="chatSheet">
-      <div class="sheet chat-sheet">
-        <div class="handle"></div>
-        <div class="sheet-head">
-          <div>
-            <div class="chat-title" id="chatTitleDisplay">Group Name</div>
-            <div class="chat-sub">Tap here for group info</div>
-          </div>
-          <button class="close" onclick="closeChatSheet()">✕</button>
-        </div>
-        <div class="messages" id="chatMessages">
-          <div class="system">Welcome to the group! 👋</div>
-        </div>
-        <div class="composer">
-          <input type="text" class="field" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendChat()">
-          <button class="send" onclick="sendChat()">➤</button>
-        </div>
-      </div>
-    </div>
-    <!-- หน้าต่าง Date/Time Picker -->
+
+    <!-- หน้าต่าง Date/Time Picker แบบบน-ล่าง -->
     <div class="overlay" id="dateTimeSheet">
       <div class="sheet" style="padding-bottom: 25px;">
          <div class="handle"></div>
@@ -3514,41 +3473,47 @@
            <h2>Select Date & Times</h2>
            <button class="close" onclick="closeDateTimeSheet()">✕</button>
          </div>
-         
          <div style="display:flex; flex-direction:column; gap:15px;">
-           <!-- ปฏิทิน -->
            <div style="background:#FAFCF9; border:1px solid var(--line); border-radius:20px; padding:15px;">
              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                <b id="calMonthYear" style="font-size:15px; color:var(--deep);">July 2026</b>
+                <b id="calMonthYear" style="font-size:15px; color:var(--deep);">September 2026</b>
                 <div>
-                  <button style="border:none; background:#E7EEE5; border-radius:8px; padding:5px 12px; color:var(--deep); font-weight:bold; margin-right:5px;" onclick="changeMonth(-1)">&lt;</button>
-                  <button style="border:none; background:#E7EEE5; border-radius:8px; padding:5px 12px; color:var(--deep); font-weight:bold;" onclick="changeMonth(1)">&gt;</button>
+                  <button style="border:none; background:#E7EEE5; border-radius:8px; padding:5px 12px; color:var(--deep); font-weight:bold; margin-right:5px; cursor:pointer;" onclick="changeMonth(-1)">&lt;</button>
+                  <button style="border:none; background:#E7EEE5; border-radius:8px; padding:5px 12px; color:var(--deep); font-weight:bold; cursor:pointer;" onclick="changeMonth(1)">&gt;</button>
                 </div>
              </div>
              <div style="display:grid; grid-template-columns:repeat(7, 1fr); text-align:center; font-size:10px; color:var(--muted); font-weight:bold; margin-bottom:8px;">
                <span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span><span>SU</span>
              </div>
-             <div id="calGrid" style="display:grid; grid-template-columns:repeat(7, 1fr); text-align:center; gap:6px;">
-                <!-- JS เติมวันที่ลงตรงนี้ -->
-             </div>
+             <div id="calGrid" style="display:grid; grid-template-columns:repeat(7, 1fr); text-align:center; gap:6px;"></div>
            </div>
-
-           <!-- ช่องเวลา (Slot Time) -->
            <div style="background:#FAFCF9; border:1px solid var(--line); border-radius:20px; padding:15px; display:flex; flex-direction:column;">
-              <b style="font-size:14px; margin-bottom:12px; color:var(--deep);">Select Times</b>
+              <b style="font-size:14px; margin-bottom:12px; color:var(--deep);">Select Times (15 min slot)</b>
               <div class="time-grid-scroll">
-                 <div id="timeGrid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;">
-                    <!-- JS เติมเวลาลงตรงนี้ -->
-                 </div>
+                 <div id="timeGrid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px;"></div>
               </div>
            </div>
          </div>
-
          <button class="save" onclick="confirmDateTime()">Confirm Schedule</button>
       </div>
     </div>
 
-    <!-- โทสต์แจ้งเตือน (Toast) -->
+    <!-- หน้าต่างแชทกลุ่ม -->
+    <div class="overlay" id="chatSheet">
+      <div class="sheet chat-sheet">
+        <div class="handle"></div>
+        <div class="sheet-head">
+          <div><div class="chat-title" id="chatTitleDisplay">Group Name</div><div class="chat-sub">Tap here for group info</div></div>
+          <button class="close" onclick="closeChatSheet()">✕</button>
+        </div>
+        <div class="messages" id="chatMessages"><div class="system">Welcome to the group! 👋</div></div>
+        <div class="composer">
+          <input type="text" class="field" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendChat()">
+          <button class="send" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+    </div>
+
     <div class="toast" id="toastMessage">Joined successfully</div>
 
 
@@ -5085,19 +5050,19 @@ function showToast(text) {
 ========================================= */
 
 // ฟังก์ชันแสดง/ซ่อน ช่องค้นหา (เมื่อกดแว่นขยาย)
+// ระบบค้นหากลุ่ม
 function toggleGroupSearch() {
     const container = document.getElementById('groupSearchContainer');
-    if (container.style.display === 'none') {
+    if (container.style.display === 'none' || container.style.display === '') {
         container.style.display = 'block';
         document.getElementById('groupSearchInput').focus();
     } else {
         container.style.display = 'none';
         document.getElementById('groupSearchInput').value = '';
-        searchFeed(); // รีเซ็ตการค้นหา
+        searchFeed();
     }
 }
 
-// ฟังก์ชันค้นหาแบบ Real-time
 function searchFeed() {
     const query = document.getElementById('groupSearchInput').value.toLowerCase();
     const posts = document.querySelectorAll('#mainFeed .post');
@@ -5112,7 +5077,57 @@ function searchFeed() {
     });
 }
 
-// ระบบปฏิทินและเวลา
+// ระบบเลือกหมวดหมู่
+function filterFeed(category, btnElement) {
+    document.querySelectorAll('#groupScreen .chip').forEach(chip => chip.classList.remove('active'));
+    btnElement.classList.add('active');
+    
+    document.querySelectorAll('#mainFeed .post').forEach(post => {
+        if (category === 'All' || post.getAttribute('data-category') === category) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+// เปิด/ปิด หน้าต่างต่างๆ
+function openCreateSheet() {
+    document.getElementById('createSheet').classList.add('show');
+}
+
+function closeCreateSheet() {
+    document.getElementById('createSheet').classList.remove('show');
+}
+
+function openChatSheet(groupName) {
+    document.getElementById('chatTitleDisplay').innerText = groupName;
+    document.getElementById('chatSheet').classList.add('show');
+}
+
+function closeChatSheet() {
+    document.getElementById('chatSheet').classList.remove('show');
+}
+
+function showToast(text) {
+    const t = document.getElementById('toastMessage');
+    t.innerText = text;
+    t.classList.add('show');
+    setTimeout(() => {
+        t.classList.remove('show');
+    }, 2500);
+}
+
+// ระบบบวก/ลบจำนวนคน
+let currentPeopleCount = 2;
+function changePeopleCount(amount) {
+    currentPeopleCount += amount;
+    if (currentPeopleCount < 1) currentPeopleCount = 1;
+    if (currentPeopleCount > 10) currentPeopleCount = 10;
+    document.getElementById('peopleCountDisplay').innerText = currentPeopleCount;
+}
+
+// ระบบปฏิทินและเวลา (Calendar & Time Slots)
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 let selectedDate = null;
@@ -5130,8 +5145,14 @@ function closeDateTimeSheet() {
 
 function changeMonth(offset) {
     currentMonth += offset;
-    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    }
     renderCalendar();
 }
 
@@ -5139,17 +5160,19 @@ function renderCalendar() {
     const grid = document.getElementById('calGrid');
     grid.innerHTML = '';
     
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay(); // 0 = Sun
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    
     document.getElementById('calMonthYear').innerText = `${monthNames[currentMonth]} ${currentYear}`;
     
-    let startDay = firstDay === 0 ? 6 : firstDay - 1; // ให้จันทร์เป็นวันแรก
+    let startDay = firstDay === 0 ? 6 : firstDay - 1;
+    for (let i = 0; i < startDay; i++) {
+        grid.innerHTML += `<div></div>`;
+    }
     
-    for(let i=0; i<startDay; i++) { grid.innerHTML += `<div></div>`; } // ช่องว่าง
-    
-    for(let d=1; d<=daysInMonth; d++) {
-        const dateStr = `${currentYear}-${(currentMonth+1).toString().padStart(2,'0')}-${d.toString().padStart(2,'0')}`;
+    for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${d.toString().padStart(2, '0')}`;
         const isActive = selectedDate === dateStr ? 'active' : '';
         grid.innerHTML += `<button type="button" class="cal-day ${isActive}" onclick="selectDate('${dateStr}')">${d}</button>`;
     }
@@ -5163,16 +5186,16 @@ function selectDate(dateStr) {
 function renderTimeSlots() {
     const grid = document.getElementById('timeGrid');
     grid.innerHTML = '';
-    // สร้างเวลาตั้งแต่ 9 โมงเช้า ถึง 2 ทุ่ม ทีละ 15 นาที
-    for(let h=9; h<=20; h++) {
-        for(let m=0; m<60; m+=15) {
-            const timeStr = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
-            // เช็คว่าเช้าหรือบ่ายเพื่อเติม AM/PM แบบเนียนๆ
+    
+    for (let h = 9; h <= 20; h++) {
+        for (let m = 0; m < 60; m += 15) {
             const ampm = h >= 12 ? 'PM' : 'AM';
             let displayHour = h > 12 ? h - 12 : h;
-            const displayStr = `${displayHour}:${m.toString().padStart(2,'0')} ${ampm}`;
+            if (displayHour === 0) displayHour = 12;
             
+            const displayStr = `${displayHour}:${m.toString().padStart(2, '0')} ${ampm}`;
             const isActive = selectedTime === displayStr ? 'active' : '';
+            
             grid.innerHTML += `<button type="button" class="time-slot ${isActive}" onclick="selectTime('${displayStr}')">${displayStr}</button>`;
         }
     }
@@ -5184,23 +5207,60 @@ function selectTime(timeStr) {
 }
 
 function confirmDateTime() {
-    if(!selectedDate || !selectedTime) {
+    if (!selectedDate || !selectedTime) {
         showToast("Please select both Date and Time 📅");
         return;
     }
-    const dateObj = new Date(selectedDate);
-    const dayName = dateObj.toLocaleDateString('en-GB', { weekday: 'short' }); // ได้เป็น Mon, Tue
     
-    // อัปเดตข้อความบนปุ่ม
+    const dateObj = new Date(selectedDate);
     const btn = document.getElementById('displayDateTime');
-    btn.innerText = `${dayName} · ${selectedTime}`;
+    
+    btn.innerText = `${dateObj.toLocaleDateString('en-GB', { weekday: 'short' })} · ${selectedTime}`;
     btn.style.color = "var(--ink)";
     btn.style.fontWeight = "bold";
     
     closeDateTimeSheet();
 }
 
-// อัปเดตฟังก์ชัน publishGroup เพื่อดึงเวลาจากปุ่มใหม่
+// ระบบกดเข้าร่วมกลุ่มและปลดล็อคแชท
+function toggleJoin(btn, groupName) {
+    const chatBtn = btn.closest('.post').querySelector('.chat-btn');
+    
+    if (btn.innerText === "Join group") {
+        btn.innerText = "✓ Joined";
+        btn.style.background = "#DDF0D9";
+        btn.style.color = "#2F7C4A";
+        
+        chatBtn.disabled = false;
+        chatBtn.style.opacity = "1";
+        chatBtn.style.cursor = "pointer";
+        
+        showToast("Joined '" + groupName + "'");
+    } else {
+        btn.innerText = "Join group";
+        btn.style.background = "var(--deep)";
+        btn.style.color = "#fff";
+        
+        chatBtn.disabled = true;
+        chatBtn.style.opacity = "0.5";
+        chatBtn.style.cursor = "not-allowed";
+    }
+}
+
+// ระบบพิมพ์ข้อความในแชท
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    
+    if (input.value.trim()) {
+        const msgContainer = document.getElementById('chatMessages');
+        msgContainer.insertAdjacentHTML('beforeend', `<div class="msg me"><div class="bubble">${input.value.trim()}</div></div>`);
+        
+        input.value = '';
+        msgContainer.scrollTop = msgContainer.scrollHeight;
+    }
+}
+
+// ระบบสร้างโพสต์ใหม่ (Post Activity)
 function publishGroup() {
     const title = document.getElementById("newTitle").value || "New Activity";
     const category = document.getElementById("newCategory").value;
@@ -5208,44 +5268,43 @@ function publishGroup() {
     const loc = document.getElementById("newLocation").value || "TBA";
     
     const timeBtnText = document.getElementById("displayDateTime").innerText;
-    const finalTime = (timeBtnText === "Select Date & Times") ? "Today · 18:00 PM" : timeBtnText;
+    const finalTime = (timeBtnText === "Select Date & Times" || timeBtnText.trim() === "") ? "Today · 18:00 PM" : timeBtnText;
 
-    const feed = document.getElementById("mainFeed");
     const newPost = `
-      <article class="post" data-category="${category}">
-          <div class="post-head">
-            <div class="avatar-circle" style="background: var(--gold); color: #fff;">Me</div>
-            <div class="userline">
-              <strong>คุณสมาชิก</strong>
-              <p>Just now</p>
+        <article class="post" data-category="${category}" style="animation: slideDown 0.4s ease;">
+            <div class="post-head">
+                <div class="avatar-circle" style="background: var(--gold); color: #fff;">Me</div>
+                <div class="userline">
+                    <strong>คุณสมาชิก</strong>
+                    <p>Just now</p>
+                </div>
+                <div class="group-badge">YOURS</div>
             </div>
-            <div class="group-badge">YOURS</div>
-          </div>
-          <h2>${title}</h2>
-          <p class="desc">${desc}</p>
-          <div class="info-grid">
-            <div class="info"><span>CATEGORY</span><strong>${category}</strong></div>
-            <div class="info"><span>TIME</span><strong>${finalTime}</strong></div>
-            <div class="info"><span>MEET AT</span><strong>${loc}</strong></div>
-            <div class="info"><span>NEED</span><strong>${currentPeopleCount} more</strong></div>
-          </div>
-          <div class="members">
-            <div class="avatars">
-              <div class="miniav">Me</div>
-              <span class="count">1 / ${currentPeopleCount + 1} joined</span>
+            <h2>${title}</h2>
+            <p class="desc">${desc}</p>
+            <div class="info-grid">
+                <div class="info"><span>CATEGORY</span><strong>${category}</strong></div>
+                <div class="info"><span>TIME</span><strong>${finalTime}</strong></div>
+                <div class="info"><span>MEET AT</span><strong>${loc}</strong></div>
+                <div class="info"><span>NEED</span><strong>${currentPeopleCount} more</strong></div>
             </div>
-          </div>
-          <div class="post-actions">
-            <button class="secondary chat-btn" onclick="openChatSheet('${title}')">💬 Group Chat</button>
-            <button class="primary join-btn" style="background:#DDF0D9; color:#2F7C4A;">✓ Hosted</button>
-          </div>
+            <div class="members">
+                <div class="avatars">
+                    <div class="miniav">Me</div>
+                    <span class="count">1 / ${currentPeopleCount + 1} joined</span>
+                </div>
+            </div>
+            <div class="post-actions">
+                <button class="secondary chat-btn" onclick="openChatSheet('${title}')">💬 Group Chat</button>
+                <button class="primary join-btn" style="background:#DDF0D9; color:#2F7C4A;">✓ Hosted</button>
+            </div>
         </article>
     `;
     
-    feed.insertAdjacentHTML('afterbegin', newPost);
+    document.getElementById("mainFeed").insertAdjacentHTML('afterbegin', newPost);
     closeCreateSheet();
     
-    // รีเซ็ตค่าหลังกดสร้าง
+    // ล้างข้อมูลฟอร์ม
     document.getElementById("newTitle").value = "";
     document.getElementById("newDesc").value = "";
     document.getElementById("newLocation").value = "";
@@ -5257,12 +5316,15 @@ function publishGroup() {
     
     selectedDate = null;
     selectedTime = null;
-
     currentPeopleCount = 2;
     document.getElementById('peopleCountDisplay').innerText = currentPeopleCount;
 
     const allChipBtn = document.querySelector('.chips button:first-child');
-    if(allChipBtn) filterFeed('All', allChipBtn);
+    if (allChipBtn) {
+        filterFeed('All', allChipBtn);
+    }
+    
+    setTimeout(() => { openChatSheet(title); }, 500);
 }
 </script>
 
