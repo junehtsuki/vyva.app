@@ -416,7 +416,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="home" style="background: #e4f2df;">
     <div class="home-header">
-      <div class="profile-avatar" onclick="show('profile')" style="background: transparent; box-shadow: none;">
+      <div class="profile-avatar" onclick="location.href='phase2.html'" style="background: transparent; box-shadow: none;">
         <img src="sayo.people.png" alt="Profile" style="width: 100%; height: 100%; object-fit: contain;">
       </div>
       <div class="user-info">
@@ -449,7 +449,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
           <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>ลองใช้ Community ฟรี 7 วัน</span></p>
           <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>Fitness + Class + Recovery +<br>Co-working</span></p>
         </div>
-        <button onclick="switchTab('plan')">
+        <button onclick="location.href='phase2.html'">
           คลิก เพื่อทดลองใช้ฟรี →
         </button>
       </div>
@@ -500,7 +500,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="home" style="background: #e4f2df;">
     <div class="home-header">
-      <div class="profile-avatar" onclick="show('profile')" style="background: transparent; box-shadow: none;">
+      <div class="profile-avatar" onclick="location.href='phase2.html'" style="background: transparent; box-shadow: none;">
         <img src="sayo.people.png" alt="Profile" style="width: 100%; height: 100%; object-fit: contain;">
       </div>
       <div class="user-info">
@@ -535,7 +535,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
           <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>ลองใช้ Community ฟรี 7 วัน</span></p>
           <p><span style="color: #9acda8; font-size: 16px;">♥</span> <span>Fitness + Class + Recovery +<br>Co-working</span></p>
         </div>
-        <button onclick="switchTab('plan')">
+        <button onclick="location.href='phase2.html'">
           คลิก เพื่อทดลองใช้ฟรี →
         </button>
       </div>
@@ -586,7 +586,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="quiz">
     <div class="onboarding-wrap">
-      <button class="back-link" onclick="switchTab('home')">← ย้อนกลับ</button>
+      <button class="back-link" onclick="show('home')">← ย้อนกลับ</button>
       <div class="onboarding-header">
         <div>
           <h2 class="section-title" style="margin:0;">บอกเราเพิ่มเติม</h2>
@@ -604,7 +604,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 
   <section id="result" style="padding-bottom: 120px;">
     <div class="onboarding-wrap" style="padding-top:0; padding-bottom:0;">
-      <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
+      <button class="back-link" onclick="show('home')">← หน้าหลัก</button>
       
       <div class="result-hero">
         <div class="result-top">
@@ -820,7 +820,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       </div>
 
       <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
-      <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
+      <button class="btn-primary" onclick="location.href='phase2.html'">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
@@ -829,7 +829,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="compare">
     <div class="onboarding-wrap" style="padding-top:0;">
-      <button class="back-link" onclick="switchTab('home')">← หน้าหลัก</button>
+      <button class="back-link" onclick="show('home')">← หน้าหลัก</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
       
       <div class="compare-grid" id="compareGrid">
@@ -1045,286 +1045,25 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       </div>
 
       <button class="btn-outline" style="margin-top:20px;" onclick="showPopup('ใบเสร็จ', 'ดาวน์โหลดใบเสร็จเรียบร้อย')">⌄ ดูใบเสร็จ</button>
-      <button class="btn-primary" onclick="switchTab('plan')">ดำเนินการต่อ · จองกิจกรรม →</button>
+      <button class="btn-primary" onclick="location.href='phase2.html'">ดำเนินการต่อ · จองกิจกรรม →</button>
     </div>
   </section>
 
   <!-- =========================================
        4. PLAN (GRID คลาส 3-4 กล่อง & เลื่อนปฏิทิน)
   ========================================= -->
-  <section id="plan">
-    <div class="eyebrow">MY PLANNER</div>
-    <h2 class="section-title">ปฏิทินกิจกรรม</h2>
-    
-    <!-- ปฏิทินเลื่อนซ้ายขวาได้ เพิ่มวันยาวๆ -->
-    <div class="horizontal-scroll" id="calScroll">
-      <div class="cal-day active" onclick="selectDay(this)"><span>Mon</span><b>7</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>8</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>9</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>10</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>11</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>12</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>13</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Mon</span><b>14</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Tue</span><b>15</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Wed</span><b>16</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Thu</span><b>17</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Fri</span><b>18</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Sat</span><b>19</b></div>
-      <div class="cal-day" onclick="selectDay(this)"><span>Sun</span><b>20</b></div>
-    </div>
-
-    <div class="eyebrow" style="margin-top: 15px;">CLASSES</div>
-    <!-- คลาสเรียงเป็นบ็อกซ์ 3 กล่องต่อแถว -->
-    <div class="class-grid">
-      <div class="class-box" onclick="openClassDetail('Yoga Flow', '🧘')">
-        <span class="emoji">🧘</span><b>Yoga Flow</b>
-      </div>
-      <div class="class-box" onclick="openClassDetail('Pilates', '🤸‍♀️')">
-        <span class="emoji">🤸‍♀️</span><b>Pilates</b>
-      </div>
-      <div class="class-box" onclick="openClassDetail('Muay Thai', '🥊')">
-        <span class="emoji">🥊</span><b>Muay Thai</b>
-      </div>
-      <div class="class-box" onclick="openClassDetail('Fitness', '🏋️')">
-        <span class="emoji">🏋️</span><b>Fitness</b>
-      </div>
-      <div class="class-box" onclick="openClassDetail('Onsen', '♨️')">
-        <span class="emoji">♨️</span><b>Onsen</b>
-      </div>
-      <div class="class-box" onclick="openClassDetail('Dance', '💃')">
-        <span class="emoji">💃</span><b>Dance</b>
-      </div>
-    </div>
-
-    <div class="eyebrow">TRANSPORT & PARKING</div>
-    <button class="parking-btn" onclick="showPopup('จองที่จอดรถ', 'คุณได้รับสิทธิ์จอดรถ EV ฟรี 4 ชม.')">
-      <div style="display:flex; align-items:center; gap:10px;">
-        <div style="background:var(--green); color:#fff; width:30px; height:30px; border-radius:8px; display:grid; place-items:center;">P</div>
-        <div style="text-align:left; line-height:1.2; color:var(--ink);"><b>จองที่จอดรถ (ตู้ EV)</b><br><span style="font-size:11px; font-weight:500;">สิทธิ์จอดฟรี 4 ชม.</span></div>
-      </div>
-      <span style="font-size:20px;">🚗</span>
-    </button>
-    <div class="transport-grid">
-      <button class="transport-btn" onclick="showPopup('Grab', 'เปิดแอป Grab')">
-        <img src="https://play-lh.googleusercontent.com/9v1h56bZ5J_l2bN9oO1nBf8pU1F_kG9zJ4f5Vq8pX0n2b_p_uO-yWJpZ9uP7iI-O7c8=w240-h480-rw" alt="G" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> Grab
-      </button>
-      <button class="transport-btn" onclick="showPopup('LINE MAN', 'เปิดแอป LINE MAN')">
-        <img src="https://play-lh.googleusercontent.com/4h_3X-3a1P_jQG_t_b0h_2a1N9g_5D0_8X5L_M9b_E0x_B9b_T8n_Q6r_K0o_H9n_g=w240-h480-rw" alt="L" style="width:24px; height:24px; border-radius:6px; object-fit:cover;"> LINEMAN
-      </button>
-    </div>
-  </section>
-
-  <!-- หน้าใหม่: CLASS BOOKING DETAIL -->
-  <section id="class-detail" class="bg-white">
-    <button class="back-link" onclick="switchTab('plan')">← ย้อนกลับ</button>
-    <div style="text-align:center; margin-bottom:20px;">
-      <div id="detailEmoji" style="font-size:60px;">🧘</div>
-      <h2 id="detailClassName" style="margin:10px 0 5px;">Class Name</h2>
-      <p style="color:var(--muted); margin:0;">เลือกเวลาที่ต้องการจองคลาส</p>
-    </div>
-    
-    <div class="eyebrow">TIME SLOTS</div>
-    <div class="time-chips">
-      <div class="time-chip" onclick="selectTime(this)">08:00</div>
-      <div class="time-chip" onclick="selectTime(this)">09:30</div>
-      <div class="time-chip" onclick="selectTime(this)">11:00</div>
-      <div class="time-chip" onclick="selectTime(this)">13:00</div>
-      <div class="time-chip" onclick="selectTime(this)">14:30</div>
-      <div class="time-chip" onclick="selectTime(this)">16:00</div>
-      <div class="time-chip" onclick="selectTime(this)">17:30</div>
-      <div class="time-chip" onclick="selectTime(this)">19:00</div>
-      <div class="time-chip" onclick="selectTime(this)">20:30</div>
-    </div>
-    
-    <button class="btn-primary" style="margin-top:auto;" onclick="confirmBooking()">ยืนยันการจอง →</button>
-  </section>
-
-  <!-- =========================================
+<!-- หน้าใหม่: CLASS BOOKING DETAIL -->
+<!-- =========================================
        5. REWARDS
   ========================================= -->
-  <section id="rewards">
-    <div class="eyebrow">YOUR CREDITS</div>
-    <h2 class="section-title">SAYO Rewards</h2>
-    <div class="card" style="background:var(--ink); color:#fff; text-align:center;">
-      <h2 style="font-size:42px; margin:5px 0; color:var(--gold);">300 <span style="font-size:20px;">Pts</span></h2>
-      <p style="margin:0; font-size:12px; opacity:0.8;">คลาสที่ไม่ได้เข้า เปลี่ยนเป็นพอยต์ได้</p>
-    </div>
-    <div class="eyebrow">REDEEM</div>
-    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับส่วนลดคาเฟ่ 50 บาท')">
-      <div style="font-size:30px;">☕</div>
-      <div style="flex:1;"><b>Cafe Discount</b><br><span style="font-size:12px; color:var(--muted);">ส่วนลด 50฿</span></div>
-      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">100 Pts</button>
-    </div>
-    <div class="card" style="display:flex; gap:15px; align-items:center;" onclick="showPopup('แลกสำเร็จ', 'ได้รับคลาสฟรี 1 ครั้ง')">
-      <div style="font-size:30px;">🥊</div>
-      <div style="flex:1;"><b>Free Class</b><br><span style="font-size:12px; color:var(--muted);">เข้าคลาสใดก็ได้</span></div>
-      <button class="btn-outline" style="width:auto; padding:8px 15px; margin:0;">300 Pts</button>
-    </div>
-  </section>
-
-  <!-- =========================================
+<!-- =========================================
        6. COMMUNITY
   ========================================= -->
-  <section id="community">
-    <div class="eyebrow">COMMUNITY</div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-      <h2 class="section-title" style="margin:0;">Buddy Feed</h2>
-      <button class="btn-primary" style="width:auto; padding:8px 16px; margin:0; font-size:13px;" onclick="show('create-post')">+ สร้างโพสต์</button>
-    </div>
-    
-    <div id="feedContainer">
-      <!-- โพสต์ตัวอย่าง -->
-      <div class="buddy-post">
-        <div class="buddy-user">
-          <div style="width:40px; height:40px; border-radius:50%; background:var(--secondary); display:grid; place-items:center; font-weight:bold;">N</div>
-          <div><b style="display:block; font-size:15px;">Nara</b><span style="font-size:11px; color:var(--muted);">2 กม. · 20 นาทีที่แล้ว</span></div>
-        </div>
-        <b style="font-size:18px;">Yoga Flow 🧘</b>
-        <p style="font-size:14px; color:var(--muted); margin:8px 0;">Beginner มาได้ นัดเจอที่หน้าคลาส ขาด 2 คน</p>
-        <div style="margin-bottom:10px;"><span style="background:var(--mint); color:var(--green); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">รับ 2 คน</span></div>
-        <div class="buddy-actions">
-          <button class="btn-primary" style="margin:0; padding:12px; font-size:13px;" onclick="joinBuddy(this)">Join · เข้าร่วม</button>
-          <button class="btn-outline" style="margin:0; padding:12px; font-size:13px;" onclick="openChat('Nara')">💬 แชท</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- หน้าใหม่: CREATE POST -->
-  <section id="create-post" class="bg-white">
-    <button class="back-link" onclick="switchTab('community')">← ย้อนกลับ</button>
-    <h2 class="section-title">สร้างโพสต์หา Buddy</h2>
-    <p class="section-desc">ชวนเพื่อนไปทำกิจกรรมด้วยกัน</p>
-    
-    <div class="eyebrow" style="margin-top:10px;">กิจกรรม</div>
-    <select id="postTitle" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
-      <option value="" disabled selected>เลือกกิจกรรม...</option>
-      <option value="Yoga Flow 🧘">Yoga Flow 🧘</option>
-      <option value="Pilates 🤸‍♀️">Pilates 🤸‍♀️</option>
-      <option value="Muay Thai 🥊">Muay Thai 🥊</option>
-      <option value="Fitness 🏋️">Fitness 🏋️</option>
-      <option value="Onsen ♨️">Onsen ♨️</option>
-      <option value="Dance 💃">Dance 💃</option>
-    </select>
-    
-    <div class="eyebrow">รายละเอียดเพิ่มเติม</div>
-    <input type="text" id="postDesc" class="input-field" placeholder="เช่น นัดเจอหน้าตึก 5 โมงเย็น">
-
-    <div class="eyebrow">จำนวนคนที่ต้องการ</div>
-    <select id="postCount" class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
-      <option value="2 คน">2 คน</option>
-      <option value="3 คน">3 คน</option>
-      <option value="4 คน">4 คน</option>
-      <option value="5 คน">5 คน</option>
-      <option value="6 คนขึ้นไป">6 คนขึ้นไป</option>
-    </select>
-    
-    <button class="btn-primary" style="margin-top:auto;" onclick="submitPost()">โพสต์ประกาศ</button>
-  </section>
-
-  <!-- หน้าใหม่: CHAT ROOM -->
-  <section id="chat" class="no-padding-bottom">
-    <div class="chat-header">
-      <button class="back-link" style="margin:0;" onclick="switchTab('community')">←</button>
-      <div style="width:36px; height:36px; border-radius:50%; background:var(--green); color:#fff; display:grid; place-items:center; font-weight:bold;" id="chatIcon">N</div>
-      <b id="chatName" style="font-size:18px;">Name</b>
-    </div>
-    <div class="chat-body" id="chatBody"></div>
-    <div class="chat-input-area">
-      <input type="text" id="chatInput" placeholder="พิมพ์ข้อความ..." style="flex:1; border-radius:999px; border:1px solid var(--line); padding:12px 15px; outline:none;">
-      <button class="btn-primary" style="width:auto; margin:0; padding:12px 20px;" onclick="sendMessage()">ส่ง</button>
-    </div>
-  </section>
-
-  <!-- =========================================
-       7. PROFILE & SETTINGS
+<!-- หน้าใหม่: CREATE POST -->
+<!-- หน้าใหม่: CHAT ROOM -->
+<!-- =========================================
+       7. เฟส 2 อยู่ในไฟล์แยก phase2.html (ลิงก์ไปจากปุ่ม "ดำเนินการต่อ · จองกิจกรรม")
   ========================================= -->
-  <section id="profile">
-    <div style="text-align: center; margin: 20px 0;">
-      <div style="width:80px; height:80px; font-size:40px; margin:0 auto 15px; border-radius:50%; background:var(--bg-yellow); display:grid; place-items:center;">🤸‍♀️</div>
-      <h2>SAYO Member</h2>
-      <p style="color:var(--muted); margin:0;">member@sayo.app</p>
-    </div>
-
-    <div class="eyebrow">SETTINGS & MENU</div>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('profile-info')">ข้อมูลส่วนตัว <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('my-package')">แพ็กเกจของฉัน <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ประวัติการใช้งาน', 'ยังไม่มีประวัติการทำกิจกรรมย้อนหลังในระบบ')">ประวัติการใช้งาน <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="showPopup('ศูนย์ช่วยเหลือ', 'กรุณาติดต่อแอดมินผ่าน LINE @SAYO')">ศูนย์ช่วยเหลือ <span>></span></button>
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between;" onclick="show('settings')">⚙️ ตั้งค่า (Settings) <span>></span></button>
-    
-    <button class="card" style="width:100%; text-align:left; font-size:15px; font-weight:600; display:flex; justify-content:space-between; color:#e74c3c;" onclick="logout()">ออกจากระบบ <span>></span></button>
-  </section>
-
-  <!-- หน้าใหม่: ข้อมูลส่วนตัว -->
-  <section id="profile-info" class="bg-white">
-    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
-    <h2 class="section-title">ข้อมูลส่วนตัว</h2>
-    <div class="eyebrow">ข้อมูลทั่วไป</div>
-    <input type="text" class="input-field" value="SAYO Member" disabled style="background:#f9f9f9; color:var(--muted);">
-    <input type="email" class="input-field" value="member@sayo.app" disabled style="background:#f9f9f9; color:var(--muted);">
-    <div class="eyebrow">ร่างกาย</div>
-    <div style="display:flex; gap:10px;">
-      <input type="number" class="input-field" placeholder="น้ำหนัก (กก.)">
-      <input type="number" class="input-field" placeholder="ส่วนสูง (ซม.)">
-    </div>
-    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกข้อมูลส่วนตัวเรียบร้อยแล้ว')">บันทึกข้อมูล</button>
-  </section>
-
-  <!-- หน้าใหม่: MY PACKAGE -->
-  <section id="my-package" class="bg-white">
-    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
-    <h2 class="section-title">แพ็กเกจของฉัน</h2>
-    <div class="card" style="background:var(--mint); border-color:var(--green);">
-      <h3 style="color:var(--green); margin:0 0 10px;">Free Trial Active</h3>
-      <p style="font-size:14px; margin:0; line-height:1.5;">คุณกำลังใช้สิทธิ์ทดลองเข้าคลาส 1 ครั้ง และรับ 300 Pts</p>
-    </div>
-    <button class="btn-primary" onclick="startQuiz()">อัปเกรดแพ็กเกจ</button>
-  </section>
-
-  <!-- หน้าใหม่: SETTINGS -->
-  <section id="settings" class="bg-white">
-    <button class="back-link" onclick="switchTab('profile')">← กลับ</button>
-    <h2 class="section-title">ตั้งค่า</h2>
-    
-    <div class="eyebrow">ภาษา (Language)</div>
-    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
-      <option value="th">ภาษาไทย</option>
-      <option value="en">English</option>
-    </select>
-
-    <div class="eyebrow">การแจ้งเตือน</div>
-    <select class="input-field" style="appearance: none; background: #fff url('data:image/svg+xml;utf8,<svg fill=%22%2371807a%22 height=%2224%22 viewBox=%220 0 24 24%22 width=%2224%22 xmlns=%22http://www.w3.org/2000/svg%22><path d=%22M7 10l5 5 5-5z%22/></svg>') no-repeat right 15px center;">
-      <option value="all">เปิดทั้งหมด (แนะนำ)</option>
-      <option value="important">เฉพาะแจ้งเตือนคลาส</option>
-      <option value="none">ปิดการแจ้งเตือน</option>
-    </select>
-
-    <div class="eyebrow">ความปลอดภัย</div>
-    <button class="btn-outline" style="text-align:left; padding: 16px 20px; border-radius:16px;" onclick="showPopup('เปลี่ยนรหัสผ่าน', 'ฟีเจอร์นี้เปิดใช้งานในแอปจริง')">เปลี่ยนรหัสผ่าน</button>
-
-    <button class="btn-primary" style="margin-top:auto;" onclick="showPopup('สำเร็จ', 'บันทึกการตั้งค่าเรียบร้อยแล้ว')">บันทึกการตั้งค่า</button>
-  </section>
-
- <!-- BOTTOM NAVIGATION BAR -->
-  <div id="bottomNav" class="bottom-nav">
-    <button class="nav-item active" onclick="show('home')">
-      <span class="icon">⌂</span><span>Home</span>
-    </button>
-    <button class="nav-item" onclick="show('plan')">
-      <span class="icon">📅</span><span>Activity</span>
-    </button>
-    <button class="nav-item" onclick="show('profile')">
-      <span class="icon">👤</span><span>Profile</span>
-    </button>
-    <button class="nav-item" onclick="show('rewards')">
-      <span class="icon">🎁</span><span>Reward</span>
-    </button>
-    <button class="nav-item" onclick="show('community')">
-      <span class="icon">👥</span><span>Buddy</span>
-    </button>
-  </div>
 
   <!-- POPUP MODAL (GENERAL) -->
   <div id="popupOverlay" class="overlay">
@@ -1353,16 +1092,6 @@ function show(id) {
   document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.querySelector('.app-container').scrollTop = 0;
-  
-  const hideNavPages = ['home','splash', 'welcome', 'signup', 'signin', 'quiz', 'result', 'compare', 'payment', 'processing', 'success', 'class-detail', 'create-post', 'chat', 'my-package', 'settings', 'profile-info', 'detail'];
-  document.getElementById('bottomNav').style.display = hideNavPages.includes(id) ? 'none' : 'grid';
-}
-
-function switchTab(tabId) {
-  show(tabId);
-  document.querySelectorAll('.nav-item').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === tabId);
-  });
 }
 
 /* =========================
@@ -1399,102 +1128,11 @@ function validateAuth(type) {
 }
 
 function loginSuccess() {
-  document.getElementById('bottomNav').style.display = 'none';
-  switchTab('home');
+  show('home');
 }
 
 function logout() {
-  document.getElementById('bottomNav').style.display = 'none';
   show('welcome');
-}
-
-/* =========================
-   PLAN & BOOKING
-========================= */
-function selectDay(btn) {
-  document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function openClassDetail(name, emoji) {
-  document.getElementById('detailClassName').innerText = name;
-  document.getElementById('detailEmoji').innerText = emoji;
-  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
-  show('class-detail');
-}
-
-function selectTime(btn) {
-  document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function confirmBooking() {
-  const selected = document.querySelector('.time-chip.active');
-  if(!selected) return showPopup('แจ้งเตือน', 'กรุณาเลือกเวลาที่ต้องการจอง');
-  showPopup('จองสำเร็จ!', 'คุณได้ทำการจองคลาสเรียบร้อยแล้ว เตรียมตัวให้พร้อม!');
-  setTimeout(() => { switchTab('plan'); }, 1500);
-}
-
-/* =========================
-   COMMUNITY & CHAT
-========================= */
-function joinBuddy(btn) {
-  if(btn.innerText.includes('Join')) {
-    btn.innerText = '✓ Requested';
-    btn.style.background = "var(--line)";
-    btn.style.color = "var(--muted)";
-  } else {
-    btn.innerText = 'Join · เข้าร่วม';
-    btn.style.background = "var(--green)";
-    btn.style.color = "#fff";
-  }
-}
-
-function submitPost() {
-  const titleSelect = document.getElementById('postTitle');
-  const countSelect = document.getElementById('postCount');
-  const title = titleSelect.options[titleSelect.selectedIndex].value;
-  const count = countSelect.options[countSelect.selectedIndex].value;
-  const desc = document.getElementById('postDesc').value;
-
-  if(!title) return showPopup('แจ้งเตือน', 'กรุณาเลือกกิจกรรม');
-  
-  const feed = document.getElementById('feedContainer');
-  const newPost = `
-    <div class="buddy-post">
-      <div class="buddy-user">
-        <div style="width:40px; height:40px; border-radius:50%; background:var(--gold); display:grid; place-items:center; font-weight:bold; color:#fff;">S</div>
-        <div><b style="display:block; font-size:15px;">SAYO Member</b><span style="font-size:11px; color:var(--muted);">เพิ่งโพสต์</span></div>
-      </div>
-      <b style="font-size:18px;">${title}</b>
-      <p style="font-size:14px; color:var(--muted); margin:8px 0;">${desc ? desc : 'ใครว่างมาจอยกันได้เลยยย'}</p>
-      <div style="margin-bottom:10px;"><span style="background:var(--mint); color:var(--green); padding:4px 10px; border-radius:6px; font-size:11px; font-weight:700;">รับ ${count}</span></div>
-    </div>
-  `;
-  feed.insertAdjacentHTML('afterbegin', newPost);
-  document.getElementById('postDesc').value = '';
-  titleSelect.selectedIndex = 0;
-  countSelect.selectedIndex = 0;
-  switchTab('community');
-  showPopup('โพสต์สำเร็จ', 'ประกาศของคุณถูกโพสต์ลงฟีดแล้ว');
-}
-
-function openChat(name) {
-  document.getElementById('chatName').innerText = name;
-  document.getElementById('chatIcon').innerText = name.charAt(0);
-  document.getElementById('chatBody').innerHTML = ''; 
-  show('chat');
-}
-
-function sendMessage() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if(text) {
-    const chatBody = document.getElementById('chatBody');
-    chatBody.innerHTML += `<div class="chat-bubble chat-right">${text}</div>`;
-    input.value = '';
-    chatBody.scrollTop = chatBody.scrollHeight; 
-  }
 }
 
 /* =========================
