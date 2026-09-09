@@ -3300,12 +3300,15 @@
          GROUP (COMMUNITY) - อัปเดตใหม่
     ========================================= -->
     <section class="screen" id="groupScreen">
-      <header class="top">
-        <div>
+      <header class="top" style="display: flex; justify-content: space-between; align-items: flex-start;">
+        <div style="flex: 1;">
           <div class="eyebrow">SAYO COMMUNITY</div>
-          <h1>Find your<br>wellness crew.</h1>
+          <!-- แก้ให้ยาวต่อกันในบรรทัดเดียว -->
+          <h1 style="white-space: nowrap; font-size: 26px;">Find your wellness crew.</h1>
           <p class="subtitle">หาเพื่อนไปทำกิจกรรมใน campus — จะสร้างกลุ่มเอง หรือ join คนอื่นก็ได้</p>
         </div>
+        <!-- เพิ่มปุ่มแว่นขยายเสิร์ชมุมขวา -->
+        <button style="width: 44px; height: 44px; border-radius: 50%; background: #a5d6b4; border: none; font-size: 22px; color: #163f39; display: grid; place-items: center; flex: 0 0 auto; margin-top: 15px; box-shadow: var(--shadow);">⌕</button>
       </header>
 
       <section class="section">
@@ -3461,6 +3464,29 @@
         <button class="save" onclick="publishGroup()">Create group & open chat</button>
       </div>
     </div>
+    <!-- หน้าต่างแชทกลุ่ม (Chat Overlay) -->
+    <div class="overlay" id="chatSheet">
+      <div class="sheet chat-sheet">
+        <div class="handle"></div>
+        <div class="sheet-head">
+          <div>
+            <div class="chat-title" id="chatTitleDisplay">Group Name</div>
+            <div class="chat-sub">Tap here for group info</div>
+          </div>
+          <button class="close" onclick="closeChatSheet()">✕</button>
+        </div>
+        <div class="messages" id="chatMessages">
+          <div class="system">Welcome to the group! 👋</div>
+        </div>
+        <div class="composer">
+          <input type="text" class="field" id="chatInput" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendChat()">
+          <button class="send" onclick="sendChat()">➤</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- โทสต์แจ้งเตือน (Toast) -->
+    <div class="toast" id="toastMessage">Joined successfully</div>
 
 
     <!-- REWARD -->
@@ -4947,6 +4973,49 @@ function publishGroup() {
 
     const allChipBtn = document.querySelector('.chips button:first-child');
     if(allChipBtn) filterFeed('All', allChipBtn);
+}// ฟังก์ชันเปิด-ปิด หน้าต่างสร้างกลุ่ม
+function openCreateSheet() {
+    document.getElementById('createSheet').classList.add('show');
+}
+function closeCreateSheet() {
+    document.getElementById('createSheet').classList.remove('show');
+}
+
+// ฟังก์ชันเปิด-ปิด หน้าต่างแชทกลุ่ม
+function openChatSheet(groupName) {
+    const sheet = document.getElementById('chatSheet');
+    if (sheet) {
+        document.getElementById('chatTitleDisplay').innerText = groupName;
+        sheet.classList.add('show');
+    }
+}
+function closeChatSheet() {
+    document.getElementById('chatSheet').classList.remove('show');
+}
+
+// ฟังก์ชันจำลองการส่งข้อความในแชท
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    const msg = input.value.trim();
+    if (msg) {
+        const msgContainer = document.getElementById('chatMessages');
+        const bubble = `<div class="msg me"><div class="bubble">${msg}</div></div>`;
+        msgContainer.insertAdjacentHTML('beforeend', bubble);
+        input.value = ''; // ล้างช่องพิมพ์
+        msgContainer.scrollTop = msgContainer.scrollHeight; // เลื่อนจอลงล่างสุด
+    }
+}
+
+// ฟังก์ชันกล่องข้อความแจ้งเตือน (Toast) ตอนกด Join
+function showToast(text) {
+    const toast = document.getElementById('toastMessage');
+    if (toast) {
+        toast.innerText = text;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 2500);
+    }
 }
 </script>
 
