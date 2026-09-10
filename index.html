@@ -584,34 +584,23 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div id="reasons"></div>
     </div>
 
-    <!-- ปรับ position เป็น static เพื่อไม่ให้ลอยค้างทับเนื้อหา -->
-    <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-        <div>
-          <div class="eyebrow">แพ็กเกจที่แนะนำ</div>
-          <h3 id="resultSelectedName" style="margin:0; font-size: 18px;">Core</h3>
-        </div>
-        <div id="resultSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿2,990 / เดือน</div>
-      </div>
-      <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
-    </div>
-  </div>
-</section>
-
-  <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
+    <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
   <section id="compare">
     <div class="onboarding-wrap" style="padding-top:0;">
       <!-- ของใหม่ -->
       <button class="back-link" onclick="goBack()">← ย้อนกลับ</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
       <div class="compare-grid" id="compareGrid"></div>
-      <div class="selected-package-banner">
+      
+      <!-- 📥 แก้ตรงนี้: เติม style="position: static;..." เพื่อไม่ให้มันลอยทับ 📥 -->
+      <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
           <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
         </div>
         <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
       </div>
+      
     </div>
   </section>
 
