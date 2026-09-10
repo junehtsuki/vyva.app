@@ -178,7 +178,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 .plan.selected { border:2px solid var(--green); box-shadow:0 15px 40px rgba(20,107,89,.13); }
 .plan.has-ribbon { background: var(--mint2); }
 .ribbon { position:absolute; top:18px; right:18px; padding:6px 11px; border-radius:999px; background:var(--green); color:white; font-size:11px; font-weight:700; }
-.selected-package-banner{ position:sticky; bottom:0; padding:20px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
+.selected-package-banner{padding:20px; border-radius:24px; background:linear-gradient(135deg,#eef9f5,#dff3eb); border:1px solid #cfe5db; margin-top:20px; }
 
 /* PACKAGE DETAIL (ดึงจาก kla.html) */
 .detail-card{ padding:30px; background:white; border:1px solid var(--line); border-radius:28px; }
@@ -441,7 +441,7 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
   ========================================= -->
   <section id="home" style="background: #e4f2df;">
     <div class="home-header">
-      <div class="profile-avatar" onclick="show('profile')" style="background: transparent; box-shadow: none;">
+      <div class="profile-avatar" style="background: transparent; box-shadow: none;">
         <img src="sayo.people.png" alt="Profile" style="width: 100%; height: 100%; object-fit: contain;">
       </div>
       <div class="user-info">
@@ -584,67 +584,28 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div id="reasons"></div>
     </div>
 
-    <!-- =========================================
-       RESULT SECTION (ปรับ Layout ไม่ให้ปุ่มลอยทับ)
-  ========================================= -->
-  <section id="result" style="padding-bottom: 40px;">
-    <div class="onboarding-wrap" style="padding-top:0; padding-bottom:0;">
-      <button class="back-link" onclick="confirmExitQuiz()">← หน้าหลัก</button>
-      
-      <div class="result-hero">
-        <div class="result-top">
-          <div>
-            <div class="eyebrow" style="color:#a7e0c7;">✦ YOUR WELLNESS MATCH</div>
-            <div style="font-size:13px; color:#d2ede0; margin-top:4px;">แพ็กเกจที่เหมาะกับคุณที่สุด</div>
-            <h1 class="package-result-name" id="packageName">Core Package</h1>
-            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจยอดนิยม ครบทั้งออกกำลังกาย ผ่อนคลาย และคอมมูนิตี้</p>
-          </div>
-          
-          <div class="match-score-card">
-            <div class="score-circle">
-              <div class="score-inner">
-                <div class="score-num" id="score">94%</div>
-                <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
-              </div>
-            </div>
-            <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
-          </div>
-
-          <!-- ปุ่มเปรียบเทียบแพ็กเกจ -->
-          <button class="btn-outline" style="border:none; color:var(--green); margin:10px 0 0; width:100%; font-size:15px; font-weight:700; background: #fff;" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
+    <!-- ปรับ position เป็น static เพื่อไม่ให้ลอยค้างทับเนื้อหา -->
+    <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <div>
+          <div class="eyebrow">แพ็กเกจที่แนะนำ</div>
+          <h3 id="resultSelectedName" style="margin:0; font-size: 18px;">Core</h3>
         </div>
+        <div id="resultSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿2,990 / เดือน</div>
       </div>
-
-      <div class="reason-card">
-        <h3 style="margin-top:0; font-size: 18px;">ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
-        <div id="reasons"></div>
-      </div>
-
-      <!-- แบนเนอร์ด้านล่าง (แก้ให้ไม่ลอยทับแล้ว) -->
-      <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-          <div>
-            <div class="eyebrow">แพ็กเกจที่แนะนำ</div>
-            <h3 id="resultSelectedName" style="margin:0; font-size: 18px;">Core</h3>
-          </div>
-          <div id="resultSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿2,990 / เดือน</div>
-        </div>
-        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
-      </div>
+      <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- =========================================
-       COMPARE SECTION (หน้าเปรียบเทียบ)
-  ========================================= -->
+  <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
   <section id="compare">
     <div class="onboarding-wrap" style="padding-top:0;">
+      <!-- ของใหม่ -->
       <button class="back-link" onclick="goBack()">← ย้อนกลับ</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
       <div class="compare-grid" id="compareGrid"></div>
-      
-      <!-- แบนเนอร์ด้านล่าง (แก้ให้ไม่ลอยทับแล้ว) -->
-      <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
+      <div class="selected-package-banner">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
           <div id="compareSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿3,000</div>
@@ -1161,9 +1122,19 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
 ========================= */
 window.addEventListener('load', () => {
   renderCompare();
+
   setTimeout(() => {
     document.getElementById('splash').style.display = 'none';
-    show('welcome'); 
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('open') === 'compare') {
+      show('compare');
+      window.history.replaceState({}, document.title, window.location.pathname);
+    } else {
+      show('welcome');
+    }
+
   }, 2600);
 });
 
