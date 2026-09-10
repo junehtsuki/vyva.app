@@ -1837,6 +1837,29 @@ function showSlip() {
   document.getElementById('slipOverlay').classList.add('active');
 }
 
+window.addEventListener('DOMContentLoaded', () => {
+    // เช็คว่า URL มีคำว่า ?open=compare ไหม
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('open') === 'compare') {
+        
+        // 1. ซ่อนหน้า Splash แบบกระชากวิญญาณ (ปิดทันที)
+        const splash = document.getElementById('splash');
+        if (splash) {
+            splash.style.display = 'none';
+        }
+
+        // 2. ปิดหน้าจออื่นๆ ให้หมด แล้วโชว์แค่หน้า Compare
+        document.querySelectorAll('.screen').forEach(s => {
+            s.classList.remove('active');
+        });
+
+        const compareScreen = document.getElementById('compare');
+        if (compareScreen) {
+            compareScreen.classList.add('active');
+            compareScreen.style.display = 'block';
+        }
+    }
+});
 </script>
 
 </body>
