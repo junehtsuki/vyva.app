@@ -1756,7 +1756,22 @@ function selectDetailPackage() {
   goPayment();
 }
 
-function goPayment() { show('payment'); }
+function goPayment() { 
+  // 1. สั่งปิดหน้าจอทุกหน้าก่อน เพื่อป้องกันการแสดงผลซ้อนกัน
+  document.querySelectorAll('.screen').forEach(s => {
+      s.classList.remove('active');
+      s.style.display = 'none';
+  });
+  // 2. เปิดเฉพาะหน้าชำระเงินขึ้นมา
+  const paymentScreen = document.getElementById('payment');
+  if (paymentScreen) {
+      paymentScreen.style.display = 'block';
+      paymentScreen.classList.add('active');
+  }
+
+  // 3. บังคับเลื่อนหน้าจอกลับไปด้านบนสุด (เพราะเนื้อหาหน้าก่อนหน้ามันยาว)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 /* PAYMENT LOGIC (จาก kla.html) */
 let paymentMethod = 'card';
