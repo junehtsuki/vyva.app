@@ -584,15 +584,66 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
       <div id="reasons"></div>
     </div>
 
-    <!-- หน้า Compare ดึงจาก kla.html เพื่อให้กดดูจาก Result ได้ -->
+    <!-- =========================================
+       RESULT SECTION (ปรับ Layout ไม่ให้ปุ่มลอยทับ)
+  ========================================= -->
+  <section id="result" style="padding-bottom: 40px;">
+    <div class="onboarding-wrap" style="padding-top:0; padding-bottom:0;">
+      <button class="back-link" onclick="confirmExitQuiz()">← หน้าหลัก</button>
+      
+      <div class="result-hero">
+        <div class="result-top">
+          <div>
+            <div class="eyebrow" style="color:#a7e0c7;">✦ YOUR WELLNESS MATCH</div>
+            <div style="font-size:13px; color:#d2ede0; margin-top:4px;">แพ็กเกจที่เหมาะกับคุณที่สุด</div>
+            <h1 class="package-result-name" id="packageName">Core Package</h1>
+            <p id="resultDescription" style="color:#c7ddd5; line-height:1.6; margin-bottom: 20px; font-size: 14px;">แพ็กเกจยอดนิยม ครบทั้งออกกำลังกาย ผ่อนคลาย และคอมมูนิตี้</p>
+          </div>
+          
+          <div class="match-score-card">
+            <div class="score-circle">
+              <div class="score-inner">
+                <div class="score-num" id="score">94%</div>
+                <div style="font-size:11px; color:#c8ddd6;">MATCH SCORE</div>
+              </div>
+            </div>
+            <p style="font-size:12px; color:#c8ddd6; margin:15px 0 0; line-height:1.5;">วิเคราะห์จากเป้าหมาย กิจกรรม ความถี่ และงบประมาณของคุณ</p>
+          </div>
+
+          <!-- ปุ่มเปรียบเทียบแพ็กเกจ -->
+          <button class="btn-outline" style="border:none; color:var(--green); margin:10px 0 0; width:100%; font-size:15px; font-weight:700; background: #fff;" onclick="show('compare')">ดูและเปรียบเทียบแพ็กเกจ</button>
+        </div>
+      </div>
+
+      <div class="reason-card">
+        <h3 style="margin-top:0; font-size: 18px;">ทำไมแพ็กเกจนี้ถึงเหมาะกับคุณ?</h3>
+        <div id="reasons"></div>
+      </div>
+
+      <!-- แบนเนอร์ด้านล่าง (แก้ให้ไม่ลอยทับแล้ว) -->
+      <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+          <div>
+            <div class="eyebrow">แพ็กเกจที่แนะนำ</div>
+            <h3 id="resultSelectedName" style="margin:0; font-size: 18px;">Core</h3>
+          </div>
+          <div id="resultSelectedPrice" style="font-weight:bold; color:var(--green); font-size:20px;">฿2,990 / เดือน</div>
+        </div>
+        <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================
+       COMPARE SECTION (หน้าเปรียบเทียบ)
+  ========================================= -->
   <section id="compare">
     <div class="onboarding-wrap" style="padding-top:0;">
-      <!-- ของใหม่ -->
       <button class="back-link" onclick="goBack()">← ย้อนกลับ</button>
       <h2 class="section-title">เปรียบเทียบแพ็กเกจ</h2>
       <div class="compare-grid" id="compareGrid"></div>
       
-      <!-- 📥 แก้ตรงนี้: เติม style="position: static;..." เพื่อไม่ให้มันลอยทับ 📥 -->
+      <!-- แบนเนอร์ด้านล่าง (แก้ให้ไม่ลอยทับแล้ว) -->
       <div class="selected-package-banner" style="position: static; margin-top: 20px; margin-bottom: 20px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
           <div><div class="eyebrow">แพ็กเกจที่เลือก</div><h3 id="compareSelectedName" style="margin:0;">Signature</h3></div>
@@ -600,7 +651,6 @@ button, input, select { font: inherit; outline: none; border: none; cursor: poin
         </div>
         <button class="btn-primary" style="margin:0;" onclick="goPayment()">ดำเนินการชำระเงิน →</button>
       </div>
-      
     </div>
   </section>
 
@@ -1212,6 +1262,7 @@ function validateAuth(type) {
     if (!passRegex.test(pass)) return showPopup('รหัสผ่านไม่ตรงเงื่อนไข', 'รหัสผ่านต้องมีความยาวอย่างน้อย 6 ตัว และมีตัวอักษรพิมพ์ใหญ่ หรือ ตัวอักษรพิเศษอย่างน้อย 1 ตัว');
     
     // 5. สำเร็จ -> ล้างค่าในฟอร์ม แสดง Popup และเด้งไปหน้า Sign In
+    localStorage.setItem('sayoUserName', name);
     nameEl.value = ''; phoneEl.value = ''; emailEl.value = ''; passEl.value = '';
     showPopup('สมัครสมาชิกสำเร็จ', 'กรุณาเข้าสู่ระบบด้วยบัญชีที่คุณเพิ่งสร้าง');
     show('signin');
